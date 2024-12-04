@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        fieldset{
+            width: 550px;
+        }
+        legend{
+            font-weight: bold;
+            font-size: 16px;
+        }
+        input[type="text"]{
+            width: 350px;
+            height: 20px;
+        }
+        td{
+            padding: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <form action="xulyThongtin.php" method="post">
+        <fieldset>
+            <legend>Enter your information</legend>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Họ tên: </td>
+                        <td>
+                            <input type="text" name="hoTen">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ: </td>
+                        <td>
+                            <input type="text" name="diaChi">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại: </td>
+                        <td>
+                            <input type="text" name="soDienThoai">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giới tính: </td>
+                        <td>
+                            <input type="radio" name="male"> Nam
+                            <input type="radio" name="female"> Nữ
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Quốc tịch: </td>
+                        <td>
+                            <select name="quocTich" id="quocTich">
+                                <option value="VN">Việt Nam</option>
+                                <option value="USA">Hoa Kỳ</option>
+                                <option value="CA">Canada</option>
+                                <option value="FR">Pháp</option>
+                                <option value="AU">Úc</option>
+                                <option value="CN">Trung Quốc</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Các môn đã học: </td>
+                        <td>
+                            <input type="checkbox" name="php_mysql"> PHP & MySQL
+                            <input type="checkbox" name="c#"> C#
+                            <input type="checkbox" name="xml"> XML
+                            <input type="checkbox" name="python"> Python
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ghi chú: </td>
+                        <td>
+                            <textarea cols="50" rows="5" name="note"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="submit" name="send" value="Gửi">
+                            <input type="reset" name="cancel" value="Huỷ">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </fieldset>
+    </form>
+</body>
+</html>
