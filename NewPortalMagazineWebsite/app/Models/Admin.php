@@ -10,6 +10,8 @@ class Admin extends Model
 {
     use HasFactory, Notifiable;
 
+    protected $guard = 'admin';
+
     protected $fillable = [
         'name',
         'image',
