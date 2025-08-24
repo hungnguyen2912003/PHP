@@ -34,13 +34,16 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="#" class="needs-validation" novalidate="">
+                                <form method="POST" action="{{ route('admin.login.post') }}" class="needs-validation" novalidate="">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-                                        <div class="invalid-feedback">
-                                            Please fill in your email
-                                        </div>
+                                        <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter your email">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -52,10 +55,12 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                            please fill in your password
-                                        </div>
+                                        <input id="password" type="password" class="form-control" name="password" tabindex="2" required placeholder="Enter your password">
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -71,26 +76,7 @@
                                         </button>
                                     </div>
                                 </form>
-                                <div class="text-center mt-4 mb-3">
-                                    <div class="text-job text-muted">Login With Social</div>
-                                </div>
-                                <div class="row sm-gutters">
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-facebook">
-                                            <span class="fab fa-facebook"></span> Facebook
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
-                        </div>
-                        <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="#">Create One</a>
                         </div>
                         <div class="simple-footer">
                             Copyright &copy; Hưng Nguyễn 2025
