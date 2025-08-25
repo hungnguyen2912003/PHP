@@ -16,8 +16,9 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
+        $id = auth()->guard('admin')->id();
         return view('admin.profile.index', compact('id'));
     }
 
@@ -39,7 +40,7 @@ class ProfileController extends Controller
 
         toast(__('admin.toast.profile_updated_successfully'), 'success')->width('400px');
 
-        return redirect()->route('admin.profile', $id);
+        return redirect()->route('admin.profile.index');
     }
 
     public function updatePassword(UpdatePasswordHandleRequest $request, $id)

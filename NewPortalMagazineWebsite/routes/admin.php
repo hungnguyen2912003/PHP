@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthenticationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,8 +18,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile');
-    Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('profile/{id}/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+    //Profile
+    Route::resource('profile', ProfileController::class);
+    Route::put('profile/{id}/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+    //Language
+    Route::resource('languages', LanguageController::class);
+
     Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
