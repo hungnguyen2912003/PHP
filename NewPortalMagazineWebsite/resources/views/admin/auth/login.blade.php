@@ -3,23 +3,24 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="login-brand">
-    <img src="{{ asset('admin/img/stisla-fill.svg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
-</div>
-
 <div class="card card-primary">
     <div class="card-header">
         <h4>Login</h4>
     </div>
 
     <div class="card-body">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <form method="POST" action="{{ route('admin.login.post') }}" class="needs-validation" novalidate="">
             @csrf
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter your email">
+                <input id="email" type="email" class="form-control" name="email" tabindex="1" autofocus placeholder="Enter your email">
                 @error('email')
-                <div class="invalid-feedback">
+                <div class="text-danger">
                     {{ $message }}
                 </div>
                 @enderror
@@ -34,9 +35,9 @@
                         </a>
                     </div>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" tabindex="2" required placeholder="Enter your password">
+                <input id="password" type="password" class="form-control" name="password" tabindex="2" placeholder="Enter your password">
                 @error('password')
-                <div class="invalid-feedback">
+                <div class="text-danger">
                     {{ $message }}
                 </div>
                 @enderror
