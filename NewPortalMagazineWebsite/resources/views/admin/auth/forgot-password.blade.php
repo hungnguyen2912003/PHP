@@ -5,11 +5,11 @@
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-        <h4>Forgot Password</h4>
+        <h4>{{ __('admin.forgot_password.title') }}</h4>
     </div>
 
     <div class="card-body">
-        <p class="text-muted">We will send a link to reset your password</p>
+        <p class="text-muted">{{ __('admin.forgot_password.description') }}</p>
         @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -18,7 +18,7 @@
         <form method="POST" action="{{ route('admin.forgot-password.post') }}">
             @csrf
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">{{ __('admin.forgot_password.email') }}</label>
                 <input id="email" type="email" class="form-control" name="email" tabindex="1" autofocus placeholder="Enter your email">
                 @error('email')
                 <div class="text-danger">
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                    Send Reset Password Link
+                    {{ __('admin.forgot_password.send_reset_password_link') }}
                 </button>
             </div>
         </form>
