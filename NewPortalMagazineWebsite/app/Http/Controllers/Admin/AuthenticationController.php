@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\LoginHandleRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AuthenticationController extends Controller
 {
@@ -16,13 +17,26 @@ class AuthenticationController extends Controller
 
     public function handleLogin(LoginHandleRequest $request)
     {
-        $credentials = $request->validated();
+        $request->authenticate();
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công');
-        }
+        $request->session()->regenerate();
 
-        return redirect()->route('admin.login')->with('error', 'Email hoặc mật khẩu không chính xác');
+        return redirect()->intended(route('admin.dashboard', absolute: false));
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
+    }
+
+    public function forgotPassword()
+    {
+        return view('admin.auth.forgot-password');
     }
 }

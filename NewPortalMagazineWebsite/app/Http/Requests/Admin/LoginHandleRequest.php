@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 
 class LoginHandleRequest extends FormRequest
 {
@@ -43,5 +46,14 @@ class LoginHandleRequest extends FormRequest
             'email' => 'Email',
             'password' => 'Mật khẩu',
         ];
+    }
+
+    public function authenticate(): void
+    {
+        if (! Auth::guard('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
     }
 }
