@@ -24,6 +24,7 @@ class UpdateProfileHandleRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:admins,email,' . $this->id],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 
@@ -37,6 +38,9 @@ class UpdateProfileHandleRequest extends FormRequest
             'email.email' => ':attribute must be a valid email address',
             'email.max' => ':attribute must be less than 255 characters',
             'email.unique' => ':attribute already exists',
+            'image.image' => ':attribute must be an image',
+            'image.mimes' => ':attribute must be a file of type: jpeg, png, jpg, gif, svg',
+            'image.max' => ':attribute must be less than 2048 kilobytes',
         ];
     }
 
@@ -45,6 +49,7 @@ class UpdateProfileHandleRequest extends FormRequest
         return [
             'name' => 'Name',
             'email' => 'Email',
+            'image' => 'Image',
         ];
     }
 }

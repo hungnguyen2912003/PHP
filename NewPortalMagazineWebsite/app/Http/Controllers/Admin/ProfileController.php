@@ -8,9 +8,11 @@ use App\Http\Requests\Admin\UpdatePasswordHandleRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\ImageUploadTrait;
 
 class ProfileController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -23,27 +25,34 @@ class ProfileController extends Controller
     {
         $admin = Admin::find($id);
         if (!$admin) {
-            return redirect()->back()->with('error', 'Admin not found');
+            toast(__('admin.toast.admin_not_found'), 'error')->width('400px');
+            return redirect()->back();
+        }
+        $image = $this->uploadImage($request, 'image', $admin->image);
+        if ($image) {
+            $admin->image = $image;
         }
         $admin->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
-        return redirect()->route('admin.profile', $id)->with('success', 'Profile updated successfully');
+
+        toast(__('admin.toast.profile_updated_successfully'), 'success')->width('400px');
+
+        return redirect()->route('admin.profile', $id);
     }
 
     public function updatePassword(UpdatePasswordHandleRequest $request, $id)
     {
         $admin = Admin::find($id);
         if (!$admin) {
-            return redirect()->back()->with('error', 'Admin not found');
-        }
-        if (!Hash::check($request->current_password, $admin->password)) {
-            return redirect()->back()->with('error', 'Current password is incorrect');
+            toast(__('admin.toast.admin_not_found'), 'error')->width('400px');
+            return redirect()->back();
         }
         $admin->update([
             'password' => Hash::make($request->new_password),
         ]);
-        return redirect()->back()->with('success', 'Password updated successfully, please login with your new password');
+        toast(__('admin.toast.password_updated_successfully'), 'success')->width('400px');
+        return redirect()->back();
     }
 }

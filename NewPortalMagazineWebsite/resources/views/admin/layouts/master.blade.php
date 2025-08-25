@@ -47,6 +47,8 @@
         <script src="{{ asset('admin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
         <script src="{{ asset('admin/modules/moment.min.js') }}"></script>
         <script src="{{ asset('admin/js/stisla.js') }}"></script>
+        <script src="{{ asset('admin/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+        @include('sweetalert::alert')
 
         <!-- JS Libraies -->
         <script src="{{ asset('admin/modules/simple-weather/jquery.simpleWeather.min.js') }}"></script>
@@ -62,6 +64,20 @@
         <!-- Template JS File -->
         <script src="{{ asset('admin/js/scripts.js') }}"></script>
         <script src="{{ asset('admin/js/custom.js') }}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $.uploadPreview({
+                    input_field: "#image-upload",
+                    preview_box: "#image-preview",
+                    label_field: "#image-label",
+                    no_label: false,
+                    success_callback: null,
+                });
+            });
+        </script>
+
+        @stack('scripts')
 </body>
 
 </html>

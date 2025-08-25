@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'navbar' => [
+        'dashboard' => 'Dashboard',
+        'profile' => 'Profile',
+        'logout' => 'Logout',
+    ],
     'login' => [
         'title' => 'Login',
         'email' => 'Email',
@@ -21,5 +26,25 @@ return [
         'new_password' => 'New Password',
         'confirm_password' => 'Confirm Password',
         'reset_password' => 'Reset Password',
+    ],
+    'profile' => [
+        'title' => 'Profile',
+        'description' => 'Change information about yourself on this page.', 
+        'name' => 'Name',
+        'email' => 'Email',
+        'description' => 'Change information about yourself on this page.',
+        'update_profile' => 'Update Profile',
+        'update_password' => 'Update Password',
+        'current_password' => 'Current Password',
+        'new_password' => 'New Password',
+        'confirm_password' => 'Confirm Password',
+        'image' => 'Image',
+        'choose_file' => 'Choose File',
+        'change_file' => 'Change File',
+    ],
+    'toast' => [
+        'profile_updated_successfully' => 'Profile updated successfully',
+        'password_updated_successfully' => 'Password updated successfully',
+        'admin_not_found' => 'Admin not found',
     ],
 ];
