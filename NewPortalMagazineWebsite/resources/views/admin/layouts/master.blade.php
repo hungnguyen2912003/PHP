@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
+    <title>@yield('title')</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -32,34 +32,36 @@
             @include('admin.layouts.sidebar')
 
             <!-- Main Content -->
-            @yield('content')
-
+            <div class="main-content">
+                <section class="section">
+                    @yield('content')
+                </section>
+            </div>
         </div>
-    </div>
 
-    <!-- General JS Scripts -->
-    <script src="{{ asset('admin/modules/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/popper.js') }}"></script>
-    <script src="{{ asset('admin/modules/tooltip.js') }}"></script>
-    <script src="{{ asset('admin/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/moment.min.js') }}"></script>
-    <script src="{{ asset('admin/js/stisla.js') }}"></script>
+        <!-- General JS Scripts -->
+        <script src="{{ asset('admin/modules/jquery.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/popper.js') }}"></script>
+        <script src="{{ asset('admin/modules/tooltip.js') }}"></script>
+        <script src="{{ asset('admin/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/moment.min.js') }}"></script>
+        <script src="{{ asset('admin/js/stisla.js') }}"></script>
 
-    <!-- JS Libraies -->
-    <script src="{{ asset('admin/modules/simple-weather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/chart.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('admin/modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('admin/modules/summernote/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('admin/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+        <!-- JS Libraies -->
+        <script src="{{ asset('admin/modules/simple-weather/jquery.simpleWeather.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/chart.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+        <script src="{{ asset('admin/modules/summernote/summernote-bs4.js') }}"></script>
+        <script src="{{ asset('admin/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
+        <!-- Page Specific JS File -->
+        <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
 
-    <!-- Template JS File -->
-    <script src="{{ asset('admin/js/scripts.js') }}"></script>
-    <script src="{{ asset('admin/js/custom.js') }}"></script>
+        <!-- Template JS File -->
+        <script src="{{ asset('admin/js/scripts.js') }}"></script>
+        <script src="{{ asset('admin/js/custom.js') }}"></script>
 </body>
 
 </html>
