@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('admin/modules/weather-icon/css/weather-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/modules/weather-icon/css/weather-icons-wind.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/modules/select2/dist/css/select2.min.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
@@ -57,6 +58,7 @@
         <script src="{{ asset('admin/modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
         <script src="{{ asset('admin/modules/summernote/summernote-bs4.js') }}"></script>
         <script src="{{ asset('admin/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/select2/dist/js/select2.full.min.js') }}"></script>
 
         <!-- Page Specific JS File -->
         <script src="{{ asset('admin/js/page/index-0.js') }}"></script>

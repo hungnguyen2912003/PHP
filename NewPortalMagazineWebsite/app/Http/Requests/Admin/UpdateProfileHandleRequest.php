@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProfileHandleRequest extends FormRequest
 {
@@ -23,7 +24,12 @@ class UpdateProfileHandleRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:admins,email,' . $this->id],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('admins', 'email')->ignore($this->route('profile')),
+            ],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
