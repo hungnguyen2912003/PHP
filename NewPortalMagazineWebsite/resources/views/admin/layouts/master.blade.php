@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{{ asset('admin/modules/weather-icon/css/weather-icons-wind.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/modules/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
@@ -59,6 +62,9 @@
         <script src="{{ asset('admin/modules/summernote/summernote-bs4.js') }}"></script>
         <script src="{{ asset('admin/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
         <script src="{{ asset('admin/modules/select2/dist/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/datatables/datatables.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
 
         <!-- Page Specific JS File -->
         <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
