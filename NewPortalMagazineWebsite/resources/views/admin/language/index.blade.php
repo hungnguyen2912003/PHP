@@ -38,23 +38,23 @@
                             <td>{{ $language->lang }}</td>
                             <td>
                                 @if ($language->is_default)
-                                    <span class="badge badge-primary">{{ __('Default') }}</span>
+                                <span class="badge badge-primary">{{ __('Default') }}</span>
                                 @else
-                                    <span class="badge badge-warning">{{ __('Not Default') }}</span>
+                                <span class="badge badge-warning">{{ __('Not Default') }}</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($language->status)
-                                    <span class="badge badge-success">{{ __('Active') }}</span>
+                                <span class="badge badge-success">{{ __('Active') }}</span>
                                 @else
-                                    <span class="badge badge-danger">{{ __('Inactive') }}</span>
+                                <span class="badge badge-danger">{{ __('Inactive') }}</span>
                                 @endif
                             </td>
                             <td>
                                 <a href="{{ route('admin.languages.edit', $language->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('admin.languages.destroy', $language->id) }}" class="btn btn-danger">
+                                <a href="{{ route('admin.languages.destroy', $language->id) }}" class="btn btn-danger delete-item" data-name="{{ $language->name }}">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -73,9 +73,9 @@
 @push('scripts')
 <script>
     $("#table-1").DataTable({
-        "columnDefs": [{ 
-            "sortable": false, 
-            "targets":[2,3] 
+        "columnDefs": [{
+            "sortable": false,
+            "targets": [2, 3]
         }]
     });
 </script>

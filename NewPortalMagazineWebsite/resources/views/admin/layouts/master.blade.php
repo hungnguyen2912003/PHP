@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- General CSS Files -->
@@ -52,6 +53,7 @@
         <script src="{{ asset('admin/modules/moment.min.js') }}"></script>
         <script src="{{ asset('admin/js/stisla.js') }}"></script>
         <script src="{{ asset('admin/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @include('sweetalert::alert')
 
         <!-- JS Libraies -->
@@ -74,15 +76,81 @@
         <script src="{{ asset('admin/js/custom.js') }}"></script>
 
         <script>
-            $(document).ready(function() {
-                $.uploadPreview({
-                    input_field: "#image-upload",
-                    preview_box: "#image-preview",
-                    label_field: "#image-label",
-                    no_label: false,
-                    success_callback: null,
-                });
+            $.uploadPreview({
+                input_field: "#image-upload",
+                preview_box: "#image-preview",
+                label_field: "#image-label",
+                no_label: false,
+                success_callback: null,
             });
+
+            //Add csrf token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            /** Handle Dynamic delete **/
+            $(document).ready(function() {
+
+                $('.delete-item').on('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let url = $(this).attr('href');
+                            console.log(url);
+                            $.ajax({
+                                method: 'DELETE',
+                                url: url,
+                                success: function(data) {
+                                    if (data.status === 'success') {
+                                        Swal.fire({
+                                            title: 'Deleted!',
+                                            text: data.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then(function() {
+                                            window.location.reload();
+                                        });
+                                    } else if (data.status === 'error') {
+                                        Swal.fire(
+                                            'Error!',
+                                            data.message,
+                                            'error'
+                                        )
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(error);
+                                }
+                            });
+
+
+                        }
+                    })
+                })
+            })
         </script>
 
         @stack('scripts')

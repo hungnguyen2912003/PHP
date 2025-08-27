@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Create Language')
+@section('title', 'Update Language')
 
 @section('content')
 
@@ -11,17 +11,18 @@
 
     <div class="card card-primary">
         <div class="card-header">
-            <h4>{{ __('Create new Language') }}</h4>
+            <h4>{{ __('Update Language') }}</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.languages.store') }}" method="post">
+            <form action="{{ route('admin.languages.update', $language->id) }}" method="post">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="lang">{{ __('Language') }}</label>
                     <select name="lang" class="form-control select2" id="language-select">
                         <option value="">{{ __('Select Language') }}</option>
-                        @foreach (config('language') as $key => $language)
-                        <option value="{{ $key }}">{{ $language['name'] }}</option>
+                        @foreach (config('language') as $key => $item)
+                        <option value="{{ $key }}" {{ $language->lang == $key ? 'selected' : '' }}>{{ $item['name'] }}</option>
                         @endforeach
                     </select>
                     @error('lang')
@@ -30,14 +31,14 @@
                 </div>
                 <div class="form-group">
                     <label for="name">{{ __('Name') }}</label>
-                    <input type="text" readonly name="name" id="name" class="form-control">
+                    <input type="text" readonly name="name" id="name" class="form-control" value="{{ $language->name }}">
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="slug">{{ __('Slug') }}</label>
-                    <input type="text" readonly name="slug" id="slug" class="form-control">
+                    <input type="text" readonly name="slug" id="slug" class="form-control" value="{{ $language->slug }}">
                     @error('slug')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -45,8 +46,8 @@
                 <div class="form-group">
                     <label for="is_default">{{ __('Is Default?') }}</label>
                     <select name="is_default" class="form-control">
-                        <option value="1">{{ __('Yes') }}</option>
-                        <option value="0" selected>{{ __('No') }}</option>
+                        <option value="1" {{ $language->is_default == 1 ? 'selected' : '' }}>{{ __('Yes') }}</option>
+                        <option value="0" {{ $language->is_default == 0 ? 'selected' : '' }}>{{ __('No') }}</option>
                     </select>
                     @error('is_default')
                     <span class="text-danger">{{ $message }}</span>
@@ -55,15 +56,15 @@
                 <div class="form-group">
                     <label for="status">{{ __('Status') }}</label>
                     <select name="status" class="form-control">
-                        <option value="1">{{ __('Active') }}</option>
-                        <option value="0">{{ __('Inactive') }}</option>
+                        <option value="1" {{ $language->status == 1 ? 'selected' : '' }}>{{ __('Active') }}</option>
+                        <option value="0" {{ $language->status == 0 ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                     </select>
                     @error('status')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                 </div>
             </form>
         </div>

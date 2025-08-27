@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Language;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLanguageHandleRequest extends FormRequest
+class UpdateLanguageHandleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +22,11 @@ class CreateLanguageHandleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $languageId = $this->route('language');
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:languages,name'],
-            'lang' => ['required', 'string', 'max:255', 'unique:languages,lang'],
-            'slug' => ['required', 'string', 'max:255', 'unique:languages,slug'],
+            'name' => ['required', 'string', 'max:255', 'unique:languages,name,' . $languageId],
+            'lang' => ['required', 'string', 'max:255', 'unique:languages,lang,' . $languageId],
+            'slug' => ['required', 'string', 'max:255', 'unique:languages,slug,' . $languageId],
             'is_default' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
         ];
