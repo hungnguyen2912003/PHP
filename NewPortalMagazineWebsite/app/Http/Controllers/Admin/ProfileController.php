@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateProfileHandleRequest;
 use App\Http\Requests\Admin\UpdatePasswordHandleRequest;
 use App\Models\Admin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ImageUploadTrait;
 

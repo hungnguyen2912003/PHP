@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthenticationController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Admin\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +26,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
 
     //Language
     Route::resource('languages', LanguageController::class);
+
+    //Category
+    Route::resource('category', CategoryController::class);
 
     Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
 });

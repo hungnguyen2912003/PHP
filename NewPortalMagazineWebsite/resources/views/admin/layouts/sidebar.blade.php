@@ -11,8 +11,13 @@
             <li class="dropdown active">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
-            <li class="menu-header">Language</li>
-            <li><a class="nav-link" href="{{ route('admin.languages.index') }}"><i class="far fa-square"></i> <span>Language</span></a></li>
+            <li class="menu-header">Menu</li>
+            <li>
+                <a href="{{ route('admin.category.index') }}" class="nav-link"><i class="fas fa-folder"></i><span>Category</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('admin.languages.index') }}"><i class="far fa-square"></i> <span>Language</span></a>
+            </li>
         </ul>
     </aside>
 </div>

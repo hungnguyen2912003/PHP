@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'yes' => 'Yes',
+    'no' => 'No',
     'navbar' => [
         'dashboard' => 'Dashboard',
         'profile' => 'Profile',
@@ -29,7 +31,7 @@ return [
     ],
     'profile' => [
         'title' => 'Profile',
-        'description' => 'Change information about yourself on this page.', 
+        'description' => 'Change information about yourself on this page.',
         'name' => 'Name',
         'email' => 'Email',
         'description' => 'Change information about yourself on this page.',
@@ -46,5 +48,21 @@ return [
         'profile_updated_successfully' => 'Profile updated successfully',
         'password_updated_successfully' => 'Password updated successfully',
         'admin_not_found' => 'Admin not found',
+    ],
+
+    'category' => [
+        'title' => 'Category',
+        'name' => 'Name',
+        'is_show' => 'Show at Nav',
+        'status' => 'Status',
+        'action' => 'Action',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'create' => 'Create',
+        'create_new' => 'Create New',
+        'all_category' => 'All Category',
+        'active_category' => 'Active Category',
+        'in_nav' => 'In Nav',
+        'language_code' => 'Language Code',
     ],
 ];
