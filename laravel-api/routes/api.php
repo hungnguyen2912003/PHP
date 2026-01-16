@@ -19,3 +19,17 @@ Route::get('/hello/{name}', function ($name) {
         'message' => "Hello {$name}"
     ]);
 });
+
+Route::prefix('/auth')->group(function () {
+    Route::post('/register', function () {
+        return response()->json([
+            'message' => 'Register ok'
+        ]);
+    });
+
+    Route::post('/login', function () {
+        return response()->json([
+            'message' => 'Login ok'
+        ]);
+    });
+});
