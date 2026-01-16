@@ -13,3 +13,9 @@ Route::get('/ping', function () {
         'message' => 'Pong'
     ]);
 });
+
+Route::get('/hello/{name}', function ($name) {
+    return response()->json([
+        'message' => "Hello {$name}"
+    ]);
+});
