@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TaskController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -32,4 +33,16 @@ Route::prefix('/auth')->group(function () {
             'message' => 'Login ok'
         ]);
     });
+});
+
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Route not found'
+    ], 404);
+});
+
+Route::prefix('tasks')->group(function () {
+    Route::get('/', [TaskController::class, 'index']);
+    Route::post('/', [TaskController::class, 'store']);
+    Route::get('/{id}', [TaskController::class, 'show']);
 });
