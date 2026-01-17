@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Http\Resources\TaskResource;
+use App\Policies\TaskPolicy;
 
 class TaskController extends Controller
 {
@@ -19,10 +21,11 @@ class TaskController extends Controller
         }
 
         if ($request->has('status')) {
-            $query->where('status', 'like', "%{$request->status}%");
+            $query->where('status', $request->status);
         }
 
-        $tasks = $query->paginate(10)->withQueryString();
+        $this->authorize('viewAny', Task::class);
+        $tasks = $query->latest()->paginate(10);
 
         return response()->json([
             'data' => TaskResource::collection($tasks)
@@ -31,10 +34,12 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
+        $this->authorize('create', Task::class);
         $task = Task::create([
             'title' => $request->title,
             'description' => $request->description,
-            'status' => $request->status
+            'status' => $request->status,
+            'user_id' => $request->user()->id
         ]);
 
         return response()->json([
@@ -43,22 +48,20 @@ class TaskController extends Controller
         ], 201);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $task = Task::findOrFail($id);
+        $this->authorize('view', $task);
         return response()->json([
             'data' => TaskResource::make($task)
         ], 200);
     }
 
-    public function update(StoreTaskRequest $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
         $task = Task::findOrFail($id);
-        $task->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status
-        ]);
+        $this->authorize('update', $task);
+        $task->update($request->validated());
 
         return response()->json([
             'message' => 'updated',
@@ -66,9 +69,10 @@ class TaskController extends Controller
         ], 200);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $task = Task::findOrFail($id);
+        $this->authorize('delete', $task);
         $task->delete();
         return response()->json([
             'message' => 'deleted',
