@@ -9,9 +9,31 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Http\Resources\TaskResource;
 use App\Policies\TaskPolicy;
+use OpenApi\Attributes as OA;
 
 class TaskController extends Controller
 {
+    #[OA\Get(
+        path: '/api/tasks',
+        operationId: 'getTasksList',
+        tags: ['Tasks'],
+        summary: 'Get list of tasks',
+        description: 'Returns list of tasks',
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Successful operation'
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Unauthenticated'
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden'
+            )
+        ]
+    )]
     public function index(Request $request)
     {
         $query = Task::query();
