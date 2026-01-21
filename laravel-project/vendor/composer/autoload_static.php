@@ -134,6 +134,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
             'Laravel\\Pail\\' => 13,
+            'Laravel\\Breeze\\' => 15,
         ),
         'I' => 
         array (
@@ -439,6 +440,10 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         array (
             0 => __DIR__ . '/..' . '/laravel/pail/src',
         ),
+        'Laravel\\Breeze\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/breeze/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -537,7 +542,12 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\WeightController' => __DIR__ . '/../..' . '/app/Http/Controllers/WeightController.php',
+        'App\\Http\\Requests\\WeightRequest' => __DIR__ . '/../..' . '/app/Http/Requests/WeightRequest.php',
+        'App\\Http\\Resources\\WeightResource' => __DIR__ . '/../..' . '/app/Http/Resources/WeightResource.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Weight' => __DIR__ . '/../..' . '/app/Models/Weight.php',
+        'App\\Policies\\WeightPolicy' => __DIR__ . '/../..' . '/app/Policies/WeightPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
@@ -2981,6 +2991,12 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Laravel\\Breeze\\BreezeServiceProvider' => __DIR__ . '/..' . '/laravel/breeze/src/BreezeServiceProvider.php',
+        'Laravel\\Breeze\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallCommand.php',
+        'Laravel\\Breeze\\Console\\InstallsApiStack' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsApiStack.php',
+        'Laravel\\Breeze\\Console\\InstallsBladeStack' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsBladeStack.php',
+        'Laravel\\Breeze\\Console\\InstallsInertiaStacks' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsInertiaStacks.php',
+        'Laravel\\Breeze\\Console\\InstallsLivewireStack' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsLivewireStack.php',
         'Laravel\\Pail\\Console\\Commands\\PailCommand' => __DIR__ . '/..' . '/laravel/pail/src/Console/Commands/PailCommand.php',
         'Laravel\\Pail\\Contracts\\Printer' => __DIR__ . '/..' . '/laravel/pail/src/Contracts/Printer.php',
         'Laravel\\Pail\\File' => __DIR__ . '/..' . '/laravel/pail/src/File.php',

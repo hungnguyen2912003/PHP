@@ -11,7 +11,7 @@ class WeightRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class WeightRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'weight' => 'required|numeric',
+            'recorded_at' => 'required|date',
+            'attachment' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 }

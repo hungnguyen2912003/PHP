@@ -14,6 +14,11 @@ class WeightResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'weight' => $this->weight,
+            'recorded_at' => $this->recorded_at,
+            'attachment' => $this->attachment,
+        ];
     }
 }
