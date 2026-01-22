@@ -11,7 +11,7 @@
                 <h3 class="page-title">Users</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="">User</a>
+                        <a href="{{ route('admin.users') }}">User</a>
                     </li>
                     <li class="breadcrumb-item active">
                         All Users
@@ -55,8 +55,7 @@
                         <div class="col-auto text-end float-end ms-auto download-grp">
                             <a href="#" class="btn btn-outline-gray me-2 active"><i class="feather-list"></i></a>
                             <a href="#" class="btn btn-outline-gray me-2"><i class="feather-grid"></i></a>
-                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i>Download</a>
-                            <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            <a href="{{ route('admin.users.add') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                         </div>
                     </div>
                  </div>
@@ -128,6 +127,7 @@
                                 <a href="javascript:void(0);" class="btn btn-sm bg-success-light me-1" data-id="${user.id}"><i class="feather-eye"></i></a>
                                 <a href="javascript:void(0);" class="btn btn-sm bg-danger-light me-1" data-id="${user.id}"><i class="feather-edit"></i></a>
                                 <a href="javascript:void(0);" class="btn btn-sm bg-danger-light me-1" data-id="${user.id}"><i class="feather-trash"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-danger-light me-1" data-id="${user.id}"><i class="feather-upload"></i></a>
                             </div>
                         </td>
                     </tr>

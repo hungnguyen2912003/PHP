@@ -12,6 +12,14 @@ Route::prefix('admin')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
-        Route::get('users', [UserController::class, 'index']);
+
+        Route::prefix('users')->group(function () {
+            Route::get('/', [UserController::class, 'index']);
+            Route::post('/', [UserController::class, 'store']);
+            Route::get('/{id}', [UserController::class, 'show']);
+            Route::put('/{id}', [UserController::class, 'update']);
+            Route::delete('/{id}', [UserController::class, 'destroy']);
+        });
     });
 });
+
