@@ -28,7 +28,7 @@
                         <h3>50055</h3>
                     </div>
                     <div class="db-icon">
-                        <img src="{{ asset('assets/admin/img/icons/dash-icon-01.svg') }}" alt="Dashboard Icon">
+                        <img src="{{ asset('assets/admin/main/img/icons/dash-icon-01.svg') }}" alt="Dashboard Icon">
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <h3>50+</h3>
                     </div>
                     <div class="db-icon">
-                        <img src="{{ asset('assets/admin/img/icons/dash-icon-02.svg') }}" alt="Dashboard Icon">
+                        <img src="{{ asset('assets/admin/main/img/icons/dash-icon-02.svg') }}" alt="Dashboard Icon">
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <h3>30+</h3>
                     </div>
                     <div class="db-icon">
-                        <img src="{{ asset('assets/admin/img/icons/dash-icon-03.svg') }}" alt="Dashboard Icon">
+                        <img src="{{ asset('assets/admin/main/img/icons/dash-icon-03.svg') }}" alt="Dashboard Icon">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                         <h3>$505</h3>
                     </div>
                     <div class="db-icon">
-                        <img src="{{ asset('assets/admin/img/icons/dash-icon-04.svg') }}" alt="Dashboard Icon">
+                        <img src="{{ asset('assets/admin/main/img/icons/dash-icon-04.svg') }}" alt="Dashboard Icon">
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                                 <td class="text-nowrap">
                                     <a href="profile.html">
                                         <img class="rounded-circle"
-                                            src="{{ asset('assets/admin/img/profiles/avatar-02.jpg') }}" width="25"
+                                            src="{{ asset('assets/admin/main/img/profiles/avatar-02.jpg') }}" width="25"
                                             alt="Star Students">
                                         John Smith
                                     </a>
@@ -181,7 +181,7 @@
                                 <td class="text-nowrap">
                                     <a href="profile.html">
                                         <img class="rounded-circle"
-                                            src="{{ asset('assets/admin/img/profiles/avatar-01.jpg') }}" width="25"
+                                            src="{{ asset('assets/admin/main/img/profiles/avatar-01.jpg') }}" width="25"
                                             alt="Star Students">
                                         Jolie Hoskins
                                     </a>
@@ -199,7 +199,7 @@
                                 <td class="text-nowrap">
                                     <a href="profile.html">
                                         <img class="rounded-circle"
-                                            src="{{ asset('assets/admin/img/profiles/avatar-03.jpg') }}" width="25"
+                                            src="{{ asset('assets/admin/main/img/profiles/avatar-03.jpg') }}" width="25"
                                             alt="Star Students">
                                         Pennington Joy
                                     </a>
@@ -217,7 +217,7 @@
                                 <td class="text-nowrap">
                                     <a href="profile.html">
                                         <img class="rounded-circle"
-                                            src="{{ asset('assets/admin/img/profiles/avatar-04.jpg') }}" width="25"
+                                            src="{{ asset('assets/admin/main/img/profiles/avatar-04.jpg') }}" width="25"
                                             alt="Star Students">
                                         Millie Marsden
                                     </a>
@@ -235,7 +235,7 @@
                                 <td class="text-nowrap">
                                     <a href="profile.html">
                                         <img class="rounded-circle"
-                                            src="{{ asset('assets/admin/img/profiles/avatar-05.jpg') }}" width="25"
+                                            src="{{ asset('assets/admin/main/img/profiles/avatar-05.jpg') }}" width="25"
                                             alt="Star Students">
                                         John Smith
                                     </a>
@@ -267,7 +267,7 @@
                 <div class="activity-groups">
                     <div class="activity-awards">
                         <div class="award-boxs">
-                            <img src="{{ asset('assets/admin/img/icons/award-icon-01.svg') }}" alt="Award">
+                            <img src="{{ asset('assets/admin/main/img/icons/award-icon-01.svg') }}" alt="Award">
                         </div>
                         <div class="award-list-outs">
                             <h4>1st place in "Chess”</h4>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="activity-awards">
                         <div class="award-boxs">
-                            <img src="{{ asset('assets/admin/img/icons/award-icon-02.svg') }}" alt="Award">
+                            <img src="{{ asset('assets/admin/main/img/icons/award-icon-02.svg') }}" alt="Award">
                         </div>
                         <div class="award-list-outs">
                             <h4>Participated in "Carrom"</h4>
@@ -291,7 +291,7 @@
                     </div>
                     <div class="activity-awards">
                         <div class="award-boxs">
-                            <img src="{{ asset('assets/admin/img/icons/award-icon-03.svg') }}" alt="Award">
+                            <img src="{{ asset('assets/admin/main/img/icons/award-icon-03.svg') }}" alt="Award">
                         </div>
                         <div class="award-list-outs">
                             <h4>Internation conference in "St.John School"</h4>
@@ -303,7 +303,7 @@
                     </div>
                     <div class="activity-awards mb-0">
                         <div class="award-boxs">
-                            <img src="{{ asset('assets/admin/img/icons/award-icon-04.svg') }}" alt="Award">
+                            <img src="{{ asset('assets/admin/main/img/icons/award-icon-04.svg') }}" alt="Award">
                         </div>
                         <div class="award-list-outs">
                             <h4>Won 1st place in "Chess"</h4>
@@ -328,7 +328,7 @@
                 <h6>50,095</h6>
             </div>
             <div class="social-boxs">
-                <img src="{{ asset('assets/admin/img/icons/social-icon-01.svg') }}" alt="Social Icon">
+                <img src="{{ asset('assets/admin/main/img/icons/social-icon-01.svg') }}" alt="Social Icon">
             </div>
         </div>
     </div>
@@ -339,7 +339,7 @@
                 <h6>48,596</h6>
             </div>
             <div class="social-boxs">
-                <img src="{{ asset('assets/admin/img/icons/social-icon-02.svg') }}" alt="Social Icon">
+                <img src="{{ asset('assets/admin/main/img/icons/social-icon-02.svg') }}" alt="Social Icon">
             </div>
         </div>
     </div>
@@ -350,7 +350,7 @@
                 <h6>52,085</h6>
             </div>
             <div class="social-boxs">
-                <img src="{{ asset('assets/admin/img/icons/social-icon-03.svg') }}" alt="Social Icon">
+                <img src="{{ asset('assets/admin/main/img/icons/social-icon-03.svg') }}" alt="Social Icon">
             </div>
         </div>
     </div>
@@ -361,7 +361,7 @@
                 <h6>69,050</h6>
             </div>
             <div class="social-boxs">
-                <img src="{{ asset('assets/admin/img/icons/social-icon-04.svg') }}" alt="Social Icon">
+                <img src="{{ asset('assets/admin/main/img/icons/social-icon-04.svg') }}" alt="Social Icon">
             </div>
         </div>
     </div>
