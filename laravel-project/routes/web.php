@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::get('/login', function () {
         return view('admin.pages.auth.login');
     })->name('login');
@@ -16,5 +15,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/register', function () {
         return view('admin.pages.auth.register');
     })->name('register');
-
 });

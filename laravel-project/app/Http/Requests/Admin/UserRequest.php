@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WeightRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class WeightRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight' => 'required|numeric',
-            'recorded_at' => 'required|date',
-            'attachment' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ];
     }
 }
