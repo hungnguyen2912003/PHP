@@ -35,6 +35,9 @@ class AuthController extends Controller
             return $this->errorResponse('Unauthorized. Admin access only.', 403);
         }
 
+        $user->last_login_at = now();
+        $user->save();
+
         return $this->respondWithToken($token);
     }
 
