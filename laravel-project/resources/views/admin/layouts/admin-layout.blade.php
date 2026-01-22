@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/main/plugins/icons/flags/flags.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/main/plugins/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/main/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/main/plugins/datatables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/main/css/style.css') }}">
 </head>
 
@@ -49,6 +50,7 @@
     <script src="{{ asset('assets/admin/main/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/admin/main/plugins/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/admin/main/plugins/apexchart/chart-data.js') }}"></script>
+    <script src="{{ asset('assets/admin/main/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/admin/main/js/script.js') }}"></script>
 </body>
 

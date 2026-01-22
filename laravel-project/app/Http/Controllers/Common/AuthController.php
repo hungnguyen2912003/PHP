@@ -4,66 +4,90 @@ namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\LogInRequest;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    use ApiResponseTrait;
+
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LogInRequest $request)
     {
-        $credentials = $request->only('email', 'password');
+        $loginType = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $credentials = [
+            $loginType => $request->input('login'),
+            'password' => $request->input('password')
+        ];
 
-        if (auth()->attempt($credentials)) {
-            $user = auth()->user();
-
-            if ($user->role !== 'admin') {
-                auth()->logout();
-                return response()->json([
-                    'message' => 'Unauthorized. Admin access only.'
-                ], 403);
-            }
-
-            $token = $user->createToken('admin-token')->plainTextToken;
-
-            return response()->json([
-                'message' => 'Login successful',
-                'user' => $user,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-            ]);
+        if (! $token = auth('api')->attempt($credentials)) {
+            return $this->errorResponse('Invalid credentials', 401);
         }
 
-        return response()->json([
-            'message' => 'Invalid credentials'
-        ], 401);
+        $user = auth('api')->user();
+
+        if ($user->role !== 'admin') {
+            auth('api')->logout();
+            return $this->errorResponse('Unauthorized. Admin access only.', 403);
+        }
+
+        return $this->respondWithToken($token);
     }
 
-    public function logout(Request $request)
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Logout successful'
-        ]);
+        return $this->successResponse(auth('api')->user());
     }
 
-    public function me(Request $request)
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
     {
-        return response()->json($request->user());
+        auth('api')->logout();
+        $cookie = cookie()->forget('auth_token');
+
+        return $this->successResponse(['message' => 'Successfully logged out'])->withCookie($cookie);
     }
 
-    public function refresh(Request $request)
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
     {
-        // For Sanctum, "refresh" usually means just issuing a new token
-        // But often strict refresh tokens are not standard.
-        // We can just return a new token and delete the old one, or similar.
-        // For simplicity, we can validly just issue a new one.
+        return $this->respondWithToken(auth('api')->refresh());
+    }
 
-        $request->user()->currentAccessToken()->delete();
-        $token = $request->user()->createToken('admin-token')->plainTextToken;
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        $ttl = auth('api')->factory()->getTTL(); // Minutes
+        $cookie = cookie('auth_token', $token, $ttl, '/', null, false, true, false, 'Lax');
 
-        return response()->json([
+        return $this->successResponse([
             'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
+            'token_type' => 'bearer',
+            'expires_in' => $ttl * 60,
+            'user' => auth('api')->user()
+        ])->withCookie($cookie);
     }
 }

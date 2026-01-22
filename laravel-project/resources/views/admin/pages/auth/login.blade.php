@@ -18,25 +18,25 @@
                         </a>
                     </p>
                 </div>
-                <form>
+                <form id="loginForm">
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">
-                        Email Address
+                        Email or Username
                         </label>
                         <div class="form-floating">
-                            <input class="form-control" id="floatingInput1" placeholder="Enter email address *" type="email"/>
+                            <input class="form-control" id="login" name="login" placeholder="Enter email or username *" type="text" required/>
                             <label for="floatingInput1">
-                            Enter email address *
+                            Enter email or username *
                             </label>
                         </div>
                     </div>
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">
-                        Your Password
+                        Password
                         </label>
                         <div class="form-group" id="password-show-hide">
                             <div class="password-wrapper position-relative password-container">
-                                <input class="form-control text-secondary password" placeholder="Enter password *" type="password"/>
+                                <input class="form-control text-secondary password" id="password" name="password" placeholder="Enter password *" type="password" required/>
                                 <i aria-hidden="true" class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary" style="color: #A9A9C8; font-size: 22px; right: 15px;">
                                 </i>
                             </div>
@@ -45,7 +45,7 @@
                     <div class="mb-20">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
                             <div class="form-check">
-                                <input class="form-check-input" id="flexCheckDefault" type="checkbox" value=""/>
+                                <input class="form-check-input" id="flexCheckDefault" name="remember" type="checkbox" value="1"/>
                                 <label class="form-check-label fs-16" for="flexCheckDefault">
                                 Remember me
                                 </label>
@@ -56,10 +56,11 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button class="btn btn-primary fw-normal text-white w-100" style="padding-top: 18px; padding-bottom: 18px;" type="button">
+                        <button class="btn btn-primary fw-normal text-white w-100" style="padding-top: 18px; padding-bottom: 18px;" type="submit">
                         Sign In
                         </button>
                     </div>
+                    <div id="error-message" class="text-danger text-center mb-3" style="display: none;"></div>
                     <div class="position-relative text-center z-1 mb-12">
                         <span class="fs-16 bg-white px-4 text-secondary card d-inline-block border-0">
                         or sign in with
@@ -94,6 +95,39 @@
                         </li>
                     </ul>
                 </form>
+
+                <script>
+                    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        const login = document.getElementById('login').value;
+                        const password = document.getElementById('password').value;
+                        const errorMessage = document.getElementById('error-message');
+                        
+                        try {
+                            const response = await fetch('/api/admin/login', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({ login, password })
+                            });
+
+                            const data = await response.json();
+
+                            if (response.ok) {
+                                window.location.href = "{{ route('admin.dashboard') }}";
+                            } else {
+                                errorMessage.style.display = 'block';
+                                errorMessage.innerText = data.body?.message || 'Login failed';
+                            }
+                        } catch (error) {
+                            errorMessage.style.display = 'block';
+                            errorMessage.innerText = 'An error occurred';
+                            console.error(error);
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

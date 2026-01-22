@@ -8,9 +8,10 @@ use App\Http\Controllers\Admin\UserController;
 Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 
-    Route::middleware('admin')->group(function () {
+    Route::middleware(['admin'])->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
+        Route::get('users', [UserController::class, 'index']);
     });
 });

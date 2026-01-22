@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
         ]);
+        $middleware->encryptCookies(except: [
+            'auth_token',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
