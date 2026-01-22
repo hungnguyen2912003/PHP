@@ -15,7 +15,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('register');
 
     Route::middleware(['admin'])->group(function () {
-        Route::get('/dashboard', function () {
+        Route::get('/', function () {
             return view('admin.pages.dashboard');
         })->name('dashboard');
 
@@ -38,16 +38,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 });
-
-Route::get('/', function () {
-    return view('client.pages.dashboard');
-});
-
-Route::get('/login', function () {
-    return view('client.pages.auth.login');
-})->name('client.login');
-
-Route::get('/register', function () {
-    return view('client.pages.auth.register');
-})->name('client.register');
-
