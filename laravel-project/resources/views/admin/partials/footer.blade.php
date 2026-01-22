@@ -1,0 +1,1 @@
+<p>Copyright © {{ date('Y') }} Hưng Nguyễn.</p>
