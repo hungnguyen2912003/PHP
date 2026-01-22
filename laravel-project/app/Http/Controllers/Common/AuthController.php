@@ -30,11 +30,6 @@ class AuthController extends Controller
 
         $user = auth('api')->user();
 
-        if ($user->role !== 'admin') {
-            auth('api')->logout();
-            return $this->errorResponse('Unauthorized. Admin access only.', 403);
-        }
-
         $user->last_login_at = now();
         $user->save();
 

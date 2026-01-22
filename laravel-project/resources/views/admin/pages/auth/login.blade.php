@@ -24,7 +24,7 @@
                         Email or Username
                         </label>
                         <div class="form-floating">
-                            <input class="form-control" id="login" name="login" placeholder="Enter email or username *" type="text" required/>
+                            <input class="form-control" id="username" name="username" placeholder="Enter email or username *" type="text" required/>
                             <label for="floatingInput1">
                             Enter email or username *
                             </label>
@@ -99,7 +99,7 @@
                 <script>
                     document.getElementById('loginForm').addEventListener('submit', async function(e) {
                         e.preventDefault();
-                        const login = document.getElementById('login').value;
+                        const username = document.getElementById('username').value;
                         const password = document.getElementById('password').value;
                         const errorMessage = document.getElementById('error-message');
                         
@@ -110,7 +110,7 @@
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json'
                                 },
-                                body: JSON.stringify({ login, password })
+                                body: JSON.stringify({ username, password })
                             });
 
                             const data = await response.json();

@@ -13,8 +13,6 @@
         <link href="{{ asset('assets/admin/auth/css/swiper-bundle.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/admin/auth/css/jsvectormap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/admin/auth/css/style.css') }}" rel="stylesheet"/>
-        <!-- Favicon -->
-        <link href="{{ asset('assets/admin/auth/images/favicon.png') }}" rel="icon" type="image/png"/>
         <!-- Title -->
         <title>
             @yield('title')

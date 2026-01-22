@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['auth:api', 'role:admin'])->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
@@ -23,3 +23,12 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+Route::prefix('user')->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::middleware(['auth:api', 'role:user'])->group(function () {
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refresh']);
+        Route::get('me', [AuthController::class, 'me']);
+    });
+});
