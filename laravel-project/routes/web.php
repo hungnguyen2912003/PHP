@@ -42,3 +42,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/', function () {
     return view('client.pages.dashboard');
 });
+
+Route::get('/login', function () {
+    return view('client.pages.auth.login');
+})->name('client.login');
+
+Route::get('/register', function () {
+    return view('client.pages.auth.register');
+})->name('client.register');
+

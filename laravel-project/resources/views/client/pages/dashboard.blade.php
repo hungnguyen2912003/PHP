@@ -170,7 +170,7 @@
                             <button type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-500/20 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-500/20 dark:ring-custom-400/20">Take a Product</button>
                         </div>
                         <div class="hidden col-span-12 2xl:col-span-3 lg:col-span-2 lg:col-start-11 2xl:col-start-10 lg:block">
-                            <img src="assets/client/main/images/dashboard.png" alt="" class="h-40 ltr:2xl:ml-auto rtl:2xl:mr-auto">
+                            <img src="assets/client/images/dashboard.png" alt="" class="h-40 ltr:2xl:ml-auto rtl:2xl:mr-auto">
                         </div>
                     </div>
                 </div>
@@ -647,7 +647,7 @@
                     <ul class="divide-y divide-slate-200 dark:divide-zink-500">
                         <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
                             <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/avatar-2.png" alt="" class="w-8 h-8 rounded-full">
+                                <img src="assets/client/images/avatar-2.png" alt="" class="w-8 h-8 rounded-full">
                             </div>
                             <div class="grow">
                                 <h6 class="font-medium">Urrie Arthur</h6>
@@ -659,7 +659,7 @@
                         </li>
                         <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
                             <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/avatar-3.png" alt="" class="w-8 h-8 rounded-full">
+                                <img src="assets/client/images/avatar-3.png" alt="" class="w-8 h-8 rounded-full">
                             </div>
                             <div class="grow">
                                 <h6 class="font-medium">Natalie Christy</h6>
@@ -671,7 +671,7 @@
                         </li>
                         <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
                             <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/avatar-4.png" alt="" class="w-8 h-8 rounded-full">
+                                <img src="assets/client/images/avatar-4.png" alt="" class="w-8 h-8 rounded-full">
                             </div>
                             <div class="grow">
                                 <h6 class="font-medium">Laurie Jackson</h6>
@@ -683,7 +683,7 @@
                         </li>
                         <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
                             <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/avatar-5.png" alt="" class="w-8 h-8 rounded-full">
+                                <img src="assets/client/images/avatar-5.png" alt="" class="w-8 h-8 rounded-full">
                             </div>
                             <div class="grow">
                                 <h6 class="font-medium">Michael Torres</h6>
@@ -767,7 +767,7 @@
                     <ul class="flex flex-col gap-5">
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-02.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-02.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Mesh Ergonomic Black Chair</h6>
@@ -783,7 +783,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-03.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-03.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Fastcolors Typography Men</h6>
@@ -799,7 +799,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-04.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-04.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Mesh Ergonomic Green Chair</h6>
@@ -815,7 +815,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-05.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-05.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Techel Black Bluetooth Soundbar</h6>
@@ -831,7 +831,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-06.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-06.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Bovet Fleurier AIFSQ029</h6>
@@ -847,7 +847,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
-                                <img src="assets/client/main/images/img-03.png" alt="" class="h-6">
+                                <img src="assets/client/images/img-03.png" alt="" class="h-6">
                             </div>
                             <div class="overflow-hidden grow">
                                 <h6 class="truncate">Fastcolors Typography Men</h6>

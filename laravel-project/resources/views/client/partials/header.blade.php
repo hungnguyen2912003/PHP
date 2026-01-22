@@ -6,18 +6,18 @@
                 <div class="items-center justify-center hidden px-5 text-center h-header group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:ltr::pl-0 group-data-[layout=horizontal]:rtl:pr-0">
                     <a href="index.html">
                         <span class="hidden">
-                            <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+                            <img src="{{ asset('assets/client/images/logo.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                         <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
-                            <img src="{{ asset('assets/client/main/images/logo-dark.png') }}" alt="" class="h-6 mx-auto">
+                            <img src="{{ asset('assets/client/images/logo-dark.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                     </a>
                     <a href="index.html" class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
                         <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
-                            <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+                            <img src="{{ asset('assets/client/images/logo.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                         <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
-                            <img src="{{ asset('assets/client/main/images/logo-light.png') }}" alt="" class="h-6 mx-auto">
+                            <img src="{{ asset('assets/client/images/logo-light.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                     </a>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="relative flex items-center dropdown h-header">
                         <button type="button" class="inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200" id="dropdownMenuButton" data-bs-toggle="dropdown">
                             <div class="bg-pink-100 rounded-full">
-                                <img src="{{ asset('assets/client/main/images/profile.png') }}" alt="" class="w-[37.5px] h-[37.5px] rounded-full">
+                                <img src="{{ asset('assets/client/images/profile.png') }}" alt="" class="w-[37.5px] h-[37.5px] rounded-full">
                             </div>
                         </button>
                         <div class="absolute z-50 hidden p-4 ltr:text-left rtl:text-right bg-white rounded-md shadow-md !top-4 dropdown-menu min-w-[14rem] dark:bg-zink-600" aria-labelledby="dropdownMenuButton">
@@ -54,7 +54,7 @@
                             <a href="#!" class="flex gap-3 mb-3">
                                 <div class="relative inline-block shrink-0">
                                     <div class="rounded bg-slate-100 dark:bg-zink-500">
-                                        <img src="{{ asset('assets/client/main/images/profile.png') }}" alt="" class="w-12 h-12 rounded">
+                                        <img src="{{ asset('assets/client/images/profile.png') }}" alt="" class="w-12 h-12 rounded">
                                     </div>
                                     <span class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"></span>
                                 </div>

@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <!-- Layout config Js -->
-    <script src="{{ asset('assets/client/main/js/layout.js') }}"></script>
+    <script src="{{ asset('assets/client/js/layout.js') }}"></script>
     <!-- Icons CSS -->
 
     <!-- StarCode CSS -->
 
 
-  <link rel="stylesheet" href="{{ asset('assets/client/main/css/starcode2.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
 </head>
 
 <body class="text-base bg-body-bg text-body font-public dark:text-zink-100 dark:bg-zink-800 group-data-[skin=bordered]:bg-body-bordered group-data-[skin=bordered]:dark:bg-zink-700">
@@ -237,21 +237,21 @@
         <a href="#!" class="w-full text-white transition-all duration-200 ease-linear bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100">Buy Now</a>
     </div>
 </div>
-<script src='{{ asset('assets/client/main/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
-<script src="{{ asset('assets/client/main/libs/@popperjs/core/umd/popper.min.js') }}"></script>
-<script src="{{ asset('assets/client/main/libs/tippy.js/tippy-bundle.umd.min.js') }}"></script>
-<script src="{{ asset('assets/client/main/libs/simplebar/simplebar.min.js') }}"></script>
-<script src="{{ asset('assets/client/main/libs/prismjs/prism.js') }}"></script>
-<script src="{{ asset('assets/client/main/libs/lucide/umd/lucide.js') }}"></script>
-<script src="{{ asset('assets/client/main/js/starcode.bundle.js') }}"></script>
+<script src='{{ asset('assets/client/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
+<script src="{{ asset('assets/client/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+<script src="{{ asset('assets/client/libs/tippy.js/tippy-bundle.umd.min.js') }}"></script>
+<script src="{{ asset('assets/client/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/client/libs/prismjs/prism.js') }}"></script>
+<script src="{{ asset('assets/client/libs/lucide/umd/lucide.js') }}"></script>
+<script src="{{ asset('assets/client/js/starcode.bundle.js') }}"></script>
 <!--apexchart js-->
-<script src="{{ asset('assets/client/main/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/client/libs/apexcharts/apexcharts.min.js') }}"></script>
 
 <!--dashboard ecommerce init js-->
-<script src="{{ asset('assets/client/main/js/pages/dashboards-ecommerce.init.js') }}"></script>
+<script src="{{ asset('assets/client/js/pages/dashboards-ecommerce.init.js') }}"></script>
 
 <!-- App js -->
-<script src="{{ asset('assets/client/main/js/app.js') }}"></script>
+<script src="{{ asset('assets/client/js/app.js') }}"></script>
 
 </body>
 

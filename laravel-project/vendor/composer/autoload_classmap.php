@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\Admin\\DashboardController' => $baseDir . '/app/Http/Controllers/Admin/DashboardController.php',
     'App\\Http\\Controllers\\Admin\\UserController' => $baseDir . '/app/Http/Controllers/Admin/UserController.php',
     'App\\Http\\Controllers\\Client\\WeightController' => $baseDir . '/app/Http/Controllers/Client/WeightController.php',
     'App\\Http\\Controllers\\Common\\AuthController' => $baseDir . '/app/Http/Controllers/Common/AuthController.php',
@@ -20,6 +21,7 @@ return array(
     'App\\Models\\Weight' => $baseDir . '/app/Models/Weight.php',
     'App\\Policies\\WeightPolicy' => $baseDir . '/app/Policies/WeightPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
+    'App\\Traits\\ApiResponseTrait' => $baseDir . '/app/Traits/ApiResponseTrait.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Brick\\Math\\BigDecimal' => $vendorDir . '/brick/math/src/BigDecimal.php',
     'Brick\\Math\\BigInteger' => $vendorDir . '/brick/math/src/BigInteger.php',
