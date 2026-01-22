@@ -1,171 +1,37 @@
-<div class="dlabnav-scroll">
-    <ul class="metismenu" id="menu">
-        <li class="dropdown header-profile">
-            <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                <img src="images/profile/pic1.jpg" width="20" alt="">
-                <div class="header-info ms-3">
-                    <span class="font-w600 ">Hi,<b>William</b></span>
-                    <small class="text-end font-w400">william@gmail.com</small>
-                </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end">
-                <a href="app-profile.html" class="dropdown-item ai-icon">
-                    <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <span class="ms-2">Profile </span>
-                </a>
-                <a href="email-inbox.html" class="dropdown-item ai-icon">
-                    <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span class="ms-2">Inbox </span>
-                </a>
-                <a href="page-error-404.html" class="dropdown-item ai-icon">
-                    <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    <span class="ms-2">Logout </span>
-                </a>
-            </div>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-025-dashboard"></i>
-                <span class="nav-text">Dashboard</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="index.html">Dashboard Light</a></li>
-                <li><a href="index-2.html">Dashboard Dark</a></li>
-                <li><a href="my-wallet.html">My Wallet</a></li>
-                <li><a href="page-invoices.html">Invoices</a></li>
-                <li><a href="cards-center.html">Cards Center</a></li>
-                <li><a href="page-transaction.html">Transaction</a></li>
-                <li><a href="transaction-details.html">Transaction Details</a></li>	
-            </ul>
+<div class="app-menu w-vertical-menu bg-vertical-menu ltr:border-r rtl:border-l border-vertical-menu-border fixed bottom-0 top-0 z-[1003] transition-all duration-75 ease-linear group-data-[sidebar-size=md]:w-vertical-menu-md group-data-[sidebar-size=sm]:w-vertical-menu-sm group-data-[sidebar-size=sm]:pt-header group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar=dark]:border-vertical-menu-dark group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar=brand]:border-vertical-menu-brand group-data-[sidebar=modern]:bg-gradient-to-tr group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[layout=horizontal]:w-full group-data-[layout=horizontal]:bottom-auto group-data-[layout=horizontal]:top-header hidden md:block print:hidden group-data-[sidebar-size=sm]:absolute group-data-[sidebar=modern]:border-vertical-menu-border-modern group-data-[layout=horizontal]:dark:bg-zink-700 group-data-[layout=horizontal]:border-t group-data-[layout=horizontal]:dark:border-zink-500 group-data-[layout=horizontal]:border-r-0 group-data-[sidebar=dark]:dark:bg-zink-700 group-data-[sidebar=dark]:dark:border-zink-600 group-data-[layout=horizontal]:group-data-[navbar=scroll]:absolute group-data-[layout=horizontal]:group-data-[navbar=bordered]:top-[calc(theme('spacing.header')_+_theme('spacing.4'))] group-data-[layout=horizontal]:group-data-[navbar=bordered]:inset-x-4 group-data-[layout=horizontal]:group-data-[navbar=hidden]:top-0 group-data-[layout=horizontal]:group-data-[navbar=hidden]:h-16 group-data-[layout=horizontal]:group-data-[navbar=bordered]:w-[calc(100%_-_2rem)] group-data-[layout=horizontal]:group-data-[navbar=bordered]:[&.sticky]:top-header group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-md group-data-[layout=horizontal]:shadow-md group-data-[layout=horizontal]:shadow-slate-500/10 group-data-[layout=horizontal]:dark:shadow-zink-500/10 group-data-[layout=horizontal]:opacity-0">
+    <div class="flex items-center justify-center px-5 text-center h-header group-data-[layout=horizontal]:hidden group-data-[sidebar-size=sm]:fixed group-data-[sidebar-size=sm]:top-0 group-data-[sidebar-size=sm]:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-gradient-to-br group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-vertical-menu-modern group-data-[sidebar-size=sm]:z-10 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.vertical-menu-sm')_-_1px)] group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:dark:bg-zink-700">
+        <a href="index.html" class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden">
+            <span class="hidden group-data-[sidebar-size=sm]:block">
+                <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+            </span>
+            <span class="group-data-[sidebar-size=sm]:hidden">
+                <img src="{{ asset('assets/client/main/images/logo-dark.png') }}" alt="" class="h-6 mx-auto">
+            </span>
+        </a>
+        <a href="index.html" class="hidden group-data-[sidebar=dark]:block group-data-[sidebar=brand]:block group-data-[sidebar=modern]:block">
+            <span class="hidden group-data-[sidebar-size=sm]:block">
+                <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+            </span>
+            <span class="group-data-[sidebar-size=sm]:hidden">
+                <img src="{{ asset('assets/client/main/images/logo-light.png') }}" alt="" class="h-6 mx-auto">
+            </span>
+        </a>
+        <button type="button" class="hidden p-0 float-end" id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
 
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-            <i class="flaticon-050-info"></i>
-                <span class="nav-text">Apps</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="app-profile.html">Profile</a></li>
-                <li><a href="post-details.html">Post Details</a></li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                    <ul aria-expanded="false">
-                        <li><a href="email-compose.html">Compose</a></li>
-                        <li><a href="email-inbox.html">Inbox</a></li>
-                        <li><a href="email-read.html">Read</a></li>
-                    </ul>
-                </li>
-                <li><a href="app-calender.html">Calendar</a></li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                    <ul aria-expanded="false">
-                        <li><a href="ecom-product-grid.html">Product Grid</a></li>
-                        <li><a href="ecom-product-list.html">Product List</a></li>
-                        <li><a href="ecom-product-detail.html">Product Details</a></li>
-                        <li><a href="ecom-product-order.html">Order</a></li>
-                        <li><a href="ecom-checkout.html">Checkout</a></li>
-                        <li><a href="ecom-invoice.html">Invoice</a></li>
-                        <li><a href="ecom-customers.html">Customers</a></li>
-                    </ul>
+    <div id="scrollbar" class="group-data-[sidebar-size=md]:max-h-[calc(100vh_-_theme('spacing.header')_*_1.2)] group-data-[sidebar-size=lg]:max-h-[calc(100vh_-_theme('spacing.header')_*_1.2)] group-data-[layout=horizontal]:h-56 group-data-[layout=horizontal]:md:h-auto group-data-[layout=horizontal]:overflow-auto group-data-[layout=horizontal]:md:overflow-visible group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:mx-auto">
+        <div>
+            <ul class="group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:flex-col group-data-[layout=horizontal]:md:flex-row" id="navbar-nav">
+                <li class="px-4 py-1 text-vertical-menu-item group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern uppercase font-medium text-[11px] cursor-default tracking-wider group-data-[sidebar-size=sm]:hidden group-data-[layout=horizontal]:hidden inline-block group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:underline group-data-[sidebar-size=md]:text-center group-data-[sidebar=dark]:dark:text-zink-200"><span data-key="t-menu">Menu</span></li>
+                <li class="relative group-data-[layout=horizontal]:shrink-0 group/sm">
+                    <a class="relative flex items-center ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 mx-3 my-1 group/menu-link text-vertical-menu-item-font-size font-normal transition-all duration-75 ease-linear rounded-md py-2.5 text-vertical-menu-item hover:text-vertical-menu-item-hover hover:bg-vertical-menu-item-bg-hover [&.active]:text-vertical-menu-item-active [&.active]:bg-vertical-menu-item-bg-active group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=dark]:hover:text-vertical-menu-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:bg-vertical-menu-item-bg-hover-dark group-data-[sidebar=dark]:dark:hover:bg-zink-600 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-item-active-dark group-data-[sidebar=dark]:[&.active]:bg-vertical-menu-item-bg-active-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-item-hover-brand group-data-[sidebar=brand]:hover:bg-vertical-menu-item-bg-hover-brand group-data-[sidebar=brand]:[&.active]:bg-vertical-menu-item-bg-active-brand group-data-[sidebar=brand]:[&.active]:text-vertical-menu-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern group-data-[sidebar=modern]:hover:bg-vertical-menu-item-bg-hover-modern group-data-[sidebar=modern]:hover:text-vertical-menu-item-hover-modern group-data-[sidebar=modern]:[&.active]:bg-vertical-menu-item-bg-active-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-item-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=sm]:group-hover/sm:w-[calc(theme('spacing.vertical-menu-sm')_*_3.63)] group-data-[sidebar-size=sm]:group-hover/sm:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:group-hover/sm:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:bg-vertical-menu-border-modern group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:group-hover/sm:bg-vertical-menu-brand group-data-[sidebar-size=sm]:my-0 group-data-[sidebar-size=sm]:rounded-b-none group-data-[layout=horizontal]:m-0 group-data-[layout=horizontal]:ltr:pr-8 group-data-[layout=horizontal]:rtl:pl-8 group-data-[layout=horizontal]:hover:bg-transparent group-data-[layout=horizontal]:[&.active]:bg-transparent [&.dropdown-button]:before:absolute [&.dropdown-button]:[&.show]:before:content-['\ea4e'] [&.dropdown-button]:before:content-['\ea6e'] [&.dropdown-button]:before:font-remix ltr:[&.dropdown-button]:before:right-2 rtl:[&.dropdown-button]:before:left-2 [&.dropdown-button]:before:text-16 group-data-[sidebar-size=sm]:[&.dropdown-button]:before:hidden group-data-[sidebar-size=md]:[&.dropdown-button]:before:hidden group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[sidebar=dark]:[&.active]:dark:bg-zink-600 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 rtl:[&.dropdown-button]:before:rotate-180 group-data-[layout=horizontal]:[&.dropdown-button]:before:rotate-90 group-data-[layout=horizontal]:[&.dropdown-button]:[&.show]:before:rotate-0 rtl:[&.dropdown-button]:[&.show]:before:rotate-0" href="/">
+                        <span class="min-w-[1.75rem] group-data-[sidebar-size=sm]:h-[1.75rem] inline-block text-start text-[16px] group-data-[sidebar-size=md]:block group-data-[sidebar-size=sm]:flex group-data-[sidebar-size=sm]:items-center"><i data-lucide="monitor-dot" class="h-4 group-data-[sidebar-size=sm]:h-5 group-data-[sidebar-size=sm]:w-5 transition group-hover/menu-link:animate-icons fill-slate-100 group-hover/menu-link:fill-blue-200 group-data-[sidebar=dark]:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:dark:fill-zink-600 group-data-[layout=horizontal]:dark:fill-zink-600 group-data-[sidebar=brand]:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:fill-vertical-menu-item-bg-active-modern group-data-[sidebar=dark]:group-hover/menu-link:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:group-hover/menu-link:dark:fill-custom-500/20 group-data-[layout=horizontal]:dark:group-hover/menu-link:fill-custom-500/20 group-data-[sidebar=brand]:group-hover/menu-link:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:group-hover/menu-link:fill-vertical-menu-item-bg-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:mx-auto group-data-[sidebar-size=md]:mb-2"></i></span> <span class="group-data-[sidebar-size=sm]:ltr:pl-10 group-data-[sidebar-size=sm]:rtl:pr-10 align-middle group-data-[sidebar-size=sm]:group-hover/sm:block group-data-[sidebar-size=sm]:hidden" data-key="t-dashboards">Dashboards</span>
+                    </a>
                 </li>
             </ul>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-041-graph"></i>
-                <span class="nav-text">Charts</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="chart-flot.html">Flot</a></li>
-                <li><a href="chart-morris.html">Morris</a></li>
-                <li><a href="chart-chartjs.html">Chartjs</a></li>
-                <li><a href="chart-chartist.html">Chartist</a></li>
-                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                <li><a href="chart-peity.html">Peity</a></li>
-            </ul>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-086-star"></i>
-                <span class="nav-text">Bootstrap</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="ui-accordion.html">Accordion</a></li>
-                <li><a href="ui-alert.html">Alert</a></li>
-                <li><a href="ui-badge.html">Badge</a></li>
-                <li><a href="ui-button.html">Button</a></li>
-                <li><a href="ui-modal.html">Modal</a></li>
-                <li><a href="ui-button-group.html">Button Group</a></li>
-                <li><a href="ui-list-group.html">List Group</a></li>
-                <li><a href="ui-card.html">Cards</a></li>
-                <li><a href="ui-carousel.html">Carousel</a></li>
-                <li><a href="ui-dropdown.html">Dropdown</a></li>
-                <li><a href="ui-popover.html">Popover</a></li>
-                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                <li><a href="ui-tab.html">Tab</a></li>
-                <li><a href="ui-typography.html">Typography</a></li>
-                <li><a href="ui-pagination.html">Pagination</a></li>
-                <li><a href="ui-grid.html">Grid</a></li>
-
-            </ul>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-045-heart"></i>
-                <span class="nav-text">Plugins</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="uc-select2.html">Select 2</a></li>
-                <li><a href="uc-nestable.html">Nestedable</a></li>
-                <li><a href="uc-noui-slider.html">Noui Slider</a></li>
-                <li><a href="uc-sweetalert.html">Sweet Alert</a></li>
-                <li><a href="uc-toastr.html">Toastr</a></li>
-                <li><a href="map-jqvmap.html">Jqv Map</a></li>
-                <li><a href="uc-lightgallery.html">Light Gallery</a></li>
-            </ul>
-        </li>
-        <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
-                <span class="nav-text">Widget</span>
-            </a>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-072-printer"></i>
-                <span class="nav-text">Forms</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="form-element.html">Form Elements</a></li>
-                <li><a href="form-wizard.html">Wizard</a></li>
-                <li><a href="form-ckeditor.html">CkEditor</a></li>
-                <li><a href="form-pickers.html">Pickers</a></li>
-                <li><a href="form-validation.html">Form Validate</a></li>
-            </ul>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-043-menu"></i>
-                <span class="nav-text">Table</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                <li><a href="table-datatable-basic.html">Datatable</a></li>
-            </ul>
-        </li>
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-022-copy"></i>
-                <span class="nav-text">Pages</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="page-login.html">Login</a></li>
-                <li><a href="page-register.html">Register</a></li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                    <ul aria-expanded="false">
-                        <li><a href="page-error-400.html">Error 400</a></li>
-                        <li><a href="page-error-403.html">Error 403</a></li>
-                        <li><a href="page-error-404.html">Error 404</a></li>
-                        <li><a href="page-error-500.html">Error 500</a></li>
-                        <li><a href="page-error-503.html">Error 503</a></li>
-                    </ul>
-                </li>
-                <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                <li><a href="empty-page.html">Empty Page</a></li>
-            </ul>
-        </li>
-    </ul>
-    <div class="copyright">
-        <p><strong>Dompet Payment Admin Dashboard</strong> © 2022 All Rights Reserved</p>
-        <p class="fs-12">Made with <span class="heart"></span> by DexignLab</p>
+        </div>
+        <!-- Sidebar -->
     </div>
 </div>

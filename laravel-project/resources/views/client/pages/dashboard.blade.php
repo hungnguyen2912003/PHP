@@ -3,645 +3,875 @@
 @section('title', 'Dashboard')
 
 @section('content')
+<div class="group-data-[sidebar-size=lg]:ltr:md:ml-vertical-menu group-data-[sidebar-size=lg]:rtl:md:mr-vertical-menu group-data-[sidebar-size=md]:ltr:ml-vertical-menu-md group-data-[sidebar-size=md]:rtl:mr-vertical-menu-md group-data-[sidebar-size=sm]:ltr:ml-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:mr-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1)] pb-[calc(theme('spacing.header')_*_0.8)] px-4 group-data-[navbar=bordered]:pt-[calc(theme('spacing.header')_*_1.3)] group-data-[navbar=hidden]:pt-0 group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:px-0 group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:ltr:md:ml-auto group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:rtl:md:mr-auto group-data-[layout=horizontal]:md:pt-[calc(theme('spacing.header')_*_1.6)] group-data-[layout=horizontal]:px-3 group-data-[layout=horizontal]:group-data-[navbar=hidden]:pt-[calc(theme('spacing.header')_*_0.9)]">
+    <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
 
-<div class="row invoice-card-row">
-    <div class="col-xl-3 col-xxl-3 col-sm-6">
-        <div class="card bg-warning invoice-card">
-            <div class="card-body d-flex">
-                <div class="icon me-3">
-                    <svg width="33px" height="32px">
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M31.963,30.931 C31.818,31.160 31.609,31.342 31.363,31.455 C31.175,31.538 30.972,31.582 30.767,31.583 C30.429,31.583 30.102,31.463 29.845,31.243 L25.802,27.786 L21.758,31.243 C21.502,31.463 21.175,31.583 20.837,31.583 C20.498,31.583 20.172,31.463 19.915,31.243 L15.872,27.786 L11.829,31.243 C11.622,31.420 11.370,31.534 11.101,31.572 C10.832,31.609 10.558,31.569 10.311,31.455 C10.065,31.342 9.857,31.160 9.710,30.931 C9.565,30.703 9.488,30.437 9.488,30.167 L9.488,17.416 L2.395,17.416 C2.019,17.416 1.658,17.267 1.392,17.001 C1.126,16.736 0.976,16.375 0.976,16.000 L0.976,6.083 C0.976,4.580 1.574,3.139 2.639,2.076 C3.703,1.014 5.146,0.417 6.651,0.417 L26.511,0.417 C28.016,0.417 29.459,1.014 30.524,2.076 C31.588,3.139 32.186,4.580 32.186,6.083 L32.186,30.167 C32.186,30.437 32.109,30.703 31.963,30.931 ZM9.488,6.083 C9.488,5.332 9.189,4.611 8.657,4.080 C8.125,3.548 7.403,3.250 6.651,3.250 C5.898,3.250 5.177,3.548 4.645,4.080 C4.113,4.611 3.814,5.332 3.814,6.083 L3.814,14.583 L9.488,14.583 L9.488,6.083 ZM29.348,6.083 C29.348,5.332 29.050,4.611 28.517,4.080 C27.985,3.548 27.263,3.250 26.511,3.250 L11.559,3.250 C12.059,4.111 12.324,5.088 12.325,6.083 L12.325,27.092 L14.950,24.840 C15.207,24.620 15.534,24.500 15.872,24.500 C16.210,24.500 16.537,24.620 16.794,24.840 L20.837,28.296 L24.880,24.840 C25.137,24.620 25.463,24.500 25.802,24.500 C26.140,24.500 26.467,24.620 26.724,24.840 L29.348,27.092 L29.348,6.083 ZM25.092,20.250 L16.581,20.250 C16.205,20.250 15.844,20.101 15.578,19.835 C15.312,19.569 15.162,19.209 15.162,18.833 C15.162,18.457 15.312,18.097 15.578,17.831 C15.844,17.566 16.205,17.416 16.581,17.416 L25.092,17.416 C25.469,17.416 25.829,17.566 26.096,17.831 C26.362,18.097 26.511,18.457 26.511,18.833 C26.511,19.209 26.362,19.569 26.096,19.835 C25.829,20.101 25.469,20.250 25.092,20.250 ZM25.092,14.583 L16.581,14.583 C16.205,14.583 15.844,14.434 15.578,14.168 C15.312,13.903 15.162,13.542 15.162,13.167 C15.162,12.791 15.312,12.430 15.578,12.165 C15.844,11.899 16.205,11.750 16.581,11.750 L25.092,11.750 C25.469,11.750 25.829,11.899 26.096,12.165 C26.362,12.430 26.511,12.791 26.511,13.167 C26.511,13.542 26.362,13.903 26.096,14.168 C25.829,14.434 25.469,14.583 25.092,14.583 ZM25.092,8.916 L16.581,8.916 C16.205,8.916 15.844,8.767 15.578,8.501 C15.312,8.236 15.162,7.875 15.162,7.500 C15.162,7.124 15.312,6.764 15.578,6.498 C15.844,6.232 16.205,6.083 16.581,6.083 L25.092,6.083 C25.469,6.083 25.829,6.232 26.096,6.498 C26.362,6.764 26.511,7.124 26.511,7.500 C26.511,7.875 26.362,8.236 26.096,8.501 C25.829,8.767 25.469,8.916 25.092,8.916 Z"></path>
-                    </svg>
-                    
-                </div>
-                <div>
-                    <h2 class="text-white invoice-num">2478</h2>
-                    <span class="text-white fs-18">Total Invoices</span>
-                </div>
+        <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
+            <div class="grow">
+                <h5 class="text-16">Ecommerce</h5>
             </div>
+            <ul class="flex items-center gap-2 text-sm font-normal shrink-0">
+                <li class="relative before:content-['\ea54'] before:font-remix ltr:before:-right-1 rtl:before:-left-1  before:absolute before:text-[18px] before:-top-[3px] ltr:pr-4 rtl:pl-4 before:text-slate-400 dark:text-zink-200">
+                    <a href="#!" class="text-slate-400 dark:text-zink-200">Dashboards</a>
+                </li>
+                <li class="text-slate-700 dark:text-zink-100">
+                    Ecommerce
+                </li>
+            </ul>
         </div>
-    </div>
-    <div class="col-xl-3 col-xxl-3 col-sm-6">
-        <div class="card bg-success invoice-card">
-            <div class="card-body d-flex">
-                <div class="icon me-3">
-                    <svg width="35px" height="34px">
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M32.482,9.730 C31.092,6.789 28.892,4.319 26.120,2.586 C22.265,0.183 17.698,-0.580 13.271,0.442 C8.843,1.458 5.074,4.140 2.668,7.990 C0.255,11.840 -0.509,16.394 0.514,20.822 C1.538,25.244 4.224,29.008 8.072,31.411 C10.785,33.104 13.896,34.000 17.080,34.000 L17.286,34.000 C20.456,33.960 23.541,33.044 26.213,31.358 C26.991,30.866 27.217,29.844 26.725,29.067 C26.234,28.291 25.210,28.065 24.432,28.556 C22.285,29.917 19.799,30.654 17.246,30.687 C14.627,30.720 12.067,29.997 9.834,28.609 C6.730,26.671 4.569,23.644 3.752,20.085 C2.934,16.527 3.546,12.863 5.486,9.763 C9.488,3.370 17.957,1.418 24.359,5.414 C26.592,6.808 28.360,8.793 29.477,11.157 C30.568,13.460 30.993,16.016 30.707,18.539 C30.607,19.448 31.259,20.271 32.177,20.371 C33.087,20.470 33.911,19.820 34.011,18.904 C34.363,15.764 33.832,12.591 32.482,9.730 L32.482,9.730 Z"></path>
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M22.593,11.237 L14.575,19.244 L11.604,16.277 C10.952,15.626 9.902,15.626 9.250,16.277 C8.599,16.927 8.599,17.976 9.250,18.627 L13.399,22.770 C13.725,23.095 14.150,23.254 14.575,23.254 C15.001,23.254 15.427,23.095 15.753,22.770 L24.940,13.588 C25.592,12.937 25.592,11.888 24.940,11.237 C24.289,10.593 23.238,10.593 22.593,11.237 L22.593,11.237 Z"></path>
+        <div class="grid grid-cols-12 2xl:grid-cols-12 gap-x-5">
+            <div class="relative col-span-12 overflow-hidden card 2xl:col-span-8 bg-slate-900">
+                <div class="absolute inset-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveaspectratio="none" viewbox="0 0 1440 560">
+                        <g mask="url(&quot;#SvgjsMask1000&quot;)" fill="none">
+                            <use xlink:href="#SvgjsSymbol1007" x="0" y="0"></use>
+                            <use xlink:href="#SvgjsSymbol1007" x="720" y="0"></use>
+                        </g>
+                        <defs>
+                            <mask id="SvgjsMask1000">
+                                <rect width="1440" height="560" fill="#ffffff"></rect>
+                            </mask>
+                            <path d="M-1 0 a1 1 0 1 0 2 0 a1 1 0 1 0 -2 0z" id="SvgjsPath1003"></path>
+                            <path d="M-3 0 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0z" id="SvgjsPath1004"></path>
+                            <path d="M-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0z" id="SvgjsPath1001"></path>
+                            <path d="M2 -2 L-2 2z" id="SvgjsPath1005"></path>
+                            <path d="M6 -6 L-6 6z" id="SvgjsPath1002"></path>
+                            <path d="M30 -30 L-30 30z" id="SvgjsPath1006"></path>
+                        </defs>
+                        <symbol id="SvgjsSymbol1007">
+                            <use xlink:href="#SvgjsPath1001" x="30" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="30" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="30" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="30" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="30" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="30" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="30" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="30" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="30" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="30" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="90" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1004" x="90" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="90" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="90" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="90" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="150" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="150" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="150" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="150" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="150" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="150" y="330" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1004" x="150" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="150" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="150" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="150" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="210" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="210" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="210" y="150" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1002" x="210" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="210" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="210" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="210" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="210" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="210" y="510" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1003" x="210" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="270" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="270" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="270" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="270" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="270" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="270" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="270" y="390" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1002" x="270" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="270" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="270" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="330" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="330" y="90" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1002" x="330" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="330" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="330" y="270" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1001" x="330" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="330" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="330" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="330" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="330" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1004" x="390" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="390" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="390" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="390" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="390" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="390" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="390" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="390" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="390" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="390" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1004" x="450" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="450" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="450" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="450" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="450" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="510" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="510" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="510" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="510" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="510" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1004" x="510" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="510" y="390" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1001" x="510" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="510" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="510" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="570" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="570" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="570" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="570" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="570" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="570" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="570" y="390" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1005" x="570" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="570" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="570" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="630" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="630" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="630" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="630" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="630" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="630" y="330" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1002" x="630" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="630" y="450" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1001" x="630" y="510" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="630" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="690" y="30" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="690" y="90" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="690" y="150" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1002" x="690" y="210" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1005" x="690" y="270" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1001" x="690" y="330" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="690" y="390" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1003" x="690" y="450" stroke="rgba(32, 43, 61, 1)"></use>
+                            <use xlink:href="#SvgjsPath1006" x="690" y="510" stroke="rgba(32, 43, 61, 1)" stroke-width="3"></use>
+                            <use xlink:href="#SvgjsPath1003" x="690" y="570" stroke="rgba(32, 43, 61, 1)"></use>
+                        </symbol>
                     </svg>
-                    
                 </div>
-                <div>
-                    <h2 class="text-white invoice-num">983</h2>
-                    <span class="text-white fs-18">Paid Invoices</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-xxl-3 col-sm-6">
-        <div class="card bg-info invoice-card">
-            <div class="card-body d-flex">
-                <div class="icon me-3">
-                    <svg width="35px" height="34px">
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M33.002,9.728 C31.612,6.787 29.411,4.316 26.638,2.583 C22.781,0.179 18.219,-0.584 13.784,0.438 C9.356,1.454 5.585,4.137 3.178,7.989 C0.764,11.840 -0.000,16.396 1.023,20.825 C2.048,25.247 4.734,29.013 8.584,31.417 C11.297,33.110 14.409,34.006 17.594,34.006 L17.800,34.006 C20.973,33.967 24.058,33.050 26.731,31.363 C27.509,30.872 27.735,29.849 27.243,29.072 C26.751,28.296 25.727,28.070 24.949,28.561 C22.801,29.922 20.314,30.660 17.761,30.693 C15.141,30.726 12.581,30.002 10.346,28.614 C7.241,26.675 5.080,23.647 4.262,20.088 C3.444,16.515 4.056,12.850 5.997,9.748 C10.001,3.353 18.473,1.401 24.876,5.399 C27.110,6.793 28.879,8.779 29.996,11.143 C31.087,13.447 31.513,16.004 31.227,18.527 C31.126,19.437 31.778,20.260 32.696,20.360 C33.607,20.459 34.432,19.809 34.531,18.892 C34.884,15.765 34.352,12.591 33.002,9.728 L33.002,9.728 Z"></path>
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M23.380,11.236 C22.728,10.585 21.678,10.585 21.026,11.236 L17.608,14.656 L14.190,11.243 C13.539,10.592 12.488,10.592 11.836,11.243 C11.184,11.893 11.184,12.942 11.836,13.593 L15.254,17.006 L11.836,20.420 C11.184,21.071 11.184,22.120 11.836,22.770 C12.162,23.096 12.588,23.255 13.014,23.255 C13.438,23.255 13.864,23.096 14.190,22.770 L17.608,19.357 L21.026,22.770 C21.352,23.096 21.777,23.255 22.203,23.255 C22.629,23.255 23.054,23.096 23.380,22.770 C24.031,22.120 24.031,21.071 23.380,20.420 L19.962,17.000 L23.380,13.587 C24.031,12.936 24.031,11.887 23.380,11.236 L23.380,11.236 Z"></path>
-                    </svg>
-                    
-                </div>
-                <div>
-                    <h2 class="text-white invoice-num">1256</h2>
-                    <span class="text-white fs-18">Unpaid Invoices</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-xxl-3 col-sm-6">
-        <div class="card bg-secondary invoice-card">
-            <div class="card-body d-flex">
-                <div class="icon me-3">
-                    <svg width="33px" height="32px">
-                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M31.963,30.931 C31.818,31.160 31.609,31.342 31.363,31.455 C31.175,31.538 30.972,31.582 30.767,31.583 C30.429,31.583 30.102,31.463 29.845,31.243 L25.802,27.786 L21.758,31.243 C21.502,31.463 21.175,31.583 20.837,31.583 C20.498,31.583 20.172,31.463 19.915,31.243 L15.872,27.786 L11.829,31.243 C11.622,31.420 11.370,31.534 11.101,31.572 C10.832,31.609 10.558,31.569 10.311,31.455 C10.065,31.342 9.857,31.160 9.710,30.931 C9.565,30.703 9.488,30.437 9.488,30.167 L9.488,17.416 L2.395,17.416 C2.019,17.416 1.658,17.267 1.392,17.001 C1.126,16.736 0.976,16.375 0.976,16.000 L0.976,6.083 C0.976,4.580 1.574,3.139 2.639,2.076 C3.703,1.014 5.146,0.417 6.651,0.417 L26.511,0.417 C28.016,0.417 29.459,1.014 30.524,2.076 C31.588,3.139 32.186,4.580 32.186,6.083 L32.186,30.167 C32.186,30.437 32.109,30.703 31.963,30.931 ZM9.488,6.083 C9.488,5.332 9.189,4.611 8.657,4.080 C8.125,3.548 7.403,3.250 6.651,3.250 C5.898,3.250 5.177,3.548 4.645,4.080 C4.113,4.611 3.814,5.332 3.814,6.083 L3.814,14.583 L9.488,14.583 L9.488,6.083 ZM29.348,6.083 C29.348,5.332 29.050,4.611 28.517,4.080 C27.985,3.548 27.263,3.250 26.511,3.250 L11.559,3.250 C12.059,4.111 12.324,5.088 12.325,6.083 L12.325,27.092 L14.950,24.840 C15.207,24.620 15.534,24.500 15.872,24.500 C16.210,24.500 16.537,24.620 16.794,24.840 L20.837,28.296 L24.880,24.840 C25.137,24.620 25.463,24.500 25.802,24.500 C26.140,24.500 26.467,24.620 26.724,24.840 L29.348,27.092 L29.348,6.083 ZM25.092,20.250 L16.581,20.250 C16.205,20.250 15.844,20.101 15.578,19.835 C15.312,19.569 15.162,19.209 15.162,18.833 C15.162,18.457 15.312,18.097 15.578,17.831 C15.844,17.566 16.205,17.416 16.581,17.416 L25.092,17.416 C25.469,17.416 25.829,17.566 26.096,17.831 C26.362,18.097 26.511,18.457 26.511,18.833 C26.511,19.209 26.362,19.569 26.096,19.835 C25.829,20.101 25.469,20.250 25.092,20.250 ZM25.092,14.583 L16.581,14.583 C16.205,14.583 15.844,14.434 15.578,14.168 C15.312,13.903 15.162,13.542 15.162,13.167 C15.162,12.791 15.312,12.430 15.578,12.165 C15.844,11.899 16.205,11.750 16.581,11.750 L25.092,11.750 C25.469,11.750 25.829,11.899 26.096,12.165 C26.362,12.430 26.511,12.791 26.511,13.167 C26.511,13.542 26.362,13.903 26.096,14.168 C25.829,14.434 25.469,14.583 25.092,14.583 ZM25.092,8.916 L16.581,8.916 C16.205,8.916 15.844,8.767 15.578,8.501 C15.312,8.236 15.162,7.875 15.162,7.500 C15.162,7.124 15.312,6.764 15.578,6.498 C15.844,6.232 16.205,6.083 16.581,6.083 L25.092,6.083 C25.469,6.083 25.829,6.232 26.096,6.498 C26.362,6.764 26.511,7.124 26.511,7.500 C26.511,7.875 26.362,8.236 26.096,8.501 C25.829,8.767 25.469,8.916 25.092,8.916 Z"></path>
-                    </svg>
-                
-                </div>
-                <div>
-                    <h2 class="text-white invoice-num">652</h2>
-                    <span class="text-white fs-18">Total Invoices Sent</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xl-9 col-xxl-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-xl-6">
-                        <div class="card-bx bg-blue">
-                            <img class="pattern-img" src="{{ assets('asset/client/images/pattern/pattern6.png') }}" alt="">
-                            <div class="card-info text-white">
-                                <img src="images/pattern/circle.png" class="mb-4" alt="">
-                                <h2 class="text-white card-balance">$824,571.93</h2>
-                                <p class="fs-16">Wallet Balance</p>
-                                <span>+0,8% than last week</span>
-                            </div>
-                            <a class="change-btn" href="javascript:void(0);"><i class="fa fa-caret-up up-ico"></i>Change<span class="reload-icon"><i class="fas fa-sync-alt reload active"></i></span></a>
+                <div class="relative card-body">
+                    <div class="grid items-center grid-cols-12">
+                        <div class="col-span-12 lg:col-span-8 2xl:col-span-7">
+                            <h5 class="mb-3 font-normal tracking-wide text-slate-200">Welcome StarCode Kh 🎉</h5>
+                            <p class="mb-5 text-slate-400">An e-commerce dashboard has just that purpose. It provides your e-commerce team with a clear overview of key financial and website KPIs at any time.</p>
+                            <button type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-500/20 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-500/20 dark:ring-custom-400/20">Take a Product</button>
+                        </div>
+                        <div class="hidden col-span-12 2xl:col-span-3 lg:col-span-2 lg:col-start-11 2xl:col-start-10 lg:block">
+                            <img src="assets/client/main/images/dashboard.png" alt="" class="h-40 ltr:2xl:ml-auto rtl:2xl:mr-auto">
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="row  mt-xl-0 mt-4">
-                            <div class="col-md-6">
-                                <h4 class="card-title">Card's Overview</h4>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit psu olor</span>
-                                <ul class="card-list mt-4">
-                                    <li><span class="bg-blue circle"></span>Account<span>20%</span></li>
-                                    <li><span class="bg-success circle"></span>Services<span>40%</span></li>
-                                    <li><span class="bg-warning circle"></span>Restaurant<span>15%</span></li>
-                                    <li><span class="bg-light circle"></span>Others<span>15%</span></li>
-                                </ul>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card 2xl:col-span-4 2xl:row-span-2">
+                <div class="card-body">
+                    <div class="flex items-center mb-3">
+                        <h6 class="grow text-15">Order Statistics</h6>
+                        <div class="relative">
+                            <a href="#!" class="underline transition-all duration-200 ease-linear text-custom-500 hover:text-custom-600">View All <i data-lucide="move-right" class="inline-block align-middle size-4 ltr:ml-1 rtl:mr-1"></i></a>
+                        </div>
+                    </div>
+                    <div id="orderStatisticsChart" class="apex-charts" data-chart-colors='["bg-purple-500", "bg-sky-500"]' dir="ltr"></div>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card md:col-span-6 lg:col-span-3 2xl:col-span-2">
+                <div class="text-center card-body">
+                    <div class="flex items-center justify-center mx-auto rounded-full size-14 bg-custom-100 text-custom-500 dark:bg-custom-500/20">
+                        <i data-lucide="wallet-2"></i>
+                    </div>
+                    <h5 class="mt-4 mb-2">$<span class="counter-value" data-target="236.18">0</span>k</h5>
+                    <p class="text-slate-500 dark:text-zink-200">Total Revenue</p>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card md:col-span-6 lg:col-span-3 2xl:col-span-2">
+                <div class="text-center card-body">
+                    <div class="flex items-center justify-center mx-auto text-purple-500 bg-purple-100 rounded-full size-14 dark:bg-purple-500/20">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h5 class="mt-4 mb-2"><span class="counter-value" data-target="13461">0</span></h5>
+                    <p class="text-slate-500 dark:text-zink-200">Total Orders</p>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card md:col-span-6 lg:col-span-3 2xl:col-span-2">
+                <div class="text-center card-body">
+                    <div class="flex items-center justify-center mx-auto text-green-500 bg-green-100 rounded-full size-14 dark:bg-green-500/20">
+                        <i data-lucide="truck"></i>
+                    </div>
+                    <h5 class="mt-4 mb-2"><span class="counter-value" data-target="17150">0</span></h5>
+                    <p class="text-slate-500 dark:text-zink-200">Delivered</p>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card md:col-span-6 lg:col-span-3 2xl:col-span-2">
+                <div class="text-center card-body">
+                    <div class="flex items-center justify-center mx-auto text-red-500 bg-red-100 rounded-full size-14 dark:bg-red-500/20">
+                        <i data-lucide="package-x"></i>
+                    </div>
+                    <h5 class="mt-4 mb-2"><span class="counter-value" data-target="3519">0</span></h5>
+                    <p class="text-slate-500 dark:text-zink-200">Cancelled</p>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card 2xl:col-span-8">
+                <div class="card-body">
+                    <div class="flex flex-col gap-4 mb-4 md:mb-3 md:items-center md:flex-row">
+                        <h6 class="grow text-15">Sales Revenue Overview</h6>
+                        <div class="relative">
+                            <i data-lucide="calendar-range" class="absolute size-4 ltr:left-3 rtl:right-3 top-3 text-slate-500 dark:text-zink-200"></i>
+                            <input type="text" class="ltr:pl-10 rtl:pr-10 form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" readonly="readonly" placeholder="Select Date">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-4 mb-3">
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center justify-center rounded-md size-12 text-sky-500 bg-sky-50 shrink-0 dark:bg-sky-500/10">
+                                    <i data-lucide="bar-chart"></i>
+                                </div>
+                                <div class="grow">
+                                    <p class="mb-1 text-slate-500 dark:text-zink-200">Total Sales</p>
+                                    <h5 class="text-15">$<span class="counter-value" data-target="1517.36">0</span>k</h5>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <canvas id="polarChart"></canvas>
+                        </div>
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center justify-center text-green-500 rounded-md size-12 bg-green-50 shrink-0 dark:bg-green-500/10">
+                                    <i data-lucide="trending-up"></i>
+                                </div>
+                                <div class="grow">
+                                    <p class="mb-1 text-slate-500 dark:text-zink-200">Total Profit</p>
+                                    <h5 class="text-15">$<span class="counter-value" data-target="746.84">0</span>k</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div id="salesRevenueOverview" class="apex-charts" data-chart-colors='["bg-custom-500", "bg-custom-400", "bg-custom-300"]' dir="ltr"></div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-xxl-5">
-        <div class="card">
-            <div class="card-header pb-0 border-0">
-                <div>
-                    <h4 class="card-title mb-2">Activity</h4>
-                    <h2 class="mb-0">$78120</h2>
-                </div>
-                <ul class="card-list">
-                    <li class="justify-content-end">Income<span class="bg-success circle me-0 ms-2"></span></li>
-                    <li class="justify-content-end">Outcome<span class="bg-danger circle me-0 ms-2"></span></li>
-                </ul>
-            </div>
-            <div class="card-body pb-0 pt-3">
-                <div id="chartBar" class="bar-chart"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-xxl-7">
-        <div class="card">
-            <div class="card-header border-0 pb-0">
-                <div>
-                    <h4 class="card-title mb-2">Quick Transfer</h4>
-                    <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
-                </div>
-                <div class="dropdown">
-                    <a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Edit</a>
+            </div><!--end col-->
+            <div class="col-span-12 2xl:col-span-4">
+                <div class="grid grid-cols-12 gap-x-5">
+                    <div class="col-span-12 card lg:col-span-6 2xl:col-span-12">
+                        <div class="card-body">
+                            <div class="flex items-center mb-3">
+                                <h6 class="grow text-15">Traffic Resources</h6>
+                                <div class="relative">
+                                    <a href="#!" class="transition-all duration-300 ease-linear text-custom-500 hover:text-custom-700">View Status <i data-lucide="move-right" class="inline-block align-middle size-4 ltr:ml-1 rtl:mr-1"></i></a>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12">
+                                <div class="col-span-12 md:col-span-6 2xl:col-span-7">
+                                    <div id="trafficResourcesChart" class="apex-charts" data-chart-colors='["bg-sky-500", "bg-purple-500", "bg-green-500", "bg-yellow-500"]' dir="ltr"></div>
+                                </div>
+                                <div class="col-span-12 md:col-span-6 2xl:col-span-5">
+                                    <ul class="flex flex-col gap-3">
+                                        <li class="flex items-center gap-2">
+                                            <div class="bg-green-500 size-3 shrink-0 clip-triangle"></div>
+                                            <p class="text-green-500">Search Engine (22%)</p>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <div class="bg-purple-500 size-3 shrink-0 clip-triangle"></div>
+                                            <p class="text-purple-500">Referral (34%)</p>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <div class="size-3 bg-sky-500 shrink-0 clip-triangle"></div>
+                                            <p class="text-sky-500">Direct (44%)</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-span-12 card lg:col-span-6 2xl:col-span-12">
+                        <div class="card-body">
+                            <div class="flex items-center mb-2">
+                                <h5 class="grow"><span class="counter-value" data-target="1596">0</span></h5>
+                                <span class="px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-white border-red-100 text-red-500 dark:bg-zink-700 dark:border-red-900"><i data-lucide="trending-down" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> 6.8%</span>
+                            </div>
+                            <h6 class="mb-0">Monthly Orders Goal (20000+)</h6>
+                            <div>
+                                <div class="flex items-center justify-between mt-5 mb-2">
+                                    <p class="text-slate-500 dark:text-zink-200">Total Orders</p>
+                                    <h6 class="mb-0 text-custom-500">85%</h6>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2.54 dark:bg-zink-600">
+                                    <div class="bg-custom-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end grid-->
+            </div><!--end col-->
+            <div class="col-span-12 card 2xl:col-span-12">
+                <div class="card-body">
+                    <div class="grid items-center grid-cols-1 gap-3 mb-5 2xl:grid-cols-12">
+                        <div class="2xl:col-span-3">
+                            <h6 class="text-15">Product Orders</h6>
+                        </div><!--end col-->
+                        <div class="2xl:col-span-3 2xl:col-start-10">
+                            <div class="flex gap-3">
+                                <div class="relative grow">
+                                    <input type="text" class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Search for ..." autocomplete="off">
+                                    <i data-lucide="search" class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
+                                </div>
+                                <button type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"><i class="align-baseline ltr:pr-1 rtl:pl-1 ri-download-2-line"></i> Export</button>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end grid-->
+                    <div class="overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                            <thead class="ltr:text-left rtl:text-right bg-slate-100 text-slate-500 dark:text-zink-200 dark:bg-zink-600">
+                                <tr>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">
+                                        #
+                                    </th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Order ID</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Customer Name</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Location</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Order Date</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Payments</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Quantity</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Price</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Total Amount</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Status</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        01
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100365</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Marie Prohaska</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Germany</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">08 Jun, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Credit Card</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">05</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$146.99</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$749.95</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-green-100 border-green-200 text-green-500 dark:bg-green-500/20 dark:border-green-500/20">Delivered</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction1" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction1">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        02
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100366</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Jaqueline Hammes</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">France</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">11 July, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Paypal</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">02</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$450.00</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$900.00</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-purple-100 border-purple-200 text-purple-500 dark:bg-purple-500/20 dark:border-purple-500/20">Shipping</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction2" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction2">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        03
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100367</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Marlene Hirthe</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Argentina</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">21 Aug, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Visa Card</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">03</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$147.23</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$294.46</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-sky-100 border-sky-200 text-sky-500 dark:bg-sky-500/20 dark:border-sky-500/20">New</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction3" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction3">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        04
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100368</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Reagan Larson</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Belgium</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">28 Nov, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">American Express</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">01</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$579.12</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$579.12</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-green-100 border-green-200 text-green-500 dark:bg-green-500/20 dark:border-green-500/20">Delivered</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction4" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction4">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        05
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100369</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Glennie Langosh</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Australia</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">11 Oct, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">American Express</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">01</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$349.00</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$349.00</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-yellow-100 border-yellow-200 text-yellow-500 dark:bg-yellow-500/20 dark:border-yellow-500/20">Pending</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction5" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction5">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        06
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100370</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Rickie Cremin</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">United States</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">16 Feb, 2023</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">COD</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">03</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$89.49</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$268.47</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-green-100 border-green-200 text-green-500 dark:bg-green-500/20 dark:border-green-500/20">Delivered</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction6" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction6">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        07
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500"><a href="apps-ecommerce-order-overview.html">#TWT5015100371</a></td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Domenic Tromp</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">Afghanistan</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">21 Jan, 2024</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">PayPal</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">02</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$739.79</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">$1,479.58</td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <span class="delivery_status px-2.5 py-0.5 text-xs inline-block font-medium rounded border bg-sky-100 border-sky-200 text-sky-500 dark:bg-sky-500/20 dark:border-sky-500/20">New</span>
+                                    </td>
+                                    <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="relative dropdown">
+                                            <button id="orderAction6" data-bs-toggle="dropdown" class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i data-lucide="more-horizontal" class="size-3"></i></button>
+                                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="orderAction6">
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="apps-ecommerce-order-overview.html"><i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Overview</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Edit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!"><i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i> <span class="align-middle">Delete</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex flex-col items-center mt-5 md:flex-row">
+                        <div class="mb-4 grow md:mb-0">
+                            <p class="text-slate-500 dark:text-zink-200">Showing <b>07</b> of <b>19</b> Results</p>
+                        </div>
+                        <ul class="flex flex-wrap items-center gap-2 shrink-0">
+                            <li>
+                                <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 h-8 px-3 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&.active]:text-custom-500 dark:[&.active]:text-custom-500 [&.active]:bg-custom-50 dark:[&.active]:bg-custom-500/10 [&.active]:border-custom-50 dark:[&.active]:border-custom-500/10 [&.active]:hover:text-custom-700 dark:[&.active]:hover:text-custom-700 [&.disabled]:text-slate-400 dark:[&.disabled]:text-zink-300 [&.disabled]:cursor-auto"><i class="mr-1 size-4 rtl:rotate-180" data-lucide="chevron-left"></i> Prev</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 w-8 h-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&.active]:text-custom-500 dark:[&.active]:text-custom-500 [&.active]:bg-custom-50 dark:[&.active]:bg-custom-500/10 [&.active]:border-custom-50 dark:[&.active]:border-custom-500/10 [&.active]:hover:text-custom-700 dark:[&.active]:hover:text-custom-700 [&.disabled]:text-slate-400 dark:[&.disabled]:text-zink-300 [&.disabled]:cursor-auto">1</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 w-8 h-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&.active]:text-custom-500 dark:[&.active]:text-custom-500 [&.active]:bg-custom-50 dark:[&.active]:bg-custom-500/10 [&.active]:border-custom-50 dark:[&.active]:border-custom-500/10 [&.active]:hover:text-custom-700 dark:[&.active]:hover:text-custom-700 [&.disabled]:text-slate-400 dark:[&.disabled]:text-zink-300 [&.disabled]:cursor-auto active">2</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 w-8 h-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&.active]:text-custom-500 dark:[&.active]:text-custom-500 [&.active]:bg-custom-50 dark:[&.active]:bg-custom-500/10 [&.active]:border-custom-50 dark:[&.active]:border-custom-500/10 [&.active]:hover:text-custom-700 dark:[&.active]:hover:text-custom-700 [&.disabled]:text-slate-400 dark:[&.disabled]:text-zink-300 [&.disabled]:cursor-auto">3</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 h-8 px-3 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&.active]:text-custom-500 dark:[&.active]:text-custom-500 [&.active]:bg-custom-50 dark:[&.active]:bg-custom-500/10 [&.active]:border-custom-50 dark:[&.active]:border-custom-500/10 [&.active]:hover:text-custom-700 dark:[&.active]:hover:text-custom-700 [&.disabled]:text-slate-400 dark:[&.disabled]:text-zink-300 [&.disabled]:cursor-auto">Next <i class="ml-1 size-4 rtl:rotate-180" data-lucide="chevron-right"></i></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">	
-                <div class="user-bx">
-                    <img src="images/profile/small/pic1.jpg" alt="">
+            </div><!--end col-->
+            <div class="col-span-12 card lg:col-span-6 2xl:col-span-3">
+                <div class="card-body">
+                    <div class="flex items-center mb-3">
+                        <h6 class="grow text-15">Customer Service</h6>
+                        <div class="relative dropdown shrink-0">
+                            <button type="button" class="flex items-center justify-center size-[30px] p-0 bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-700 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10 dropdown-toggle" id="customServiceDropdown" data-bs-toggle="dropdown">
+                                <i data-lucide="more-vertical" class="inline-block size-4"></i>
+                            </button>
+
+                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="customServiceDropdown">
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Weekly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">3 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">6 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">This Yearly</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div>
-                        <h6 class="user-name">Samuel</h6>
-                        <span class="meta">@sam224</span>
+                        <div class="flex items-center justify-between mt-5 mb-2">
+                            <p class="text-slate-500 dark:text-zink-200">28% of the Goal Reached ($25k)</p>
+                        </div>
+                        <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-zink-600">
+                            <div class="h-2 bg-green-500 rounded-full" style="width: 28%"></div>
+                        </div>
+                        <div class="grid mt-3 xl:grid-cols-2">
+                            <div class="flex items-center gap-2">
+                                <div class="shrink-0">
+                                    <i data-lucide="calendar-days" class="inline-block mb-1 align-middle size-4"></i>
+                                </div>
+                                <p class="mb-0 text-slate-500 dark:text-zink-200">This Month: <span class="font-medium text-slate-800 dark:text-zink-50">$13,741</span></p>
+                            </div>
+                        </div>
                     </div>
-                    <i class="las la-check-circle check-icon"></i>
-                </div>
-                <h4 class="mt-3 mb-3">Recent Friend<a href="javascript:void(0);" class="fs-16 float-end text-secondary font-w600">See More</a></h4>
-                <ul class="user-list">
-                    <li><img src="images/avatar/1.jpg" alt=""></li>
-                    <li><img src="images/avatar/2.jpg" alt=""></li>
-                    <li><img src="images/avatar/3.jpg" alt=""></li>
-                    <li><img src="images/avatar/4.jpg" alt=""></li>
-                    <li><img src="images/avatar/5.jpg" alt=""></li>
-                    <li><img src="images/avatar/6.jpg" alt=""></li>
-                </ul>
-                <h4 class="mt-3 mb-0">Insert Amount</h4>
-                <div class="format-slider">
-                    <input class="form-control amount-input" title="Formatted number" id="input-format">
-                    <div id="slider-format"></div>
-                </div>
-                <div class="text-secondary fs-16 d-flex justify-content-between font-w600 mt-4">
-                    <span>Your Balance</span>
-                    <span>$ 456,345.62</span>
-                </div>
-            </div>
-            <div class="card-footer border-0 pt-0">
-                <a href="javascript:void(0);" class="btn btn-primary d-block btn-lg text-uppercase">Transfer Now</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-xxl-5">
-        <div class="card">
-            <div class="card-header border-0 pb-0">
-                <div>
-                    <h4 class="card-title mb-2">Spendings</h4>
-                    <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
-                </div>
-                <div class="dropdown">
-                    <a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Edit</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">	
-                <div class="progress default-progress">
-                    <div class="progress-bar bg-gradient-1 progress-animated" style="width: 45%; height:20px;" role="progressbar">
-                        <span class="sr-only">45% Complete</span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
-                    <span>Investment</span>
-                    <span class="fs-18"><span class="text-black pe-2">$1415</span>/$2000</span>
-                </div>
-                <div class="progress default-progress mt-4">
-                    <div class="progress-bar bg-gradient-2 progress-animated" style="width: 70%; height:20px;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
-                    <span>Restaurant</span>
-                    <span class="fs-18"><span class="text-black pe-2">$1567</span>/$5000</span>
-                </div>
-                <div class="progress default-progress mt-4">
-                    <div class="progress-bar bg-gradient-3 progress-animated" style="width: 35%; height:20px;" role="progressbar">
-                        <span class="sr-only">35% Complete</span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
-                    <span>Installment</span>
-                    <span class="fs-18"><span class="text-black pe-2">$487</span>/$10000</span>
-                </div>
-                <div class="progress default-progress mt-4">
-                    <div class="progress-bar bg-gradient-4 progress-animated" style="width: 95%; height:20px;" role="progressbar">
-                        <span class="sr-only">95% Complete</span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-end mt-2 justify-content-between">
-                    <span>Property</span>
-                    <span class="fs-18"><span class="text-black pe-2">$3890</span>/$4000</span>
-                </div>
-            </div>
-            <div class="card-footer border-0 pt-0">
-                <a href="javascript:void(0);" class="btn btn-outline-primary d-block btn-lg">View More</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-xxl-7">
-        <div class="card">
-            <div class="card-header d-flex flex-wrap border-0 pb-0">
-                <div class="me-auto mb-sm-0 mb-3">
-                    <h4 class="card-title mb-2">Transaction Overview</h4>
-                    <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
-                </div>
-                <a href="javascript:void(0)" class="btn btn-rounded btn-md btn-primary me-3 me-3"><i class="las la-download scale5 me-3"></i>Download Report</a>
-                <div class="dropdown">
-                    <a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Edit</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body pb-2">
-                <div class="d-sm-flex d-block">
-                    <div class="form-check toggle-switch text-end form-switch me-4">
-                        <input checked="" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Number</label>
-                    </div>
-                    <div class="form-check toggle-switch text-end form-switch me-auto">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
-                        <label class="form-check-label" for="flexSwitchCheckDefault1">Analytics</label>
-                    </div>
-                    <ul class="card-list d-flex mt-sm-0 mt-3">
-                        <li class="me-3"><span class="bg-success circle"></span>Income</li>
-                        <li><span class="bg-danger circle"></span>Outcome</li>
-                    </ul>
-                </div>
-                <div id="chartBar2" class="bar-chart"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-xxl-12">
-        <div class="card">
-            <div class="card-header d-block d-sm-flex border-0">
-                <div class="me-3">
-                    <h4 class="card-title mb-2">Previous Transactions</h4>
-                    <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
-                </div>
-                <div class="card-tabs mt-3 mt-sm-0">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#monthly" role="tab">Monthly</a>
+                    <h6 class="mt-4 mb-3">Top Customer</h6>
+                    <ul class="divide-y divide-slate-200 dark:divide-zink-500">
+                        <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/avatar-2.png" alt="" class="w-8 h-8 rounded-full">
+                            </div>
+                            <div class="grow">
+                                <h6 class="font-medium">Urrie Arthur</h6>
+                                <p class="text-slate-500 dark:text-zink-200">arthur@starcode.com</p>
+                            </div>
+                            <div class="shrink-0">
+                                <h6>$2,452</h6>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Weekly" role="tab">Weekly</a>
+                        <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/avatar-3.png" alt="" class="w-8 h-8 rounded-full">
+                            </div>
+                            <div class="grow">
+                                <h6 class="font-medium">Natalie Christy</h6>
+                                <p class="text-slate-500 dark:text-zink-200">natalie@starcode.com</p>
+                            </div>
+                            <div class="shrink-0">
+                                <h6>$1,893</h6>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Today" role="tab">Today</a>
+                        <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/avatar-4.png" alt="" class="w-8 h-8 rounded-full">
+                            </div>
+                            <div class="grow">
+                                <h6 class="font-medium">Laurie Jackson</h6>
+                                <p class="text-slate-500 dark:text-zink-200">jackson@starcode.com</p>
+                            </div>
+                            <div class="shrink-0">
+                                <h6>$1,196</h6>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/avatar-5.png" alt="" class="w-8 h-8 rounded-full">
+                            </div>
+                            <div class="grow">
+                                <h6 class="font-medium">Michael Torres</h6>
+                                <p class="text-slate-500 dark:text-zink-200">torres@starcode.com</p>
+                            </div>
+                            <div class="shrink-0">
+                                <h6>$976</h6>
+                            </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="card-body tab-content p-0">
-                <div class="tab-pane active show fade" id="monthly" role="tabpanel">
-                    <div class="table-responsive">
-                        <table class="table table-responsive-md card-table transactions-table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">XYZ Store ID</a></h6>
-                                        <span class="fs-14">Cashback</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-success fs-16 font-w500 text-end d-block">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-danger tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Chef Renata</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">-$167</span></td>
-                                    <td><span class="text-light fs-16 font-w500 text-end d-block">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Cindy Alexandro</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-danger fs-16 font-w500 text-end d-block">Canceled</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Paipal</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-success fs-16 font-w500 text-end d-block">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-danger tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Hawkins Jr.</a></h6>
-                                        <span class="fs-14">Cashback</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-danger fs-16 font-w500 text-end d-block">Canceled</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane" id="Weekly" role="tabpanel">
-                    <div class="table-responsive">
-                        <table class="table table-responsive-md card-table transactions-table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">XYZ Store ID</a></h6>
-                                        <span class="fs-14">Cashback</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-success fs-16 font-w500 text-end d-block">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-danger tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Chef Renata</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">-$167</span></td>
-                                    <td><span class="text-light fs-16 font-w500 text-end d-block">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Cindy Alexandro</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-danger fs-16 font-w500 text-end d-block">Canceled</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane" id="Today" role="tabpanel">
-                    <div class="table-responsive">
-                        <table class="table table-responsive-md card-table transactions-table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-danger tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Chef Renata</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">-$167</span></td>
-                                    <td><span class="text-light fs-16 font-w500 text-end d-block">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Cindy Alexandro</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 5, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-danger fs-16 font-w500 text-end d-block">Canceled</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-success tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-                                            </g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Paipal</a></h6>
-                                        <span class="fs-14">Transfer</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-success fs-16 font-w500 text-end d-block">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <svg class="bgl-danger tr-icon" width="63" height="63" viewbox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-                                        </svg>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">Hawkins Jr.</a></h6>
-                                        <span class="fs-14">Cashback</span>
-                                    </td>
-                                    <td>
-                                        <h6 class="fs-16 text-black font-w600 mb-0">June 4, 2020</h6>
-                                        <span class="fs-14">05:34:45 AM</span>
-                                    </td>
-                                    <td><span class="fs-16 text-black font-w600">+$5,553</span></td>
-                                    <td><span class="text-danger fs-16 font-w500 text-end d-block">Canceled</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-xxl-12">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card coin-card">
-                    <div class="card-body d-sm-flex d-block align-items-center">
-                        <span class="coin-icon">
-                            <svg width="38" height="41" viewbox="0 0 38 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g><path d="M14.0413 32.5832C15.7416 32.5934 17.4269 32.2659 18.9997 31.6199C20.5708 32.2714 22.2572 32.5991 23.958 32.5832C29.1218 32.5832 33.1663 29.8278 33.1663 26.3088V20.441C33.1663 16.922 29.1218 14.1666 23.958 14.1666C23.7186 14.1666 23.4834 14.1779 23.2497 14.1906V7.55498C23.2497 4.10823 19.2051 1.41656 14.0413 1.41656C8.87759 1.41656 4.83301 4.10823 4.83301 7.55498V26.4448C4.83301 29.8916 8.87759 32.5832 14.0413 32.5832ZM30.333 26.3088C30.333 27.9366 27.715 29.7499 23.958 29.7499C20.201 29.7499 17.583 27.9366 17.583 26.3088V24.9984C19.5015 26.1652 21.7131 26.7604 23.958 26.714C26.203 26.7604 28.4145 26.1652 30.333 24.9984V26.3088ZM23.958 16.9999C27.715 16.9999 30.333 18.8132 30.333 20.441C30.333 22.0687 27.715 23.8807 23.958 23.8807C20.201 23.8807 17.583 22.0673 17.583 20.441C17.583 18.8147 20.201 16.9999 23.958 16.9999ZM14.0413 4.2499C17.7983 4.2499 20.4163 5.9924 20.4163 7.55498C20.4163 9.11757 17.7983 10.8615 14.0413 10.8615C10.2843 10.8615 7.66634 9.11898 7.66634 7.55498C7.66634 5.99098 10.2843 4.2499 14.0413 4.2499ZM7.66634 12.0161C9.59282 13.1601 11.8012 13.7417 14.0413 13.6948C16.2814 13.7417 18.4899 13.1601 20.4163 12.0161V14.6341C18.8724 15.0232 17.4565 15.8078 16.308 16.9107C15.5631 17.0718 14.8034 17.1545 14.0413 17.1572C10.2843 17.1572 7.66634 15.4146 7.66634 13.8521V12.0161ZM7.66634 18.3132C9.59323 19.4561 11.8015 20.0371 14.0413 19.9905C14.2935 19.9905 14.5372 19.9593 14.7851 19.9466C14.764 20.1106 14.7522 20.2756 14.7497 20.441V23.3947C14.5117 23.4089 14.2822 23.4542 14.0413 23.4542C10.2843 23.4542 7.66634 21.7117 7.66634 20.1477V18.3132ZM7.66634 24.6088C9.59282 25.7529 11.8012 26.3344 14.0413 26.2876C14.2793 26.2876 14.5131 26.2692 14.7497 26.2578V26.3088C14.7699 27.5148 15.2334 28.6711 16.0516 29.5572C15.3887 29.6824 14.7159 29.7469 14.0413 29.7499C10.2843 29.7499 7.66634 28.0074 7.66634 26.4448V24.6088Z" fill="#fff"></path></g>
-                            </svg>
-                        </span>
-                        <div>
-                            <h3 class="text-white">Get managed by Dompet’s Virtual Assistant</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>
-                            <a class="text-white" href="javascript:void(0);">Learn more >></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card progress-card">
-                    <div class="card-body d-flex">
-                        <div class="me-auto">
-                            <h4 class="card-title">Total Transactions</h4>
-                            <div class="d-flex align-items-center">
-                                <h2 class="fs-38 mb-0">98k</h2>
-                                <div class="text-success transaction-caret">
-                                    <i class="fas fa-sort-up"></i>
-                                    <p class="mb-0">+0.5%</p>
-                                </div>
-                            </div>
-                        </div>		
-                        <div class="progress progress-vertical-bottom" style="min-height:110px;min-width:10px;">
-                            <div class="progress-bar bg-primary" style="width:10px; height:40%;" role="progressbar">
-                                <span class="sr-only">40% Complete</span>
-                            </div>
-                        </div>
-                        <div class="progress progress-vertical-bottom" style="min-height:110px;min-width:10px;">
-                            <div class="progress-bar bg-primary" style="width:10px; height:55%;" role="progressbar">
-                                <span class="sr-only">55% Complete</span>
-                            </div>
-                        </div>
-                        <div class="progress progress-vertical-bottom" style="min-height:110px;min-width:10px;">
-                            <div class="progress-bar bg-primary" style="width:10px; height:80%;" role="progressbar">
-                                <span class="sr-only">80% Complete</span>
-                            </div>
-                        </div>
-                        <div class="progress progress-vertical-bottom" style="min-height:110px;min-width:10px;">
-                            <div class="progress-bar bg-primary" style="width:10px; height:50%;" role="progressbar">
-                                <span class="sr-only">50% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Invoice Remaining</h4>
-                        <div class="d-flex align-items-center">
-                            <div class="me-auto">
-                                <div class="progress mt-4" style="height:10px;">
-                                    <div class="progress-bar bg-primary progress-animated" style="width: 45%; height:10px;" role="progressbar">
-                                        <span class="sr-only">60% Complete</span>
-                                    </div>
-                                </div>
-                                <p class="fs-16 mb-0 mt-2"><span class="text-danger">-0,8% </span>from last month</p>
-                            </div>
-                            <h2 class="fs-38">854</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mt-2">Invoice Sent</h4>
-                        <div class="d-flex align-items-center mt-3 mb-2">
-                            <h2 class="fs-38 mb-0 me-3">456</h2>
-                            <span class="badge badge-success badge-xl">+0.5%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mt-2">Invoice Compeleted</h4>
-                        <div class="d-flex align-items-center mt-3 mb-2">
-                            <h2 class="fs-38 mb-0 me-3">1467</h2>
-                            <span class="badge badge-danger badge-xl">-6.4%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </div><!--end col-->
+            <div class="col-span-12 card lg:col-span-6 2xl:col-span-3">
+                <div class="card-body">
+                    <div class="flex items-center mb-3">
+                        <h6 class="grow text-15">Sales This Month</h6>
+                        <div class="relative dropdown shrink-0">
+                            <button type="button" class="flex items-center justify-center size-[30px] p-0 bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-700 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10 dropdown-toggle" id="sellingProductDropdown" data-bs-toggle="dropdown">
+                                <i data-lucide="more-vertical" class="inline-block size-4"></i>
+                            </button>
 
-@section('content')
+                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="sellingProductDropdown">
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Weekly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">3 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">6 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">This Yearly</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 my-3">
+                        <div class="flex items-center justify-center text-green-500 rounded-md size-12 bg-green-50 shrink-0 dark:bg-green-500/10">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <div class="grow">
+                            <p class="mb-1 text-slate-500 dark:text-zink-200">Total Profit</p>
+                            <h5 class="text-15">$<span class="counter-value" data-target="746.84">0</span>k</h5>
+                        </div>
+                    </div>
+                    <div id="salesThisMonthChart" class="apex-charts" data-chart-colors='["bg-sky-100", "bg-orange-100", "bg-sky-500", "bg-orange-500"]' dir="ltr"></div>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card lg:col-span-6 2xl:col-span-3">
+                <div class="card-body">
+                    <div class="flex items-center mb-3">
+                        <h6 class="grow text-15">Top Selling Products</h6>
+                        <div class="relative dropdown shrink-0">
+                            <button type="button" class="flex items-center justify-center size-[30px] p-0 bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-700 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10 dropdown-toggle" id="sellingProductDropdown" data-bs-toggle="dropdown">
+                                <i data-lucide="more-vertical" class="inline-block size-4"></i>
+                            </button>
+
+                            <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600" aria-labelledby="sellingProductDropdown">
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Weekly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">1 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">3 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">6 Monthly</a>
+                                </li>
+                                <li>
+                                    <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200" href="#!">This Yearly</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="flex flex-col gap-5">
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-02.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Mesh Ergonomic Black Chair</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 798</h6>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-03.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Fastcolors Typography Men</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 695</h6>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-04.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Mesh Ergonomic Green Chair</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 985</h6>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-05.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Techel Black Bluetooth Soundbar</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 813</h6>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-06.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Bovet Fleurier AIFSQ029</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 915</h6>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 dark:bg-zink-600">
+                                <img src="assets/client/main/images/img-03.png" alt="" class="h-6">
+                            </div>
+                            <div class="overflow-hidden grow">
+                                <h6 class="truncate">Fastcolors Typography Men</h6>
+                                <div class="text-yellow-500">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <h6 class="shrink-0"><i data-lucide="shopping-cart" class="inline-block align-middle size-4 text-slate-500 dark:text-zink-200 ltr:mr-1 rtl:ml-1"></i> 785</h6>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--end col-->
+            <div class="col-span-12 card lg:col-span-6 2xl:col-span-3">
+                <div class="card-body">
+                    <h6 class="relative mb-3 grow text-15">Audience</h6>
+                    <div id="audienceChart" class="-mt-9 apex-charts" data-chart-colors='["bg-sky-500", "bg-orange-400", "bg-green-500", "bg-yellow-500"]' dir="ltr"></div>
+                </div>
+            </div><!--end col-->
+        </div><!--end grid-->
+    </div>
+    <!-- container-fluid -->
+</div>
+@endsection

@@ -1,172 +1,81 @@
-<div class="header-content">
-    <nav class="navbar navbar-expand">
-        <div class="collapse navbar-collapse justify-content-between">
-            <div class="header-left">
-                <div class="dashboard_bar">
-                    Dashboard 
+<header id="page-topbar" class="ltr:md:left-vertical-menu rtl:md:right-vertical-menu group-data-[sidebar-size=md]:ltr:md:left-vertical-menu-md group-data-[sidebar-size=md]:rtl:md:right-vertical-menu-md group-data-[sidebar-size=sm]:ltr:md:left-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:md:right-vertical-menu-sm group-data-[layout=horizontal]:ltr:left-0 group-data-[layout=horizontal]:rtl:right-0 fixed right-0 z-[1000] left-0 print:hidden group-data-[navbar=bordered]:m-4 group-data-[navbar=bordered]:[&.is-sticky]:mt-0 transition-all ease-linear duration-300 group-data-[navbar=hidden]:hidden group-data-[navbar=scroll]:absolute group/topbar group-data-[layout=horizontal]:z-[1004]">
+    <div class="layout-width">
+        <div class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand shadow-md h-header shadow-slate-200/50 group-data-[navbar=bordered]:rounded-md group-data-[navbar=bordered]:group-[.is-sticky]/topbar:rounded-t-none group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-700 dark:shadow-none group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-zink-500 group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-md group-data-[navbar=bordered]:shadow-none group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-none group-data-[layout=horizontal]:shadow-none group-data-[layout=horizontal]:dark:group-[.is-sticky]/topbar:shadow-none">
+            <div class="flex items-center w-full group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl navbar-header group-data-[layout=horizontal]:ltr:xl:pr-3 group-data-[layout=horizontal]:rtl:xl:pl-3">
+                <!-- LOGO -->
+                <div class="items-center justify-center hidden px-5 text-center h-header group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:ltr::pl-0 group-data-[layout=horizontal]:rtl:pr-0">
+                    <a href="index.html">
+                        <span class="hidden">
+                            <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+                        </span>
+                        <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
+                            <img src="{{ asset('assets/client/main/images/logo-dark.png') }}" alt="" class="h-6 mx-auto">
+                        </span>
+                    </a>
+                    <a href="index.html" class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
+                        <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
+                            <img src="{{ asset('assets/client/main/images/logo.png') }}" alt="" class="h-6 mx-auto">
+                        </span>
+                        <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
+                            <img src="{{ asset('assets/client/main/images/logo-light.png') }}" alt="" class="h-6 mx-auto">
+                        </span>
+                    </a>
                 </div>
-            </div>
-            <ul class="navbar-nav header-right">
-                <li class="nav-item">
-                    <div class="input-group search-area">
-                        <input type="text" class="form-control" placeholder="Search here...">
-                        <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+
+                <!-- Hamburger Button -->
+                <button type="button" class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:border-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:md:hidden hamburger-icon" id="topnav-hamburger-icon">
+                    <i data-lucide="chevrons-left" class="w-5 h-5 group-data-[sidebar-size=sm]:hidden"></i>
+                    <i data-lucide="chevrons-right" class="hidden w-5 h-5 group-data-[sidebar-size=sm]:block"></i>
+                </button>
+
+                <!-- Search Box -->
+                <div class="relative hidden ltr:ml-3 rtl:mr-3 lg:block group-data-[layout=horizontal]:hidden group-data-[layout=horizontal]:lg:block">
+                    <input type="text" class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100" placeholder="Search for ..." autocomplete="off">
+                    <i data-lucide="search" class="inline-block size-4 absolute left-2.5 top-2.5 text-topbar-item fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:fill-zink-600"></i>
+                </div>
+
+                <div class="flex gap-3 ms-auto">
+                    <!-- Light/Dark Mode Button -->
+                    <div class="relative flex items-center h-header">
+                        <button type="button" class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:text-topbar-item-dark" id="light-dark-mode">
+                            <i data-lucide="sun" class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
+                        </button>
                     </div>
-                </li>
-                <li class="nav-item dropdown notification_dropdown">
-                    <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
-                        <svg width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M3.88552 6.2921C1.95571 6.54135 0.439911 8.19656 0.439911 10.1896V10.7253C0.439911 12.8874 2.21812 14.6725 4.38019 14.6725H12.7058V24.9768H7.01104C5.77451 24.9768 4.82009 24.0223 4.82009 22.7858V18.4039C4.84523 16.6262 2.16581 16.6262 2.19096 18.4039V22.7858C2.19096 25.4334 4.36345 27.6059 7.01104 27.6059H21.0331C23.6807 27.6059 25.8532 25.4334 25.8532 22.7858V13.9981C26.9064 13.286 27.6042 12.0802 27.6042 10.7253V10.1896C27.6042 8.17115 26.0501 6.50077 24.085 6.28526C24.0053 0.424609 17.6008 -1.28785 13.9827 2.48534C10.3936 -1.60185 3.7545 1.06979 3.88552 6.2921ZM12.7058 5.68103C12.7058 5.86287 12.7033 6.0541 12.7058 6.24246H6.50609C6.55988 2.31413 11.988 1.90765 12.7058 5.68103ZM21.4559 6.24246H15.3383C15.3405 6.05824 15.3538 5.87664 15.3383 5.69473C15.9325 2.04532 21.3535 2.18829 21.4559 6.24246ZM4.38019 8.87502H12.7058V12.0382H4.38019C3.62918 12.0382 3.06562 11.4764 3.06562 10.7253V10.1896C3.06562 9.43859 3.6292 8.87502 4.38019 8.87502ZM15.3383 8.87502H23.6656C24.4166 8.87502 24.9785 9.43859 24.9785 10.1896V10.7253C24.9785 11.4764 24.4167 12.0382 23.6656 12.0382H15.3383V8.87502ZM15.3383 14.6725H23.224V22.7858C23.224 24.0223 22.2696 24.9768 21.0331 24.9768H15.3383V14.6725Z" fill="#4f7086"></path> 
-                        </svg>
-                        <span class="badge light text-white bg-primary rounded-circle">2</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <div id="dlab_W_TimeLine02" class="widget-timeline dlab-scroll style-1 ps ps--active-y p-3 height370">
-                        <ul class="timeline">
-                            <li>
-                                <div class="timeline-badge primary"></div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>10 minutes ago</span>
-                                    <h6 class="mb-0">Youtube, a video-sharing website, goes live <strong class="text-primary">$500</strong>.</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge info">
+
+                    <!-- Profile Dropdown -->
+                    <div class="relative flex items-center dropdown h-header">
+                        <button type="button" class="inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                            <div class="bg-pink-100 rounded-full">
+                                <img src="{{ asset('assets/client/main/images/profile.png') }}" alt="" class="w-[37.5px] h-[37.5px] rounded-full">
+                            </div>
+                        </button>
+                        <div class="absolute z-50 hidden p-4 ltr:text-left rtl:text-right bg-white rounded-md shadow-md !top-4 dropdown-menu min-w-[14rem] dark:bg-zink-600" aria-labelledby="dropdownMenuButton">
+                            <h6 class="mb-2 text-sm font-normal text-slate-500 dark:text-zink-300">Welcome to starcode</h6>
+                            <a href="#!" class="flex gap-3 mb-3">
+                                <div class="relative inline-block shrink-0">
+                                    <div class="rounded bg-slate-100 dark:bg-zink-500">
+                                        <img src="{{ asset('assets/client/main/images/profile.png') }}" alt="" class="w-12 h-12 rounded">
+                                    </div>
+                                    <span class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"></span>
                                 </div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>20 minutes ago</span>
-                                    <h6 class="mb-0">New order placed <strong class="text-info">#XF-2356.</strong></h6>
-                                    <p class="mb-0">Quisque a consequat ante Sit amet magna at volutapt...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge danger">
+                                <div>
+                                    <h6 class="mb-1 text-15">StarCode Kh</h6>
+                                    <p class="text-slate-500 dark:text-zink-300">Web Developer</p>
                                 </div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>30 minutes ago</span>
-                                    <h6 class="mb-0">john just buy your product <strong class="text-warning">Sell $250</strong></h6>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge success">
-                                </div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>15 minutes ago</span>
-                                    <h6 class="mb-0">StumbleUpon is acquired by eBay. </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge warning">
-                                </div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>20 minutes ago</span>
-                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge dark">
-                                </div>
-                                <a class="timeline-panel text-muted" href="javascript:void(0);">
-                                    <span>20 minutes ago</span>
-                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown notification_dropdown">
-                    <a class="nav-link  ai-icon" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                        <svg width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.638 4.9936V2.3C12.638 1.5824 13.2484 1 14.0006 1C14.7513 1 15.3631 1.5824 15.3631 2.3V4.9936C17.3879 5.2718 19.2805 6.1688 20.7438 7.565C22.5329 9.2719 23.5384 11.5872 23.5384 14V18.8932L24.6408 20.9966C25.1681 22.0041 25.1122 23.2001 24.4909 24.1582C23.8709 25.1163 22.774 25.7 21.5941 25.7H15.3631C15.3631 26.4176 14.7513 27 14.0006 27C13.2484 27 12.638 26.4176 12.638 25.7H6.40705C5.22571 25.7 4.12888 25.1163 3.50892 24.1582C2.88759 23.2001 2.83172 22.0041 3.36039 20.9966L4.46268 18.8932V14C4.46268 11.5872 5.46691 9.2719 7.25594 7.565C8.72068 6.1688 10.6119 5.2718 12.638 4.9936ZM14.0006 7.5C12.1924 7.5 10.4607 8.1851 9.18259 9.4045C7.90452 10.6226 7.18779 12.2762 7.18779 14V19.2C7.18779 19.4015 7.13739 19.6004 7.04337 19.7811C7.04337 19.7811 6.43703 20.9381 5.79662 22.1588C5.69171 22.3603 5.70261 22.6008 5.82661 22.7919C5.9506 22.983 6.16996 23.1 6.40705 23.1H21.5941C21.8298 23.1 22.0492 22.983 22.1732 22.7919C22.2972 22.6008 22.3081 22.3603 22.2031 22.1588C21.5627 20.9381 20.9564 19.7811 20.9564 19.7811C20.8624 19.6004 20.8133 19.4015 20.8133 19.2V14C20.8133 12.2762 20.0953 10.6226 18.8172 9.4045C17.5391 8.1851 15.8073 7.5 14.0006 7.5Z" fill="#4f7086"></path>
-                        </svg>
-                        <span class="badge light text-white bg-primary rounded-circle">12</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <div id="dlab_W_Notification1" class="widget-media dlab-scroll p-3" style="height:380px;">
-                            <ul class="timeline">
+                            </a>
+                            <ul>
                                 <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2">
-                                            <img alt="image" width="50" src="images/avatar/1.jpg">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Dr sultads Send you Photo</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
+                                    <a class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500" href="pages-account.html"><i data-lucide="user-2" class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Profile</a>
                                 </li>
-                                <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2 media-info">
-                                            KG
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Resport created successfully</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
                                 </li>
-                                <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2 media-success">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Reminder : Treatment Time!</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                    <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2">
-                                            <img alt="image" width="50" src="images/avatar/1.jpg">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Dr sultads Send you Photo</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2 media-danger">
-                                            KG
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Resport created successfully</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-panel">
-                                        <div class="media me-2 media-primary">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mb-1">Reminder : Treatment Time!</h6>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </div>
+                                <li class="pt-2 mt-2 border-t border-slate-200 dark:border-zink-500">
+                                    <a class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500" href="auth-logout-basic.html"><i data-lucide="log-out" class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Sign Out</a>
                                 </li>
                             </ul>
                         </div>
-                        <a class="all-notification" href="javascript:void(0);">See all notifications <i class="ti-arrow-end"></i></a>
                     </div>
-                </li>
-                <li class="nav-item dropdown notification_dropdown">
-                    <a class="nav-link bell bell-link" href="javascript:void(0);">
-                        <svg width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27 7.88883C27 5.18897 24.6717 3 21.8 3C17.4723 3 10.5277 3 6.2 3C3.3283 3 1 5.18897 1 7.88883V23.7776C1 24.2726 1.31721 24.7174 1.80211 24.9069C2.28831 25.0963 2.8473 24.9912 3.2191 24.6417C3.2191 24.6417 5.74629 22.2657 7.27769 20.8272C7.76519 20.3688 8.42561 20.1109 9.11591 20.1109H21.8C24.6717 20.1109 27 17.922 27 15.2221V7.88883ZM24.4 7.88883C24.4 6.53951 23.2365 5.44441 21.8 5.44441C17.4723 5.44441 10.5277 5.44441 6.2 5.44441C4.7648 5.44441 3.6 6.53951 3.6 7.88883V20.8272L5.4382 19.0989C6.4132 18.1823 7.73661 17.6665 9.11591 17.6665H21.8C23.2365 17.6665 24.4 16.5726 24.4 15.2221V7.88883ZM7.5 15.2221H17.9C18.6176 15.2221 19.2 14.6745 19.2 13.9999C19.2 13.3252 18.6176 12.7777 17.9 12.7777H7.5C6.7824 12.7777 6.2 13.3252 6.2 13.9999C6.2 14.6745 6.7824 15.2221 7.5 15.2221ZM7.5 10.3333H20.5C21.2176 10.3333 21.8 9.7857 21.8 9.11104C21.8 8.43638 21.2176 7.88883 20.5 7.88883H7.5C6.7824 7.88883 6.2 8.43638 6.2 9.11104C6.2 9.7857 6.7824 10.3333 7.5 10.3333Z" fill="#4f7086"></path>
-                        </svg>
-                        <span class="badge light text-white bg-primary rounded-circle">5</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:void(0);" class="btn btn-primary d-sm-inline-block d-none">Generate Report<i class="las la-signal ms-3 scale5"></i></a>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
-    </nav>
-</div>
+    </div>
+</header>
