@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-use App\Http\Controllers\Common\AuthController;
+use App\Http\Controllers\Client\AuthController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {
@@ -39,14 +38,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-Route::get('/login', function () {
-    return view('client.pages.auth.login');
-})->name('client.login');
-
-Route::get('/register', function () {
-    return view('client.pages.auth.register');
-})->name('client.register');
-
 Route::get('/', function () {
     return view('client.pages.home');
 });
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+
