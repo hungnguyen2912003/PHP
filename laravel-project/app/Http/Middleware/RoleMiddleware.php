@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class RoleMiddleware
 {
     /**
@@ -16,12 +17,35 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, $role): Response
     {
 
+        $token = $request->cookie('auth_token');
+
+        if ($token && ! $request->bearerToken()) {
+            $request->headers->set('Authorization', 'Bearer ' . $token);
+        }
+
         if (! auth('api')->check()) {
-            return response()->json(['message' => 'Unauthenticated'], 401);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status_code' => 401,
+                ], 401);
+            }
+
+            if ($role === 'admin') {
+                return redirect()->route('admin.login');
+            }
+            return redirect()->route('client.login');
         }
 
         if (auth('api')->user()->role !== $role) {
-            return response()->json(['message' => 'Unauthorized. Role access only.'], 403);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status_code' => 403,
+                ], 403);
+            }
+            if ($role === 'admin') {
+                return redirect()->route('admin.login');
+            }
+            return redirect()->route('client.login');
         }
 
         return $next($request);

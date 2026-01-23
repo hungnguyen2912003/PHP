@@ -13,7 +13,7 @@ trait ApiResponseTrait
      * @param  int  $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function successResponse($data, int $statusCode = 200): JsonResponse
+    protected function success($data, int $statusCode = 200): JsonResponse
     {
         return response()->json([
             'status_code' => $statusCode,
@@ -28,7 +28,7 @@ trait ApiResponseTrait
      * @param  int  $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function errorResponse(string $message, int $statusCode): JsonResponse
+    protected function error(string $message, int $statusCode): JsonResponse
     {
         return response()->json([
             'status_code' => $statusCode,

@@ -25,7 +25,12 @@ class AuthController extends Controller
         ];
 
         if (! $token = auth('api')->attempt($credentials)) {
-            return $this->errorResponse('Invalid credentials', 401);
+            return response()->json([
+                'status_code' => 401,
+                'body' => [
+                    'data' => []
+                ]
+            ], 401);
         }
 
         $user = auth('api')->user();
@@ -43,7 +48,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return $this->successResponse(auth('api')->user());
+        return $this->success(auth('api')->user());
     }
 
     /**
@@ -51,12 +56,20 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        auth('api')->logout();
+        try {
+            $token = $request->bearerToken() ?? $request->cookie('auth_token');
+            if ($token) {
+                auth('api')->setToken($token)->logout();
+            }
+        } catch (\Exception $e) {
+            // Token might be already invalid, ignore error
+        }
+
         $cookie = cookie()->forget('auth_token');
 
-        return $this->successResponse(['message' => 'Successfully logged out'])->withCookie($cookie);
+        return $this->success(null)->withCookie($cookie);
     }
 
     /**
@@ -81,7 +94,7 @@ class AuthController extends Controller
         $ttl = auth('api')->factory()->getTTL(); // Minutes
         $cookie = cookie('auth_token', $token, $ttl, '/', null, false, true, false, 'Lax');
 
-        return $this->successResponse([
+        return $this->success([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $ttl * 60,

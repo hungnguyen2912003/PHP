@@ -18,13 +18,15 @@
                         </a>
                     </p>
                 </div>
+
+                <!-- Form -->
                 <form id="loginForm">
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">
                         Email or Username
                         </label>
                         <div class="form-floating">
-                            <input class="form-control" id="username" name="username" placeholder="Enter email or username *" type="text" required/>
+                            <input class="form-control" id="login" name="login" placeholder="Enter email or username *" type="text" required/>
                             <label for="floatingInput1">
                             Enter email or username *
                             </label>
@@ -99,9 +101,8 @@
                 <script>
                     document.getElementById('loginForm').addEventListener('submit', async function(e) {
                         e.preventDefault();
-                        const username = document.getElementById('username').value;
+                        const login = document.getElementById('login').value;
                         const password = document.getElementById('password').value;
-                        const errorMessage = document.getElementById('error-message');
                         
                         try {
                             const response = await fetch('/api/admin/login', {
@@ -110,21 +111,15 @@
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json'
                                 },
-                                body: JSON.stringify({ username, password })
+                                body: JSON.stringify({ login, password })
                             });
 
                             const data = await response.json();
 
                             if (response.ok) {
                                 window.location.href = "{{ route('admin.dashboard') }}";
-                            } else {
-                                errorMessage.style.display = 'block';
-                                errorMessage.innerText = data.body?.message || 'Login failed';
                             }
                         } catch (error) {
-                            errorMessage.style.display = 'block';
-                            errorMessage.innerText = 'An error occurred';
-                            console.error(error);
                         }
                     });
                 </script>

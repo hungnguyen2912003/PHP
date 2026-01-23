@@ -10,6 +10,8 @@
     <!-- Icons CSS -->
 
     <!-- StarCode CSS -->
+    <script src="{{ asset('assets/client/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/common.js') }}"></script>
 
 
   <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
@@ -244,6 +246,7 @@
 <script src="{{ asset('assets/client/libs/prismjs/prism.js') }}"></script>
 <script src="{{ asset('assets/client/libs/lucide/umd/lucide.js') }}"></script>
 <script src="{{ asset('assets/client/js/starcode.bundle.js') }}"></script>
+<script src="{{ asset('assets/client/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 <!--apexchart js-->
 <script src="{{ asset('assets/client/libs/apexcharts/apexcharts.min.js') }}"></script>
 

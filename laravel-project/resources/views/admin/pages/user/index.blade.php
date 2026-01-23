@@ -88,16 +88,22 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        const token = document.cookie.split(';').find(row => row.startsWith('auth_token='));
+
         fetch('/api/admin/users', {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            const users = data.data; 
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            const users = res.body.data; 
             let html = '';
             users.forEach(user => {
                 const avatarUrl = user.avatar 
