@@ -97,32 +97,6 @@
                         </li>
                     </ul>
                 </form>
-
-                <script>
-                    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-                        e.preventDefault();
-                        const login = document.getElementById('login').value;
-                        const password = document.getElementById('password').value;
-                        
-                        try {
-                            const response = await fetch('/api/admin/login', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json'
-                                },
-                                body: JSON.stringify({ login, password })
-                            });
-
-                            const data = await response.json();
-
-                            if (response.ok) {
-                                window.location.href = "{{ route('admin.dashboard') }}";
-                            }
-                        } catch (error) {
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>

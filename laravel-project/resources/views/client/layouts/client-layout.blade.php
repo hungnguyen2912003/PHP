@@ -12,9 +12,11 @@
     <!-- StarCode CSS -->
     <script src="{{ asset('assets/client/libs/@popperjs/core/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/client/js/common.js') }}"></script>
+    
 
 
-  <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
+    @notifyCss
 </head>
 
 <body class="text-base bg-body-bg text-body font-public dark:text-zink-100 dark:bg-zink-800 group-data-[skin=bordered]:bg-body-bordered group-data-[skin=bordered]:dark:bg-zink-700">
@@ -247,14 +249,13 @@
 <script src="{{ asset('assets/client/libs/lucide/umd/lucide.js') }}"></script>
 <script src="{{ asset('assets/client/js/starcode.bundle.js') }}"></script>
 <script src="{{ asset('assets/client/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-<!--apexchart js-->
-<script src="{{ asset('assets/client/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-<!--dashboard ecommerce init js-->
-<script src="{{ asset('assets/client/js/pages/dashboards-ecommerce.init.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/client/js/app.js') }}"></script>
+
+<x-notify::notify />
+@notifyJs
 
 </body>
 

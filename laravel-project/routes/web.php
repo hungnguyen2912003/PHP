@@ -39,24 +39,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-Route::middleware(['role:user'])->group(function () {
-    Route::get('/', function () {
-        return view('client.pages.dashboard');
-    });
-
-    Route::get('/weight', function () {
-        return view('client.pages.weight.index');
-    })->name('client.weight');
-
-    Route::get('/height', function () {
-        return view('client.pages.height.index');
-    })->name('client.height');
-
-    Route::get('/profile', function () {
-        return view('client.pages.auth.profile');
-    })->name('client.profile');
-});
-
 Route::get('/login', function () {
     return view('client.pages.auth.login');
 })->name('client.login');
@@ -64,3 +46,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('client.pages.auth.register');
 })->name('client.register');
+
+Route::get('/', function () {
+    return view('client.pages.home');
+});

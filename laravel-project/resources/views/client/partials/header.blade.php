@@ -58,8 +58,8 @@
                                     <span class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-1 text-15">{{ auth('api')->user()->name }}</h6>
-                                    <p class="text-slate-500 dark:text-zink-300">{{ auth('api')->user()->role === 'admin' ? 'Administrator' : auth('api')->user()->role }}</p>
+                                    <h6 class="mb-1 text-15"></h6>
+                                    <p class="text-slate-500 dark:text-zink-300"></p>
                                 </div>
                             </a>
                             <ul>
@@ -78,25 +78,3 @@
         </div>
     </div>
 </header>
-<script>
-    document.getElementById('client-logout-link').addEventListener('click', async function(e) {
-        e.preventDefault();
-        
-        try {
-            const response = await fetch('{{ url("/api/user/logout") }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                credentials: 'same-origin'
-            });
-
-            if (response.ok) {
-                window.location.href = "{{ route('client.login') }}";
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    });
-</script>

@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
 Route::prefix('user')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::middleware(['role:user', 'auth:api'])->group(function () {
+    Route::middleware(['auth:api', 'role:user'])->group(function () {
 
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);

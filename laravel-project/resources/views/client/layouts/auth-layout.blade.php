@@ -9,6 +9,7 @@
     <script src="{{ asset('assets/client/js/layout.js') }}"></script>
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
+
 </head>
 
 <body class="flex items-center justify-center min-h-screen py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public">
