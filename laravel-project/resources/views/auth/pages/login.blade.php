@@ -1,4 +1,4 @@
-@extends('client.layouts.auth-layout')
+@extends('auth.layouts.auth-layout')
 
 @section('title', 'Login')
 
@@ -47,7 +47,7 @@
             </div>
 
             <div class="mt-10 text-center">
-                <p class="mb-0 text-slate-500 dark:text-zink-200">Don't have an account ? <a href="{{ route('client.register') }}" class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500"> SignUp</a> </p>
+                <p class="mb-0 text-slate-500 dark:text-zink-200">Don't have an account ? <a href="{{ route('register') }}" class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500"> SignUp</a> </p>
             </div>
         </form>
         <!-- End Login Form -->

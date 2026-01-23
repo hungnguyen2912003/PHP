@@ -28,7 +28,7 @@
                             <label for="floatingInput1">Enter your name</label>
                         </div>
                         @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-20">
@@ -38,18 +38,17 @@
                             <label for="floatingInput1">Enter your username</label>
                         </div>
                         @error('username')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>                    
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">Email Address <span class="text-danger">*</span></label>
-                        </label>
                         <div class="form-floating">
                             <input class="form-control" name="email" id="floatingInput2" placeholder="Enter your email address" type="email" value="{{ old('email') }}"/>
                             <label for="floatingInput2">Enter your email address</label>
                         </div>
                         @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-20">
@@ -62,7 +61,7 @@
                             </div>
                         </div>
                         @error('password')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-20">
@@ -75,7 +74,7 @@
                             </div>
                         </div>
                         @error('password_confirmation')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-20">
@@ -89,7 +88,7 @@
                             </label>
                         </div>
                         @error('termsCheckbox')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">

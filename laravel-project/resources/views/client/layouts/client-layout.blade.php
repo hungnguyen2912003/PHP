@@ -16,7 +16,6 @@
 
 
     <link rel="stylesheet" href="{{ asset('assets/client/css/starcode2.css') }}">
-    @notifyCss
 </head>
 
 <body class="text-base bg-body-bg text-body font-public dark:text-zink-100 dark:bg-zink-800 group-data-[skin=bordered]:bg-body-bordered group-data-[skin=bordered]:dark:bg-zink-700">
@@ -254,8 +253,7 @@
 <!-- App js -->
 <script src="{{ asset('assets/client/js/app.js') }}"></script>
 
-<x-notify::notify />
-@notifyJs
+{{-- <x-notify::notify /> --}}
 
 </body>
 
