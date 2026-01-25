@@ -9,20 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ActivationMail extends Mailable
+class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $token;
-    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($token, $user)
+    public $token;
+    public $email;
+    public function __construct($token, $email)
     {
         $this->token = $token;
-        $this->user = $user;
+        $this->email = $email;
     }
 
     /**
@@ -31,7 +30,7 @@ class ActivationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Activation Your Account',
+            subject: 'Forgot Password Mail',
         );
     }
 
@@ -41,12 +40,10 @@ class ActivationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'client.emails.activation',
+            view: 'auth.mail.forgot-password',
             with: [
-                'activation_url' => route('activate', ['token' => $this->token, 'email' => $this->user->email]),
-                'expires_in' => '24 hours',
-                'support_url' => url('/'),
-                'year' => date('Y'),
+                'token' => $this->token,
+                'email' => $this->email,
             ],
         );
     }

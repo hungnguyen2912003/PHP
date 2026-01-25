@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\ForgotPaswordRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+use Illuminate\Http\Request;
 use App\Mail\ActivationMail;
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 
@@ -35,8 +38,6 @@ class AuthController extends Controller
             return redirect()->back();
         }
 
-        //Create activation token
-        $activation_token = Str::random(64);
         $role = Role::where('name', 'User')->first();
 
         //Create new user
@@ -46,32 +47,57 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role_id' => $role->id,
-            'activation_token' => $activation_token,
             'status' => 'pending',
+        ]);
+
+        // Create activation token
+        $activation_token = Str::random(64);
+        \DB::table('activation_tokens')->insert([
+            'email' => $user->email,
+            'token' => $activation_token,
+            'created_at' => now(),
         ]);
 
         //Send activation email
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user));
 
         //Success message
-        toastr()->success('User registered successfully. Please check your email for activation link.');
+        toastr()->success('User registered successfully. Please check your email for activation link (valid for 24h).');
         return redirect()->route('login');
 
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Activate
-    public function activate($token)
+    public function activate(Request $request, $token)
     {
-        $user = User::where('activation_token', $token)->first();
-        if ($user) {
-            $user->activation_token = null;
-            $user->status = 'active';
-            $user->save();
-            toastr()->success('User activated successfully.');
+        $email = $request->query('email');
+        if (!$email) {
+            toastr()->error('Invalid activation link (missing email).');
             return redirect()->route('login');
         }
-        toastr()->error('Invalid activation or expired token.');
+
+        $activationRecord = \DB::table('activation_tokens')->where([
+            'email' => $email,
+            'token' => $token
+        ])->first();
+
+        if ($activationRecord && \Carbon\Carbon::parse($activationRecord->created_at)->addHours(24)->isFuture()) {
+
+            $user = User::where('email', $email)->first();
+            if ($user) {
+                $user->status = 'active';
+                $user->save();
+
+                // Delete the token
+                \DB::table('activation_tokens')->where(['email' => $email])->delete();
+
+                toastr()->success('User activated successfully.');
+                return redirect()->route('login');
+            }
+        }
+
+        toastr()->error('Invalid or expired activation token.');
         return redirect()->route('login');
     }
 
@@ -136,5 +162,72 @@ class AuthController extends Controller
 
         toastr()->success('Logout successfully.');
         return redirect()->route('login')->withCookie($cookie);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Forgot Password
+    public function showForgotPasswordForm()
+    {
+        return view('auth.pages.forgot-password');
+    }
+    public function forgotPassword(ForgotPaswordRequest $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $token = Str::random(64);
+
+            // Update or Insert into password_reset_tokens
+            \DB::table('password_reset_tokens')->updateOrInsert(
+                ['email' => $request->email],
+                [
+                    'email' => $request->email,
+                    'token' => $token,
+                    'created_at' => now()
+                ]
+            );
+
+            Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email));
+
+            toastr()->success('Password reset link has been sent to your email (valid for 60 mins).');
+            return redirect()->route('login');
+        }
+
+        toastr()->error('Email not found.');
+        return redirect()->route('forgot-password');
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Reset Password
+    public function showResetPasswordForm(Request $request, $token)
+    {
+        return view('auth.pages.reset-password', ['token' => $token, 'email' => $request->email]);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request, $token)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $resetRecord = \DB::table('password_reset_tokens')->where([
+            'email' => $request->email,
+            'token' => $token,
+        ])->first();
+
+        // Check if token exists and is not expired (60 mins)
+        if ($resetRecord && \Carbon\Carbon::parse($resetRecord->created_at)->addMinutes(60)->isFuture()) {
+
+            $user = User::where('email', $request->email)->first();
+            $user->update(['password' => Hash::make($request->password)]);
+
+            // Delete the token
+            \DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
+
+            toastr()->success('Password reset successfully. You can now login with your new password.');
+            return redirect()->route('login');
+        }
+
+        toastr()->error('Invalid or expired reset token.');
+        return redirect()->route('login');
     }
 }

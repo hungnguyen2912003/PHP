@@ -48,7 +48,13 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('forgot-password');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password.post');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('reset-password');
+Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('reset-password.post');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
 

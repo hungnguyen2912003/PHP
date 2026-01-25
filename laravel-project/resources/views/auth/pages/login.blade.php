@@ -63,7 +63,8 @@
                                         Remember me
                                     </label>
                                 </div>
-                                <a class="fs-16 text-primary fw-normal text-decoration-none" href="forgot-password.html">
+                                <a class="fs-16 text-primary fw-normal text-decoration-none"
+                                    href="{{ route('forgot-password') }}">
                                     Forgot Password?
                                 </a>
                             </div>
