@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Auth\RegisterRequest;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -22,7 +24,38 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
-        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
-    } 
+        //Check if user exists: email or username
+        $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
+        if ($existingUser) {
+            if ($existingUser->isPending()) {
+                toastr()->error('User is already registered and pending approval.');
+                return redirect()->back();
+            }
+            toastr()->error('User already exists.');
+            return redirect()->back();
+        }
+
+        //Create activation token
+        $activation_token = Str::random(64);
+        $role = Role::where('name', 'User')->first();
+
+        //Create new user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'role_id' => $role->id,
+            'activation_token' => $activation_token,
+            'status' => 'pending',
+        ]);
+
+        //Send activation email
+        Mail::to($user->email)->send(new ActivationEmail($activation_token, $user));
+
+        //Success message
+        toastr()->success('User registered successfully. Please check your email for activation link.');
+        return redirect()->route('login');
+
+    }
 }
