@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Mail\ActivationMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -51,11 +52,25 @@ class AuthController extends Controller
         ]);
 
         //Send activation email
-        Mail::to($user->email)->send(new ActivationEmail($activation_token, $user));
+        Mail::to($user->email)->send(new ActivationMail($activation_token, $user));
 
         //Success message
         toastr()->success('User registered successfully. Please check your email for activation link.');
         return redirect()->route('login');
 
+    }
+
+    public function activate($token)
+    {
+        $user = User::where('activation_token', $token)->first();
+        if ($user) {
+            $user->activation_token = null;
+            $user->status = 'active';
+            $user->save();
+            toastr()->success('User activated successfully.');
+            return redirect()->route('login');
+        }
+        toastr()->error('Invalid activation or expired token.');
+        return redirect()->route('login');
     }
 }

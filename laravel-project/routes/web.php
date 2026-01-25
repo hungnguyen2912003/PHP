@@ -48,4 +48,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
+Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
+
 
