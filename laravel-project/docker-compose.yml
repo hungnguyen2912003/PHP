@@ -12,7 +12,8 @@ services:
             SERVICE_TAGS: dev
         working_dir: /var/www
         volumes:
-            - ./:/var/www
+            - ./:/var/www:delegated
+            - vendor_data:/var/www/vendor
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
         networks:
             - app-network
@@ -25,7 +26,7 @@ services:
         ports:
             - "8080:80"
         volumes:
-            - ./:/var/www
+            - ./:/var/www:delegated
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
         networks:
             - app-network
@@ -56,4 +57,6 @@ networks:
 
 volumes:
     dbdata:
+        driver: local
+    vendor_data:
         driver: local

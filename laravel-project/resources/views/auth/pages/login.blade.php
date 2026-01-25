@@ -4,54 +4,125 @@
 
 @section('content')
 
-<div class="mb-0 border-none lg:w-[500px] card bg-white/70 shadow-none dark:bg-zink-500/70">
-    <div class="!px-10 !py-12 card-body">
-
-        <div class="mt-8 text-center">
-            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome Back !</h4>
-            <p class="text-slate-500 dark:text-zink-200">Sign in to access your account.</p>
-        </div>
-
-        <!-- Login Form -->
-        <form action="{{ route('login.post') }}" class="mt-10" id="loginForm">
-            <div class="hidden px-4 py-3 mb-3 text-sm text-green-500 border border-green-200 rounded-md bg-green-50 dark:bg-green-400/20 dark:border-green-500/50" id="successAlert">
-                You have <b>successfully</b> signed in.
-            </div>
-            <div class="mb-3">
-                <label for="login" class="inline-block mb-2 text-base font-medium">Username/Email</label>
-                <input type="text" id="login" name="login" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter your username or email">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="inline-block mb-2 text-base font-medium">Password</label>
-                <input type="password" id="password" name="password" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter your password">
-            </div>
-            <div>
-                <div class="flex items-center gap-2">
-                    <input id="remember_me" class="border rounded-sm appearance-none size-4 bg-slate-100 border-slate-200 dark:bg-zink-600/50 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" type="checkbox" value="">
-                    <label for="remember_me" class="inline-block text-base font-medium align-middle cursor-pointer">Remember me</label>
+    <div class="main-content d-flex flex-column p-0">
+        <div class="m-lg-auto my-auto w-930 py-4">
+            <div class="card bg-white border rounded-10 border-white py-100 px-130">
+                <div class="p-md-5 p-4 p-lg-0">
+                    <div class="text-center mb-4">
+                        <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
+                            Sign In
+                        </h3>
+                        <p class="fs-16 text-secondary lh-1-8">
+                            Don't have an account yet?
+                            <a class="text-primary text-decoration-none" href="{{ route('register') }}">
+                                Sign Up
+                            </a>
+                        </p>
+                    </div>
+                    <form action="{{ route('login.post') }}" method="POST" id="loginForm">
+                        @csrf
+                        <div class="mb-20">
+                            <label class="label fs-16 mb-2">
+                                Username or Email Address <span class="text-danger">*</span>
+                            </label>
+                            <div class="form-floating">
+                                <input class="form-control" id="login" placeholder="Enter your username or email address"
+                                    type="text" name="login" />
+                                <label for="login">
+                                    Enter your username or email address
+                                </label>
+                            </div>
+                            @error('login')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-20">
+                            <label class="label fs-16 mb-2">
+                                Password <span class="text-danger">*</span>
+                            </label>
+                            <div class="form-group" id="password-show-hide">
+                                <div class="password-wrapper position-relative password-container form-floating">
+                                    <input class="form-control text-secondary password" placeholder="Enter your password"
+                                        type="password" name="password" id="password" />
+                                    <label for="password">Enter your password</label>
+                                    <i aria-hidden="true"
+                                        class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
+                                        style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
+                                    </i>
+                                </div>
+                            </div>
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-20">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
+                                    <label class="form-check-label fs-16" for="flexCheckDefault">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a class="fs-16 text-primary fw-normal text-decoration-none" href="forgot-password.html">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary fw-normal text-white w-100"
+                                style="padding-top: 18px; padding-bottom: 18px;" type="submit">
+                                Sign In
+                            </button>
+                        </div>
+                        <div class="position-relative text-center z-1 mb-12">
+                            <span class="fs-16 bg-white px-4 text-secondary card d-inline-block border-0">
+                                or sign in with
+                            </span>
+                            <span class="d-block border-bottom border-2 position-absolute w-100 z-n1" style="top: 13px;">
+                            </span>
+                        </div>
+                        <ul class="p-0 mb-0 list-unstyled d-flex justify-content-center" style="gap: 10px;">
+                            <li>
+                                <a class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
+                                    href="https://www.facebook.com/"
+                                    style="width: 30px; height: 30px; line-height: 30px; background-color: #3a559f;"
+                                    target="_blank">
+                                    <i class="ri-facebook-fill">
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
+                                    href="https://www.twitter.com/"
+                                    style="width: 30px; height: 30px; line-height: 30px; background-color: #0f1419;"
+                                    target="_blank">
+                                    <i class="ri-twitter-x-line">
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
+                                    href="https://www.google.com/"
+                                    style="width: 30px; height: 30px; line-height: 30px; background-color: #e02f2f;"
+                                    target="_blank">
+                                    <i class="ri-google-fill">
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
+                                    href="https://www.linkedin.com/"
+                                    style="width: 30px; height: 30px; line-height: 30px; background-color: #007ab9;"
+                                    target="_blank">
+                                    <i class="ri-linkedin-fill">
+                                    </i>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
-            <div class="mt-10">
-                <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
-            </div>
-
-            <div class="relative text-center my-9 before:absolute before:top-3 before:left-0 before:right-0 before:border-t before:border-t-slate-200 dark:before:border-t-zink-500">
-                <h5 class="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">Sign In with</h5>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-2">
-                <button type="button" class="flex items-center justify-center size-[37.5px] transition-all duration-200 ease-linear p-0 text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 active:text-white active:bg-custom-600 active:border-custom-600"><i data-lucide="facebook" class="size-4"></i></button>
-                <button type="button" class="flex items-center justify-center size-[37.5px] transition-all duration-200 ease-linear p-0 text-white btn bg-orange-500 border-orange-500 hover:text-white hover:bg-orange-600 hover:border-orange-600 focus:text-white focus:bg-orange-600 focus:border-orange-600 active:text-white active:bg-orange-600 active:border-orange-600"><i data-lucide="mail" class="size-4"></i></button>
-                <button type="button" class="flex items-center justify-center size-[37.5px] transition-all duration-200 ease-linear p-0 text-white btn bg-sky-500 border-sky-500 hover:text-white hover:bg-sky-600 hover:border-sky-600 focus:text-white focus:bg-sky-600 focus:border-sky-600 active:text-white active:bg-sky-600 active:border-sky-600"><i data-lucide="twitter" class="size-4"></i></button>
-                <button type="button" class="flex items-center justify-center size-[37.5px] transition-all duration-200 ease-linear p-0 text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 active:text-white active:bg-slate-600 active:border-slate-600"><i data-lucide="github" class="size-4"></i></button>
-            </div>
-
-            <div class="mt-10 text-center">
-                <p class="mb-0 text-slate-500 dark:text-zink-200">Don't have an account ? <a href="{{ route('register') }}" class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500"> SignUp</a> </p>
-            </div>
-        </form>
-        <!-- End Login Form -->
+        </div>
     </div>
-</div>
 
 @endsection

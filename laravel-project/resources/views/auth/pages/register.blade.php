@@ -24,9 +24,9 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Name <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="name" id="floatingInput1" placeholder="Enter your name"
-                                    type="text" value="{{ old('name') }}" />
-                                <label for="floatingInput1">Enter your name</label>
+                                <input class="form-control" name="name" id="name" placeholder="Enter your name" type="text"
+                                    value="{{ old('name') }}" />
+                                <label for="name">Enter your name</label>
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -35,9 +35,9 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Username <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="username" id="floatingInput1"
-                                    placeholder="Enter your username" type="text" value="{{ old('username') }}" />
-                                <label for="floatingInput1">Enter your username</label>
+                                <input class="form-control" name="username" id="username" placeholder="Enter your username"
+                                    type="text" value="{{ old('username') }}" />
+                                <label for="username">Enter your username</label>
                             </div>
                             @error('username')
                                 <span class="text-danger">{{ $message }}</span>
@@ -46,9 +46,9 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Email Address <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="email" id="floatingInput2"
-                                    placeholder="Enter your email address" type="email" value="{{ old('email') }}" />
-                                <label for="floatingInput2">Enter your email address</label>
+                                <input class="form-control" name="email" id="email" placeholder="Enter your email address"
+                                    type="email" value="{{ old('email') }}" />
+                                <label for="email">Enter your email address</label>
                             </div>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -57,12 +57,13 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Password <span class="text-danger">*</span></label>
                             <div class="form-group" id="password-show-hide">
-                                <div class="password-wrapper position-relative password-container">
-                                    <input class="form-control text-secondary password" name="password"
+                                <div class="password-wrapper position-relative password-container form-floating">
+                                    <input class="form-control text-secondary password" name="password" id="password"
                                         placeholder="Enter password" type="password" />
+                                    <label for="password">Enter password</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
-                                        style="color: #A9A9C8; font-size: 22px; right: 15px;">
+                                        style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
                                     </i>
                                 </div>
                             </div>
@@ -73,12 +74,13 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Confirm Password <span class="text-danger">*</span></label>
                             <div class="form-group" id="password-show-hide">
-                                <div class="password-wrapper position-relative password-container">
+                                <div class="password-wrapper position-relative password-container form-floating">
                                     <input class="form-control text-secondary password" name="password_confirmation"
-                                        placeholder="Enter confirm password " type="password" />
+                                        id="password_confirmation" placeholder="Enter confirm password" type="password" />
+                                    <label for="password_confirmation">Enter confirm password</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
-                                        style="color: #A9A9C8; font-size: 22px; right: 15px;">
+                                        style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
                                     </i>
                                 </div>
                             </div>

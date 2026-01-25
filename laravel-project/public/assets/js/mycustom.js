@@ -38,4 +38,22 @@ $(document).ready(function () {
         }
     })
 
+    $('#loginForm').submit(function (e) {
+        let login = $.trim($('#login').val());
+        let password = $.trim($('#password').val());
+
+        let errorMsg = [];
+
+        if (login.length < 3)
+            errorMsg.push("Username or email must be at least 3 characters long.");
+
+        if (password.length < 6)
+            errorMsg.push("Password must be at least 6 characters long.");
+
+        if (errorMsg.length > 0) {
+            toastr.error(errorMsg.join("\n"));
+            e.preventDefault();
+        }
+    })
+
 });
