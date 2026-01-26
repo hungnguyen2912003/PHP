@@ -1,55 +1,1252 @@
-<div class="app-menu w-vertical-menu bg-vertical-menu ltr:border-r rtl:border-l border-vertical-menu-border fixed bottom-0 top-0 z-[1003] transition-all duration-75 ease-linear group-data-[sidebar-size=md]:w-vertical-menu-md group-data-[sidebar-size=sm]:w-vertical-menu-sm group-data-[sidebar-size=sm]:pt-header group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar=dark]:border-vertical-menu-dark group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar=brand]:border-vertical-menu-brand group-data-[sidebar=modern]:bg-gradient-to-tr group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[layout=horizontal]:w-full group-data-[layout=horizontal]:bottom-auto group-data-[layout=horizontal]:top-header hidden md:block print:hidden group-data-[sidebar-size=sm]:absolute group-data-[sidebar=modern]:border-vertical-menu-border-modern group-data-[layout=horizontal]:dark:bg-zink-700 group-data-[layout=horizontal]:border-t group-data-[layout=horizontal]:dark:border-zink-500 group-data-[layout=horizontal]:border-r-0 group-data-[sidebar=dark]:dark:bg-zink-700 group-data-[sidebar=dark]:dark:border-zink-600 group-data-[layout=horizontal]:group-data-[navbar=scroll]:absolute group-data-[layout=horizontal]:group-data-[navbar=bordered]:top-[calc(theme('spacing.header')_+_theme('spacing.4'))] group-data-[layout=horizontal]:group-data-[navbar=bordered]:inset-x-4 group-data-[layout=horizontal]:group-data-[navbar=hidden]:top-0 group-data-[layout=horizontal]:group-data-[navbar=hidden]:h-16 group-data-[layout=horizontal]:group-data-[navbar=bordered]:w-[calc(100%_-_2rem)] group-data-[layout=horizontal]:group-data-[navbar=bordered]:[&.sticky]:top-header group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-md group-data-[layout=horizontal]:shadow-md group-data-[layout=horizontal]:shadow-slate-500/10 group-data-[layout=horizontal]:dark:shadow-zink-500/10 group-data-[layout=horizontal]:opacity-0">
-    <div class="flex items-center justify-center px-5 text-center h-header group-data-[layout=horizontal]:hidden group-data-[sidebar-size=sm]:fixed group-data-[sidebar-size=sm]:top-0 group-data-[sidebar-size=sm]:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-gradient-to-br group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-vertical-menu-modern group-data-[sidebar-size=sm]:z-10 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.vertical-menu-sm')_-_1px)] group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:dark:bg-zink-700">
-        <a href="/" class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden">
-            <span class="hidden group-data-[sidebar-size=sm]:block">
-                <img src="{{ asset('assets/client/images/logo.png') }}" alt="" class="h-6 mx-auto">
-            </span>
-            <span class="group-data-[sidebar-size=sm]:hidden">
-                <img src="{{ asset('assets/client/images/logo-dark.png') }}" alt="" class="h-6 mx-auto">
-            </span>
+<div class="sidebar-area" id="sidebar-area">
+    <div class="logo position-relative d-flex align-items-center justify-content-between">
+        <a class="d-block text-decoration-none position-relative" href="index.html">
+            <img alt="logo-icon" src="assets/images/logo-icon.png"/>
+            <span class="logo-text text-secondary fw-semibold">StarCode</span>
         </a>
-        <a href="index.html" class="hidden group-data-[sidebar=dark]:block group-data-[sidebar=brand]:block group-data-[sidebar=modern]:block">
-            <span class="hidden group-data-[sidebar-size=sm]:block">
-                <img src="{{ asset('assets/client/images/logo.png') }}" alt="" class="h-6 mx-auto">
+        <button class="sidebar-burger-menu-close bg-transparent py-3 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y" id="sidebar-burger-menu-close">
+            <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px; transform: rotate(45deg);">
             </span>
-            <span class="group-data-[sidebar-size=sm]:hidden">
-                <img src="{{ asset('assets/client/images/logo-light.png') }}" alt="" class="h-6 mx-auto">
+            <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px; transform: rotate(-45deg);">
             </span>
-        </a>
-        <button type="button" class="hidden p-0 float-end" id="vertical-hover">
-            <i class="ri-record-circle-line"></i>
+            </button>
+            <button class="sidebar-burger-menu bg-transparent p-0 border-0" id="sidebar-burger-menu">
+            <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px;">
+            </span>
+            <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px; margin: 6px 0;">
+            </span>
+            <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px;">
+            </span>
         </button>
     </div>
-
-    <div id="scrollbar" class="group-data-[sidebar-size=md]:max-h-[calc(100vh_-_theme('spacing.header')_*_1.2)] group-data-[sidebar-size=lg]:max-h-[calc(100vh_-_theme('spacing.header')_*_1.2)] group-data-[layout=horizontal]:h-56 group-data-[layout=horizontal]:md:h-auto group-data-[layout=horizontal]:overflow-auto group-data-[layout=horizontal]:md:overflow-visible group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:mx-auto">
-        <div>
-            <ul class="group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:flex-col group-data-[layout=horizontal]:md:flex-row" id="navbar-nav">
-                <li class="px-4 py-1 text-vertical-menu-item group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern uppercase font-medium text-[11px] cursor-default tracking-wider group-data-[sidebar-size=sm]:hidden group-data-[layout=horizontal]:hidden inline-block group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:underline group-data-[sidebar-size=md]:text-center group-data-[sidebar=dark]:dark:text-zink-200"><span data-key="t-menu">Menu</span></li>
-                <li class="relative group-data-[layout=horizontal]:shrink-0 group/sm">
-                    <a class="relative flex items-center ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 mx-3 my-1 group/menu-link text-vertical-menu-item-font-size font-normal transition-all duration-75 ease-linear rounded-md py-2.5 text-vertical-menu-item hover:text-vertical-menu-item-hover hover:bg-vertical-menu-item-bg-hover [&.active]:text-vertical-menu-item-active [&.active]:bg-vertical-menu-item-bg-active group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=dark]:hover:text-vertical-menu-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:bg-vertical-menu-item-bg-hover-dark group-data-[sidebar=dark]:dark:hover:bg-zink-600 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-item-active-dark group-data-[sidebar=dark]:[&.active]:bg-vertical-menu-item-bg-active-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-item-hover-brand group-data-[sidebar=brand]:hover:bg-vertical-menu-item-bg-hover-brand group-data-[sidebar=brand]:[&.active]:bg-vertical-menu-item-bg-active-brand group-data-[sidebar=brand]:[&.active]:text-vertical-menu-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern group-data-[sidebar=modern]:hover:bg-vertical-menu-item-bg-hover-modern group-data-[sidebar=modern]:hover:text-vertical-menu-item-hover-modern group-data-[sidebar=modern]:[&.active]:bg-vertical-menu-item-bg-active-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-item-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=sm]:group-hover/sm:w-[calc(theme('spacing.vertical-menu-sm')_*_3.63)] group-data-[sidebar-size=sm]:group-hover/sm:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:group-hover/sm:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:bg-vertical-menu-border-modern group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:group-hover/sm:bg-vertical-menu-brand group-data-[sidebar-size=sm]:my-0 group-data-[sidebar-size=sm]:rounded-b-none group-data-[layout=horizontal]:m-0 group-data-[layout=horizontal]:ltr:pr-8 group-data-[layout=horizontal]:rtl:pl-8 group-data-[layout=horizontal]:hover:bg-transparent group-data-[layout=horizontal]:[&.active]:bg-transparent [&.dropdown-button]:before:absolute [&.dropdown-button]:[&.show]:before:content-['\ea4e'] [&.dropdown-button]:before:content-['\ea6e'] [&.dropdown-button]:before:font-remix ltr:[&.dropdown-button]:before:right-2 rtl:[&.dropdown-button]:before:left-2 [&.dropdown-button]:before:text-16 group-data-[sidebar-size=sm]:[&.dropdown-button]:before:hidden group-data-[sidebar-size=md]:[&.dropdown-button]:before:hidden group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[sidebar=dark]:[&.active]:dark:bg-zink-600 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 rtl:[&.dropdown-button]:before:rotate-180 group-data-[layout=horizontal]:[&.dropdown-button]:before:rotate-90 group-data-[layout=horizontal]:[&.dropdown-button]:[&.show]:before:rotate-0 rtl:[&.dropdown-button]:[&.show]:before:rotate-0" href="/">
-                        <span class="min-w-[1.75rem] group-data-[sidebar-size=sm]:h-[1.75rem] inline-block text-start text-[16px] group-data-[sidebar-size=md]:block group-data-[sidebar-size=sm]:flex group-data-[sidebar-size=sm]:items-center"><i data-lucide="monitor-dot" class="h-4 group-data-[sidebar-size=sm]:h-5 group-data-[sidebar-size=sm]:w-5 transition group-hover/menu-link:animate-icons fill-slate-100 group-hover/menu-link:fill-blue-200 group-data-[sidebar=dark]:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:dark:fill-zink-600 group-data-[layout=horizontal]:dark:fill-zink-600 group-data-[sidebar=brand]:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:fill-vertical-menu-item-bg-active-modern group-data-[sidebar=dark]:group-hover/menu-link:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:group-hover/menu-link:dark:fill-custom-500/20 group-data-[layout=horizontal]:dark:group-hover/menu-link:fill-custom-500/20 group-data-[sidebar=brand]:group-hover/menu-link:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:group-hover/menu-link:fill-vertical-menu-item-bg-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:mx-auto group-data-[sidebar-size=md]:mb-2"></i></span> <span class="group-data-[sidebar-size=sm]:ltr:pl-10 group-data-[sidebar-size=sm]:rtl:pr-10 align-middle group-data-[sidebar-size=sm]:group-hover/sm:block group-data-[sidebar-size=sm]:hidden" data-key="t-dashboards">Dashboards</span>
+    <aside class="layout-menu menu-vertical menu active" data-simplebar="" id="layout-menu">
+        <ul class="menu-inner">
+        <li class="menu-title small text-uppercase"><span class="menu-title-text">MAIN</span></li>
+        <li class="menu-item open">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">dashboard</span>
+            <span class="title">Dashboard</span>
+            <span class="count">11</span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item"><a class="menu-link active" href="index.html">E-Commerce</a></li>
+                <li class="menu-item"><a class="menu-link" href="crm.html">CRM</a></li>
+                <li class="menu-item"><a class="menu-link" href="project-management.html">Project Management</a></li>
+                <li class="menu-item"><a class="menu-link" href="lms.html">LMS</a></li>
+                <li class="menu-item"><a class="menu-link" href="help-desk.html">Help Desk</a></li>
+                <li class="menu-item"><a class="menu-link" href="hr-management.html">HR Management</a></li>
+                <li class="menu-item"><a class="menu-link" href="school.html">School</a></li>
+                <li class="menu-item"><a class="menu-link" href="marketing.html">Marketing</a></li>
+                <li class="menu-item"><a class="menu-link" href="analytics.html">Analytics</a></li>
+                <li class="menu-item"><a class="menu-link" href="hospital.html">Hospital</a></li>
+                <li class="menu-item"><a class="menu-link" href="finance.html">Finance</a></li>
+            </ul>
+        </li>
+        <li class="menu-title small text-uppercase"><span class="menu-title-text">APPS</span></li>
+        <li class="menu-item"><a class="menu-link" href="to-do-list.html"><span class="material-symbols-outlined menu-icon">ballot</span><span class="title">To Do List</span></a></li>
+        <li class="menu-item"><a class="menu-link" href="calendar.html"><span class="material-symbols-outlined menu-icon">calendar_today</span><span class="title">Calendar</span></a></li>
+        <li class="menu-item"><a class="menu-link" href="contacts.html"><span class="material-symbols-outlined menu-icon">perm_contact_calendar</span><span class="title">Contacts</span></a></li>
+        <li class="menu-item"><a class="menu-link" href="chat.html"><span class="material-symbols-outlined menu-icon">chat</span><span class="title">Chat</span></a></li>
+        <li class="menu-item"><a class="menu-link" href="contacts.html"><span class="material-symbols-outlined menu-icon">perm_contact_calendar</span><span class="title">Contacts</span></a></li>
+        <li class="menu-item"><a class="menu-link" href="chat.html"><span class="material-symbols-outlined menu-icon">chat</span><span class="title">Chat</span></a></li>
+        <li class="menu-item"><a class="menu-link menu-toggle active" href="javascript:void(0);"><span class="material-symbols-outlined menu-icon">email</span><span class="title">Email</span><span class="count new bg-success-40 text-success-50">3</span></a></li>
+        <li class="menu-item"><a class="menu-link menu-toggle active" href="javascript:void(0);"><span class="material-symbols-outlined menu-icon">keyboard_command_key</span><span class="title">Kanban Board</span></a></li>
+        <li class="menu-item"><a class="menu-link menu-toggle active" href="javascript:void(0);"><span class="material-symbols-outlined menu-icon">keyboard_command_key</span><span class="title">Kanban Board</span></a></li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            email
+            </span>
+            <span class="title">
+            Email
+            </span>
+            <span class="count new bg-success-40 text-success-50">
+            3
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="inbox.html">
+                    Inbox
                     </a>
                 </li>
-
-                <li class="px-4 py-1 text-vertical-menu-item group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern uppercase font-medium text-[11px] cursor-default tracking-wider group-data-[sidebar-size=sm]:hidden group-data-[layout=horizontal]:hidden inline-block group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:underline group-data-[sidebar-size=md]:text-center"><span data-key="t-apps">Management</span></li>
-
-                <li class="relative group-data-[layout=horizontal]:shrink-0 group/sm">
-                    <a class="relative dropdown-button flex items-center ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 mx-3 my-1 group/menu-link text-vertical-menu-item-font-size font-normal transition-all duration-75 ease-linear rounded-md py-2.5 text-vertical-menu-item hover:text-vertical-menu-item-hover hover:bg-vertical-menu-item-bg-hover [&.active]:text-vertical-menu-item-active [&.active]:bg-vertical-menu-item-bg-active group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=dark]:hover:text-vertical-menu-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:bg-vertical-menu-item-bg-hover-dark group-data-[sidebar=dark]:dark:hover:bg-zink-600 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-item-active-dark group-data-[sidebar=dark]:[&.active]:bg-vertical-menu-item-bg-active-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-item-hover-brand group-data-[sidebar=brand]:hover:bg-vertical-menu-item-bg-hover-brand group-data-[sidebar=brand]:[&.active]:bg-vertical-menu-item-bg-active-brand group-data-[sidebar=brand]:[&.active]:text-vertical-menu-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern group-data-[sidebar=modern]:hover:bg-vertical-menu-item-bg-hover-modern group-data-[sidebar=modern]:hover:text-vertical-menu-item-hover-modern group-data-[sidebar=modern]:[&.active]:bg-vertical-menu-item-bg-active-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-item-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=sm]:group-hover/sm:w-[calc(theme('spacing.vertical-menu-sm')_*_3.63)] group-data-[sidebar-size=sm]:group-hover/sm:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:group-hover/sm:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:bg-vertical-menu-border-modern group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:group-hover/sm:bg-vertical-menu-brand group-data-[sidebar-size=sm]:my-0 group-data-[sidebar-size=sm]:rounded-b-none group-data-[layout=horizontal]:m-0 group-data-[layout=horizontal]:ltr:pr-8 group-data-[layout=horizontal]:rtl:pl-8 group-data-[layout=horizontal]:hover:bg-transparent group-data-[layout=horizontal]:[&.active]:bg-transparent [&.dropdown-button]:before:absolute [&.dropdown-button]:[&.show]:before:content-['\ea4e'] [&.dropdown-button]:before:content-['\ea6e'] [&.dropdown-button]:before:font-remix ltr:[&.dropdown-button]:before:right-2 rtl:[&.dropdown-button]:before:left-2 [&.dropdown-button]:before:text-16 group-data-[sidebar-size=sm]:[&.dropdown-button]:before:hidden group-data-[sidebar-size=md]:[&.dropdown-button]:before:hidden group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[sidebar=dark]:[&.active]:dark:bg-zink-600 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 rtl:[&.dropdown-button]:before:rotate-180 group-data-[layout=horizontal]:[&.dropdown-button]:before:rotate-90 group-data-[layout=horizontal]:[&.dropdown-button]:[&.show]:before:rotate-0 rtl:[&.dropdown-button]:[&.show]:before:rotate-0" href="#!">
-                        <span class="min-w-[1.75rem] group-data-[sidebar-size=sm]:h-[1.75rem] inline-block text-start text-[16px] group-data-[sidebar-size=md]:block group-data-[sidebar-size=sm]:flex group-data-[sidebar-size=sm]:items-center"><i data-lucide="calendar-days" class="h-4 group-data-[sidebar-size=sm]:h-5 group-data-[sidebar-size=sm]:w-5 transition group-hover/menu-link:animate-icons fill-slate-100 group-hover/menu-link:fill-blue-200 group-data-[sidebar=dark]:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:dark:fill-zink-600 group-data-[layout=horizontal]:dark:fill-zink-600 group-data-[sidebar=brand]:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:fill-vertical-menu-item-bg-active-modern group-data-[sidebar=dark]:group-hover/menu-link:fill-vertical-menu-item-bg-active-dark group-data-[sidebar=dark]:group-hover/menu-link:dark:fill-custom-500/20 group-data-[layout=horizontal]:dark:group-hover/menu-link:fill-custom-500/20 group-data-[sidebar=brand]:group-hover/menu-link:fill-vertical-menu-item-bg-active-brand group-data-[sidebar=modern]:group-hover/menu-link:fill-vertical-menu-item-bg-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:mx-auto group-data-[sidebar-size=md]:mb-2"></i></span> <span class="group-data-[sidebar-size=sm]:ltr:pl-10 group-data-[sidebar-size=sm]:rtl:pr-10 align-middle group-data-[sidebar-size=sm]:group-hover/sm:block group-data-[sidebar-size=sm]:hidden" data-key="t-calendar">Health Management</span>
+                <li class="menu-item">
+                    <a class="menu-link" href="compose.html">
+                    Compose
                     </a>
-                    <div class="dropdown-content group-data-[sidebar-size=sm]:ltr:left-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:right-vertical-menu-sm group-data-[sidebar-size=sm]:w-[calc(theme('spacing.vertical-menu-sm')_*_2.8)] group-data-[sidebar-size=sm]:absolute group-data-[sidebar-size=sm]:rounded-b-sm bg-vertical-menu group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar=dark]:dark:bg-zink-700 group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar=modern]:bg-transparent group-data-[layout=horizontal]:md:absolute group-data-[layout=horizontal]:top-full group-data-[layout=horizontal]:md:w-44 group-data-[layout=horizontal]:py-2 group-data-[layout=horizontal]:rounded-b-md group-data-[layout=horizontal]:md:shadow-lg group-data-[layout=horizontal]:md:shadow-slate-500/10 group-data-[layout=horizontal]:dark:bg-zink-700 group-data-[layout=horizontal]:dark:md:shadow-zink-600/20 hidden group-data-[sidebar-size=sm]:hidden group-data-[sidebar-size=sm]:group-hover/sm:block group-data-[sidebar-size=sm]:ltr:rounded-br-md group-data-[sidebar-size=sm]:rtl:rounded-br-md group-data-[sidebar-size=sm]:shadow-lg group-data-[sidebar-size=sm]:shadow-slate-700/10 group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:to-vertical-menu-to-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:from-vertical-menu-from-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:bg-gradient-to-tr">
-                        <ul class="ltr:pl-[1.75rem] rtl:pr-[1.75rem] group-data-[sidebar-size=md]:ltr:pl-0 group-data-[sidebar-size=md]:rtl:pr-0 group-data-[sidebar-size=sm]:ltr:pl-0 group-data-[sidebar-size=sm]:rtl:pr-0 group-data-[sidebar-size=sm]:py-2 group-data-[layout=horizontal]:ltr:pl-0 group-data-[layout=horizontal]:rtl:pr-0">
-                            <li>
-                                <a href="" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark]:text-vertical-menu-sub-item-dark group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:text-vertical-menu-sub-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-sub-item-active-dark group-data-[sidebar=dark]:dark:[&.active]:text-custom-500 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 group-data-[sidebar=dark]:before:bg-vertical-menu-sub-item-dark/50 group-data-[sidebar=dark]:hover:before:bg-vertical-menu-sub-item-hover-dark group-data-[sidebar=dark]:dark:hover:before:bg-custom-500 group-data-[sidebar=dark]:[&.active]:before:bg-vertical-menu-sub-item-active-dark group-data-[sidebar=dark]:dark:[&.active]:before:bg-custom-500 group-data-[sidebar=brand]:text-vertical-menu-sub-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-sub-item-hover-brand group-data-[sidebar=brand]:before:bg-vertical-menu-sub-item-brand/80 group-data-[sidebar=brand]:hover:before:bg-vertical-menu-sub-item-hover-brand/80 group-data-[sidebar=brand]:[&.active]:before:bg-vertical-menu-sub-item-active-brand/80 group-data-[sidebar=brand]:[&.active]:text-vertical-menu-sub-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-sub-item-modern group-data-[sidebar=modern]:before:bg-vertical-menu-sub-item-modern/70 group-data-[sidebar=modern]:hover:text-vertical-menu-sub-item-hover-modern group-data-[sidebar=modern]:before:hover:bg-vertical-menu-sub-item-hover-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-sub-item-active-modern group-data-[sidebar=modern]:before:[&.active]:text-vertical-menu-sub-item-active-modern group-data-[sidebar-size=md]:before:hidden group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=md]:block group-data-[sidebar-size=sm]:before:hidden group-data-[layout=horizontal]:before:left-[1.4rem] group-data-[layout=horizontal]:md:before:hidden group-data-[layout=horizontal]:ltr:pl-10 group-data-[layout=horizontal]:rtl:pr-10 group-data-[layout=horizontal]:ltr:pr-5 group-data-[layout=horizontal]:rtl:pl-5 group-data-[layout=horizontal]:md:!px-5" data-key="t-default"> Weight </a>
-                            </li>
-                            <li>
-                                <a href="" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark]:text-vertical-menu-sub-item-dark group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:text-vertical-menu-sub-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-sub-item-active-dark group-data-[sidebar=dark]:dark:[&.active]:text-custom-500 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 group-data-[sidebar=dark]:before:bg-vertical-menu-sub-item-dark/50 group-data-[sidebar=dark]:hover:before:bg-vertical-menu-sub-item-hover-dark group-data-[sidebar=dark]:dark:hover:before:bg-custom-500 group-data-[sidebar=dark]:[&.active]:before:bg-vertical-menu-sub-item-active-dark group-data-[sidebar=dark]:dark:[&.active]:before:bg-custom-500 group-data-[sidebar=brand]:text-vertical-menu-sub-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-sub-item-hover-brand group-data-[sidebar=brand]:before:bg-vertical-menu-sub-item-brand/80 group-data-[sidebar=brand]:hover:before:bg-vertical-menu-sub-item-hover-brand/80 group-data-[sidebar=brand]:[&.active]:before:bg-vertical-menu-sub-item-active-brand/80 group-data-[sidebar=brand]:[&.active]:text-vertical-menu-sub-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-sub-item-modern group-data-[sidebar=modern]:before:bg-vertical-menu-sub-item-modern/70 group-data-[sidebar=modern]:hover:text-vertical-menu-sub-item-hover-modern group-data-[sidebar=modern]:before:hover:bg-vertical-menu-sub-item-hover-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-sub-item-active-modern group-data-[sidebar=modern]:before:[&.active]:text-vertical-menu-sub-item-active-modern group-data-[sidebar-size=md]:before:hidden group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=md]:block group-data-[sidebar-size=sm]:before:hidden group-data-[layout=horizontal]:before:left-[1.4rem] group-data-[layout=horizontal]:md:before:hidden group-data-[layout=horizontal]:ltr:pl-10 group-data-[layout=horizontal]:rtl:pr-10 group-data-[layout=horizontal]:ltr:pr-5 group-data-[layout=horizontal]:rtl:pl-5 group-data-[layout=horizontal]:md:!px-5" data-key="t-month-grid"> Height </a>
-                            </li>
-                        </ul>
-                    </div>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="read-email.html">
+                    Read
+                    </a>
                 </li>
             </ul>
-        </div>
-        <!-- Sidebar -->
-    </div>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="kanban-board.html">
+            <span class="material-symbols-outlined menu-icon">
+            keyboard_command_key
+            </span>
+            <span class="title">
+            Kanban Board
+            </span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            insert_drive_file
+            </span>
+            <span class="title">
+            File Manager
+            </span>
+            <span class="count new bg-danger-40 text-danger-50">
+            7
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="my-drive.html">
+                    My Drive
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="assets.html">
+                    Assets
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="projects-file.html">
+                    Projects
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="personal.html">
+                    Personal
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="applications.html">
+                    Applications
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="documents.html">
+                    Documents
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="media.html">
+                    Media
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-title small text-uppercase">
+            <span class="menu-title-text">
+            PAGES
+            </span>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            shopping_cart
+            </span>
+            <span class="title">
+            E-Commerce
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="products-grid.html">
+                    Products Grid
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="products-list.html">
+                    Products List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="product-details.html">
+                    Product Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-product.html">
+                    Create Product
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="edit-product.html">
+                    Edit Product
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="cart.html">
+                    Cart
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="checkout.html">
+                    Checkout
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="orders.html">
+                    Orders
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="order-details.html">
+                    Order Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-order.html">
+                    Create Order
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="order-tracking.html">
+                    Order Tracking
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="customers.html">
+                    Customers
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="customer-details.html">
+                    Customer Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="categories.html">
+                    Categories
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-category.html">
+                    Create Category
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="edit-category.html">
+                    Edit Category
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="sellers.html">
+                    Sellers
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="seller-details.html">
+                    Seller Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-seller.html">
+                    Create Seller
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="reviews.html">
+                    Reviews
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="refunds.html">
+                    Refunds
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            handshake
+            </span>
+            <span class="title">
+            CRM
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="contacts-crm.html">
+                    Contacts
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-contact.html">
+                    Create Contact
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="customers-crm.html">
+                    Customers
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="leads.html">
+                    Leads
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-lead.html">
+                    Create Lead
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="deals.html">
+                    Deals
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            description
+            </span>
+            <span class="title">
+            Project Management
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="project-overview.html">
+                    Project Overview
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="projects-list.html">
+                    Projects List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-project.html">
+                    Create Project
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="clients.html">
+                    Clients
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="teams.html">
+                    Teams
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="kanban-board-project.html">
+                    Kanban Board
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="users.html">
+                    Users
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-user.html">
+                    Create User
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            auto_stories
+            </span>
+            <span class="title">
+            LMS
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="courses-list.html">
+                    Courses List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="course-details.html">
+                    Course Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-course.html">
+                    Create Course
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="edit-course.html">
+                    Edit Course
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="instructors.html">
+                    Instructors
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            support
+            </span>
+            <span class="title">
+            Help Desk
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="tickets.html">
+                    Tickets
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="ticket-details.html">
+                    Ticket Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="agents.html">
+                    Agents
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="reports.html">
+                    Reports
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            clinical_notes
+            </span>
+            <span class="title">
+            HR Management
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="employee-list.html">
+                    Employee List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-new-employee.html">
+                    Add New Employee
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="employee-leave.html">
+                    Employee Leave
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-leave.html">
+                    Add Leave
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="school-attendance.html">
+                    Attendance
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="departments.html">
+                    Departments
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-departments.html">
+                    Add Departments
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="holidays.html">
+                    Holidays
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="employee-salary.html">
+                    Employee Salary
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-payslip.html">
+                    Create Payslip
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            school
+            </span>
+            <span class="title">
+            School
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="student-list.html">
+                    Student List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-student.html">
+                    Add Student
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="teacher-list.html">
+                    Teacher List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-teacher.html">
+                    Add Teacher
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="staff-list.html">
+                    Staff List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-staff.html">
+                    Add Staff
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="all-courses.html">
+                    All Courses
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-course.html">
+                    Add Course
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="fees-collection.html">
+                    Fees collection
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-fees.html">
+                    Add Fees
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="school-attendance.html">
+                    Attendance
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="library.html">
+                    Library
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-library-book.html">
+                    Add Library Book
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            home_health
+            </span>
+            <span class="title">
+            Hospital
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="patients.html">
+                    Patients
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="patient-details.html">
+                    Patient Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="doctors.html">
+                    Doctors
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="doctor-details.html">
+                    Doctor Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="all-schedule.html">
+                    All Schedule
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="book-appointments.html">
+                    Book Appointments
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            local_activity
+            </span>
+            <span class="title">
+            Events
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="events.html">
+                    Events
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="event-details.html">
+                    Event Details
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="create-an-event.html">
+                    Create An Event
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="edit-an-event.html">
+                    Edit An Event
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            share
+            </span>
+            <span class="title">
+            Social
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="profile.html">
+                    Profile
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="settings.html">
+                    Settings
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            content_paste
+            </span>
+            <span class="title">
+            Invoices
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="invoices.html">
+                    Invoices
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="invoice-details.html">
+                    Invoice Details
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            person
+            </span>
+            <span class="title">
+            Users
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="team-members.html">
+                    Team Members
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="users-list.html">
+                    Users List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="add-user.html">
+                    Add User
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            account_box
+            </span>
+            <span class="title">
+            Profile
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="user-profile.html">
+                    User Profile
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="teams2.html">
+                    Teams
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="projects.html">
+                    Projects
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="starter.html">
+            <span class="material-symbols-outlined menu-icon">
+            star_border
+            </span>
+            <span class="title">
+            Starter
+            </span>
+            </a>
+        </li>
+        <li class="menu-title small text-uppercase">
+            <span class="menu-title-text">
+            MODULES
+            </span>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            emoji_emotions
+            </span>
+            <span class="title">
+            Icons
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="material-symbols.html">
+                    Material Symbols
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="remix-icon.html">
+                    RemixIcon
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            qr_code_scanner
+            </span>
+            <span class="title">
+            UI Elements
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="alerts.html">
+                    Alerts
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="avatar.html">
+                    Avatar
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="buttons.html">
+                    Buttons
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="cards.html">
+                    Cards
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="carousels.html">
+                    Carousels
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="dropdowns.html">
+                    Dropdowns
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="grids.html">
+                    Grids
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="images.html">
+                    Images
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="list.html">
+                    List
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="modals.html">
+                    Modals
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="navs.html">
+                    Navs
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="paginations.html">
+                    Pagination's
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="progress.html">
+                    Progress
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="spinners.html">
+                    Spinners
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="tabs.html">
+                    Tabs
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="accordions.html">
+                    Accordions
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="date-time-picker.html">
+                    Date Time Picker
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="videos.html">
+                    Videos
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            table_chart
+            </span>
+            <span class="title">
+            Tables
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="basic-table.html">
+                    Basic Table
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="data-table.html">
+                    Data Table
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            forum
+            </span>
+            <span class="title">
+            Forms
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="basic-elements.html">
+                    Basic Elements
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="advanced-elements.html">
+                    Advanced Elements
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="validation.html">
+                    Validation
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="wizard.html">
+                    Wizard
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="editors.html">
+                    Editors
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="file-uploader.html">
+                    File Uploader
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            pie_chart
+            </span>
+            <span class="title">
+            ApexCharts
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="line.html">
+                    Line
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="area.html">
+                    Area
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="column.html">
+                    Column
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="mixed.html">
+                    Mixed
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="radial-bar.html">
+                    RadialBar
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="radar.html">
+                    Radar
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="pie.html">
+                    Pie
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="polar.html">
+                    Polar
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="more.html">
+                    More
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            lock_open
+            </span>
+            <span class="title">
+            Authentication
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="sign-in.html">
+                    Sign In
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="sign-up.html">
+                    Sign Up
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="forgot-password.html">
+                    Forgot Password
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="reset-password.html">
+                    Reset Password
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="confirm-email.html">
+                    Confirm Email
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="lock-screen.html">
+                    Lock Screen
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="logout.html">
+                    Logout
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            content_copy
+            </span>
+            <span class="title">
+            Extra Pages
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="pricing.html">
+                    Pricing
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="timeline.html">
+                    Timeline
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="faq.html">
+                    FAQ
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="gallery.html">
+                    Gallery
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="testimonials.html">
+                    Testimonials
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="search.html">
+                    Search
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="coming-soon.html">
+                    Coming Soon
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="blank-page.html">
+                    Blank Page
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            error
+            </span>
+            <span class="title">
+            Errors
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="404-error-page.html">
+                    404 Error Page
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="internal-error.html">
+                    Internal Error
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="widgets.html">
+            <span class="material-symbols-outlined menu-icon">
+            widgets
+            </span>
+            <span class="title">
+            Widgets
+            </span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="maps.html">
+            <span class="material-symbols-outlined menu-icon">
+            map
+            </span>
+            <span class="title">
+            Maps
+            </span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="notifications.html">
+            <span class="material-symbols-outlined menu-icon">
+            notifications
+            </span>
+            <span class="title">
+            Notifications
+            </span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="members.html">
+            <span class="material-symbols-outlined menu-icon">
+            people
+            </span>
+            <span class="title">
+            Members
+            </span>
+            </a>
+        </li>
+        <li class="menu-title small text-uppercase">
+            <span class="menu-title-text">
+            OTHERS
+            </span>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="my-profile.html">
+            <span class="material-symbols-outlined menu-icon">
+            account_circle
+            </span>
+            <span class="title">
+            My Profile
+            </span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            settings
+            </span>
+            <span class="title">
+            Settings
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a class="menu-link" href="account-settings.html">
+                    Account Settings
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="change-password.html">
+                    Change Password
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="connections.html">
+                    Connections
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="privacy-policy.html">
+                    Privacy Policy
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="terms-conditions.html">
+                    Terms &amp; Conditions
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <span class="material-symbols-outlined menu-icon">
+            keyboard_arrow_down
+            </span>
+            <span class="title">
+            Multi Level Menu
+            </span>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item after-sub-menu menu-level">
+                    <a class="menu-link menu-toggle" href="javascript:void(0);">
+                    <span class="title">
+                    Level One
+                    </span>
+                    </a>
+                    <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                        Level Three
+                        </a>
+                    </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-link" href="logout.html">
+            <span class="material-symbols-outlined menu-icon">
+            logout
+            </span>
+            <span class="title">
+            Logout
+            </span>
+            </a>
+        </li>
+        </ul>
+    </aside>
 </div>

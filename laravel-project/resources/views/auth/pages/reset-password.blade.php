@@ -17,7 +17,28 @@
                     </div>
                     <form id="resetPasswordForm" action="{{ route('password.update', $token) }}" method="POST">
                         @csrf
-                        <input type="hidden" name="email" value="{{ $email ?? old('email') }}">
+                        <div class="mb-20">
+                            <label class="label fs-16 mb-2">Username <span class="text-danger">*</span></label>
+                            <div class="form-floating">
+                                <input class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Enter your username"
+                                    type="text" value="{{ $username }}" readonly />
+                                <label for="username">Enter your username</label>
+                            </div>
+                            @error('username')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-20">
+                            <label class="label fs-16 mb-2">Email Address <span class="text-danger">*</span></label>
+                            <div class="form-floating">
+                                <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter your email address"
+                                    type="email" value="{{ $email }}" readonly />
+                                <label for="email">Enter your email address</label>
+                            </div>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">
                                 Password <span class="text-danger">*</span>
