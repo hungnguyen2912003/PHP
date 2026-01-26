@@ -26,4 +26,15 @@ class ResetPasswordRequest extends FormRequest
             'password_confirmation' => 'required|min:6',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'password.required' => 'Password is required.',
+            'password.min' => 'Password must be at least 6 characters.',
+            'password.confirmed' => 'Password confirmation does not match.',
+            'password_confirmation.required' => 'Password confirmation is required.',
+            'password_confirmation.min' => 'Password confirmation must be at least 6 characters.',
+        ];
+    }
 }

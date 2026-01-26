@@ -26,7 +26,7 @@
                                 Username or Email Address <span class="text-danger">*</span>
                             </label>
                             <div class="form-floating">
-                                <input class="form-control" id="login" placeholder="Enter your username or email address"
+                                <input class="form-control @error('login') is-invalid @enderror" id="login" placeholder="Enter your username or email address"
                                     type="text" name="login" />
                                 <label for="login">
                                     Enter your username or email address
@@ -42,7 +42,7 @@
                             </label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password" placeholder="Enter your password"
+                                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" placeholder="Enter your password"
                                         type="password" name="password" id="password" />
                                     <label for="password">Enter your password</label>
                                     <i aria-hidden="true"
@@ -70,9 +70,10 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <button class="btn btn-primary fw-normal text-white w-100"
+                            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
                                 style="padding-top: 18px; padding-bottom: 18px;" type="submit">
-                                Sign In
+                                <span id="btnText">Sign In</span>
+                                <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                             </button>
                         </div>
                         <div class="position-relative text-center z-1 mb-12">

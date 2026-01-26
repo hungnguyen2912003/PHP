@@ -28,4 +28,22 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name is required.',
+            'name.max' => 'Name must be at most 255 characters.',
+            'username.required' => 'Username is required.',
+            'username.max' => 'Username must be at most 255 characters.',
+            'username.unique' => 'This username is already taken.',
+            'email.required' => 'Email is required.',
+            'email.max' => 'Email must be at most 255 characters.',
+            'email.email' => 'Email must be a valid email address.',
+            'email.unique' => 'This email is already registered.',
+            'password.required' => 'Password is required.',
+            'password.min' => 'Password must be at least 6 characters.',
+            'password.confirmed' => 'Password confirmation does not match.',
+        ];
+    }
 }

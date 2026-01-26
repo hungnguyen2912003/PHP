@@ -605,9 +605,12 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
     public static $classMap = array (
         'App\\Http\\Controllers\\Client\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Requests\\Auth\\ForgotPaswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/ForgotPaswordRequest.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\Auth\\RegisterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/RegisterRequest.php',
+        'App\\Http\\Requests\\Auth\\ResetPasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/ResetPasswordRequest.php',
         'App\\Mail\\ActivationMail' => __DIR__ . '/../..' . '/app/Mail/ActivationMail.php',
+        'App\\Mail\\ForgotPasswordMail' => __DIR__ . '/../..' . '/app/Mail/ForgotPasswordMail.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Role_Permission' => __DIR__ . '/../..' . '/app/Models/Role_Permission.php',

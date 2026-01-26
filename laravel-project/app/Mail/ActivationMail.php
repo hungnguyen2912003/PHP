@@ -15,14 +15,16 @@ class ActivationMail extends Mailable
 
     public $token;
     public $user;
+    public $expires_in;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($token, $user)
+    public function __construct($token, $user, $expires_in)
     {
         $this->token = $token;
         $this->user = $user;
+        $this->expires_in = $expires_in;
     }
 
     /**
@@ -31,7 +33,7 @@ class ActivationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Activation Your Account',
+            subject: 'Activate Your Account',
         );
     }
 
@@ -41,11 +43,10 @@ class ActivationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'client.emails.activation',
+            view: 'auth.emails.activation',
             with: [
                 'activation_url' => route('activate', ['token' => $this->token, 'email' => $this->user->email]),
-                'expires_in' => '24 hours',
-                'support_url' => url('/'),
+                'expires_in' => $this->expires_in,
                 'year' => date('Y'),
             ],
         );

@@ -24,7 +24,7 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Name <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="name" id="name" placeholder="Enter your name" type="text"
+                                <input class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Enter your name" type="text"
                                     value="{{ old('name') }}" />
                                 <label for="name">Enter your name</label>
                             </div>
@@ -35,7 +35,7 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Username <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="username" id="username" placeholder="Enter your username"
+                                <input class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Enter your username"
                                     type="text" value="{{ old('username') }}" />
                                 <label for="username">Enter your username</label>
                             </div>
@@ -46,7 +46,7 @@
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Email Address <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control" name="email" id="email" placeholder="Enter your email address"
+                                <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter your email address"
                                     type="email" value="{{ old('email') }}" />
                                 <label for="email">Enter your email address</label>
                             </div>
@@ -58,7 +58,7 @@
                             <label class="label fs-16 mb-2">Password <span class="text-danger">*</span></label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password" name="password" id="password"
+                                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" name="password" id="password"
                                         placeholder="Enter password" type="password" />
                                     <label for="password">Enter password</label>
                                     <i aria-hidden="true"
@@ -75,7 +75,7 @@
                             <label class="label fs-16 mb-2">Confirm Password <span class="text-danger">*</span></label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password" name="password_confirmation"
+                                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
                                         id="password_confirmation" placeholder="Enter confirm password" type="password" />
                                     <label for="password_confirmation">Enter confirm password</label>
                                     <i aria-hidden="true"
@@ -89,9 +89,10 @@
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <button class="btn btn-primary fw-normal text-white w-100"
+                            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
                                 style="padding-top: 18px; padding-bottom: 18px;" type="submit">
-                                Sign Up
+                                <span id="btnText">Sign Up</span>
+                                <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                             </button>
                         </div>
                         <div class="position-relative text-center z-1 mb-12">

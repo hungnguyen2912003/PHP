@@ -20,20 +20,24 @@
                         @csrf
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">
-                                Email Address
+                                Email Address <span class="text-danger">*</span>
                             </label>
                             <div class="form-floating">
-                                <input class="form-control" id="email" placeholder="Enter email address *" type="email"
+                                <input class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email address *" type="email"
                                     name="email" value="{{ old('email') }}" />
                                 <label for="email">
-                                    Enter email address *
+                                    Enter your email address
                                 </label>
                             </div>
+                            @error('email')
+                                <span class="text-danger mt-2">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-20">
-                            <button class="btn btn-primary fw-normal text-white w-100"
+                            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
                                 style="padding-top: 18px; padding-bottom: 18px;" type="submit">
-                                Send
+                                <span id="btnText">Send</span>
+                                <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                             </button>
                         </div>
                         <a class="text-decoration-none fs-16 text-primary d-flex align-items-center gap-1 justify-content-center"

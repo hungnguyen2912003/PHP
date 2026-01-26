@@ -15,18 +15,18 @@
                             Enter your new password and confirm it another time in the field below.
                         </p>
                     </div>
-                    <form id="resetPasswordForm" action="{{ route('reset-password.post', $token) }}" method="POST">
+                    <form id="resetPasswordForm" action="{{ route('password.update', $token) }}" method="POST">
                         @csrf
                         <input type="hidden" name="email" value="{{ $email ?? old('email') }}">
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">
-                                Password
+                                Password <span class="text-danger">*</span>
                             </label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password" placeholder="Enter password *"
+                                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" placeholder="Enter password *"
                                         type="password" name="password" id="password" />
-                                    <label for="password">Enter password *</label>
+                                    <label for="password">Enter new password</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
                                         style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
@@ -36,13 +36,13 @@
                         </div>
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">
-                                Password
+                                Confirm Password <span class="text-danger">*</span>
                             </label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password" placeholder="Enter password *"
+                                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror" placeholder="Enter password *"
                                         type="password" name="password_confirmation" id="password_confirmation" />
-                                    <label for="password_confirmation">Confirm Password *</label>
+                                    <label for="password_confirmation">Confirm new password</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
                                         style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
@@ -51,9 +51,10 @@
                             </div>
                         </div>
                         <div class="mb-20">
-                            <button class="btn btn-primary fw-normal text-white w-100"
+                            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
                                 style="padding-top: 18px; padding-bottom: 18px;" type="submit">
-                                Send
+                                <span id="btnText">Reset Password</span>
+                                <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                             </button>
                         </div>
                         <a class="text-decoration-none fs-16 text-primary d-flex align-items-center gap-1 justify-content-center"

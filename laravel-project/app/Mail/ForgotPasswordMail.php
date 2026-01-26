@@ -18,10 +18,15 @@ class ForgotPasswordMail extends Mailable
      */
     public $token;
     public $email;
-    public function __construct($token, $email)
+    public $user;
+    public $expires_in;
+
+    public function __construct($token, $email, $user, $expires_in)
     {
         $this->token = $token;
         $this->email = $email;
+        $this->user = $user;
+        $this->expires_in = $expires_in;
     }
 
     /**
@@ -30,7 +35,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Forgot Password Mail',
+            subject: 'Forgot Password',
         );
     }
 
@@ -40,10 +45,11 @@ class ForgotPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'auth.mail.forgot-password',
+            view: 'auth.emails.forgot-password',
             with: [
-                'token' => $this->token,
-                'email' => $this->email,
+                'reset_url' => route('password.reset', ['token' => $this->token, 'email' => $this->email]),
+                'expires_in' => $this->expires_in,
+                'year' => date('Y'),
             ],
         );
     }

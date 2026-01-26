@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Role;
 
@@ -40,6 +41,9 @@ class AuthController extends Controller
 
         $role = Role::where('name', 'User')->first();
 
+        //Create activation token
+        $activation_token = Str::random(64);
+
         //Create new user
         $user = User::create([
             'name' => $request->name,
@@ -48,56 +52,41 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => $role->id,
             'status' => 'pending',
-        ]);
-
-        // Create activation token
-        $activation_token = Str::random(64);
-        \DB::table('activation_tokens')->insert([
-            'email' => $user->email,
-            'token' => $activation_token,
-            'created_at' => now(),
+            'activation_token' => $activation_token,
+            'activation_token_sent_at' => Carbon::now(),
         ]);
 
         //Send activation email
-        Mail::to($user->email)->send(new ActivationMail($activation_token, $user));
+        Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         //Success message
-        toastr()->success('User registered successfully. Please check your email for activation link (valid for 24h).');
+        toastr()->success('User registered successfully. Please check your email for activation link');
         return redirect()->route('login');
 
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Activate
-    public function activate(Request $request, $token)
+    public function activate($token)
     {
-        $email = $request->query('email');
-        if (!$email) {
-            toastr()->error('Invalid activation link (missing email).');
+        $user = User::where('activation_token', $token)->first();
+
+        if (!$user) {
+            toastr()->error('Invalid activation token. Please register again.');
             return redirect()->route('login');
         }
 
-        $activationRecord = \DB::table('activation_tokens')->where([
-            'email' => $email,
-            'token' => $token
-        ])->first();
-
-        if ($activationRecord && \Carbon\Carbon::parse($activationRecord->created_at)->addHours(24)->isFuture()) {
-
-            $user = User::where('email', $email)->first();
-            if ($user) {
-                $user->status = 'active';
-                $user->save();
-
-                // Delete the token
-                \DB::table('activation_tokens')->where(['email' => $email])->delete();
-
-                toastr()->success('User activated successfully.');
-                return redirect()->route('login');
-            }
+        if ($user->activation_token_sent_at->addMinutes(30)->isPast()) {
+            toastr()->error('Your activation token has expired. Please register again.');
+            return redirect()->route('login');
         }
 
-        toastr()->error('Invalid or expired activation token.');
+        $user->activation_token = null;
+        $user->activation_token_sent_at = null;
+        $user->status = 'active';
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+        toastr()->success('Your account has been activated successfully.');
         return redirect()->route('login');
     }
 
@@ -122,28 +111,15 @@ class AuthController extends Controller
         // Attempt Web Session Login
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
             if (in_array($user->role->name, ['Admin', 'User'])) {
-
-                // Generate JWT Token
-                $token = auth('api')->login($user);
-
-                // Create HTTP-Only Cookie (1 day duration)
-                $cookie = cookie('jwt_token', $token, 60 * 24, null, null, false, true);
-
+                $user->last_login_at = Carbon::now();
+                $user->save();
                 toastr()->success('Login successfully.');
-                return redirect()->route('home')->withCookie($cookie);
+                return redirect()->route('home');
             }
 
             toastr()->warning('You are not authorized to access this page.');
             Auth::logout();
-            return redirect()->route('login');
-        }
-
-        // Check if user is pending (for better error message)
-        $user = User::where($login, $request->login)->first();
-        if ($user && $user->isPending()) {
-            toastr()->warning('Your account is pending approval. Please check your email for activation link.');
             return redirect()->route('login');
         }
 
@@ -157,11 +133,8 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        // Remove JWT Cookie
-        $cookie = cookie()->forget('jwt_token');
-
         toastr()->success('Logout successfully.');
-        return redirect()->route('login')->withCookie($cookie);
+        return redirect()->route('login');
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -181,14 +154,14 @@ class AuthController extends Controller
                 ['email' => $request->email],
                 [
                     'email' => $request->email,
-                    'token' => $token,
-                    'created_at' => now()
+                    'token' => Hash::make($token),
+                    'created_at' => Carbon::now()
                 ]
             );
 
-            Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email));
+            Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email, $user, Carbon::now()->addMinutes(60)));
 
-            toastr()->success('Password reset link has been sent to your email (valid for 60 mins).');
+            toastr()->success('Password reset link has been sent to your email.');
             return redirect()->route('login');
         }
 
@@ -205,17 +178,22 @@ class AuthController extends Controller
 
     public function resetPassword(ResetPasswordRequest $request, $token)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
+        $reset = \DB::table('password_reset_tokens')->where('email', $request->email)->first();
 
-        $resetRecord = \DB::table('password_reset_tokens')->where([
-            'email' => $request->email,
-            'token' => $token,
-        ])->first();
+        // Check if token exists
+        if (!$reset) {
+            toastr()->error('Invalid token.');
+            return redirect()->route('login');
+        }
 
-        // Check if token exists and is not expired (60 mins)
-        if ($resetRecord && \Carbon\Carbon::parse($resetRecord->created_at)->addMinutes(60)->isFuture()) {
+        // Check if token is expired (60 mins)
+        if ($reset && Carbon::parse($reset->created_at)->addMinutes(60)->isPast()) {
+            toastr()->error('Token has expired. Please request a new one.');
+            return redirect()->route('login');
+        }
+
+        // Check if token is valid
+        if ($reset && Hash::check($token, $reset->token)) {
 
             $user = User::where('email', $request->email)->first();
             $user->update(['password' => Hash::make($request->password)]);
@@ -226,8 +204,5 @@ class AuthController extends Controller
             toastr()->success('Password reset successfully. You can now login with your new password.');
             return redirect()->route('login');
         }
-
-        toastr()->error('Invalid or expired reset token.');
-        return redirect()->route('login');
     }
 }

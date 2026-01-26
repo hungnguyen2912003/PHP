@@ -19,6 +19,11 @@
     <title>
         @yield('title')
     </title>
+    <style>
+        .password-wrapper .form-control.is-invalid ~ .password-toggle-icon {
+            right: 45px !important;
+        }
+    </style>
 </head>
 
 <body class="bg-body-bg">

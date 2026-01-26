@@ -22,7 +22,16 @@ class ForgotPaswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email,status,active',
+            'email' => 'required|email|exists:users,email',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Email must be a valid email address.',
+            'email.exists' => 'Email does not exist.',
         ];
     }
 }

@@ -7,31 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
-
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [
-            'role' => $this->role->name,
-        ];
-    }
     use HasFactory, HasUuids;
     protected $fillable = [
         'name',
@@ -45,6 +22,15 @@ class User extends Authenticatable implements JWTSubject
         'role_id',
         'google_id',
         'activation_token',
+        'activation_token_sent_at',
+        'email_verified_at',
+        'last_login_at',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'activation_token_sent_at' => 'datetime',
+        'last_login_at' => 'datetime',
     ];
 
     public function role()

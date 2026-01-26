@@ -8,9 +8,12 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Http\\Controllers\\Client\\AuthController' => $baseDir . '/app/Http/Controllers/Client/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Requests\\Auth\\ForgotPaswordRequest' => $baseDir . '/app/Http/Requests/Auth/ForgotPaswordRequest.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\Auth\\RegisterRequest' => $baseDir . '/app/Http/Requests/Auth/RegisterRequest.php',
+    'App\\Http\\Requests\\Auth\\ResetPasswordRequest' => $baseDir . '/app/Http/Requests/Auth/ResetPasswordRequest.php',
     'App\\Mail\\ActivationMail' => $baseDir . '/app/Mail/ActivationMail.php',
+    'App\\Mail\\ForgotPasswordMail' => $baseDir . '/app/Mail/ForgotPasswordMail.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\Role_Permission' => $baseDir . '/app/Models/Role_Permission.php',
