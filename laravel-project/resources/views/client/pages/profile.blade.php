@@ -58,8 +58,13 @@
                                 </a>
                             </span>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-sm-4">
+                    </div>                    
+                    <div class="d-flex align-items-center mb-sm-4 gap-2">
+                        @if($user->status === 'pending')
+                        <a href="" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
+                            <i class="ri-error-warning-line"></i> Activate your account
+                        </a>
+                        @endif
                         <a href="{{ route('setting.index') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
                             Settings
                         </a>
