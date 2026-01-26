@@ -112,19 +112,6 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            if ($user->status !== 'active') {
-                Auth::logout();
-                flash()->warning('Your account is not active.');
-                return redirect()->route('login');
-            }
-
-            $roleName = optional($user->role)->name;
-            if (!in_array($roleName, ['Admin', 'User'])) {
-                Auth::logout();
-                flash()->warning('You are not authorized to access this page.');
-                return redirect()->route('login');
-            }
-
             $user->last_login_at = Carbon::now();
             $user->save();
             flash()->success('Login successfully.');

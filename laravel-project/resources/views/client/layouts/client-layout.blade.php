@@ -33,6 +33,7 @@
                 <!-- Start Main Content -->
                 @yield('content')
                 <!-- End Main Content -->
+                <div class="flex-grow-1"></div>
                 <!-- Start Footer Area -->
                 @include('client.partials.footer')
                 <!-- End Footer Area -->

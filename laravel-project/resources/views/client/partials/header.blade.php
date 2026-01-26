@@ -121,81 +121,68 @@
                     </button>
                 </div>
             </li>
-            <li class="header-right-item calendar-item">
-                <div class="dropdown notifications">
-                    <a class="btn btn-secondary border-0 p-0 position-relative" href="calendar.html">
-                    <span class="material-symbols-outlined" style="font-size: 19px;">calendar_today</span>
-                    </a>
-                </div>
-            </li>
-            <li class="header-right-item">
-                <div class="dropdown admin-profile">
-                    <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor dropdown-toggle" data-bs-toggle="dropdown">
-                        <div class="flex-shrink-0 position-relative">
-                        <img alt="admin" class="rounded-circle admin-img-width-for-mobile" src="{{ asset('assets/client/images/admin.png') }}" style="width: 40px; height: 40px;"/>
-                        <span class="d-block bg-success-60 border border-2 border-white rounded-circle position-absolute end-0 bottom-0" style="width: 11px; height: 11px;">
-                        </span>
+            @php
+                $user = Auth::guard('web')->user();
+            @endphp
+            @if($user)
+                <li class="header-right-item border-0">
+                    <div class="dropdown admin-profile">
+                        <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor dropdown-toggle" data-bs-toggle="dropdown">
+                            <div class="flex-shrink-0 position-relative">
+                                <img alt="admin" class="rounded-circle admin-img-width-for-mobile" src="{{ $user->avatar ? asset($user->avatar) : asset('images/user.png') }}" style="width: 40px; height: 40px;"/>
+                                <span class="d-block bg-success-60 border border-2 border-white rounded-circle position-absolute end-0 bottom-0" style="width: 11px; height: 11px;">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu border-0 bg-white dropdown-menu-end">
+                            <div class="d-flex align-items-center info">
+                                <div class="flex-shrink-0">
+                                    <img alt="admin" class="rounded-circle admin-img-width-for-mobile" src="{{ $user->avatar ? asset($user->avatar) : asset('images/user.png') }}" style="width: 40px; height: 40px;"/>
+                                </div>
+                                <div class="flex-grow-1 ms-10">
+                                    <h3 class="fw-medium fs-17 mb-0">
+                                        {{ $user->name }}
+                                    </h3>
+                                    <span class="fs-15 fw-medium">
+                                        Role: {{ optional($user->role)->name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <ul class="admin-link mb-0 list-unstyled">
+                                <li>
+                                    <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="{{ route('profile') }}">
+                                        <i class="material-symbols-outlined">person</i>
+                                        <span class="ms-2">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="{{ route('setting.index') }}">
+                                        <i class="material-symbols-outlined">settings</i>
+                                        <span class="ms-2">Settings</span>
+                                    </a>
+                                </li>
+                                {{-- <li>
+                                    <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="#">
+                                        <i class="material-symbols-outlined">info</i>
+                                        <span class="ms-2">Support</span>
+                                    </a>
+                                </li> --}}
+                                <li>
+                                    <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="{{ route('logout') }}">
+                                        <i class="material-symbols-outlined">logout</i>
+                                        <span class="ms-2">Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="dropdown-menu border-0 bg-white dropdown-menu-end">
-                        <div class="d-flex align-items-center info">
-                        <div class="flex-shrink-0">
-                            <img alt="admin" class="rounded-circle admin-img-width-for-mobile" src="{{ asset('assets/client/images/admin.png') }}" style="width: 40px; height: 40px;"/>
-                        </div>
-                        <div class="flex-grow-1 ms-10">
-                            <h3 class="fw-medium fs-17 mb-0">
-                                Tên user
-                            </h3>
-                            <span class="fs-15 fw-medium">
-                            Vai trò
-                            </span>
-                        </div>
-                        </div>
-                        <ul class="admin-link mb-0 list-unstyled">
-                        <li>
-                            <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="#">
-                            <i class="material-symbols-outlined">
-                            person
-                            </i>
-                            <span class="ms-2">
-                            My Profile
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="#">
-                            <i class="material-symbols-outlined">
-                            settings
-                            </i>
-                            <span class="ms-2">
-                            Settings
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="#">
-                            <i class="material-symbols-outlined">
-                            info
-                            </i>
-                            <span class="ms-2">
-                            Support
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="#">
-                            <i class="material-symbols-outlined">
-                            logout
-                            </i>
-                            <span class="ms-2">
-                            Logout
-                            </span>
-                            </a>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
+                </li>
+            @else
+                <li class="header-right-item">
+                    <a href="{{ route('login') }}" class="btn btn-primary text-white btn-sm rounded-pill px-3 me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-info text-white btn-sm rounded-pill px-3">Register</a>
+                </li>
+            @endif
             </ul>
         </div>
     </div>

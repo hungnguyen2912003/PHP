@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\SettingController;
 
+// admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {
         return view('admin.pages.auth.login');
@@ -13,7 +16,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.pages.auth.register');
     })->name('register');
 
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware('admin.auth')->group(function () {
         Route::get('/', function () {
             return view('admin.pages.dashboard');
         })->name('dashboard');
@@ -53,12 +56,19 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.update');
 });
 
+Route::middleware('user.auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::prefix('setting')->name('setting.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::get('/account', [SettingController::class, 'account'])->name('account');
+        Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
+    });
+});
 
 Route::get('/', function () {
     return view('client.pages.home');
 })->name('home');
-
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
 

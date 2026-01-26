@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('role_id')->constrained('roles')->onDelete('cascade');
             $table->string('name')->unique();
+            $table->date('birth_date')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
