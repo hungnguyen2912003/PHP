@@ -71,5 +71,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
+Route::get('/verified-account', [AuthController::class,'verifiedAccount'])->name('verified-account');
 
 

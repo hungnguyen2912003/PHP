@@ -87,7 +87,16 @@ class AuthController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
         flash()->success('Your account has been activated successfully.');
-        return redirect()->route('login');
+        session()->flash('verified_access', true);
+        return redirect()->route('verified-account');
+    }
+
+    public function verifiedAccount()
+    {
+        if (!session('verified_access')) {
+            return redirect()->route('login');
+        }
+        return view('auth.pages.verified-account');
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -170,9 +179,9 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         $username = $user ? $user->username : '';
-        
+
         return view('auth.pages.reset-password', [
-            'token' => $token, 
+            'token' => $token,
             'email' => $request->email,
             'username' => $username
         ]);
