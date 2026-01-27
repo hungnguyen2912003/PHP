@@ -44,7 +44,8 @@
                                     <div class="avatar-upload">
                                         <div class="avatar-edit" data-bs-placement="top"
                                             data-bs-title="{{ __('messages.image_size_hint') }}" data-bs-toggle="tooltip">
-                                            <input accept=".png, .jpg, .jpeg" id="imageUpload" type="file">
+                                            <input accept=".png, .jpg, .jpeg" name="avatar_url_file" id="imageUpload"
+                                                type="file">
                                             <label for="imageUpload"></label>
                                         </div>
                                         <div class="avatar-preview">
@@ -197,3 +198,11 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function () {
+            document.getElementById('avatarForm').submit();
+        });
+    </script>
+@endpush

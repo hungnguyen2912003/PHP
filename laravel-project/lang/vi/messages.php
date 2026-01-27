@@ -27,6 +27,7 @@ return [
     'profile_information' => 'Thông tin hồ sơ',
     'contact_information' => 'Thông tin liên hệ',
     'account_information' => 'Thông tin tài khoản',
+    'image_size_hint' => 'Kích thước ảnh (190x190)',
     'full_name' => 'Họ và tên',
     'date_of_birth' => 'Ngày sinh',
     'gender' => 'Giới tính',

@@ -21,6 +21,7 @@ return [
     'profile_page_title' => 'User Profile',
     'profile_breadcrumb_dashboard' => 'Dashboard',
     'profile_breadcrumb_profile' => 'Profile',
+    'image_size_hint' => 'Image size (190x190)',
     'bio' => 'Bio',
     'no_bio' => 'No bio available',
     'activate_account' => 'Activate your account',

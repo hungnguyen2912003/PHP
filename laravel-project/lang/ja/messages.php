@@ -21,6 +21,7 @@ return [
     'profile_page_title' => 'ユーザープロフィール',
     'profile_breadcrumb_dashboard' => 'ダッシュボード',
     'profile_breadcrumb_profile' => 'プロフィール',
+    'image_size_hint' => '画像サイズ (190x190)',
     'bio' => '自己紹介',
     'no_bio' => '自己紹介なし',
     'activate_account' => 'アカウントを有効化',
