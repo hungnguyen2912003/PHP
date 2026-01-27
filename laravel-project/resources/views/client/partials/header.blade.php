@@ -20,11 +20,12 @@
                     </li>
                     <li>
                         <form class="src-form position-relative">
-                            <input class="form-control" placeholder="{{ __('messages.search_placeholder') }}" type="text" />
+                            <input class="form-control" placeholder="{{ __('messages.search_placeholder') }}"
+                                type="text" />
                             <div
                                 class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
                                 <span class="material-symbols-outlined">
-                                    {{ __('messages.search') }}
+                                    search
                                 </span>
                             </div>
                         </form>
@@ -61,7 +62,8 @@
                                     @endphp
                                     @foreach ($locales as $key => $data)
                                         <div class="notification-menu">
-                                            <a class="dropdown-item {{ $currentLocale === $key ? 'bg-light' : '' }}" href="{{ route('change-language', $key) }}">
+                                            <a class="dropdown-item {{ $currentLocale === $key ? 'bg-light' : '' }}"
+                                                href="{{ route('change-language', $key) }}">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
                                                         <img alt="{{ $data['name'] }}" class="wh-30 rounded-circle"

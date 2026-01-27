@@ -16,7 +16,7 @@ class UserAuthenticateMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            flash()->error('Please login to use this feature');
+            flash()->error(__('messages.login_require'));
             return redirect()->route('login');
         }
 
@@ -24,7 +24,7 @@ class UserAuthenticateMiddleware
         if ($user->status === 'pending') {
             $allowed = ['profile', 'logout', 'resend-activation'];
             if (!in_array($request->route()->getName(), $allowed)) {
-                flash()->warning('Please activate your account to use this feature.');
+                flash()->warning(__('messages.activate_account_require'));
                 return redirect()->route('profile');
             }
         }

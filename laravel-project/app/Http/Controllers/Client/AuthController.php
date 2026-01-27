@@ -32,10 +32,10 @@ class AuthController extends Controller
         $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
         if ($existingUser) {
             if ($existingUser->isPending()) {
-                flash()->error('User is already registered and pending approval.');
+                flash()->error(__('messages.user_pending_approval'));
                 return redirect()->back();
             }
-            flash()->error('User already exists.');
+            flash()->error(__('messages.user_exists'));
             return redirect()->back();
         }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         //Success message
-        flash()->success('User registered successfully. Please check your email for activation link');
+        flash()->success(__('messages.register_success'));
         return redirect()->route('login');
 
     }
@@ -72,12 +72,12 @@ class AuthController extends Controller
         $user = User::where('activation_token', $token)->first();
 
         if (!$user) {
-            flash()->error('Invalid activation token. Please login your account then go to Profile page to send activation email again.');
+            flash()->error(__('messages.activation_token_invalid'));
             return redirect()->route('login');
         }
 
         if ($user->activation_token_sent_at->addMinutes(30)->isPast()) {
-            flash()->error('Your activation token has expired. Please login your account then go to Profile page to send activation email again.');
+            flash()->error(__('messages.activation_token_expired'));
             return redirect()->route('login');
         }
 
@@ -86,7 +86,7 @@ class AuthController extends Controller
         $user->status = 'active';
         $user->email_verified_at = Carbon::now();
         $user->save();
-        flash()->success('Your account has been activated successfully.');
+        flash()->success(__('messages.activation_success'));
         session()->flash('verified_access', true);
         return redirect()->route('verified-account');
     }
@@ -96,12 +96,12 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            flash()->error('User not found.');
+            flash()->error(__('messages.user_not_found'));
             return redirect()->back();
         }
 
         if ($user->status !== 'pending') {
-            flash()->error('Account is already active.');
+            flash()->error(__('messages.account_already_active'));
             return redirect()->back();
         }
 
@@ -117,7 +117,7 @@ class AuthController extends Controller
         // Send activation email
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
-        flash()->success('Activation link sent to your email.');
+        flash()->success(__('messages.activation_link_sent'));
         return redirect()->back();
     }
 
@@ -155,15 +155,15 @@ class AuthController extends Controller
             $user->save();
 
             if ($user->status === 'pending') {
-                flash()->warning('Please activate your account to use all features.');
+                flash()->warning(__('messages.activate_account_require_all'));
                 return redirect()->route('profile');
             }
 
-            flash()->success('Login successfully.');
+            flash()->success(__('messages.login_success'));
             return redirect()->route('home');
         }
 
-        flash()->error('Invalid login info.');
+        flash()->error(__('messages.login_invalid'));
         return redirect()->route('login');
     }
 
@@ -173,7 +173,7 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        flash()->success('Logout successfully.');
+        flash()->success(__('messages.logout_success'));
         return redirect()->route('login');
     }
 
@@ -201,11 +201,11 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email, $user, Carbon::now()->addMinutes(60)));
 
-            flash()->success('Password reset link has been sent to your email.');
+            flash()->success(__('messages.password_reset_link_sent'));
             return redirect()->route('login');
         }
 
-        flash()->error('Email not found.');
+        flash()->error(__('messages.email_not_found'));
         return redirect()->route('forgot-password');
     }
 
@@ -229,13 +229,13 @@ class AuthController extends Controller
 
         // Check if token exists
         if (!$reset) {
-            flash()->error('Invalid token.');
+            flash()->error(__('messages.token_invalid'));
             return redirect()->route('login');
         }
 
         // Check if token is expired (60 mins)
         if ($reset && Carbon::parse($reset->created_at)->addMinutes(60)->isPast()) {
-            flash()->error('Token has expired. Please request a new one.');
+            flash()->error(__('messages.token_expired'));
             return redirect()->route('login');
         }
 
@@ -248,7 +248,7 @@ class AuthController extends Controller
             // Delete the token
             \DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
 
-            flash()->success('Password reset successfully. You can now login with your new password.');
+            flash()->success(__('messages.password_reset_success'));
             return redirect()->route('login');
         }
     }
