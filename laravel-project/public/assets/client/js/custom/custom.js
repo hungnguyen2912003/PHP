@@ -671,17 +671,17 @@
 	const getSwitchToggleId = document.getElementById('switch-toggle');
 	if (getSwitchToggleId) {
 		const switchtoggle = document.querySelector(".switch-toggle");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("data-theme") === "dark") {
 				document.body.setAttribute("data-theme", "light");
-				localStorage.setItem("StarCode_theme", "light");
+				localStorage.setItem("theme", "light");
 			} else {
 				document.body.setAttribute("data-theme", "dark");
-				localStorage.setItem("StarCode_theme", "dark");
+				localStorage.setItem("theme", "dark");
 			}
 		});
 	}
@@ -690,17 +690,17 @@
 	const getSidebarToggleId = document.getElementById('sidebar-light-dark');
 	if (getSidebarToggleId) {
 		const switchtoggle = document.querySelector(".sidebar-light-dark");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("sidebar-dark-light-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("sidebar-dark-light-data-theme") === "sidebar-dark") {
 				document.body.setAttribute("sidebar-dark-light-data-theme", "sidebar-light");
-				localStorage.setItem("StarCode_theme", "sidebar-light");
+				localStorage.setItem("theme", "sidebar-light");
 			} else {
 				document.body.setAttribute("sidebar-dark-light-data-theme", "sidebar-dark");
-				localStorage.setItem("StarCode_theme", "sidebar-dark");
+				localStorage.setItem("theme", "sidebar-dark");
 			}
 		});
 	}
@@ -709,17 +709,17 @@
 	const getHeaderToggleId = document.getElementById('header-light-dark');
 	if (getHeaderToggleId) {
 		const switchtoggle = document.querySelector(".header-light-dark");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("header-dark-light-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("header-dark-light-data-theme") === "header-dark") {
 				document.body.setAttribute("header-dark-light-data-theme", "header-light");
-				localStorage.setItem("StarCode_theme", "header-light");
+				localStorage.setItem("theme", "header-light");
 			} else {
 				document.body.setAttribute("header-dark-light-data-theme", "header-dark");
-				localStorage.setItem("StarCode_theme", "header-dark");
+				localStorage.setItem("theme", "header-dark");
 			}
 		});
 	}
@@ -728,17 +728,17 @@
 	const getIconSidebarToggleId = document.getElementById('icon-sidebar');
 	if (getIconSidebarToggleId) {
 		const switchtoggle = document.querySelector(".icon-sidebar");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("icon-sidebar-none-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("icon-sidebar-none-data-theme") === "icon-sidebar-none-switch") {
 				document.body.setAttribute("icon-sidebar-none-data-theme", "icon-sidebar-block-switch");
-				localStorage.setItem("StarCode_theme", "icon-sidebar-block-switch");
+				localStorage.setItem("theme", "icon-sidebar-block-switch");
 			} else {
 				document.body.setAttribute("icon-sidebar-none-data-theme", "icon-sidebar-none-switch");
-				localStorage.setItem("StarCode_theme", "icon-sidebar-none-switch");
+				localStorage.setItem("theme", "icon-sidebar-none-switch");
 			}
 		});
 	}
@@ -747,17 +747,17 @@
 	const getRightSidebarId = document.getElementById('right-sidebar');
 	if (getRightSidebarId) {
 		const switchtoggle = document.querySelector(".right-sidebar");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("right-sidebar-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("right-sidebar-data-theme") === "right-sidebar-normal") {
 				document.body.setAttribute("right-sidebar-data-theme", "right-sidebar-right");
-				localStorage.setItem("StarCode_theme", "right-sidebar-right");
+				localStorage.setItem("theme", "right-sidebar-right");
 			} else {
 				document.body.setAttribute("right-sidebar-data-theme", "right-sidebar-normal");
-				localStorage.setItem("StarCode_theme", "right-sidebar-normal");
+				localStorage.setItem("theme", "right-sidebar-normal");
 			}
 		});
 	}
@@ -766,17 +766,17 @@
 	const getRadiusSquaresToggleId = document.getElementById('card-radius-square');
 	if (getRadiusSquaresToggleId) {
 		const switchtoggle = document.querySelector(".card-radius-square");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("card-radius-square-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("card-radius-square-data-theme") === "card-square") {
 				document.body.setAttribute("card-radius-square-data-theme", "card-radius");
-				localStorage.setItem("StarCode_theme", "card-radius");
+				localStorage.setItem("theme", "card-radius");
 			} else {
 				document.body.setAttribute("card-radius-square-data-theme", "card-square");
-				localStorage.setItem("StarCode_theme", "card-square");
+				localStorage.setItem("theme", "card-square");
 			}
 		});
 	}
@@ -785,17 +785,17 @@
 	const getCardBorderToggleId = document.getElementById('card-border');
 	if (getCardBorderToggleId) {
 		const switchtoggle = document.querySelector(".card-border");
-		const savedTheme = localStorage.getItem("StarCode_theme");
+		const savedTheme = localStorage.getItem("theme");
 		if (savedTheme) {
 			document.body.setAttribute("card-border-data-theme", savedTheme);
 		}
 		switchtoggle.addEventListener("click", function () {
 			if (document.body.getAttribute("card-border-data-theme") === "card-border-normal") {
 				document.body.setAttribute("card-border-data-theme", "card-border-gray");
-				localStorage.setItem("StarCode_theme", "card-border-gray");
+				localStorage.setItem("theme", "card-border-gray");
 			} else {
 				document.body.setAttribute("card-border-data-theme", "card-border-normal");
-				localStorage.setItem("StarCode_theme", "card-border-normal");
+				localStorage.setItem("theme", "card-border-normal");
 			}
 		});
 	}
@@ -865,12 +865,12 @@
 try {
 	// function to set a given theme/color-scheme
 	function setTheme(themeName) {
-		localStorage.setItem('StarCode_rtl', themeName);
+		localStorage.setItem('rtl', themeName);
 		document.documentElement.className = themeName;
 	}
 	// function to toggle between light and dark theme
 	function toggleTheme() {
-		if (localStorage.getItem('StarCode_rtl') === 'rtl') {
+		if (localStorage.getItem('rtl') === 'rtl') {
 			setTheme('ltr');
 		} else {
 			setTheme('rtl');
@@ -879,7 +879,7 @@ try {
 	
 	// Immediately invoked function to set the theme on initial load
 	(function () {
-		if (localStorage.getItem('StarCode_rtl') === 'rtl') {
+		if (localStorage.getItem('rtl') === 'rtl') {
 			setTheme('rtl');
 			document.getElementById('slider').checked = false;
 		} else {

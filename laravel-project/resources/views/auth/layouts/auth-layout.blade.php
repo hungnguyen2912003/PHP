@@ -50,8 +50,8 @@
     <script src="{{ asset('assets/auth/js/custom/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom/echarts.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom/maps.js') }}"></script>
-    <script src="{{ asset('assets/auth/js/custom/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/auth.js') }}"></script>
+    <script src="{{ asset('assets/auth/js/custom/custom.js?id=' . time()) }}"></script>
+    <script src="{{ asset('assets/js/auth.js?id=' . time()) }}"></script>
     {{-- @flasher_render --}}
 
 
