@@ -3,6 +3,7 @@
 @section('title', 'Reset Password')
 
 @section('content')
+<div class="container-fluid bg-cover-reset-password">
     <div class="main-content d-flex flex-column p-0">
         <div class="m-lg-auto my-auto w-930 py-4">
             <div class="card bg-white border rounded-10 border-white py-100 px-130">
@@ -22,7 +23,7 @@
                             <div class="form-floating">
                                 <input class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Enter your username"
                                     type="text" value="{{ $username }}" readonly />
-                                <label for="username">Enter your username</label>
+                                <label for="username"><i class="ri-user-line mr-2"></i> Enter your username</label>
                             </div>
                             @error('username')
                                 <span class="text-danger">{{ $message }}</span>
@@ -33,7 +34,7 @@
                             <div class="form-floating">
                                 <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter your email address"
                                     type="email" value="{{ $email }}" readonly />
-                                <label for="email">Enter your email address</label>
+                                <label for="email"><i class="ri-mail-line mr-2"></i> Enter your email address</label>
                             </div>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -91,4 +92,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

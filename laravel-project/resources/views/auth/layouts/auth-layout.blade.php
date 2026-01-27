@@ -14,24 +14,20 @@
     <link href="{{ asset('assets/auth/css/swiper-bundle.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/auth/css/jsvectormap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/auth/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/auth/css/mycss.css') }}" rel="stylesheet" />
     <!-- Title -->
-
-    <!-- Flasher CSS -->
-    {{-- <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet"> --}}
     <title>
         @yield('title')
     </title>
     <style>
-        .password-wrapper .form-control.is-invalid ~ .password-toggle-icon {
+        .password-wrapper .form-control.is-invalid~.password-toggle-icon {
             right: 45px !important;
         }
     </style>
 </head>
 
 <body class="bg-body-bg">
-    <div class="container-fluid">
-        @yield('content')
-    </div>
+    @yield('content')
     <!-- Link Of JS File -->
     <script src="{{ asset('assets/js/jquery-4.0.0.min.js') }}"></script>
     <script src="{{ asset('assets/auth/js/bootstrap.bundle.min.js') }}"></script>

@@ -1,0 +1,27 @@
+.bg-cover-register {
+    background-image: url("../images/bg-cover3.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-cover-login {
+    background-image: url("../images/bg-cover2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-cover-reset-password {
+    background-image: url("../images/bg-cover.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-cover-forget-password {
+    background-image: url("../images/bg-cover2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
