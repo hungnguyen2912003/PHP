@@ -70,12 +70,12 @@
                                         <a class="dropdown-item" href="javascript:void(0);">
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
-                                                    <img alt="australia" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/australia.png') }}" />
+                                                    <img alt="japan" class="wh-30 rounded-circle"
+                                                        src="{{ asset('assets/client/images/japan.png') }}" />
                                                 </div>
                                                 <div class="flex-grow-1 ms-10">
                                                     <span class="text-secondary fw-medium fs-15">
-                                                        Australia
+                                                        Japan
                                                     </span>
                                                 </div>
                                             </div>
@@ -85,41 +85,13 @@
                                         <a class="dropdown-item" href="javascript:void(0);">
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
-                                                    <img alt="spain" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/spain.png') }}" />
+                                                    <img alt="vietnam" class="wh-30 rounded-circle"
+                                                        src="{{ asset('assets/client/images/vietnam.png') }}" />
                                                 </div>
                                                 <div class="flex-grow-1 ms-10">
                                                     <span class="text-secondary fw-medium fs-15">
-                                                        Spanish
+                                                        Việt Nam
                                                     </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="notification-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img alt="portugal" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/france.png') }}" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-10">
-                                                    <span class="text-secondary fw-medium fs-15">
-                                                        France
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="notification-menu mb-0">
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img alt="Germany" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/germany.png') }}" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-10">
-                                                    <span class="text-secondary fw-medium fs-15">Germany</span>
                                                 </div>
                                             </div>
                                         </a>
