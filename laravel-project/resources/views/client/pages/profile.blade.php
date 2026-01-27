@@ -6,20 +6,20 @@
 
 <div class="main-content-container overflow-hidden">
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
-        <h3 class="mb-0">User Profile</h3>
+        <h3 class="mb-0">{{ __('messages.profile_page_title') }}</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb align-items-center mb-0 lh-1">
                 <li class="breadcrumb-item">
                     <a class="d-flex align-items-center text-decoration-none" href="{{ route('home') }}">
                         <i class="ri-home-8-line fs-15 text-primary me-1"></i>
-                        <span class="text-body fs-14 hover">Dashboard</span>
+                        <span class="text-body fs-14 hover">{{ __('messages.profile_breadcrumb_dashboard') }}</span>
                     </a>
                 </li>
                 <li aria-current="page" class="breadcrumb-item active">
-                    <span>Profile</span>
+                    <span>{{ __('messages.profile_breadcrumb_profile') }}</span>
                 </li>
                 <li aria-current="page" class="breadcrumb-item active">
-                    <span class="text-secondary">User Profile</span>
+                    <span class="text-secondary">{{ __('messages.profile_page_title') }}</span>
                 </li>
             </ol>
         </nav>
@@ -53,7 +53,7 @@
                         <div class="flex-grow-1 ms-20 mb-25" style="max-width: 1000px;">
                             <h3 class="mb-1">{{ $user->fullname }}</h3>
                             <div class="fs-15 text-wrap">
-                                <span class="text-secondary">Bio:</span> {{ $user->bio ?? 'No bio available' }}
+                                <span class="text-secondary">{{ __('messages.bio') }}:</span> {{ $user->bio ?? __('messages.no_bio') }}
                             </div>
                         </div>
                     </div>                
@@ -62,13 +62,13 @@
                             <form action="{{ route('resend-activation') }}" method="POST" class="d-inline" id="resendActivationForm">
                                 @csrf
                                 <button id="resend-activation-btn" type="submit" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;">
-                                    <i class="ri-error-warning-line"></i> <span id="btnTextActivation">Activate your account</span>
+                                    <i class="ri-error-warning-line"></i> <span id="btnTextActivation">{{ __('messages.activate_account') }}</span>
                                     <span id="btnLoadingActivation" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                                 </button>
                             </form>
                         @endif
                         <a href="{{ route('setting.account') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
-                            Settings
+                            {{ __('messages.settings') }}
                         </a>
                     </div>
                 </div>
@@ -79,32 +79,32 @@
         <div class="col-lg-4 col-xxl-4 col-xxxl-12">
             <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                 <h3 class="mb-20">
-                    Profile Information
+                    {{ __('messages.profile_information') }}
                 </h3>
                 <ul class="p-0 mb-0 list-unstyled last-child-none">
                     <li class="mb-10 fs-16">
-                        Full Name:
+                        {{ __('messages.full_name') }}:
                         <span class="text-secondary">
                             {{ $user->fullname }}
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Date of birth:
+                        {{ __('messages.date_of_birth') }}:
                         <span class="text-secondary">
                             @if ($user->date_of_birth)
                                 {{ $user->date_of_birth }}
                             @else
-                                <span class="text-danger">Unknown</span>
+                                <span class="text-danger">{{ __('messages.unknown') }}</span>
                             @endif
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Gender:
+                        {{ __('messages.gender') }}:
                         <span class="text-secondary">
                             @if ($user->gender)
                                 {{ ucfirst($user->gender) }}
                             @else
-                                <span class="text-danger">Unknown</span>
+                                <span class="text-danger">{{ __('messages.unknown') }}</span>
                             @endif
                         </span>
                     </li>
@@ -114,32 +114,32 @@
         <div class="col-lg-4 col-xxl-4 col-xxxl-12">
             <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                 <h3 class="mb-20">
-                    Contact Information
+                    {{ __('messages.contact_information') }}
                 </h3>
                 <ul class="p-0 mb-0 list-unstyled last-child-none">
                     <li class="mb-10 fs-16">
-                        Email:
+                        {{ __('messages.email') }}:
                         <span class="text-secondary">
                         {{ $user->email }}
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Phone:
+                        {{ __('messages.phone') }}:
                         <span class="text-secondary">
                             @if ($user->phone)
                                 {{ $user->phone }}
                             @else
-                                <span class="text-danger">Unknown</span>
+                                <span class="text-danger">{{ __('messages.unknown') }}</span>
                             @endif
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Address:
+                        {{ __('messages.address') }}:
                         <span class="text-secondary">
                             @if ($user->address)
                                 {{ $user->address }}
                             @else
-                                <span class="text-danger">Unknown</span>
+                                <span class="text-danger">{{ __('messages.unknown') }}</span>
                             @endif
                         </span>
                     </li>
@@ -149,31 +149,31 @@
         <div class="col-lg-4 col-xxl-4 col-xxxl-12">
             <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                 <h3 class="mb-20">
-                    Account Information
+                    {{ __('messages.account_information') }}
                 </h3>
                 <ul class="p-0 mb-0 list-unstyled last-child-none">
                     <li class="mb-10 fs-16">
-                        Username:
+                        {{ __('messages.username') }}:
                         <span class="text-secondary">
                         {{ $user->username }}
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Status:
+                        {{ __('messages.status') }}:
                         <span class="text-secondary">
                             @if ($user->status == 'active')
-                                <span class="badge bg-success">Active</span>
+                                <span class="badge bg-success">{{ __('messages.status_active') }}</span>
                             @elseif ($user->status == 'pending')
-                                <span class="badge bg-warning">Pending</span>
+                                <span class="badge bg-warning">{{ __('messages.status_pending') }}</span>
                             @elseif ($user->status == 'banned')
-                                <span class="badge bg-danger">Banned</span>
+                                <span class="badge bg-danger">{{ __('messages.status_banned') }}</span>
                             @else
-                                <span class="badge bg-secondary">Deleted</span>
+                                <span class="badge bg-secondary">{{ __('messages.status_deleted') }}</span>
                             @endif
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Created Date:
+                        {{ __('messages.created_date') }}:
                         <span class="text-secondary">
                             {{ $user->created_at->format('d-m-Y') }}
                         </span>

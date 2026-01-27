@@ -78,3 +78,13 @@ Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('acti
 Route::get('/verified-account', [AuthController::class,'verifiedAccount'])->name('verified-account');
 
 
+
+Route::get('language/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'vi', 'ja'])) {
+        abort(400);
+    }
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('change-language');

@@ -21,24 +21,24 @@
     </div>
     <aside class="layout-menu menu-vertical menu active" data-simplebar="" id="layout-menu">
         <ul class="menu-inner">
-            <li class="menu-title small text-uppercase"><span class="menu-title-text">MAIN</span></li>
+            <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('messages.menu_main') }}</span></li>
             <li class="menu-item {{ request()->routeIs('home') ? 'open' : '' }}">
                 <a class="menu-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
                     <span class="material-symbols-outlined menu-icon">ballot</span>
-                    <span class="title">Dashboard</span>
+                    <span class="title">{{ __('messages.menu_dashboard') }}</span>
                 </a>
             </li>
-            <li class="menu-title small text-uppercase"><span class="menu-title-text">APPS</span></li>
+            <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('messages.menu_apps') }}</span></li>
             <li class="menu-item {{ request()->routeIs('to-do-list') ? 'open' : '' }}">
                 <a class="menu-link {{ request()->routeIs('to-do-list') ? 'active' : '' }}" href="#">
                 <span class="material-symbols-outlined menu-icon">ballot</span>
-                <span class="title">To Do List</span>
+                <span class="title">{{ __('messages.menu_todo_list') }}</span>
                 </a>
             </li>
             <li class="menu-item {{ request()->routeIs('profile') ? 'open' : '' }}">
                 <a class="menu-link {{ request()->routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">
                 <span class="material-symbols-outlined menu-icon">account_circle</span>
-                <span class="title">My Profile</span>
+                <span class="title">{{ __('messages.menu_my_profile') }}</span>
                 </a>
             </li>
         </ul>

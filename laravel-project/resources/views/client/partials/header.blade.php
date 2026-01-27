@@ -20,11 +20,11 @@
                     </li>
                     <li>
                         <form class="src-form position-relative">
-                            <input class="form-control" placeholder="Search here..." type="text" />
+                            <input class="form-control" placeholder="{{ __('messages.search_placeholder') }}" type="text" />
                             <div
                                 class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
                                 <span class="material-symbols-outlined">
-                                    search
+                                    {{ __('messages.search') }}
                                 </span>
                             </div>
                         </form>
@@ -48,54 +48,34 @@
                             <div class="dropdown-menu dropdown-lg p-0 border-0 dropdown-menu-end">
                                 <span class="fw-medium fs-16 text-secondary d-block title"
                                     style="padding-top: 20px; padding-bottom: 20px;">
-                                    Choose Language
+                                    {{ __('messages.choose_language') }}
                                 </span>
                                 <div class="max-h-275" data-simplebar="">
-                                    <div class="notification-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img alt="usa" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/usa.png') }}" />
+                                    @php
+                                        $locales = [
+                                            'en' => ['name' => 'English', 'flag' => 'usa.png'],
+                                            'ja' => ['name' => 'Japan', 'flag' => 'japan.png'],
+                                            'vi' => ['name' => 'Việt Nam', 'flag' => 'vietnam.png'],
+                                        ];
+                                        $currentLocale = App::getLocale();
+                                    @endphp
+                                    @foreach ($locales as $key => $data)
+                                        <div class="notification-menu">
+                                            <a class="dropdown-item {{ $currentLocale === $key ? 'bg-light' : '' }}" href="{{ route('change-language', $key) }}">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img alt="{{ $data['name'] }}" class="wh-30 rounded-circle"
+                                                            src="{{ asset('assets/client/images/' . $data['flag']) }}" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-10">
+                                                        <span class="text-secondary fw-medium fs-15">
+                                                            {{ $data['name'] }}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-grow-1 ms-10">
-                                                    <span class="text-secondary fw-medium fs-15">
-                                                        English
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="notification-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img alt="japan" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/japan.png') }}" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-10">
-                                                    <span class="text-secondary fw-medium fs-15">
-                                                        Japan
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="notification-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img alt="vietnam" class="wh-30 rounded-circle"
-                                                        src="{{ asset('assets/client/images/vietnam.png') }}" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-10">
-                                                    <span class="text-secondary fw-medium fs-15">
-                                                        Việt Nam
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -138,7 +118,7 @@
                                                 {{ $user->fullname }}
                                             </h3>
                                             <span class="fs-15 fw-medium">
-                                                Role: {{ optional($user->role)->name }}
+                                                {{ __('messages.role') }}: {{ optional($user->role)->name }}
                                             </span>
                                         </div>
                                     </div>
@@ -147,28 +127,28 @@
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="{{ route('profile') }}">
                                                 <i class="material-symbols-outlined">person</i>
-                                                <span class="ms-2">My Profile</span>
+                                                <span class="ms-2">{{ __('messages.menu_my_profile') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="{{ route('setting.account') }}">
                                                 <i class="material-symbols-outlined">settings</i>
-                                                <span class="ms-2">Settings</span>
+                                                <span class="ms-2">{{ __('messages.settings') }}</span>
                                             </a>
                                         </li>
                                         {{-- <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="#">
                                                 <i class="material-symbols-outlined">info</i>
-                                                <span class="ms-2">Support</span>
+                                                <span class="ms-2">{{ __('messages.support') }}</span>
                                             </a>
                                         </li> --}}
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="{{ route('logout') }}">
                                                 <i class="material-symbols-outlined">logout</i>
-                                                <span class="ms-2">Logout</span>
+                                                <span class="ms-2">{{ __('messages.logout') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -179,9 +159,9 @@
                     @guest
                         <li class="header-right-item">
                             <a href="{{ route('login') }}"
-                                class="btn btn-primary text-white btn-sm rounded-pill px-3 me-2">Login</a>
+                                class="btn btn-primary text-white btn-sm rounded-pill px-3 me-2">{{ __('messages.login') }}</a>
                             <a href="{{ route('register') }}"
-                                class="btn btn-info text-white btn-sm rounded-pill px-3">Register</a>
+                                class="btn btn-info text-white btn-sm rounded-pill px-3">{{ __('messages.register') }}</a>
                         </li>
                     @endguest
                 </ul>
