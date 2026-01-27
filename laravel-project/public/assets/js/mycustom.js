@@ -1,51 +1,17 @@
 $(document).ready(function () {
-    let btnText = $('#btnText');
-    let btnLoading = $('#btnLoading');
-    let submitBtn = $('#submitBtn');
-    
-    
-    /*****************************************
-     * REGISTER
-     *****************************************/
+    $('#form').submit(function (e) {
+        let form = $(this);
+        let submitBtn = $('#submitBtn');
+        let btnText = $('#btnText');
+        let btnLoading = $('#btnLoading');
 
-    $('#registerForm').submit(function (e) {
-        $(this).find('span.text-danger').not('label span.text-danger').text('');
-        $(this).find('.is-invalid').removeClass('is-invalid');
-        submitBtn.prop('disabled', true);
-        btnText.text('Processing...');
-        btnLoading.removeClass('d-none');
-    })
+        form.find('span.text-danger').not('label span.text-danger').text('');
+        form.find('.is-invalid').removeClass('is-invalid');
 
-    /*****************************************
-     * LOGIN
-     *****************************************/
-    $('#loginForm').submit(function (e) {
-        $(this).find('span.text-danger').not('label span.text-danger').text('');
-        $(this).find('.is-invalid').removeClass('is-invalid');
-        submitBtn.prop('disabled', true);
-        btnText.text('Processing...');
-        btnLoading.removeClass('d-none');
-    })
-
-    /*****************************************
-     * FORGOT PASSWORD
-     *****************************************/
-    $('#forgotPasswordForm').submit(function (e) {
-        $(this).find('span.text-danger').not('label span.text-danger').text('');
-        $(this).find('.is-invalid').removeClass('is-invalid');
-        submitBtn.prop('disabled', true);
-        btnText.text('Processing...');
-        btnLoading.removeClass('d-none');
-    })
-
-    /*****************************************
-     * RESET PASSWORD
-     *****************************************/
-    $('#resetPasswordForm').submit(function (e) {
-        $(this).find('span.text-danger').not('label span.text-danger').text('');
-        $(this).find('.is-invalid').removeClass('is-invalid');
-        submitBtn.prop('disabled', true);
-        btnText.text('Processing...');
-        btnLoading.removeClass('d-none');
-    })
+        if (submitBtn.length) {
+            submitBtn.prop('disabled', true);
+            if (btnText.length) btnText.text('Processing...');
+            if (btnLoading.length) btnLoading.removeClass('d-none');
+        }
+    });
 });

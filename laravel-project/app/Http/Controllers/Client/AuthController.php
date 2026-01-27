@@ -91,33 +91,34 @@ class AuthController extends Controller
         return redirect()->route('verified-account');
     }
 
-    public function resendActivation()
+    public function resendActivation(Request $request)
     {
         $user = Auth::user();
 
-        if (!$user || $user->status !== 'pending') {
-            return response()->json(['message' => 'Account is already active or user not found.'], 400);
+        if (!$user) {
+            flash()->error('User not found.');
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
 
-        $cooldownMinutes = 5;
-        if ($user->activation_token_sent_at && Carbon::parse($user->activation_token_sent_at)->addMinutes($cooldownMinutes)->isFuture()) {
-            $remainingSeconds = Carbon::now()->diffInSeconds(Carbon::parse($user->activation_token_sent_at)->addMinutes($cooldownMinutes));
-            return response()->json([
-                'message' => "Please wait before resending. You can resend again in " . ceil($remainingSeconds / 60) . " minutes.",
-                'remaining_seconds' => $remainingSeconds
-            ], 429);
+        if ($user->status !== 'pending') {
+            flash()->error('Account is already active.');
+            return response()->json(['success' => false, 'message' => 'Account is already active.'], 400);
         }
 
         // Create new activation token
         $activation_token = Str::random(64);
-        $user->activation_token = $activation_token;
-        $user->activation_token_sent_at = Carbon::now();
-        $user->save();
+
+        // Update user
+        $user->update([
+            'activation_token' => $activation_token,
+            'activation_token_sent_at' => Carbon::now(),
+        ]);
 
         // Send activation email
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
-        return response()->json(['message' => 'Activation email has been resent successfully.']);
+        flash()->success('Activation link sent to your email.');
+        return response()->json(['success' => true, 'message' => 'Activation link sent to your email.']);
     }
 
     public function verifiedAccount()

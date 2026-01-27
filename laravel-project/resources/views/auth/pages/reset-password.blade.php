@@ -15,7 +15,7 @@
                             Enter your new password and confirm it another time in the field below.
                         </p>
                     </div>
-                    <form id="resetPasswordForm" action="{{ route('password.update', $token) }}" method="POST">
+                    <form id="form" action="{{ route('password.update', $token) }}" method="POST">
                         @csrf
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Username <span class="text-danger">*</span></label>

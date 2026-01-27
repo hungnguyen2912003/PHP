@@ -49,7 +49,7 @@
     <script src="{{ asset('assets/auth/js/custom/echarts.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom/maps.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/mycustom.js') }}"></script>
+    <script src="{{ asset('assets/js/auth.js') }}"></script>
     <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
 </body>

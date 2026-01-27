@@ -14,11 +14,8 @@
         <link href="{{ asset('assets/client/css/jsvectormap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/client/css/style.css') }}" rel="stylesheet"/>
         <!-- Favicon -->
-        {{-- <link href="{{ asset('assets/client/images/favicon.png') }}" rel="icon" type="image/png"/> --}}
-        <!-- Title -->
-        <title>
-            @yield('title')
-        </title>
+        <!-- Flasher CSS -->
+        <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet">
     </head>
     <body class="bg-body-bg">
         <!-- Start Sidebar Area -->
@@ -141,8 +138,10 @@
         <script src="{{ asset('assets/client/js/custom/echarts.js') }}"></script>
         <script src="{{ asset('assets/client/js/custom/maps.js') }}"></script>
         <script src="{{ asset('assets/client/js/custom/custom.js') }}"></script>
+        @flasher_render
         <script>
             (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bc284948f78f7b9',t:'MTc2ODExNDYyNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
         </script>
+        @stack('scripts')
     </body>
 </html>

@@ -29,9 +29,6 @@
             <div class="position-relative">
                 <img alt="profile-cover" class="rounded-top-3 w-100" src="{{ asset('assets/client/images/profile-big-cover.jpg') }}"/>
                 <div class="position-absolute z-1" style="bottom: 20px; right: 20px;">
-                    {{-- <button class="btn btn-primary text-white fs-16 fw-normal hover rounded-1" style="padding: 14px 26px;">
-                        Edit Cover Photo
-                    </button> --}}
                 </div>
             </div>
             <div class="card border-0 rounded-10 p-20 pb-0 rounded-top-0 profile-info" style="background-color: transparent !important;">
@@ -62,103 +59,17 @@
                     </div>                    
                     <div class="d-flex align-items-center mb-sm-4 gap-2">
                         @if($user->status === 'pending')
-                        <button id="resend-activation-btn" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
+                        <button id="resend-activation-btn" 
+                                class="btn btn-warning text-white fw-normal fs-16 hover-bg" 
+                                style="padding: 12px 15px;"
+                                data-user-id="{{ $user->id }}"
+                                data-route="{{ route('resend-activation') }}"
+                                data-csrf="{{ csrf_token() }}">
                             <i class="ri-error-warning-line"></i> <span id="resend-text">Activate your account</span>
+                            <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                         </button>
                         @endif
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                const resendBtn = document.getElementById('resend-activation-btn');
-                                if (!resendBtn) return;
-
-                                const resendText = document.getElementById('resend-text');
-                                const cooldownKey = 'activation_resend_cooldown_{{ $user->id }}';
-                                let cooldownInterval;
-
-                                function updateTimerDisplay(remainingSeconds) {
-                                    const minutes = Math.floor(remainingSeconds / 60);
-                                    const seconds = remainingSeconds % 60;
-                                    resendText.innerText = `Resend in ${minutes}:${seconds.toString().padStart(2, '0')}`;
-                                    resendBtn.disabled = true;
-                                }
-
-                                function startTimer(seconds) {
-                                    const endTime = Date.now() + seconds * 1000;
-                                    localStorage.setItem(cooldownKey, endTime);
-
-                                    clearInterval(cooldownInterval);
-                                    updateTimerDisplay(seconds);
-
-                                    cooldownInterval = setInterval(() => {
-                                        const remaining = Math.round((endTime - Date.now()) / 1000);
-                                        if (remaining <= 0) {
-                                            clearInterval(cooldownInterval);
-                                            resendText.innerText = 'Activate your account';
-                                            resendBtn.disabled = false;
-                                            localStorage.removeItem(cooldownKey);
-                                        } else {
-                                            updateTimerDisplay(remaining);
-                                        }
-                                    }, 1000);
-                                }
-
-                                // Check for existing cooldown on load
-                                const storedEndTime = localStorage.getItem(cooldownKey);
-                                if (storedEndTime) {
-                                    const remaining = Math.round((storedEndTime - Date.now()) / 1000);
-                                    if (remaining > 0) {
-                                        startTimer(remaining);
-                                    } else {
-                                        localStorage.removeItem(cooldownKey);
-                                    }
-                                }
-
-                                resendBtn.addEventListener('click', function() {
-                                    resendBtn.disabled = true;
-                                    resendText.innerText = 'Sending...';
-
-                                    fetch("{{ route('resend-activation') }}", {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                        }
-                                    })
-                                    .then(response => response.json().then(data => ({ status: response.status, body: data })))
-                                    .then(res => {
-                                        if (res.status === 200) {
-                                            flash('success', res.body.message);
-                                            startTimer(300); // 5 minutes
-                                        } else if (res.status === 429) {
-                                            flash('warning', res.body.message);
-                                            startTimer(Math.round(res.body.remaining_seconds));
-                                        } else {
-                                            flash('error', res.body.message || 'Something went wrong.');
-                                            resendBtn.disabled = false;
-                                            resendText.innerText = 'Activate your account';
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error:', error);
-                                        resendBtn.disabled = false;
-                                        resendText.innerText = 'Activate your account';
-                                    });
-                                });
-
-                                function flash(type, message) {
-                                    // Custom simple flash if library not globally available for JS
-                                    if (window.Toastify) {
-                                        Toastify({
-                                            text: message,
-                                            backgroundColor: type === 'success' ? 'green' : (type === 'warning' ? 'orange' : 'red'),
-                                        }).showToast();
-                                    } else {
-                                        alert(message);
-                                    }
-                                }
-                            });
-                        </script>
                         <a href="{{ route('setting.account') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
                             Settings
                         </a>
@@ -278,3 +189,7 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/client/js/custom/resend-activation.js') }}"></script>
+@endpush
