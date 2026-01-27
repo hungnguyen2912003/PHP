@@ -16,7 +16,7 @@
                             your password.
                         </p>
                     </div>
-                    <form action="{{ route('forgot-password.post') }}" method="POST" id="form">
+                    <form action="{{ route('forgot-password.post') }}" method="POST" id="forgotPasswordForm">
                         @csrf
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">

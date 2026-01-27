@@ -19,7 +19,7 @@
                             </a>
                         </p>
                     </div>
-                    <form action="{{ route('login.post') }}" method="POST" id="form">
+                    <form action="{{ route('login.post') }}" method="POST" id="loginForm">
                         @csrf
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">

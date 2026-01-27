@@ -19,7 +19,7 @@
                             </a>
                         </p>
                     </div>
-                    <form action="{{ route('register.post') }}" method="POST" id="form">
+                    <form action="{{ route('register.post') }}" method="POST" id="registerForm">
                         @csrf
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">Full Name <span class="text-danger">*</span></label>

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\UpdateAccountRequest;
+use App\Http\Requests\Client\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
 {
@@ -19,24 +20,30 @@ class SettingController extends Controller
     {
         $user = Auth::user();
         $data = $request->validated();
+        $user->update($data);
+        flash()->success('Profile updated successfully.');
+        return redirect()->back();
+    }
 
-        if ($request->hasFile('avatar_url_file')) {
-            // Delete old avatar if exists
-            if ($user->avatar_url) {
-                $oldPath = str_replace('storage/', '', $user->avatar_url);
-                if (Storage::disk('public')->exists($oldPath)) {
-                    Storage::disk('public')->delete($oldPath);
-                }
-            }
+    public function changePassword()
+    {
+        return view('client.pages.setting.change-password');
+    }
 
-            // Store new avatar in user-specific folder
-            $path = $request->file('avatar_url_file')->store($user->id . '/avatars', 'public');
-            $data['avatar_url'] = 'storage/' . $path;
+    public function changePasswordUpdate(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            flash()->error('Your old password does not match.');
+            return redirect()->back();
         }
 
-        $user->update($data);
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
 
-        flash()->success('Account settings updated successfully.');
+        flash()->success('Password changed successfully.');
         return redirect()->back();
     }
 }

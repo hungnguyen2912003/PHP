@@ -13,9 +13,11 @@
     <link href="{{ asset('assets/auth/css/remixicon.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/auth/css/swiper-bundle.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/auth/css/jsvectormap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/auth/css/style.css') }}" rel="stylesheet" />
     <!-- Title -->
+
+    <!-- Flasher CSS -->
+    {{-- <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet"> --}}
     <title>
         @yield('title')
     </title>
@@ -50,7 +52,8 @@
     <script src="{{ asset('assets/auth/js/custom/maps.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom/custom.js') }}"></script>
     <script src="{{ asset('assets/js/auth.js') }}"></script>
-    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    {{-- @flasher_render --}}
+
 
 </body>
 

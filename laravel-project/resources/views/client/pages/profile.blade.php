@@ -50,7 +50,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="flex-grow-1 ms-20 mb-45" style="max-width: 600px;">
+                        <div class="flex-grow-1 ms-20 mb-25" style="max-width: 1000px;">
                             <h3 class="mb-1">{{ $user->fullname }}</h3>
                             <div class="fs-15 text-wrap">
                                 <span class="text-secondary">Bio:</span> {{ $user->bio ?? 'No bio available' }}
@@ -59,17 +59,14 @@
                     </div>                    
                     <div class="d-flex align-items-center mb-sm-4 gap-2">
                         @if($user->status === 'pending')
-                        <button id="resend-activation-btn" 
-                                class="btn btn-warning text-white fw-normal fs-16 hover-bg" 
-                                style="padding: 12px 15px;"
-                                data-user-id="{{ $user->id }}"
-                                data-route="{{ route('resend-activation') }}"
-                                data-csrf="{{ csrf_token() }}">
-                            <i class="ri-error-warning-line"></i> <span id="resend-text">Activate your account</span>
-                            <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
-                        </button>
+                            <form action="{{ route('resend-activation') }}" method="POST" class="d-inline" id="resendActivationForm">
+                                @csrf
+                                <button id="resend-activation-btn" type="submit" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;">
+                                    <i class="ri-error-warning-line"></i> <span id="btnTextActivation">Activate your account</span>
+                                    <span id="btnLoadingActivation" class="spinner-border spinner-border-sm ml-2 d-none"></span>
+                                </button>
+                            </form>
                         @endif
-
                         <a href="{{ route('setting.account') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
                             Settings
                         </a>
@@ -184,12 +181,11 @@
                 </ul>
             </div>
         </div>
- 
     </div>
 </div>
 
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/client/js/custom/resend-activation.js') }}"></script>
+    <script src="{{ asset('assets/js/resend-activation-mail.js') }}"></script>
 @endpush

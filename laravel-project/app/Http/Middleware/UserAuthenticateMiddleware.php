@@ -20,6 +20,15 @@ class UserAuthenticateMiddleware
             return redirect()->route('login');
         }
 
+        $user = Auth::user();
+        if ($user->status === 'pending') {
+            $allowed = ['profile', 'logout', 'resend-activation'];
+            if (!in_array($request->route()->getName(), $allowed)) {
+                flash()->warning('Please activate your account to use this feature.');
+                return redirect()->route('profile');
+            }
+        }
+
         return $next($request);
     }
 }

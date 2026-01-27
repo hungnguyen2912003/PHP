@@ -97,12 +97,12 @@ class AuthController extends Controller
 
         if (!$user) {
             flash()->error('User not found.');
-            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+            return redirect()->back();
         }
 
         if ($user->status !== 'pending') {
             flash()->error('Account is already active.');
-            return response()->json(['success' => false, 'message' => 'Account is already active.'], 400);
+            return redirect()->back();
         }
 
         // Create new activation token
@@ -118,7 +118,7 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         flash()->success('Activation link sent to your email.');
-        return response()->json(['success' => true, 'message' => 'Activation link sent to your email.']);
+        return redirect()->back();
     }
 
     public function verifiedAccount()
@@ -153,6 +153,12 @@ class AuthController extends Controller
 
             $user->last_login_at = Carbon::now();
             $user->save();
+
+            if ($user->status === 'pending') {
+                flash()->warning('Please activate your account to use all features.');
+                return redirect()->route('profile');
+            }
+
             flash()->success('Login successfully.');
             return redirect()->route('home');
         }
