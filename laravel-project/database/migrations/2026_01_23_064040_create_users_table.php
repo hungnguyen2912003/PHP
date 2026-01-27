@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('role_id')->constrained('roles')->onDelete('cascade');
-            $table->string('name')->unique();
-            $table->date('birth_date')->nullable();
+            $table->string('fullname')->unique();
+            $table->date('date_of_birth')->nullable();
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatar_url')->nullable();
             $table->string('address')->nullable();
+            $table->text('bio')->nullable()->max(255);
             $table->string('username')->unique();
             $table->string('password');
             $table->string('google_id')->nullable();

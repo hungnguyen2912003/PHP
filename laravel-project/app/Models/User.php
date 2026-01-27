@@ -11,14 +11,16 @@ class User extends Authenticatable
 {
     use HasFactory, HasUuids;
     protected $fillable = [
-        'name',
+        'fullname',
         'username',
         'email',
-        'birth_date',
+        'date_of_birth',
+        'gender',
         'phone',
         'password',
-        'avatar',
+        'avatar_url',
         'address',
+        'bio',
         'status',
         'role_id',
         'google_id',

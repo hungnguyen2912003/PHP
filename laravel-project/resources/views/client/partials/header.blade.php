@@ -146,7 +146,7 @@
                                     data-bs-toggle="dropdown">
                                     <div class="flex-shrink-0 position-relative">
                                         <img alt="admin" class="rounded-circle admin-img-width-for-mobile"
-                                            src="{{ $user->avatar ? asset($user->avatar) : asset('images/user.png') }}"
+                                            src="{{ $user->avatar_url ? asset($user->avatar_url) : asset('images/user.png') }}"
                                             style="width: 40px; height: 40px;" />
                                         <span
                                             class="d-block bg-success-60 border border-2 border-white rounded-circle position-absolute end-0 bottom-0"
@@ -158,12 +158,12 @@
                                     <div class="d-flex align-items-center info">
                                         <div class="flex-shrink-0">
                                             <img alt="admin" class="rounded-circle admin-img-width-for-mobile"
-                                                src="{{ $user->avatar ? asset($user->avatar) : asset('images/user.png') }}"
+                                                src="{{ $user->avatar_url ? asset($user->avatar_url) : asset('images/user.png') }}"
                                                 style="width: 40px; height: 40px;" />
                                         </div>
                                         <div class="flex-grow-1 ms-10">
                                             <h3 class="fw-medium fs-17 mb-0">
-                                                {{ $user->name }}
+                                                {{ $user->fullname }}
                                             </h3>
                                             <span class="fs-15 fw-medium">
                                                 Role: {{ optional($user->role)->name }}
@@ -180,7 +180,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
-                                                href="{{ route('setting.index') }}">
+                                                href="{{ route('setting.account') }}">
                                                 <i class="material-symbols-outlined">settings</i>
                                                 <span class="ms-2">Settings</span>
                                             </a>

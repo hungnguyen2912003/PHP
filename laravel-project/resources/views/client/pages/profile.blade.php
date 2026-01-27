@@ -38,34 +38,128 @@
                 <div class="d-flex justify-content-between align-items-end flex-wrap gap-3">
                     <div class="d-flex align-items-end">
                         <div class="flex-shrink-0 position-relative">
-                            <div class="avatar-upload">
-                                <div class="avatar-edit" data-bs-placement="top" data-bs-title="Image Size (190x190)" data-bs-toggle="tooltip">
-                                    <input accept=".png, .jpg, .jpeg" id="imageUpload" type="file">
-                                    <label for="imageUpload"></label>
-                                    </input>
-                                </div>
-                                <div class="avatar-preview">
-                                    <div id="imagePreview" style="background-image: url({{ asset('images/user.png') }});">
+                            <form id="avatarForm" action="{{ route('profile.avatar.update') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit" data-bs-placement="top" data-bs-title="Change Avatar" data-bs-toggle="tooltip">
+                                        <input type="file" name="avatar_url_file" id="avatarInput" accept="image/*" onchange="document.getElementById('avatarForm').submit();">
+                                        <label for="avatarInput"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview" style="background-image: url({{ $user->avatar_url ? asset($user->avatar_url) : asset('images/user.png') }});">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div class="flex-grow-1 ms-20 mb-45">
-                            <h3 class="mb-1">{{ $user->name }}</h3>
-                            <span class="fs-16">
-                                <a href="mailto:{{ $user->email }}">
-                                    {{ $user->email }}
-                                </a>
-                            </span>
+                        <div class="flex-grow-1 ms-20 mb-45" style="max-width: 600px;">
+                            <h3 class="mb-1">{{ $user->fullname }}</h3>
+                            <div class="fs-15 text-wrap">
+                                <span class="text-secondary">Bio:</span> {{ $user->bio ?? 'No bio available' }}
+                            </div>
                         </div>
                     </div>                    
                     <div class="d-flex align-items-center mb-sm-4 gap-2">
                         @if($user->status === 'pending')
-                        <a href="" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
-                            <i class="ri-error-warning-line"></i> Activate your account
-                        </a>
+                        <button id="resend-activation-btn" class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
+                            <i class="ri-error-warning-line"></i> <span id="resend-text">Activate your account</span>
+                        </button>
                         @endif
-                        <a href="{{ route('setting.index') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const resendBtn = document.getElementById('resend-activation-btn');
+                                if (!resendBtn) return;
+
+                                const resendText = document.getElementById('resend-text');
+                                const cooldownKey = 'activation_resend_cooldown_{{ $user->id }}';
+                                let cooldownInterval;
+
+                                function updateTimerDisplay(remainingSeconds) {
+                                    const minutes = Math.floor(remainingSeconds / 60);
+                                    const seconds = remainingSeconds % 60;
+                                    resendText.innerText = `Resend in ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                                    resendBtn.disabled = true;
+                                }
+
+                                function startTimer(seconds) {
+                                    const endTime = Date.now() + seconds * 1000;
+                                    localStorage.setItem(cooldownKey, endTime);
+
+                                    clearInterval(cooldownInterval);
+                                    updateTimerDisplay(seconds);
+
+                                    cooldownInterval = setInterval(() => {
+                                        const remaining = Math.round((endTime - Date.now()) / 1000);
+                                        if (remaining <= 0) {
+                                            clearInterval(cooldownInterval);
+                                            resendText.innerText = 'Activate your account';
+                                            resendBtn.disabled = false;
+                                            localStorage.removeItem(cooldownKey);
+                                        } else {
+                                            updateTimerDisplay(remaining);
+                                        }
+                                    }, 1000);
+                                }
+
+                                // Check for existing cooldown on load
+                                const storedEndTime = localStorage.getItem(cooldownKey);
+                                if (storedEndTime) {
+                                    const remaining = Math.round((storedEndTime - Date.now()) / 1000);
+                                    if (remaining > 0) {
+                                        startTimer(remaining);
+                                    } else {
+                                        localStorage.removeItem(cooldownKey);
+                                    }
+                                }
+
+                                resendBtn.addEventListener('click', function() {
+                                    resendBtn.disabled = true;
+                                    resendText.innerText = 'Sending...';
+
+                                    fetch("{{ route('resend-activation') }}", {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        }
+                                    })
+                                    .then(response => response.json().then(data => ({ status: response.status, body: data })))
+                                    .then(res => {
+                                        if (res.status === 200) {
+                                            flash('success', res.body.message);
+                                            startTimer(300); // 5 minutes
+                                        } else if (res.status === 429) {
+                                            flash('warning', res.body.message);
+                                            startTimer(Math.round(res.body.remaining_seconds));
+                                        } else {
+                                            flash('error', res.body.message || 'Something went wrong.');
+                                            resendBtn.disabled = false;
+                                            resendText.innerText = 'Activate your account';
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        resendBtn.disabled = false;
+                                        resendText.innerText = 'Activate your account';
+                                    });
+                                });
+
+                                function flash(type, message) {
+                                    // Custom simple flash if library not globally available for JS
+                                    if (window.Toastify) {
+                                        Toastify({
+                                            text: message,
+                                            backgroundColor: type === 'success' ? 'green' : (type === 'warning' ? 'orange' : 'red'),
+                                        }).showToast();
+                                    } else {
+                                        alert(message);
+                                    }
+                                }
+                            });
+                        </script>
+                        <a href="{{ route('setting.account') }}" class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg" style="padding: 12px 15px;" >
                             Settings
                         </a>
                     </div>
@@ -74,7 +168,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xxl-4 col-xxxl-12">
+        <div class="col-lg-4 col-xxl-4 col-xxxl-12">
             <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                 <h3 class="mb-20">
                     Profile Information
@@ -83,20 +177,24 @@
                     <li class="mb-10 fs-16">
                         Full Name:
                         <span class="text-secondary">
-                            {{ $user->name }}
+                            {{ $user->fullname }}
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Role:
+                        Date of birth:
                         <span class="text-secondary">
-                            {{ $user->role->name }}
+                            @if ($user->date_of_birth)
+                                {{ $user->date_of_birth }}
+                            @else
+                                <span class="text-danger">Unknown</span>
+                            @endif
                         </span>
                     </li>
                     <li class="mb-10 fs-16">
-                        Birth Date:
+                        Gender:
                         <span class="text-secondary">
-                            @if ($user->birth_date)
-                                {{ $user->birth_date }}
+                            @if ($user->gender)
+                                {{ ucfirst($user->gender) }}
                             @else
                                 <span class="text-danger">Unknown</span>
                             @endif
@@ -105,42 +203,7 @@
                 </ul>
             </div>    
         </div>
-        <div class="col-xxl-4 col-xxxl-12">
-            <div class="card bg-white border border-white rounded-10 p-20 mb-4">
-                <h3 class="mb-20">
-                    Additional Information
-                </h3>
-                <ul class="p-0 mb-0 list-unstyled last-child-none">
-                    <li class="mb-10 fs-16">
-                        Username:
-                        <span class="text-secondary">
-                        {{ $user->username }}
-                        </span>
-                    </li>
-                    <li class="mb-10 fs-16">
-                        Status:
-                        <span class="text-secondary">
-                            @if ($user->status == 'active')
-                                <span class="badge bg-success">Active</span>
-                            @elseif ($user->status == 'pending')
-                                <span class="badge bg-warning">Pending</span>
-                            @elseif ($user->status == 'banned')
-                                <span class="badge bg-danger">Banned</span>
-                            @else
-                                <span class="badge bg-secondary">Deleted</span>
-                            @endif
-                        </span>
-                    </li>
-                    <li class="mb-10 fs-16">
-                        Join Date:
-                        <span class="text-secondary">
-                            {{ $user->created_at->format('d-m-Y') }}
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div> 
-        <div class="col-xxl-4 col-xxxl-12">
+        <div class="col-lg-4 col-xxl-4 col-xxxl-12">
             <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                 <h3 class="mb-20">
                     Contact Information
@@ -175,6 +238,42 @@
                 </ul>
             </div>
         </div>
+        <div class="col-lg-4 col-xxl-4 col-xxxl-12">
+            <div class="card bg-white border border-white rounded-10 p-20 mb-4">
+                <h3 class="mb-20">
+                    Account Information
+                </h3>
+                <ul class="p-0 mb-0 list-unstyled last-child-none">
+                    <li class="mb-10 fs-16">
+                        Username:
+                        <span class="text-secondary">
+                        {{ $user->username }}
+                        </span>
+                    </li>
+                    <li class="mb-10 fs-16">
+                        Status:
+                        <span class="text-secondary">
+                            @if ($user->status == 'active')
+                                <span class="badge bg-success">Active</span>
+                            @elseif ($user->status == 'pending')
+                                <span class="badge bg-warning">Pending</span>
+                            @elseif ($user->status == 'banned')
+                                <span class="badge bg-danger">Banned</span>
+                            @else
+                                <span class="badge bg-secondary">Deleted</span>
+                            @endif
+                        </span>
+                    </li>
+                    <li class="mb-10 fs-16">
+                        Created Date:
+                        <span class="text-secondary">
+                            {{ $user->created_at->format('d-m-Y') }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+ 
     </div>
 </div>
 

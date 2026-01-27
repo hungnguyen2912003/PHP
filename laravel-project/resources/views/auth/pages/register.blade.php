@@ -22,13 +22,13 @@
                     <form action="{{ route('register.post') }}" method="POST" id="registerForm">
                         @csrf
                         <div class="mb-20">
-                            <label class="label fs-16 mb-2">Name <span class="text-danger">*</span></label>
+                            <label class="label fs-16 mb-2">Full Name <span class="text-danger">*</span></label>
                             <div class="form-floating">
-                                <input class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Enter your name" type="text"
-                                    value="{{ old('name') }}" />
-                                <label for="name">Enter your name</label>
+                                <input class="form-control @error('fullname') is-invalid @enderror" name="fullname" id="fullname" placeholder="Enter your full name" type="text"
+                                    value="{{ old('fullname') }}" />
+                                <label for="fullname">Enter your full name</label>
                             </div>
-                            @error('name')
+                            @error('fullname')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

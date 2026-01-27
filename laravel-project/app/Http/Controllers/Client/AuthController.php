@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         //Create new user
         $user = User::create([
-            'name' => $request->name,
+            'fullname' => $request->fullname,
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -89,6 +89,35 @@ class AuthController extends Controller
         flash()->success('Your account has been activated successfully.');
         session()->flash('verified_access', true);
         return redirect()->route('verified-account');
+    }
+
+    public function resendActivation()
+    {
+        $user = Auth::user();
+
+        if (!$user || $user->status !== 'pending') {
+            return response()->json(['message' => 'Account is already active or user not found.'], 400);
+        }
+
+        $cooldownMinutes = 5;
+        if ($user->activation_token_sent_at && Carbon::parse($user->activation_token_sent_at)->addMinutes($cooldownMinutes)->isFuture()) {
+            $remainingSeconds = Carbon::now()->diffInSeconds(Carbon::parse($user->activation_token_sent_at)->addMinutes($cooldownMinutes));
+            return response()->json([
+                'message' => "Please wait before resending. You can resend again in " . ceil($remainingSeconds / 60) . " minutes.",
+                'remaining_seconds' => $remainingSeconds
+            ], 429);
+        }
+
+        // Create new activation token
+        $activation_token = Str::random(64);
+        $user->activation_token = $activation_token;
+        $user->activation_token_sent_at = Carbon::now();
+        $user->save();
+
+        // Send activation email
+        Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
+
+        return response()->json(['message' => 'Activation email has been resent successfully.']);
     }
 
     public function verifiedAccount()

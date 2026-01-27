@@ -58,11 +58,15 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('user.auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     Route::prefix('setting')->name('setting.')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('index');
+        //Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::get('/account', [SettingController::class, 'account'])->name('account');
+        Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
         Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
+        Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
     });
 });
 
