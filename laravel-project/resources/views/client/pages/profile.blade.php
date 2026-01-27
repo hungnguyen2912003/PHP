@@ -39,9 +39,9 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="avatar-upload">
-                                    <div class="avatar-edit" data-bs-placement="top" data-bs-title="Change Avatar" data-bs-toggle="tooltip">
-                                        <input type="file" name="avatar_url_file" id="avatarInput" accept="image/*" onchange="document.getElementById('avatarForm').submit();">
-                                        <label for="avatarInput"></label>
+                                    <div class="avatar-edit" data-bs-placement="top" data-bs-title="Image Size (190x190)" data-bs-toggle="tooltip">
+                                        <input accept=".png, .jpg, .jpeg" id="imageUpload" type="file">
+                                        <label for="imageUpload"></label>
                                     </div>
                                     <div class="avatar-preview">
                                         <div id="imagePreview" style="background-image: url({{ $user->avatar_url ? asset($user->avatar_url) : asset('images/user.png') }});">
@@ -56,7 +56,7 @@
                                 <span class="text-secondary">Bio:</span> {{ $user->bio ?? 'No bio available' }}
                             </div>
                         </div>
-                    </div>                    
+                    </div>                
                     <div class="d-flex align-items-center mb-sm-4 gap-2">
                         @if($user->status === 'pending')
                             <form action="{{ route('resend-activation') }}" method="POST" class="d-inline" id="resendActivationForm">
@@ -185,7 +185,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('assets/js/resend-activation-mail.js') }}"></script>
-@endpush
