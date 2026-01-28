@@ -1,6 +1,6 @@
 @extends('auth.layouts.auth-layout')
 
-@section('title', 'Verified Account')
+@section('title', __('messages.verified_account_title'))
 
 @section('content')
     <div class="main-content d-flex flex-column p-0">
@@ -9,10 +9,10 @@
                 <div class="p-md-5 p-4 p-lg-0">
                     <div class="text-center mb-4">
                         <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
-                            Welcome To Our Website
+                            {{ __('messages.welcome_website') }}
                         </h3>
                         <p class="fs-16 text-body lh-1-8 mx-auto">
-                            Your account is activated! You can now login to your account.
+                            {{ __('messages.account_activated_text') }}
                         </p>
                     </div>
                     <div>
@@ -24,15 +24,15 @@
                             </div>
                         </div>
                         <h3 class="mb-30 text-center">
-                            Your Account Activated
+                            {{ __('messages.account_activated_title') }}
                             <span class="text-success">
-                                Successfully!
+                                {{ __('messages.successfully') }}
                             </span>
                         </h3>
                         <div>
                             <a class="btn btn-primary fw-normal text-white w-100" href="{{ route('login') }}"
                                 style="padding-top: 18px; padding-bottom: 18px;">
-                                Back To Login
+                                {{ __('messages.back_to_login') }}
                             </a>
                         </div>
                     </div>

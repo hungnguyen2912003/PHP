@@ -7,6 +7,10 @@ use App\Http\Middleware\AdminAuthenticateMiddleware;
 use App\Http\Middleware\UserAuthenticateMiddleware;
 use App\Http\Middleware\SetLocale;
 
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -24,5 +28,21 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['message' => 'Record not found.'], 404);
+            }
+            return response()->view('error.pages.404-error', [], 404);
+        });
+
+        $exceptions->render(function (\Throwable $e, Request $request) {
+            if ($request->is('api/*') || config('app.debug')) {
+                return null;
+            }
+            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+                return null;
+            }
+
+            return response()->view('error.pages.500-error', [], 500);
+        });
     })->create();

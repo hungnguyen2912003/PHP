@@ -36,14 +36,13 @@
                                     <td style="padding:22px 24px;background:linear-gradient(135deg,#111827,#1f2937);">
                                         <div
                                             style="font-size:12px;font-weight:700;color:#c7d2fe;letter-spacing:.12em;text-transform:uppercase;">
-                                            PASSWORD RESET
+                                            {{ __('messages.email_header_reset_password') }}
                                         </div>
                                         <div style="margin-top:8px;font-size:22px;font-weight:800;color:#ffffff;">
-                                            Hello {{ $user->name }} 👋
+                                            {{ __('messages.email_greeting_hello', ['name' => $user->fullname]) }}
                                         </div>
                                         <div style="margin-top:8px;font-size:14px;line-height:1.7;color:#d1d5db;">
-                                            We received a request to reset your password. Click the button below to set a
-                                            new password.
+                                            {{ __('messages.email_reset_intro') }}
                                         </div>
                                     </td>
                                 </tr>
@@ -62,12 +61,12 @@
                                                 <td style="padding:16px;box-sizing:border-box;">
                                                     <div style="font-size:13px;line-height:1.6;color:#6b7280;">
                                                         <div style="font-weight:700;color:#111827;margin-bottom:6px;">
-                                                            Request Details
+                                                            {{ __('messages.email_request_details') }}
                                                         </div>
-                                                        <div><b>Username:</b> {{ $user->username }}</div>
-                                                        <div><b>Email:</b> {{ $user->email }}</div>
-                                                        <div><b>Requested at:</b> {{ now() }}</div>
-                                                        <div><b>Expires in:</b> {{ $expires_in }}</div>
+                                                        <div><b>{{ __('messages.email_username') }}:</b> {{ $user->username }}</div>
+                                                        <div><b>{{ __('messages.email_email') }}:</b> {{ $user->email }}</div>
+                                                        <div><b>{{ __('messages.email_requested_at') }}:</b> {{ now() }}</div>
+                                                        <div><b>{{ __('messages.email_expires_in') }}:</b> {{ $expires_in }}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -81,7 +80,7 @@
                                                     style="background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:14px;">
                                                     <a href="{{ $reset_url }}"
                                                         style="display:inline-block;padding:14px 26px;font-size:15px;font-weight:800;color:#ffffff;text-decoration:none;border-radius:14px;">
-                                                        Reset Password
+                                                        {{ __('messages.email_btn_reset_password') }}
                                                     </a>
                                                 </td>
                                             </tr>
@@ -89,9 +88,8 @@
 
                                         <!-- Expire note -->
                                         <div style="margin-top:6px;font-size:13px;line-height:1.7;color:#6b7280;">
-                                            This password reset link will expire in
-                                            <b style="color:#111827;">60 minutes</b>.
-                                            If you didn’t request a password reset, you can safely ignore this email.
+                                            {{ __('messages.email_reset_expire_note', ['count' => 60]) }}
+                                            {{ __('messages.email_reset_ignore_note') }}
                                         </div>
 
                                         <!-- Divider -->
@@ -99,7 +97,7 @@
 
                                         <!-- Fallback -->
                                         <div style="font-size:13px;line-height:1.7;color:#6b7280;">
-                                            If the button doesn’t work, copy and paste this link into your browser:
+                                            {{ __('messages.email_fallback_text') }}
                                         </div>
 
                                         <!-- Link box -->
@@ -119,9 +117,7 @@
                                             <tr>
                                                 <td style="padding:14px;box-sizing:border-box;">
                                                     <div style="font-size:12px;line-height:1.7;color:#3730a3;">
-                                                        <b>Security tip:</b> If you didn’t request this reset, please
-                                                        review your account security. After resetting, choose a strong
-                                                        password that you don’t reuse elsewhere.
+                                                        <b>{{ __('messages.email_security_tip_title') }}</b> {{ __('messages.email_reset_security_tip_body') }}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -134,14 +130,14 @@
                                 <tr>
                                     <td align="center"
                                         style="padding:18px 8px 0;font-size:12px;line-height:1.6;color:#6b7280;">
-                                        <div>You received this email because a password reset was requested for your account.</div>
+                                        <div>{{ __('messages.email_footer_reset_reason') }}</div>
                                         <div style="margin-top:6px;">
                                             © {{ date('Y') }} {{ config('app.name') }} •
                                             <a href="/"
-                                                style="color:#2563eb;text-decoration:none;font-weight:700;">Website</a>
+                                                style="color:#2563eb;text-decoration:none;font-weight:700;">{{ __('messages.email_website') }}</a>
                                             •
                                             <a href="/"
-                                                style="color:#2563eb;text-decoration:none;font-weight:700;">Support</a>
+                                                style="color:#2563eb;text-decoration:none;font-weight:700;">{{ __('messages.email_support') }}</a>
                                         </div>
                                         <div style="margin-top:10px;color:#9ca3af;padding-bottom:10px;">
                                             Nha Trang – Khanh Hoa

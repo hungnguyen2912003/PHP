@@ -34,14 +34,13 @@
                                     <td style="padding:22px 24px;background:linear-gradient(135deg,#111827,#1f2937);">
                                         <div
                                             style="font-size:12px;font-weight:700;color:#c7d2fe;letter-spacing:.12em;text-transform:uppercase;">
-                                            ACCOUNT ACTIVATION
+                                            {{ __('messages.email_header_activation') }}
                                         </div>
                                         <div style="margin-top:8px;font-size:22px;font-weight:800;color:#ffffff;">
-                                            Hello {{ $user->name }} 👋
+                                            {{ __('messages.email_greeting_hello', ['name' => $user->fullname]) }}
                                         </div>
                                         <div style="margin-top:8px;font-size:14px;line-height:1.7;color:#d1d5db;">
-                                            Thanks for signing up! Please confirm your email address by clicking the
-                                            button below.
+                                            {{ __('messages.email_activation_intro') }}
                                         </div>
                                     </td>
                                 </tr>
@@ -60,11 +59,11 @@
                                                 <td style="padding:16px;box-sizing:border-box;">
                                                     <div style="font-size:13px;line-height:1.6;color:#6b7280;">
                                                         <div style="font-weight:700;color:#111827;margin-bottom:6px;">
-                                                            Registration Details</div>
-                                                        <div><b>Username:</b> {{ $user->username }}</div>
-                                                        <div><b>Email:</b> {{ $user->email }}</div>
-                                                        <div><b>Registered at:</b> {{ $user->created_at }}</div>
-                                                        <div><b>Expires in:</b> {{ $expires_in }}</div>
+                                                            {{ __('messages.email_reg_details') }}</div>
+                                                        <div><b>{{ __('messages.email_username') }}:</b> {{ $user->username }}</div>
+                                                        <div><b>{{ __('messages.email_email') }}:</b> {{ $user->email }}</div>
+                                                        <div><b>{{ __('messages.email_requested_at') }}:</b> {{ now() }}</div>
+                                                        <div><b>{{ __('messages.email_expires_in') }}:</b> {{ $expires_in }}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -78,7 +77,7 @@
                                                     style="background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:14px;">
                                                     <a href="{{ $activation_url }}"
                                                         style="display:inline-block;padding:14px 26px;font-size:15px;font-weight:800;color:#ffffff;text-decoration:none;border-radius:14px;">
-                                                        Activate The Account
+                                                        {{ __('messages.email_btn_activate') }}
                                                     </a>
                                                 </td>
                                             </tr>
@@ -86,9 +85,8 @@
 
                                         <!-- Expire note -->
                                         <div style="margin-top:6px;font-size:13px;line-height:1.7;color:#6b7280;">
-                                            This activation link will expire in
-                                            <b style="color:#111827;">30 minutes</b>.
-                                            If you didn’t create this account, you can safely ignore this email.
+                                            {{ __('messages.email_expire_note', ['count' => 30]) }}
+                                            {{ __('messages.email_ignore_note') }}
                                         </div>
 
                                         <!-- Divider -->
@@ -96,7 +94,7 @@
 
                                         <!-- Fallback -->
                                         <div style="font-size:13px;line-height:1.7;color:#6b7280;">
-                                            If the button doesn’t work, copy and paste this link into your browser:
+                                            {{ __('messages.email_fallback_text') }}
                                         </div>
 
                                         <!-- Link box -->
@@ -116,10 +114,7 @@
                                             <tr>
                                                 <td style="padding:14px;box-sizing:border-box;">
                                                     <div style="font-size:12px;line-height:1.7;color:#3730a3;">
-                                                        <b>Security tip:</b> Never share this activation link with
-                                                        anyone.
-                                                        If you suspect unauthorized access, change your password
-                                                        immediately after activation.
+                                                        <b>{{ __('messages.email_security_tip_title') }}</b> {{ __('messages.email_security_tip_body') }}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -131,15 +126,15 @@
                                 <tr>
                                     <td align="center"
                                         style="padding:18px 8px 0;font-size:12px;line-height:1.6;color:#6b7280;">
-                                        <div>You received this email because you registered an account on our website.
+                                        <div>{{ __('messages.email_footer_reason') }}
                                         </div>
                                         <div style="margin-top:6px;">
                                             © {{ date('Y') }} {{ config('app.name') }} •
                                             <a href="/"
-                                                style="color:#2563eb;text-decoration:none;font-weight:700;">Website</a>
+                                                style="color:#2563eb;text-decoration:none;font-weight:700;">{{ __('messages.email_website') }}</a>
                                             •
                                             <a href="/"
-                                                style="color:#2563eb;text-decoration:none;font-weight:700;">Support</a>
+                                                style="color:#2563eb;text-decoration:none;font-weight:700;">{{ __('messages.email_support') }}</a>
                                         </div>
                                         <div style="margin-top:10px;color:#9ca3af; padding-bottom:10px;">Nha Trang –
                                             Khanh Hoa</div>

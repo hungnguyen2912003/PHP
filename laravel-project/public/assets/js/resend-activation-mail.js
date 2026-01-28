@@ -49,14 +49,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTimer(endTime) {
         const remaining = endTime - Date.now();
         if (btnTextActivation) {
-            btnTextActivation.innerText = `Resend in ${formatTime(remaining)}`;
+            const resendInText = btnTextActivation.getAttribute('data-resend-in-text') || 'Resend in';
+            btnTextActivation.innerText = `${resendInText} ${formatTime(remaining)}`;
         }
     }
 
     function stopCooldown() {
         localStorage.removeItem(STORAGE_KEY);
         if (submitBtn) submitBtn.disabled = false;
-        if (btnTextActivation) btnTextActivation.innerText = 'Activate your account';
+        if (btnTextActivation) {
+            const originalText = btnTextActivation.getAttribute('data-original-text') || 'Activate your account';
+            btnTextActivation.innerText = originalText;
+        }
     }
 
     /*****************************************
@@ -72,7 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show loading state immediately
             setTimeout(function() {
                 if (submitBtn) submitBtn.disabled = true;
-                if (btnTextActivation) btnTextActivation.innerText = 'Sending...';
+                if (btnTextActivation) {
+                     const sendingText = btnTextActivation.getAttribute('data-sending-text') || 'Sending...';
+                     btnTextActivation.innerText = sendingText;
+                }
                 if (btnLoadingActivation) btnLoadingActivation.classList.remove('d-none');
             }, 0);
         });

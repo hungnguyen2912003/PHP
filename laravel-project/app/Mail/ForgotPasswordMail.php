@@ -35,7 +35,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Forgot Password',
+            subject: __('messages.email_subject_reset_password'),
         );
     }
 

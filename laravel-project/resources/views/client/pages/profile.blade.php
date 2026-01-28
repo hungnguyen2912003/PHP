@@ -80,7 +80,7 @@
                                     <button id="resend-activation-btn" type="submit"
                                         class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;">
                                         <i class="ri-error-warning-line"></i> <span
-                                            id="btnTextActivation">{{ __('messages.activate_account') }}</span>
+                                            id="btnTextActivation" data-sending-text="{{ __('messages.sending') }}" data-resend-in-text="{{ __('messages.resend_in') }}" data-original-text="{{ __('messages.activate_account') }}">{{ __('messages.activate_account') }}</span>
                                         <span id="btnLoadingActivation"
                                             class="spinner-border spinner-border-sm ml-2 d-none"></span>
                                     </button>
@@ -219,4 +219,5 @@
             document.getElementById('avatarForm').submit();
         });
     </script>
+    <script src="{{ asset('assets/js/resend-activation-mail.js') }}"></script>
 @endpush

@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Role;
@@ -57,7 +58,7 @@ class AuthController extends Controller
         ]);
 
         //Send activation email
-        Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
+        Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         //Success message
         flash()->success(__('messages.register_success'), [], __('messages.success'));
@@ -115,7 +116,7 @@ class AuthController extends Controller
         ]);
 
         // Send activation email
-        Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
+        Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         flash()->success(__('messages.activation_link_sent'), [], __('messages.success'));
         return redirect()->back();
@@ -199,7 +200,7 @@ class AuthController extends Controller
                 ]
             );
 
-            Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email, $user, Carbon::now()->addMinutes(60)));
+            Mail::to($user->email)->locale(App::getLocale())->send(new ForgotPasswordMail($token, $user->email, $user, Carbon::now()->addMinutes(60)));
 
             flash()->success(__('messages.password_reset_link_sent'), [], __('messages.success'));
             return redirect()->route('login');
