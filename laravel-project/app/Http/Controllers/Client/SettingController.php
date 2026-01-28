@@ -21,7 +21,7 @@ class SettingController extends Controller
         $user = Auth::user();
         $data = $request->validated();
         $user->update($data);
-        flash()->success('Profile updated successfully.');
+        flash()->success(__('messages.profile_updated_success'));
         return redirect()->back();
     }
 
@@ -35,7 +35,7 @@ class SettingController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->old_password, $user->password)) {
-            flash()->error('Your old password does not match.');
+            flash()->error(__('messages.old_password_mismatch'));
             return redirect()->back();
         }
 
@@ -43,7 +43,7 @@ class SettingController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        flash()->success('Password changed successfully.');
+        flash()->success(__('messages.password_changed_success'));
         return redirect()->back();
     }
 }

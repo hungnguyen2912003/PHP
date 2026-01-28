@@ -115,7 +115,13 @@
                             {{ __('messages.gender') }}:
                             <span class="text-secondary">
                                 @if ($user->gender)
-                                    {{ ucfirst($user->gender) }}
+                                    @if ($user->gender === 'male')
+                                        {{ __('messages.gender_male') }}
+                                    @elseif ($user->gender === 'female')
+                                        {{ __('messages.gender_female') }}
+                                    @else
+                                        {{ __('messages.gender_other') }}
+                                    @endif
                                 @else
                                     <span class="text-danger">{{ __('messages.unknown') }}</span>
                                 @endif

@@ -22,10 +22,10 @@ class ChangePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'old_password.required' => 'The old password is required.',
-            'password.required' => 'The new password is required.',
-            'password.min' => 'The new password must be at least 6 characters.',
-            'password.confirmed' => 'The new password confirmation does not match.',
+            'old_password.required' => __('messages.old_password_required'),
+            'password.required' => __('messages.new_password_required'),
+            'password.min' => __('messages.password_min_length'),
+            'password.confirmed' => __('messages.password_confirmed_mismatch'),
         ];
     }
 }

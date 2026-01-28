@@ -1,3 +1,14 @@
+<style>
+    .active-language {
+        background-color: #f8f9fa;
+    }
+    body[data-theme="dark"] .active-language {
+        background-color: #334155 !important;
+    }
+    body[data-theme="dark"] .active-language .text-secondary {
+        color: #ffffff !important;
+    }
+</style>
 <header class="header-area bg-white mb-4 rounded-10 border border-white" id="header-area">
     <div class="row align-items-center">
         <div class="col-md-6">
@@ -62,7 +73,7 @@
                                     @endphp
                                     @foreach ($locales as $key => $data)
                                         <div class="notification-menu">
-                                            <a class="dropdown-item {{ $currentLocale === $key ? 'bg-light' : '' }}"
+                                            <a class="dropdown-item {{ $currentLocale === $key ? 'active-language' : '' }}"
                                                 href="{{ route('change-language', $key) }}">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
