@@ -43,7 +43,7 @@ class ActivationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'auth.emails.activation',
+            view: 'emails.activation',
             with: [
                 'activation_url' => route('activate', ['token' => $this->token, 'email' => $this->user->email]),
                 'expires_in' => $this->expires_in,

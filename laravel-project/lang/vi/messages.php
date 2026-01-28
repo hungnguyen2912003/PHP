@@ -165,6 +165,7 @@ return [
     'back_to_home' => 'Quay lại Trang chủ',
 
     // Emails
+    'email_preheader_activation' => 'Kích hoạt tài khoản để bắt đầu.',
     'email_subject_activation' => 'Kích hoạt tài khoản của bạn',
     'email_header_activation' => 'KÍCH HOẠT TÀI KHOẢN',
     'email_greeting_hello' => 'Xin chào, :name 👋',
@@ -194,4 +195,9 @@ return [
     'email_reset_ignore_note' => 'Nếu bạn không yêu cầu đặt lại mật khẩu, bạn có thể bỏ qua email này một cách an toàn.',
     'email_reset_security_tip_body' => 'Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng xem lại bảo mật tài khoản của bạn. Sau khi đặt lại, hãy chọn một mật khẩu mạnh mà bạn không sử dụng lại ở nơi khác.',
     'email_footer_reset_reason' => 'Bạn nhận được email này vì đã có yêu cầu đặt lại mật khẩu cho tài khoản của bạn.',
+
+    // Footer
+    'footer_rights' => 'Đã đăng ký bản quyền.',
+    'footer_privacy' => 'Chính sách bảo mật',
+    'footer_terms' => 'Điều khoản dịch vụ',
 ];

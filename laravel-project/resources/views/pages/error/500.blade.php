@@ -8,7 +8,7 @@
             <div class="col-xl-5">
                 <div class="text-center text-muted mb-2">
                     <div class="pb-3">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('dashboard') }}">
                             <span class="logo-lg">
                                 <span class="logo-txt fs-24 fw-bold">Laravel App</span>
                             </span>
@@ -29,7 +29,7 @@
                             <h4 class="">{{ __('messages.error_500_msg') }}</h4>
                             <p class="font-size-15 mx-auto text-muted w-75 mt-4">{{ __('messages.error_500_text') }}</p>
                             <div class="mt-5 text-center">
-                                <a class="btn btn-primary waves-effect waves-light" href="{{ route('home') }}">{{ __('messages.back_to_home') }}</a>
+                                <a class="btn btn-primary waves-effect waves-light" href="{{ route('dashboard') }}">{{ __('messages.back_to_home') }}</a>
                             </div>
                         </div>
                     </div>

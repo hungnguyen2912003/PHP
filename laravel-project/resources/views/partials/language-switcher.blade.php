@@ -27,7 +27,7 @@
     <div class="dropdown">
         {{-- Button (minimal) --}}
         <button class="lang-trigger" data-bs-toggle="dropdown" aria-expanded="false" type="button">
-            <img src="{{ asset('assets/client/images/' . $currentFlag) }}" alt="{{ $currentName }}">
+            <img src="{{ asset('assets/images/' . $currentFlag) }}" alt="{{ $currentName }}">
             <span>{{ $currentName }}</span>
             <i class="ri-arrow-down-s-line"></i>
         </button>
@@ -42,7 +42,7 @@
                 @foreach ($locales as $key => $data)
                     <a href="{{ route('change-language', $key) }}"
                        class="lang-item {{ $currentLocale === $key ? 'is-active' : '' }}">
-                        <img src="{{ asset('assets/client/images/' . $data['flag']) }}" alt="{{ $data['name'] }}">
+                        <img src="{{ asset('assets/images/' . $data['flag']) }}" alt="{{ $data['name'] }}">
                         <span class="lang-name">{{ $data['name'] }}</span>
 
                         @if ($currentLocale === $key)

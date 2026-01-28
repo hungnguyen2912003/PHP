@@ -12,7 +12,7 @@
     style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#111827;">
     <!-- Preheader -->
     <div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
-        Activate your account to get started.
+        {{ __('messages.email_preheader_activation') }}
     </div>
 
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0"

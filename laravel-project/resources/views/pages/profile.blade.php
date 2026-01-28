@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('home') }}">
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('dashboard') }}">
                             <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                             <span class="text-body fs-14 hover">{{ __('messages.profile_breadcrumb_dashboard') }}</span>
                         </a>

@@ -167,6 +167,7 @@ return [
     'back_to_home' => 'Back to Home',
 
     // Emails
+    'email_preheader_activation' => 'Activate your account to get started.',
     'email_subject_activation' => 'Activate Your Account',
     'email_header_activation' => 'Account Activation',
     'email_greeting_hello' => 'Hello, :name 👋',
@@ -196,4 +197,9 @@ return [
     'email_reset_ignore_note' => 'If you didn’t request a password reset, you can safely ignore this email.',
     'email_reset_security_tip_body' => 'If you didn’t request this reset, please review your account security. After resetting, choose a strong password that you don’t reuse elsewhere.',
     'email_footer_reset_reason' => 'You received this email because a password reset was requested for your account.',
+
+    // Footer
+    'footer_rights' => 'All rights reserved.',
+    'footer_privacy' => 'Privacy Policy',
+    'footer_terms' => 'Terms of Service',
 ];

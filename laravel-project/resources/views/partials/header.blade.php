@@ -78,7 +78,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
                                                         <img alt="{{ $data['name'] }}" class="wh-30 rounded-circle"
-                                                            src="{{ asset('assets/client/images/' . $data['flag']) }}" />
+                                                            src="{{ asset('assets/images/' . $data['flag']) }}" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-10">
                                                         <span class="text-secondary fw-medium fs-15">
