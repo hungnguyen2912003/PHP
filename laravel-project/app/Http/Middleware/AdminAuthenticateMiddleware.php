@@ -16,20 +16,20 @@ class AdminAuthenticateMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            flash()->error('Please login to go to admin page');
+            flash()->error('messages.login_require');
             return redirect()->route('login');
         }
 
         $user = Auth::user();
 
         if ($user->role->name !== 'Admin') {
-            flash()->error('You do not have permission to access the admin page');
-            return redirect()->route('home');
+            flash()->error('messages.permission_denied');
+            return redirect()->route('dashboard');
         }
 
-        if ($user->status !== 'active') {
-            flash()->error('Your account is not active or has been restricted');
-            return redirect()->route('home');
+        if ($user->status !== 'pending') {
+            flash()->error('messages.activate_account_require');
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

@@ -2,42 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Client\AuthController;
-use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\Client\SettingController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\DashboardController;
 
 // admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', function () {
-        return view('admin.pages.auth.login');
-    })->name('login');
-
-    Route::get('/register', function () {
-        return view('admin.pages.auth.register');
-    })->name('register');
-
-    Route::middleware('admin.auth')->group(function () {
-        Route::get('/', function () {
-            return view('admin.pages.dashboard');
-        })->name('dashboard');
-
-        Route::prefix('users')->group(function () {
-            Route::get('/', function () {
-                return view('admin.pages.user.index');
-            })->name('users');
-
-            Route::get('/add', function () {
-                return view('admin.pages.user.add');
-            })->name('users.add');
-
-            Route::get('/edit/{id}', function ($id) {
-                return view('admin.pages.user.edit', compact('id'));
-            })->name('users.edit');
-
-            Route::get('/delete/{id}', function ($id) {
-                return view('admin.pages.user.delete', compact('id'));
-            })->name('users.delete');
-        });
+// user
+Route::middleware('admin.auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::prefix('setting')->name('setting.')->group(function () {
+        //Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::get('/account', [SettingController::class, 'account'])->name('account');
+        Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
+        Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
+        Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
     });
 });
 
@@ -56,6 +38,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.update');
 });
 
+// user
 Route::middleware('user.auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
@@ -70,9 +53,7 @@ Route::middleware('user.auth')->group(function () {
     });
 });
 
-Route::get('/', function () {
-    return view('client.pages.home');
-})->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
 Route::get('/verified-account', [AuthController::class,'verifiedAccount'])->name('verified-account');
@@ -88,3 +69,7 @@ Route::get('language/{locale}', function ($locale) {
 
     return redirect()->back();
 })->name('change-language');
+
+Route::fallback(function () {
+    abort(404);
+});

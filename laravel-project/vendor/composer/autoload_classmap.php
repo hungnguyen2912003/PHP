@@ -6,12 +6,20 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Http\\Controllers\\Client\\AuthController' => $baseDir . '/app/Http/Controllers/Client/AuthController.php',
+    'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
+    'App\\Http\\Controllers\\SettingController' => $baseDir . '/app/Http/Controllers/SettingController.php',
+    'App\\Http\\Middleware\\AdminAuthenticateMiddleware' => $baseDir . '/app/Http/Middleware/AdminAuthenticateMiddleware.php',
+    'App\\Http\\Middleware\\SetLocale' => $baseDir . '/app/Http/Middleware/SetLocale.php',
+    'App\\Http\\Middleware\\UserAuthenticateMiddleware' => $baseDir . '/app/Http/Middleware/UserAuthenticateMiddleware.php',
     'App\\Http\\Requests\\Auth\\ForgotPaswordRequest' => $baseDir . '/app/Http/Requests/Auth/ForgotPaswordRequest.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\Auth\\RegisterRequest' => $baseDir . '/app/Http/Requests/Auth/RegisterRequest.php',
     'App\\Http\\Requests\\Auth\\ResetPasswordRequest' => $baseDir . '/app/Http/Requests/Auth/ResetPasswordRequest.php',
+    'App\\Http\\Requests\\Client\\ChangePasswordRequest' => $baseDir . '/app/Http/Requests/Client/ChangePasswordRequest.php',
+    'App\\Http\\Requests\\Client\\UpdateAccountRequest' => $baseDir . '/app/Http/Requests/Client/UpdateAccountRequest.php',
     'App\\Mail\\ActivationMail' => $baseDir . '/app/Mail/ActivationMail.php',
     'App\\Mail\\ForgotPasswordMail' => $baseDir . '/app/Mail/ForgotPasswordMail.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
