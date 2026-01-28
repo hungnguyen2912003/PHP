@@ -18,6 +18,8 @@ return [
     'logout' => 'ログアウト',
     'login' => 'ログイン',
     'register' => '登録',
+    'admin' => '管理者',
+    'user' => 'ユーザー',
 
     // Profile
     'profile_page_title' => 'ユーザープロフィール',
@@ -101,4 +103,47 @@ return [
     'new_password_required' => '新しいパスワードが必要です。',
     'password_min_length' => '新しいパスワードは6文字以上である必要があります。',
     'password_confirmed_mismatch' => '新しいパスワードの確認が一致しません。',
+
+    // Auth Pages
+    'sign_in_title' => 'ログイン',
+    'sign_up_title' => '登録',
+    'forgot_password_title' => 'パスワードをお忘れですか',
+    'reset_password_title' => 'パスワードのリセット',
+    'dont_have_account' => "アカウントをお持ちでないですか？",
+    'already_have_account' => "すでにアカウントをお持ちですか？",
+    'sign_in_link' => 'ログイン',
+    'sign_up_link' => '登録',
+    'forgot_password_link' => 'パスワードをお忘れですか？',
+    'remember_me' => 'ログイン状態を保持する',
+    'or_sign_in_with' => 'または以下でログイン',
+    'enter_username_email' => 'ユーザー名またはメールアドレスを入力',
+    'enter_username' => 'ユーザー名を入力',
+    'enter_email' => 'メールアドレスを入力',
+    'enter_password' => 'パスワードを入力',
+    'password_label' => 'パスワード',
+    'enter_full_name' => '氏名を入力',
+    'username_email_label' => 'ユーザー名またはメールアドレス',
+    'forgot_password_heading' => 'パスワードをお忘れですか？',
+    'forgot_password_desc' => '登録時に使用したメールアドレスを入力してください。パスワードリセットの手順をお送りします。',
+    'send_btn' => '送信',
+    'back_to_sign_in' => 'ログインに戻る',
+    'reset_password_heading' => 'パスワードのリセット？',
+    'reset_password_desc' => '新しいパスワードを入力し、下のフィールドでもう一度確認してください。',
+    'reset_password_btn' => 'パスワードをリセット',
+    'enter_new_password_label' => '新しいパスワードを入力',
+    'enter_new_password_label' => '新しいパスワードを入力',
+    'confirm_new_password_label' => '新しいパスワード（確認）',
+    'processing' => '処理中...',
+
+    // Languages
+    'lang_en' => '英語',
+    'lang_vi' => 'ベトナム語',
+    'lang_ja' => '日本語',
+
+    // Flash Messages
+    'success' => '成功通知',
+    'error' => 'エラー通知',
+    'warning' => '警告通知',
+    'info' => '情報通知',
+    'avatar_updated_success' => 'アバターが正常に更新されました。',
 ];

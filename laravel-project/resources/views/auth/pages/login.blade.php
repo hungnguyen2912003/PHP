@@ -1,21 +1,22 @@
 @extends('auth.layouts.auth-layout')
 
-@section('title', 'Login')
+@section('title', __('messages.sign_in_title'))
 
 @section('content')
     <div class="container-fluid bg-cover-login">
         <div class="main-content d-flex flex-column p-0">
             <div class="m-lg-auto my-auto w-930 py-4">
-                <div class="card bg-white border rounded-10 py-100 px-130">
+                <div class="card bg-white border rounded-10 py-100 px-130 position-relative">
+                    @include('auth.partials.language-switcher')
                     <div class="p-md-5 p-4 p-lg-0">
                         <div class="text-center mb-4">
                             <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
-                                Sign In
+                                {{ __('messages.sign_in_title') }}
                             </h3>
                             <p class="fs-16 text-secondary lh-1-8">
-                                Don't have an account yet?
+                                {{ __('messages.dont_have_account') }}
                                 <a class="text-primary text-decoration-none" href="{{ route('register') }}">
-                                    Sign Up
+                                    {{ __('messages.sign_up_link') }}
                                 </a>
                             </p>
                         </div>
@@ -23,14 +24,14 @@
                             @csrf
                             <div class="mb-20">
                                 <label class="label fs-16 mb-2">
-                                    Username or Email Address <span class="text-danger">*</span>
+                                    {{ __('messages.username_email_label') }} <span class="text-danger">*</span>
                                 </label>
                                 <div class="form-floating">
                                     <input class="form-control @error('login') is-invalid @enderror" id="login"
-                                        placeholder="Enter your username or email address" type="text" name="login" />
+                                        placeholder="{{ __('messages.enter_username_email') }}" type="text" name="login" />
                                     <label for="login">
                                         <i class="ri-user-line"></i>
-                                        Enter your username or email address
+                                        {{ __('messages.enter_username_email') }}
                                     </label>
                                 </div>
                                 @error('login')
@@ -39,17 +40,17 @@
                             </div>
                             <div class="mb-20">
                                 <label class="label fs-16 mb-2">
-                                    Password <span class="text-danger">*</span>
+                                    {{ __('messages.password_label') }} <span class="text-danger">*</span>
                                 </label>
                                 <div class="form-group" id="password-show-hide">
                                     <div class="password-wrapper position-relative password-container form-floating">
                                         <input
                                             class="form-control text-secondary password @error('password') is-invalid @enderror"
-                                            placeholder="Enter your password" type="password" name="password"
+                                            placeholder="{{ __('messages.enter_password') }}" type="password" name="password"
                                             id="password" />
                                         <label for="password">
                                             <i class="ri-lock-line"></i>
-                                            Enter your password
+                                            {{ __('messages.enter_password') }}
                                         </label>
                                         <i aria-hidden="true"
                                             class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
@@ -66,25 +67,25 @@
                                     <div class="form-check">
                                         <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
                                         <label class="form-check-label fs-16" for="flexCheckDefault">
-                                            Remember me
+                                            {{ __('messages.remember_me') }}
                                         </label>
                                     </div>
                                     <a class="fs-16 text-primary fw-normal text-decoration-none"
                                         href="{{ route('forgot-password') }}">
-                                        Forgot Password?
+                                        {{ __('messages.forgot_password_link') }}
                                     </a>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
+                                <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn" data-processing-text="{{ __('messages.processing') }}"
                                     style="padding-top: 18px; padding-bottom: 18px;" type="submit">
-                                    <span id="btnText">Sign In</span>
+                                    <span id="btnText">{{ __('messages.sign_in_link') }}</span>
                                     <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
                                 </button>
                             </div>
                             <div class="position-relative text-center z-1 mb-12">
                                 <span class="fs-16 bg-white px-4 text-secondary card d-inline-block border-0">
-                                    or sign in with
+                                    {{ __('messages.or_sign_in_with') }}
                                 </span>
                                 <span class="d-block border-bottom border-2 position-absolute w-100 z-n1"
                                     style="top: 13px;">

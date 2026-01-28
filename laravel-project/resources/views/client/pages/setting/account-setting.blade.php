@@ -119,10 +119,27 @@
                 <div class="col-lg-12">
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">{{ __('messages.bio') }}</label>
+
                         <div class="form-floating">
-                            <textarea class="form-control @error('bio') is-invalid @enderror" id="floatingTextarea7" name="bio" placeholder="{{ __('messages.placeholder_bio_hint') }}" style="height: 152px" maxlength="255">{{ old('bio', $user->bio) }}</textarea>
-                            <label for="floatingTextarea7"><i class="ri-pencil-line"></i> {{ __('messages.placeholder_bio_hint') }}</label>
+                            <textarea
+                                class="form-control @error('bio') is-invalid @enderror"
+                                id="floatingTextarea7"
+                                name="bio"
+                                placeholder="{{ __('messages.placeholder_bio_hint') }}"
+                                style="height: 152px"
+                                maxlength="255"
+                            >{{ old('bio', $user->bio) }}</textarea>
+
+                            <label for="floatingTextarea7">
+                                <i class="ri-pencil-line"></i> {{ __('messages.placeholder_bio_hint') }}
+                            </label>
                         </div>
+
+                        {{-- Bộ đếm ký tự --}}
+                        <div class="text-end small mt-1">
+                            <span id="bioCount">0</span>/255
+                        </div>
+
                         @error('bio')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -138,4 +155,24 @@
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const textarea = document.getElementById("floatingTextarea7");
+    const counter = document.getElementById("bioCount");
+    const maxLength = parseInt(textarea.getAttribute("maxlength"));
+
+    function updateBioCounter() {
+        if (textarea.value.length > maxLength) {
+            textarea.value = textarea.value.substring(0, maxLength);
+        }
+        counter.textContent = textarea.value.length;
+    }
+
+    textarea.addEventListener("input", updateBioCounter);
+
+    updateBioCounter();
+});
+</script>
+
 @endsection

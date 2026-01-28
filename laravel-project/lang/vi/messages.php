@@ -18,6 +18,8 @@ return [
     'logout' => 'Đăng xuất',
     'login' => 'Đăng nhập',
     'register' => 'Đăng ký',
+    'admin' => 'Quản trị viên',
+    'user' => 'Người dùng',
 
     // Profile
     'profile_page_title' => 'Hồ sơ người dùng',
@@ -101,4 +103,47 @@ return [
     'new_password_required' => 'Vui lòng nhập mật khẩu mới.',
     'password_min_length' => 'Mật khẩu mới phải có ít nhất 6 ký tự.',
     'password_confirmed_mismatch' => 'Xác nhận mật khẩu mới không khớp.',
+
+    // Auth Pages
+    'sign_in_title' => 'Đăng nhập',
+    'sign_up_title' => 'Đăng ký',
+    'forgot_password_title' => 'Quên mật khẩu',
+    'reset_password_title' => 'Đặt lại mật khẩu',
+    'dont_have_account' => "Chưa có tài khoản?",
+    'already_have_account' => "Đã có tài khoản?",
+    'sign_in_link' => 'Đăng nhập',
+    'sign_up_link' => 'Đăng ký',
+    'forgot_password_link' => 'Quên mật khẩu?',
+    'remember_me' => 'Ghi nhớ đăng nhập',
+    'or_sign_in_with' => 'hoặc đăng nhập bằng',
+    'enter_username_email' => 'Nhập tên đăng nhập hoặc email',
+    'enter_username' => 'Nhập tên đăng nhập',
+    'enter_email' => 'Nhập email của bạn',
+    'enter_password' => 'Nhập mật khẩu',
+    'enter_full_name' => 'Nhập họ tên đầy đủ',
+    'username_email_label' => 'Tên đăng nhập hoặc Email',
+    'password_label' => 'Mật khẩu',
+    'forgot_password_heading' => 'Quên mật khẩu?',
+    'forgot_password_desc' => 'Nhập địa chỉ email bạn đã sử dụng khi tham gia và chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu cho bạn.',
+    'send_btn' => 'Gửi',
+    'back_to_sign_in' => 'Quay lại Đăng nhập',
+    'reset_password_heading' => 'Đặt lại mật khẩu?',
+    'reset_password_desc' => 'Nhập mật khẩu mới của bạn và xác nhận lại lần nữa ở ô bên dưới.',
+    'reset_password_btn' => 'Đặt lại mật khẩu',
+    'enter_new_password_label' => 'Nhập mật khẩu mới',
+    'enter_new_password_label' => 'Nhập mật khẩu mới',
+    'confirm_new_password_label' => 'Xác nhận mật khẩu mới',
+    'processing' => 'Đang xử lý...',
+
+    // Languages
+    'lang_en' => 'Tiếng Anh',
+    'lang_vi' => 'Tiếng Việt',
+    'lang_ja' => 'Tiếng Nhật',
+
+    // Flash Messages
+    'success' => 'Thông báo thành công',
+    'error' => 'Thông báo lỗi',
+    'warning' => 'Thông báo cảnh báo',
+    'info' => 'Thông báo thông tin',
+    'avatar_updated_success' => 'Cập nhật ảnh đại diện thành công.',
 ];

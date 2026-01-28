@@ -18,6 +18,8 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'register' => 'Register',
+    'admin' => 'Admin',
+    'user' => 'User',
 
     // Profile
     'profile_page_title' => 'User Profile',
@@ -47,6 +49,8 @@ return [
     'status_pending' => 'Pending',
     'status_banned' => 'Banned',
     'status_deleted' => 'Deleted',
+    'no_role' => 'No role available',
+
 
     // Notifications
     'login_require' => 'Please login to use this feature',
@@ -101,4 +105,47 @@ return [
     'new_password_required' => 'The new password is required.',
     'password_min_length' => 'The new password must be at least 6 characters.',
     'password_confirmed_mismatch' => 'The new password confirmation does not match.',
+    
+    // Auth Pages
+    'sign_in_title' => 'Sign In',
+    'sign_up_title' => 'Sign Up',
+    'forgot_password_title' => 'Forgot Password',
+    'reset_password_title' => 'Reset Password',
+    'dont_have_account' => "Don't have an account yet?",
+    'already_have_account' => "Already have an account?",
+    'sign_in_link' => 'Sign In',
+    'sign_up_link' => 'Sign Up',
+    'forgot_password_link' => 'Forgot Password?',
+    'remember_me' => 'Remember me',
+    'or_sign_in_with' => 'or sign in with',
+    'enter_username_email' => 'Enter your username or email address',
+    'enter_username' => 'Enter your username',
+    'enter_email' => 'Enter your email address',
+    'enter_password' => 'Enter your password',
+    'enter_full_name' => 'Enter your full name',
+    'username_email_label' => 'Username or Email Address',
+    'password_label' => 'Password',
+    'forgot_password_heading' => 'Forgot Your Password?',
+    'forgot_password_desc' => 'Enter the email address you used when you joined and will send you instructions to reset your password.',
+    'send_btn' => 'Send',
+    'back_to_sign_in' => 'Back to Sign In',
+    'reset_password_heading' => 'Reset Password?',
+    'reset_password_desc' => 'Enter your new password and confirm it another time in the field below.',
+    'reset_password_btn' => 'Reset Password',
+    'enter_new_password_label' => 'Enter new password',
+    'enter_new_password_label' => 'Enter new password',
+    'confirm_new_password_label' => 'Confirm new password',
+    'processing' => 'Processing...',
+
+    // Languages
+    'lang_en' => 'English',
+    'lang_vi' => 'Vietnamese',
+    'lang_ja' => 'Japanese',
+
+    // Flash Messages
+    'success' => 'Success Notification',
+    'error' => 'Error Notification',
+    'warning' => 'Warning Notification',
+    'info' => 'Info Notification',
+    'avatar_updated_success' => 'Avatar updated successfully.',
 ];

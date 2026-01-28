@@ -37,7 +37,7 @@ class ProfileController extends Controller
             $user->avatar_url = 'storage/' . $path;
             $user->save();
 
-            flash()->success('Avatar updated successfully.');
+            flash()->success(__('messages.avatar_updated_success'), [], __('messages.success'));
         }
 
         return redirect()->back();

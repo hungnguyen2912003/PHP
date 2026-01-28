@@ -20,7 +20,8 @@ $(document).ready(function () {
         // before the button is disabled. Synchronous disable can abort submission in some browsers.
         setTimeout(function() {
             submitBtn.prop('disabled', true);
-            btnText.text('Processing...');
+            let processingText = submitBtn.data('processing-text') || 'Processing...';
+            btnText.text(processingText);
             btnLoading.removeClass('d-none');
         }, 0);
         

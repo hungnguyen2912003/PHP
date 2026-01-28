@@ -56,8 +56,16 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="flex-grow-1 ms-20 mb-25" style="max-width: 1000px;">
+                            <div class="flex-grow-1 ms-20 mb-10" style="max-width: 1000px;">
                                 <h3 class="mb-1">{{ $user->fullname }}</h3>
+                                <div class="fs-15">
+                                    <span class="text-secondary">{{ __('messages.role') }}:</span>
+                                    @if ($user->role->name === 'Admin')
+                                        {{ __('messages.admin') }}
+                                    @elseif ($user->role->name === 'User')
+                                        {{ __('messages.user') }}
+                                    @endif
+                                </div>
                                 <div class="fs-15 text-wrap">
                                     <span class="text-secondary">{{ __('messages.bio') }}:</span>
                                     {{ $user->bio ?? __('messages.no_bio') }}

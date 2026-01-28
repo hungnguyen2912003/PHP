@@ -32,10 +32,10 @@ class AuthController extends Controller
         $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
         if ($existingUser) {
             if ($existingUser->isPending()) {
-                flash()->error(__('messages.user_pending_approval'));
+                flash()->error(__('messages.user_pending_approval'), [], __('messages.error'));
                 return redirect()->back();
             }
-            flash()->error(__('messages.user_exists'));
+            flash()->error(__('messages.user_exists'), [], __('messages.error'));
             return redirect()->back();
         }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         //Success message
-        flash()->success(__('messages.register_success'));
+        flash()->success(__('messages.register_success'), [], __('messages.success'));
         return redirect()->route('login');
 
     }
@@ -72,12 +72,12 @@ class AuthController extends Controller
         $user = User::where('activation_token', $token)->first();
 
         if (!$user) {
-            flash()->error(__('messages.activation_token_invalid'));
+            flash()->error(__('messages.activation_token_invalid'), [], __('messages.error'));
             return redirect()->route('login');
         }
 
         if ($user->activation_token_sent_at->addMinutes(30)->isPast()) {
-            flash()->error(__('messages.activation_token_expired'));
+            flash()->error(__('messages.activation_token_expired'), [], __('messages.error'));
             return redirect()->route('login');
         }
 
@@ -86,7 +86,7 @@ class AuthController extends Controller
         $user->status = 'active';
         $user->email_verified_at = Carbon::now();
         $user->save();
-        flash()->success(__('messages.activation_success'));
+        flash()->success(__('messages.activation_success'), [], __('messages.success'));
         session()->flash('verified_access', true);
         return redirect()->route('verified-account');
     }
@@ -96,12 +96,12 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            flash()->error(__('messages.user_not_found'));
+            flash()->error(__('messages.user_not_found'), [], __('messages.error'));
             return redirect()->back();
         }
 
         if ($user->status !== 'pending') {
-            flash()->error(__('messages.account_already_active'));
+            flash()->error(__('messages.account_already_active'), [], __('messages.error'));
             return redirect()->back();
         }
 
@@ -117,7 +117,7 @@ class AuthController extends Controller
         // Send activation email
         Mail::to($user->email)->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
-        flash()->success(__('messages.activation_link_sent'));
+        flash()->success(__('messages.activation_link_sent'), [], __('messages.success'));
         return redirect()->back();
     }
 
@@ -155,15 +155,15 @@ class AuthController extends Controller
             $user->save();
 
             if ($user->status === 'pending') {
-                flash()->warning(__('messages.activate_account_require_all'));
+                flash()->warning(__('messages.activate_account_require_all'), [], __('messages.warning'));
                 return redirect()->route('profile');
             }
 
-            flash()->success(__('messages.login_success'));
+            flash()->success(__('messages.login_success'), [], __('messages.success'));
             return redirect()->route('home');
         }
 
-        flash()->error(__('messages.login_invalid'));
+        flash()->error(__('messages.login_invalid'), [], __('messages.error'));
         return redirect()->route('login');
     }
 
@@ -173,7 +173,7 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        flash()->success(__('messages.logout_success'));
+        flash()->success(__('messages.logout_success'), [], __('messages.success'));
         return redirect()->route('login');
     }
 
@@ -201,11 +201,11 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($token, $user->email, $user, Carbon::now()->addMinutes(60)));
 
-            flash()->success(__('messages.password_reset_link_sent'));
+            flash()->success(__('messages.password_reset_link_sent'), [], __('messages.success'));
             return redirect()->route('login');
         }
 
-        flash()->error(__('messages.email_not_found'));
+        flash()->error(__('messages.email_not_found'), [], __('messages.error'));
         return redirect()->route('forgot-password');
     }
 
@@ -229,13 +229,13 @@ class AuthController extends Controller
 
         // Check if token exists
         if (!$reset) {
-            flash()->error(__('messages.token_invalid'));
+            flash()->error(__('messages.token_invalid'), [], __('messages.error'));
             return redirect()->route('login');
         }
 
         // Check if token is expired (60 mins)
         if ($reset && Carbon::parse($reset->created_at)->addMinutes(60)->isPast()) {
-            flash()->error(__('messages.token_expired'));
+            flash()->error(__('messages.token_expired'), [], __('messages.error'));
             return redirect()->route('login');
         }
 
@@ -248,7 +248,7 @@ class AuthController extends Controller
             // Delete the token
             \DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
 
-            flash()->success(__('messages.password_reset_success'));
+            flash()->success(__('messages.password_reset_success'), [], __('messages.success'));
             return redirect()->route('login');
         }
     }

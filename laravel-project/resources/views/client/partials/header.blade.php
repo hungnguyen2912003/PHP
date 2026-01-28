@@ -65,9 +65,9 @@
                                 <div class="max-h-275" data-simplebar="">
                                     @php
                                         $locales = [
-                                            'en' => ['name' => 'English', 'flag' => 'usa.png'],
-                                            'ja' => ['name' => 'Japan', 'flag' => 'japan.png'],
-                                            'vi' => ['name' => 'Việt Nam', 'flag' => 'vietnam.png'],
+                                            'en' => ['name' => __('messages.lang_en'), 'flag' => 'usa.png'],
+                                            'ja' => ['name' => __('messages.lang_ja'), 'flag' => 'japan.png'],
+                                            'vi' => ['name' => __('messages.lang_vi'), 'flag' => 'vietnam.png'],
                                         ];
                                         $currentLocale = App::getLocale();
                                     @endphp
