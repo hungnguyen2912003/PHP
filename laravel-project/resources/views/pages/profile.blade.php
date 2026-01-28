@@ -219,5 +219,5 @@
             document.getElementById('avatarForm').submit();
         });
     </script>
-    <script src="{{ asset('assets/js/resend-activation-mail.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/resend-activation-mail.js') }}"></script>
 @endpush

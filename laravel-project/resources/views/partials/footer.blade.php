@@ -4,7 +4,7 @@
             <div class="col-md-6 text-md-start mb-2 mb-md-0">
                 <p class="fs-14 text-muted mb-0">
                     © <script>document.write(new Date().getFullYear())</script> 
-                    <span class="fw-semibold text-dark">Hung Nguyen</span>. {{ __('messages.footer_rights') }}
+                    <span class="fw-semibold text-dark">Hung Nguyen</span> {{ __('messages.footer_rights') }}
                 </p>
             </div>
             <div class="col-md-6 text-md-end">

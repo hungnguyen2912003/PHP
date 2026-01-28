@@ -19,7 +19,7 @@
                         <div class="mb-20">
                             <div class="d-flex justify-content-center align-items-center for-dark-bg-light bg-light rounded-circle mx-auto"
                                 style="width: 200px; height: 200px;">
-                                <img src="{{ asset('images/hero.png') }}" alt="Verified Account"
+                                <img src="{{ asset('assets/images/hero.png') }}" alt="Verified Account"
                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </div>
