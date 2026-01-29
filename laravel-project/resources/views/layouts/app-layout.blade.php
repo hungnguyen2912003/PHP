@@ -13,7 +13,7 @@
         <link href="{{ asset('assets/css/remixicon.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/swiper-bundle.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/jsvectormap.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/style.css?v=' . time()) }}" rel="stylesheet"/>
         <!-- Favicon -->
         <!-- Flasher CSS -->
         <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet">

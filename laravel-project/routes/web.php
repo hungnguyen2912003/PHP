@@ -25,9 +25,10 @@ Route::middleware('admin.auth')->group(function () {
         Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
         Route::get('/store', [UserController::class, 'store'])->name('store');
         Route::post('/store', [UserController::class, 'storePost'])->name('store.post');
-        Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
-        Route::post('/update/{id}', [UserController::class, 'updatePost'])->name('update.post');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('edit.post');
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+        Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
     });
 });
 
@@ -81,3 +82,6 @@ Route::get('language/{locale}', function ($locale) {
 Route::fallback(function () {
     abort(404);
 });
+
+
+

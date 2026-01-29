@@ -26,8 +26,9 @@ return [
     'search_user' => 'Tìm kiếm người dùng',
     'action' => 'Hành động',
     'view' => 'Xem',
-    'edit' => 'Sửa',
+    'edit' => 'Chỉnh sửa',
     'delete' => 'Xóa',
+    'back_btn' => 'Quay lại',
     'showing_entries' => 'Hiển thị :first đến :last trong tổng số :total mục',
     'click_to_copy' => 'Nhấn để sao chép',
     'copied' => 'Đã sao chép',
@@ -104,8 +105,8 @@ return [
     'change_password_btn' => 'Đổi mật khẩu',
     'placeholder_fullname' => 'Họ và tên',
     'placeholder_email' => 'Địa chỉ Email',
-    'placeholder_phone' => 'Số điện thoại',
-    'placeholder_address' => 'Địa chỉ',
+    'placeholder_phone' => 'Nhập số điện thoại',
+    'placeholder_address' => 'Nhập địa chỉ',
     'placeholder_bio_hint' => 'Viết tại đây....',
 
     // Backend Messages
@@ -217,6 +218,9 @@ return [
 
     // Validation
     'select_role' => 'Chọn vai trò',
+    'select_status' => 'Chọn trạng thái',
+    'select_gender' => 'Chọn giới tính',
+    'select_date' => 'Chọn ngày',
     'fullname_required' => 'Vui lòng nhập họ và tên',
     'fullname_max' => 'Họ và tên không được vượt quá 255 ký tự',
     'email_required' => 'Vui lòng nhập email',
@@ -227,6 +231,15 @@ return [
     'role_exists' => 'Vai trò không tồn tại',
     'add_user_btn' => '+ Thêm người dùng',
     'user_created_success' => 'Tạo người dùng thành công.',
+    'resend_activation_email' => 'Gửi lại email kích hoạt',
+    'resend_activation_success' => 'Email kích hoạt đã được gửi lại thành công.',
+    'resend_activation_failed' => 'Gửi lại email kích hoạt thất bại. Người dùng không ở trạng thái chờ hoặc không tồn tại.',
+    'phone_required' => 'Vui lòng nhập số điện thoại',
+    'address_required' => 'Vui lòng nhập địa chỉ',
+    'gender_required' => 'Vui lòng chọn giới tính',
+    'date_of_birth_required' => 'Vui lòng chọn ngày sinh',
+    'status_required' => 'Vui lòng chọn trạng thái',
+    'password_required' => 'Vui lòng nhập mật khẩu',
 
     // Roles
     'role_admin' => 'Quản trị viên',
@@ -238,4 +251,7 @@ return [
     'set_first_password_heading' => 'Đặt mật khẩu lần đầu',
     'set_first_password_desc' => 'Vui lòng đặt mật khẩu để kích hoạt tài khoản của bạn.',
     'set_first_password_btn' => 'Đặt mật khẩu',
+    'update_user' => 'Cập nhật thông tin người dùng',
+    'password' => 'Mật khẩu',
+    'user_image' => 'Ảnh người dùng',
 ];

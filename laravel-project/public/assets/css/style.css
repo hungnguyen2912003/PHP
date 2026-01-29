@@ -16637,6 +16637,26 @@ Custom Hover Area Style
   color: #0f79f3 !important;
 }
 
+.hover-text-warning {
+  transition: all ease 0.5s;
+}
+.hover-text-warning:hover {
+  color: #ff9800 !important;
+}
+.hover-text-warning:hover i {
+  color: #ff9800 !important;
+}
+
+.hover-text-primary {
+  transition: all ease 0.5s;
+}
+.hover-text-primary:hover {
+  color: #0f79f3 !important;
+}
+.hover-text-primary:hover i {
+  color: #0f79f3 !important;
+}
+
 .hover-text-danger {
   transition: all ease 0.5s;
 }
@@ -16675,6 +16695,28 @@ Custom Hover Area Style
   color: #fff !important;
 }
 .hover-bg:hover i {
+  color: #fff !important;
+}
+
+.hover-bg-secondary {
+  transition: all ease 0.5s;
+}
+.hover-bg-secondary:hover {
+  background-color: #6c757d !important;
+  color: #fff !important;
+}
+.hover-bg-secondary:hover i {
+  color: #fff !important;
+}
+
+.hover-bg-warning {
+  transition: all ease 0.5s;
+}
+.hover-bg-warning:hover {
+  background-color: #ff9800 !important;
+  color: #fff !important;
+}
+.hover-bg-warning:hover i {
   color: #fff !important;
 }
 

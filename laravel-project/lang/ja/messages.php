@@ -28,6 +28,7 @@ return [
     'view' => '表示',
     'edit' => '編集',
     'delete' => '削除',
+    'back_btn' => '戻る',
     'showing_entries' => ':total 件中 :first - :last 件を表示',
     'click_to_copy' => 'クリックしてコピー',
     'copied' => 'コピーしました',
@@ -104,8 +105,8 @@ return [
     'change_password_btn' => 'パスワードを変更',
     'placeholder_fullname' => '氏名',
     'placeholder_email' => 'メールアドレス',
-    'placeholder_phone' => '電話番号',
-    'placeholder_address' => '住所',
+    'placeholder_phone' => '電話番号を入力',
+    'placeholder_address' => '住所を入力',
     'placeholder_bio_hint' => 'ここに書いてください....',
 
     // Backend Messages
@@ -217,6 +218,9 @@ return [
 
     // Validation
     'select_role' => '役割を選択',
+    'select_status' => 'ステータスを選択',
+    'select_gender' => '性別を選択',
+    'select_date' => '日付を選択',
     'fullname_required' => '氏名を入力してください',
     'fullname_max' => '氏名は255文字以内で入力してください',
     'email_required' => 'メールアドレスを入力してください',
@@ -227,6 +231,15 @@ return [
     'role_exists' => '選択された役割は存在しません',
     'add_user_btn' => '+ ユーザーを追加',
     'user_created_success' => 'ユーザーが正常に作成されました。',
+    'resend_activation_email' => '有効化メールを再送信',
+    'resend_activation_success' => '有効化メールが正常に再送信されました。',
+    'resend_activation_failed' => '有効化メールの再送信に失敗しました。ユーザーは保留中ではないか、存在しません。',
+    'phone_required' => '電話番号を入力してください',
+    'address_required' => '住所を入力してください',
+    'gender_required' => '性別を選択してください',
+    'date_of_birth_required' => '生年月日を選択してください',
+    'status_required' => 'ステータスを選択してください',
+    'password_required' => 'パスワードを入力してください',
 
     // Roles
     'role_admin' => '管理者',
@@ -238,4 +251,7 @@ return [
     'set_first_password_heading' => '初回パスワード設定',
     'set_first_password_desc' => 'アカウントを有効にするためにパスワードを設定してください。',
     'set_first_password_btn' => 'パスワードを設定',
+    'update_user' => 'ユーザー情報の更新',
+    'password' => 'パスワード',
+    'user_image' => 'ユーザー画像',
 ];

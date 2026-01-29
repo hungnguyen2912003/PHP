@@ -28,6 +28,7 @@ return [
     'view' => 'View',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'back_btn' => 'Back',
     'showing_entries' => 'Showing :first to :last of :total entries',
     'click_to_copy' => 'Click to copy',
     'copied' => 'Copied',
@@ -106,8 +107,8 @@ return [
     'change_password_btn' => 'Change Password',
     'placeholder_fullname' => 'Full Name',
     'placeholder_email' => 'Email Address',
-    'placeholder_phone' => 'Phone Number',
-    'placeholder_address' => 'Address',
+    'placeholder_phone' => 'Enter phone number',
+    'placeholder_address' => 'Enter address',
     'placeholder_bio_hint' => 'Write here....',
     
     // Backend Messages
@@ -227,6 +228,9 @@ return [
     'select_date' => 'Select date',
     'user_created_success' => 'User created successfully.',
     'add_user_btn' => '+ Add User',
+    'resend_activation_email' => 'Resend Activation Email',
+    'resend_activation_success' => 'Activation email has been resent successfully.',
+    'resend_activation_failed' => 'Failed to resend activation email. User is not pending or does not exist.',
     
     // Validation
     'fullname_required' => 'Please enter full name',
@@ -237,8 +241,12 @@ return [
     'role_required' => 'Please select a role',
     'role_exists' => 'Role does not exist',
     'role_exists' => 'Role does not exist',
-    'add_user_btn' => '+ Add User',
-    'user_created_success' => 'User created successfully.',
+    'phone_required' => 'Please enter phone number',
+    'address_required' => 'Please enter address',
+    'gender_required' => 'Please select gender',
+    'date_of_birth_required' => 'Please select date of birth',
+    'status_required' => 'Please select status',
+    'password_required' => 'Please enter password',
 
     // Roles
     'role_admin' => 'Admin',
@@ -250,4 +258,6 @@ return [
     'set_first_password_heading' => 'Set First Password',
     'set_first_password_desc' => 'Please set your password to activate your account.',
     'set_first_password_btn' => 'Set Password',
+    'update_user' => 'Update User Information',
+    'password' => 'Password',
 ];

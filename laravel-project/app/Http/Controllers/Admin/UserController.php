@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -66,16 +67,68 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.show', compact('user'));
     }
 
-    public function update(Request $request, string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $roles = Role::where('name', '!=', 'User')->get();
+        return view('admin.users.edit', compact('user', 'roles'));
+    }
+
+
+
+    public function editPost(UpdateUserRequest $request, string $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $validated = $request->validated();
+
+        $user->fullname = $validated['fullname'];
+        $user->email = $validated['email'];
+        $user->phone = $validated['phone'];
+        $user->address = $validated['address'];
+        $user->gender = $validated['gender'];
+        $user->date_of_birth = $validated['date_of_birth'];
+        $user->role_id = $validated['role_id'];
+        $user->status = $validated['status'];
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        flash()->success(__('messages.profile_updated_success'), [], __('messages.success'));
+        return redirect()->back();
     }
 
     public function destroy(string $id)
     {
         //
+    }
+
+    public function resendActivation($id)
+    {
+        $user = User::find($id);
+
+        if ($user && $user->status == 'pending') {
+            // Regeneration activation token
+            $activation_token = Str::random(64);
+            $user->activation_token = $activation_token;
+            $user->activation_token_sent_at = Carbon::now();
+            $user->save();
+
+            // Send activation email
+            Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
+
+            flash()->success(__('messages.resend_activation_success'), [], __('messages.success'));
+        } else {
+            flash()->error(__('messages.resend_activation_failed'), [], __('messages.error'));
+        }
+
+        return redirect()->back();
     }
 }
