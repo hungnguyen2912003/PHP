@@ -3,7 +3,6 @@
 @section('title', __('messages.profile_page_title'))
 
 @section('content')
-
     <div class="main-content-container overflow-hidden">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
             <h3 class="mb-0">{{ __('messages.profile_page_title') }}</h3>
@@ -41,7 +40,7 @@
                             <div class="flex-shrink-0 position-relative">
                                 <div class="avatar-upload">
                                     <div class="avatar-preview">
-                                        <div id="imagePreview"
+                                        <div id="imagePreviewShow"
                                             style="background-image: url({{ $user->avatar_url ? asset($user->avatar_url) : asset('assets/images/user.png') }});">
                                         </div>
                                     </div>

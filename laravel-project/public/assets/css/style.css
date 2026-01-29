@@ -22419,3 +22419,52 @@ Dark Mode SCSS
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* SweetAlert2 Dark Mode Support */
+[data-bs-theme="dark"] .swal2-popup {
+    background-color: #1a1d20 !important;
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .swal2-title {
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .swal2-html-container {
+    color: #b1b1b1 !important;
+}
+
+[data-bs-theme="dark"] .swal2-icon.swal2-warning {
+    border-color: #ffca2c;
+    color: #ffca2c;
+}
+
+/* SweetAlert2 Dark Mode Support (data-theme) */
+[data-theme="dark"] .swal2-popup {
+    background-color: #1a1d20 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .swal2-title {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .swal2-html-container {
+    color: #b1b1b1 !important;
+}
+
+[data-theme="dark"] .swal2-icon.swal2-warning {
+    border-color: #ffca2c;
+    color: #ffca2c;
+}
+
+/* SweetAlert2 High Specificity Override */
+body[data-theme="dark"] div.swal2-container div.swal2-popup {
+    background-color: #1a1d20 !important;
+}
+body[data-theme="dark"] div.swal2-container div.swal2-title {
+    color: #ffffff !important;
+}
+body[data-theme="dark"] div.swal2-container div.swal2-html-container {
+    color: #b1b1b1 !important;
+}

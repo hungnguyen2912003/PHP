@@ -208,14 +208,14 @@
             const form = this.closest('.delete-form');
             
             Swal.fire({
-                title: "{{ __('messages.delete_confirm_title') }}",
-                text: "{{ __('messages.delete_confirm_text') }}",
+                title: {!! json_encode(__('messages.delete_confirm_title')) !!},
+                text: {!! json_encode(__('messages.delete_confirm_text')) !!},
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: "{{ __('messages.delete_confirm_btn') }}",
-                cancelButtonText: "{{ __('messages.delete_cancel_btn') }}"
+                confirmButtonText: {!! json_encode(__('messages.delete_confirm_btn')) !!},
+                cancelButtonText: {!! json_encode(__('messages.delete_cancel_btn')) !!}
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
