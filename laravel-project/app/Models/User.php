@@ -34,6 +34,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'activation_token_sent_at' => 'datetime',
         'last_login_at' => 'datetime',
+        'date_of_birth' => 'date',
     ];
 
     public function role()

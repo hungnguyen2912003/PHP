@@ -1,7 +1,7 @@
 <div class="sidebar-area" id="sidebar-area">
     <div class="logo position-relative d-flex align-items-center justify-content-between">
         <a class="d-block text-decoration-none position-relative" href="{{ route('dashboard') }}">
-            <img alt="logo-icon" src="{{ asset('assets/client/images/logo-icon.png') }}"/>
+            <img alt="logo-icon" src="{{ asset('assets/images/logo-icon.png') }}"/>
             <span class="logo-text text-secondary fw-semibold">App</span>
         </a>
         <button class="sidebar-burger-menu-close bg-transparent py-3 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y" id="sidebar-burger-menu-close">
@@ -29,16 +29,10 @@
                 </a>
             </li>
             <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('messages.menu_apps') }}</span></li>
-            <li class="menu-item {{ request()->routeIs('to-do-list') ? 'open' : '' }}">
-                <a class="menu-link {{ request()->routeIs('to-do-list') ? 'active' : '' }}" href="#">
-                <span class="material-symbols-outlined menu-icon">ballot</span>
-                <span class="title">{{ __('messages.menu_todo_list') }}</span>
-                </a>
-            </li>
-            <li class="menu-item {{ request()->routeIs('profile') ? 'open' : '' }}">
-                <a class="menu-link {{ request()->routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">
+            <li class="menu-item {{ request()->routeIs('user.*') ? 'open' : '' }}">
+                <a class="menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}" href="{{ route('user.index') }}">
                 <span class="material-symbols-outlined menu-icon">account_circle</span>
-                <span class="title">{{ __('messages.menu_my_profile') }}</span>
+                <span class="title">{{ __('messages.menu_users') }}</span>
                 </a>
             </li>
         </ul>

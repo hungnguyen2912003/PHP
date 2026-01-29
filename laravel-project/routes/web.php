@@ -6,20 +6,28 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 
 // admin
-// user
 Route::middleware('admin.auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     Route::prefix('setting')->name('setting.')->group(function () {
-        //Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::get('/account', [SettingController::class, 'account'])->name('account');
         Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
         Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
         Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
+    });
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
+        Route::get('/store', [UserController::class, 'store'])->name('store');
+        Route::post('/store', [UserController::class, 'storePost'])->name('store.post');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+        Route::post('/update/{id}', [UserController::class, 'updatePost'])->name('update.post');
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
 });
 
@@ -45,7 +53,6 @@ Route::middleware('user.auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     Route::prefix('setting')->name('setting.')->group(function () {
-        //Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::get('/account', [SettingController::class, 'account'])->name('account');
         Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
         Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');

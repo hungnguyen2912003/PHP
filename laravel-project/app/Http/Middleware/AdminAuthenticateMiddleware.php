@@ -27,11 +27,6 @@ class AdminAuthenticateMiddleware
             return redirect()->route('dashboard');
         }
 
-        if ($user->status !== 'pending') {
-            flash()->error('messages.activate_account_require');
-            return redirect()->route('dashboard');
-        }
-
         return $next($request);
     }
 }

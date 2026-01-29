@@ -28,7 +28,7 @@
             <div class="card border-0 bg-white rounded-10 mb-4">
                 <div class="position-relative">
                     <img alt="profile-cover" class="rounded-top-3 w-100"
-                        src="{{ asset('assets/client/images/profile-big-cover.jpg') }}" />
+                        src="{{ asset('assets/images/profile-big-cover.jpg') }}" />
                     <div class="position-absolute z-1" style="bottom: 20px; right: 20px;">
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview"
-                                                style="background-image: url({{ $user->avatar_url ? asset($user->avatar_url) : asset('images/user.png') }});">
+                                                style="background-image: url({{ $user->avatar_url ? asset($user->avatar_url) : asset('assets/images/user.png') }});">
                                             </div>
                                         </div>
                                     </div>
