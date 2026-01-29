@@ -168,10 +168,10 @@
                                         drive_file_rename_outline
                                         </i>
                                         </a>
-                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="bg-transparent p-0 border-0 hover-text-danger" data-bs-placement="top" data-bs-title="{{ __('messages.delete') }}" data-bs-toggle="tooltip">
+                                            <button type="button" class="bg-transparent p-0 border-0 hover-text-danger delete-btn" data-bs-placement="top" data-bs-title="{{ __('messages.delete') }}" data-bs-toggle="tooltip">
                                             <i class="material-symbols-outlined fs-16 fw-normal text-body">
                                             delete
                                             </i>
@@ -199,3 +199,29 @@
             </div>
         </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('.delete-form');
+            
+            Swal.fire({
+                title: "{{ __('messages.delete_confirm_title') }}",
+                text: "{{ __('messages.delete_confirm_text') }}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{ __('messages.delete_confirm_btn') }}",
+                cancelButtonText: "{{ __('messages.delete_cancel_btn') }}"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+@endpush

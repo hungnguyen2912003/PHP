@@ -260,4 +260,9 @@ return [
     'set_first_password_btn' => 'Set Password',
     'update_user' => 'Update User Information',
     'password' => 'Password',
+    'delete_confirm_title' => 'Are you sure?',
+    'delete_confirm_text' => "You won't be able to revert this!",
+    'delete_confirm_btn' => 'Yes, delete it!',
+    'delete_cancel_btn' => 'Cancel',
+    'user_deleted_success' => 'User deleted successfully.',
 ];

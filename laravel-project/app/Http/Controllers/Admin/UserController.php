@@ -107,7 +107,11 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        flash()->success(__('messages.user_deleted_success'), [], __('messages.success'));
+        return redirect()->back();
     }
 
     public function resendActivation($id)

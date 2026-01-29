@@ -254,4 +254,9 @@ return [
     'update_user' => 'ユーザー情報の更新',
     'password' => 'パスワード',
     'user_image' => 'ユーザー画像',
+    'delete_confirm_title' => '本当に実行しますか？',
+    'delete_confirm_text' => "これを元に戻すことはできません！",
+    'delete_confirm_btn' => 'はい、削除します！',
+    'delete_cancel_btn' => 'キャンセル',
+    'user_deleted_success' => 'ユーザーが正常に削除されました。',
 ];

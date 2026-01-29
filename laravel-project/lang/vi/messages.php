@@ -254,4 +254,9 @@ return [
     'update_user' => 'Cập nhật thông tin người dùng',
     'password' => 'Mật khẩu',
     'user_image' => 'Ảnh người dùng',
+    'delete_confirm_title' => 'Bạn có chắc chắn không?',
+    'delete_confirm_text' => "Bạn sẽ không thể hoàn tác điều này!",
+    'delete_confirm_btn' => 'Vâng, xóa nó!',
+    'delete_cancel_btn' => 'Hủy',
+    'user_deleted_success' => 'Xóa người dùng thành công.',
 ];
