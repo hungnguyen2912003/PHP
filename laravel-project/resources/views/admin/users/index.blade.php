@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="index.html">
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('dashboard') }}">
                         <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                         <span class="text-body fs-14 hover">{{ __('messages.menu_dashboard') }}</span>
                         </a>
@@ -35,7 +35,7 @@
                             </span>
                         </div>
                     </form>
-                    <a class="text-decoration-none fs-16 text-primary" href="add-teacher.html">
+                    <a class="text-decoration-none fs-16 text-primary" href="{{ route('user.store') }}">
                     + {{ __('messages.add_new_user') }}
                     </a>
                 </div>
@@ -126,9 +126,11 @@
                                 <td class="text-body">
                                     @php $roleName = optional($user->role)->name; @endphp
                                     @if ($roleName === 'Admin')
-                                        <span class="badge bg-primary">{{ __('messages.admin') }}</span>
+                                        <span class="badge bg-primary">{{ __('messages.role_admin') }}</span>
                                     @elseif ($roleName === 'User')
-                                        <span class="badge bg-info">{{ __('messages.user') }}</span>
+                                        <span class="badge bg-info">{{ __('messages.role_user') }}</span>
+                                    @elseif ($roleName === 'Staff')
+                                        <span class="badge bg-success">{{ __('messages.role_staff') }}</span>
                                     @else
                                         {{ $roleName }}
                                     @endif

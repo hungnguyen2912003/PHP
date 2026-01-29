@@ -144,6 +144,7 @@ return [
     'back_to_sign_in' => 'Back to Sign In',
     'reset_password_heading' => 'Reset Password?',
     'reset_password_desc' => 'Enter your new password and confirm it another time in the field below.',
+    'permission_denied' => 'Permission denied',
     'reset_password_btn' => 'Reset Password',
     'enter_new_password_label' => 'Enter new password',
     'enter_new_password_label' => 'Enter new password',
@@ -215,4 +216,38 @@ return [
     'footer_rights' => 'All rights reserved.',
     'footer_privacy' => 'Privacy Policy',
     'footer_terms' => 'Terms of Service',
+
+    // User Management
+    'user_image' => 'User Image',
+    'upload_image_hint' => 'Drag and drop an image or',
+    'browse' => 'Browse',
+    'select_role' => 'Select role',
+    'select_status' => 'Select status',
+    'select_gender' => 'Select gender',
+    'select_date' => 'Select date',
+    'user_created_success' => 'User created successfully.',
+    'add_user_btn' => '+ Add User',
+    
+    // Validation
+    'fullname_required' => 'Please enter full name',
+    'fullname_max' => 'Full name must not exceed 255 characters',
+    'email_required' => 'Please enter email',
+    'email_valid' => 'Invalid email format',
+    'email_unique' => 'Email already exists',
+    'role_required' => 'Please select a role',
+    'role_exists' => 'Role does not exist',
+    'role_exists' => 'Role does not exist',
+    'add_user_btn' => '+ Add User',
+    'user_created_success' => 'User created successfully.',
+
+    // Roles
+    'role_admin' => 'Admin',
+    'role_user' => 'User',
+    'role_staff' => 'Staff',
+
+    // Set First Password
+    'set_first_password_title' => 'Set First Password',
+    'set_first_password_heading' => 'Set First Password',
+    'set_first_password_desc' => 'Please set your password to activate your account.',
+    'set_first_password_btn' => 'Set Password',
 ];

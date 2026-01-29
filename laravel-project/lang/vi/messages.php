@@ -142,6 +142,7 @@ return [
     'back_to_sign_in' => 'Quay lại Đăng nhập',
     'reset_password_heading' => 'Đặt lại mật khẩu?',
     'reset_password_desc' => 'Nhập mật khẩu mới của bạn và xác nhận lại lần nữa ở ô bên dưới.',
+    'permission_denied' => 'Bạn không có quyền truy cập',
     'reset_password_btn' => 'Đặt lại mật khẩu',
     'enter_new_password_label' => 'Nhập mật khẩu mới',
     'enter_new_password_label' => 'Nhập mật khẩu mới',
@@ -213,4 +214,28 @@ return [
     'footer_rights' => 'Đã đăng ký bản quyền.',
     'footer_privacy' => 'Chính sách bảo mật',
     'footer_terms' => 'Điều khoản dịch vụ',
+
+    // Validation
+    'select_role' => 'Chọn vai trò',
+    'fullname_required' => 'Vui lòng nhập họ và tên',
+    'fullname_max' => 'Họ và tên không được vượt quá 255 ký tự',
+    'email_required' => 'Vui lòng nhập email',
+    'email_valid' => 'Email không hợp lệ',
+    'email_unique' => 'Email đã tồn tại',
+    'role_required' => 'Vui lòng chọn vai trò',
+    'role_exists' => 'Vai trò không tồn tại',
+    'role_exists' => 'Vai trò không tồn tại',
+    'add_user_btn' => '+ Thêm người dùng',
+    'user_created_success' => 'Tạo người dùng thành công.',
+
+    // Roles
+    'role_admin' => 'Quản trị viên',
+    'role_user' => 'Người dùng',
+    'role_staff' => 'Nhân viên',
+
+    // Set First Password
+    'set_first_password_title' => 'Đặt mật khẩu lần đầu',
+    'set_first_password_heading' => 'Đặt mật khẩu lần đầu',
+    'set_first_password_desc' => 'Vui lòng đặt mật khẩu để kích hoạt tài khoản của bạn.',
+    'set_first_password_btn' => 'Đặt mật khẩu',
 ];

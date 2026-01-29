@@ -60,10 +60,8 @@
                                 <h3 class="mb-1">{{ $user->fullname }}</h3>
                                 <div class="fs-15">
                                     <span class="text-secondary">{{ __('messages.role') }}:</span>
-                                    @if ($user->role->name === 'Admin')
-                                        {{ __('messages.admin') }}
-                                    @elseif ($user->role->name === 'User')
-                                        {{ __('messages.user') }}
+                                    @if($user->role)
+                                        {{ __('messages.role_' . strtolower($user->role->name)) }}
                                     @endif
                                 </div>
                                 <div class="fs-15 text-wrap">

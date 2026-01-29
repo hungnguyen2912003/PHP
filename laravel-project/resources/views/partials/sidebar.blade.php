@@ -28,6 +28,7 @@
                     <span class="title">{{ __('messages.menu_dashboard') }}</span>
                 </a>
             </li>
+            @if(Auth::check() && optional(Auth::user()->role)->name === 'Admin')
             <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('messages.menu_apps') }}</span></li>
             <li class="menu-item {{ request()->routeIs('user.*') ? 'open' : '' }}">
                 <a class="menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}" href="{{ route('user.index') }}">
@@ -35,6 +36,7 @@
                 <span class="title">{{ __('messages.menu_users') }}</span>
                 </a>
             </li>
+            @endif
         </ul>
     </aside>
 </div>

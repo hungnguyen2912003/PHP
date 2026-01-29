@@ -142,6 +142,7 @@ return [
     'back_to_sign_in' => 'ログインに戻る',
     'reset_password_heading' => 'パスワードのリセット？',
     'reset_password_desc' => '新しいパスワードを入力し、下のフィールドでもう一度確認してください。',
+    'permission_denied' => '権限がありません',
     'reset_password_btn' => 'パスワードをリセット',
     'enter_new_password_label' => '新しいパスワードを入力',
     'enter_new_password_label' => '新しいパスワードを入力',
@@ -213,4 +214,28 @@ return [
     'footer_rights' => '全著作権所有。',
     'footer_privacy' => 'プライバシーポリシー',
     'footer_terms' => '利用規約',
+
+    // Validation
+    'select_role' => '役割を選択',
+    'fullname_required' => '氏名を入力してください',
+    'fullname_max' => '氏名は255文字以内で入力してください',
+    'email_required' => 'メールアドレスを入力してください',
+    'email_valid' => 'メールアドレスの形式が正しくありません',
+    'email_unique' => 'このメールアドレスは既に使用されています',
+    'role_required' => '役割を選択してください',
+    'role_exists' => '選択された役割は存在しません',
+    'role_exists' => '選択された役割は存在しません',
+    'add_user_btn' => '+ ユーザーを追加',
+    'user_created_success' => 'ユーザーが正常に作成されました。',
+
+    // Roles
+    'role_admin' => '管理者',
+    'role_user' => 'ユーザー',
+    'role_staff' => 'スタッフ',
+
+    // Set First Password
+    'set_first_password_title' => '初回パスワード設定',
+    'set_first_password_heading' => '初回パスワード設定',
+    'set_first_password_desc' => 'アカウントを有効にするためにパスワードを設定してください。',
+    'set_first_password_btn' => 'パスワードを設定',
 ];

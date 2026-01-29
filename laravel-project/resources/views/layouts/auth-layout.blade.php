@@ -31,7 +31,7 @@
 <body class="bg-body-bg">
     @yield('content')
     <!-- Link Of JS File -->
-    <script src="{{ asset('assets/js/jquery-4.0.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
     <script src="{{ asset('assets/js/quill.min.js') }}"></script>

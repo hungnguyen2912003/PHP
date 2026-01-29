@@ -131,10 +131,8 @@
                                                 {{ $user->fullname }}
                                             </h3>
                                             <span class="fs-15 fw-medium">{{ __('messages.role') }}:</span>
-                                            @if ($user->role->name === 'Admin')
-                                                {{ __('messages.admin') }}
-                                            @elseif ($user->role->name === 'User')
-                                                {{ __('messages.user') }}
+                                            @if($user->role)
+                                                {{ __('messages.role_' . strtolower($user->role->name)) }}
                                             @endif
                                         </div>
                                     </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\ForgotPaswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\SetFirstPasswordRequest;
 use Illuminate\Http\Request;
 use App\Mail\ActivationMail;
 use App\Mail\ForgotPasswordMail;
@@ -68,9 +69,48 @@ class AuthController extends Controller
 
     ///////////////////////////////////////////////////////////////////////////
     // Activate
-    public function activate($token)
+    public function activate(Request $request, $token)
     {
-        $user = User::where('activation_token', $token)->first();
+        $email = $request->query('email');
+        $user = User::where('activation_token', $token)->where('email', $email)->first();
+
+        if (!$user) {
+            flash()->error(__('messages.activation_token_invalid'), [], __('messages.error'));
+            return redirect()->route('login');
+        }
+
+        if ($user->activation_token_sent_at->addMinutes(30)->isPast()) {
+            flash()->error(__('messages.activation_token_expired'), [], __('messages.error'));
+            return redirect()->route('login');
+        }
+
+        // If user has role 'User', just activate and redirect to verified-account
+        if ($user->role->name === 'User') {
+            $user->activation_token = null;
+            $user->activation_token_sent_at = null;
+            $user->status = 'active';
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+
+            flash()->success(__('messages.activation_success'), [], __('messages.success'));
+            session()->flash('verified_access', true);
+            return redirect()->route('verified-account');
+        }
+
+        // For Admin/Staff, redirect to set-first-password
+        return view('pages.auth.set-first-password', [
+            'token' => $token,
+            'email' => $email,
+            'username' => $user->username
+        ]);
+    }
+
+    public function setFirstPassword(SetFirstPasswordRequest $request, $token)
+    {
+        $user = User::where('activation_token', $token)
+                    ->where('email', $request->email)
+                    ->where('username', $request->username)
+                    ->first();
 
         if (!$user) {
             flash()->error(__('messages.activation_token_invalid'), [], __('messages.error'));
@@ -86,10 +126,13 @@ class AuthController extends Controller
         $user->activation_token_sent_at = null;
         $user->status = 'active';
         $user->email_verified_at = Carbon::now();
+        $user->password = Hash::make($request->password);
         $user->save();
+
         flash()->success(__('messages.activation_success'), [], __('messages.success'));
         session()->flash('verified_access', true);
-        return redirect()->route('verified-account');
+        
+        return redirect()->route('login');
     }
 
     public function resendActivation(Request $request)
@@ -172,11 +215,6 @@ class AuthController extends Controller
             if ($user->role->name === 'Admin') {
                 return redirect()->route('dashboard');
             }
-
-            // If user status is pending, maybe we should still redirect to profile/home but show the warning?
-            // The original code redirected to profile for pending.
-            // But let's follow the general rule: User -> home (or profile if pending?)
-            // The user request said: "user thì chuyển đến home của user"
             
             if ($user->status === 'pending') {
                  return redirect()->route('profile');

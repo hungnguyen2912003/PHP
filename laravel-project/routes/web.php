@@ -63,6 +63,7 @@ Route::middleware('user.auth')->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
+Route::post('/activate/{token}', [AuthController::class, 'setFirstPassword'])->name('activate.password');
 Route::get('/verified-account', [AuthController::class,'verifiedAccount'])->name('verified-account');
 
 

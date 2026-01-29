@@ -44,6 +44,7 @@
         </div>
         <!-- Link Of JS File -->
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>        
         <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
         <script src="{{ asset('assets/js/quill.min.js') }}"></script>
         <script src="{{ asset('assets/js/data-table.js') }}"></script>

@@ -16,14 +16,14 @@ class AdminAuthenticateMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            flash()->error('messages.login_require');
+            flash()->error(__('messages.login_require'), [], __('messages.error'));
             return redirect()->route('login');
         }
 
         $user = Auth::user();
 
         if ($user->role->name !== 'Admin') {
-            flash()->error('messages.permission_denied');
+            flash()->warning(__('messages.permission_denied'), [], __('messages.warning'));
             return redirect()->route('dashboard');
         }
 
