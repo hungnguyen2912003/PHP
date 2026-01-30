@@ -48,9 +48,9 @@
                             </label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" placeholder="{{ __('messages.enter_new_password_label') }}"
+                                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" placeholder="{{ __('messages.enter_password') }}"
                                         type="password" name="password" id="password" />
-                                    <label for="password">{{ __('messages.enter_new_password_label') }}</label>
+                                    <label for="password">{{ __('messages.enter_password') }}</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
                                         style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">
@@ -60,13 +60,13 @@
                         </div>
                         <div class="mb-20">
                             <label class="label fs-16 mb-2">
-                                {{ __('messages.confirm_new_password_label') }} <span class="text-danger">*</span>
+                                {{ __('messages.confirm_password_label') }} <span class="text-danger">*</span>
                             </label>
                             <div class="form-group" id="password-show-hide">
                                 <div class="password-wrapper position-relative password-container form-floating">
-                                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('messages.confirm_new_password_label') }}"
+                                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('messages.confirm_password_label') }}"
                                         type="password" name="password_confirmation" id="password_confirmation" />
-                                    <label for="password_confirmation">{{ __('messages.confirm_new_password_label') }}</label>
+                                    <label for="password_confirmation">{{ __('messages.confirm_password') }}</label>
                                     <i aria-hidden="true"
                                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
                                         style="color: #A9A9C8; font-size: 22px; right: 15px; z-index: 10;">

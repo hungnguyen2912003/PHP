@@ -64,6 +64,7 @@ return [
     'status_pending' => '保留中',
     'status_banned' => '禁止',
     'status_deleted' => '削除済み',
+    'no_role' => '役職が設定されていません',
 
     // Notifications
     'login_require' => 'この機能を使用するにはログインしてください',
@@ -254,6 +255,8 @@ return [
     'set_first_password_btn' => 'パスワードを設定',
     'update_user' => 'ユーザー情報の更新',
     'password' => 'パスワード',
+    'confirm_password_label' => 'パスワード（確認）',
+    'confirm_password' => 'パスワードを再入力してください',
     'user_image' => 'ユーザー画像',
     'delete_confirm_title' => '本当に実行しますか？',
     'delete_confirm_text' => "これを元に戻すことはできません！",

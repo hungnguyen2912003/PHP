@@ -19944,7 +19944,7 @@ Dark Mode CSS
   top: -2px;
 }
 .default-table-area .table-responsive .table tbody tr td:last-child {
-  text-align: right;
+  text-align: center;
 }
 .default-table-area .table-responsive .table tbody tr.last-child-border-none:last-child td {
   border: none;
@@ -22475,55 +22475,4 @@ body[data-theme="dark"] div.swal2-container div.swal2-html-container {
 }
 .dataTables_wrapper .dataTables_paginate {
     margin-top: 0 !important;
-}
-
-/* Custom DataTables Sort Icons */
-table.dataTable thead > tr > th.sorting:before,
-table.dataTable thead > tr > th.sorting:after,
-table.dataTable thead > tr > th.sorting_asc:before,
-table.dataTable thead > tr > th.sorting_asc:after,
-table.dataTable thead > tr > th.sorting_desc:before,
-table.dataTable thead > tr > th.sorting_desc:after,
-table.dataTable thead > tr > td.sorting:before,
-table.dataTable thead > tr > td.sorting:after,
-table.dataTable thead > tr > td.sorting_asc:before,
-table.dataTable thead > tr > td.sorting_asc:after,
-table.dataTable thead > tr > td.sorting_desc:before,
-table.dataTable thead > tr > td.sorting_desc:after {
-    content: "" !important;
-    background-image: none !important;
-}
-
-table.dataTable thead > tr > th.sorting,
-table.dataTable thead > tr > th.sorting_asc,
-table.dataTable thead > tr > th.sorting_desc {
-    position: relative;
-    padding-right: 30px !important;
-}
-
-table.dataTable thead > tr > th.sorting::after,
-table.dataTable thead > tr > th.sorting_asc::after,
-table.dataTable thead > tr > th.sorting_desc::after {
-    font-family: 'remixicon' !important;
-    position: absolute !important;
-    right: 10px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 1rem !important;
-    opacity: 0.5;
-    display: inline-block !important;
-}
-
-table.dataTable thead > tr > th.sorting::after {
-    content: "\ea74" !important; /* ri-arrow-up-down-line */
-}
-
-table.dataTable thead > tr > th.sorting_asc::after {
-    content: "\ea76" !important; /* ri-arrow-up-line */
-    opacity: 1;
-}
-
-table.dataTable thead > tr > th.sorting_desc::after {
-    content: "\ea4c" !important; /* ri-arrow-down-line */
-    opacity: 1;
 }

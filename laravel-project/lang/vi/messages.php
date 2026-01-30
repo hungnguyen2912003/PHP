@@ -64,6 +64,7 @@ return [
     'status_pending' => 'Chờ duyệt',
     'status_banned' => 'Bị khóa',
     'status_deleted' => 'Đã xóa',
+    'no_role' => 'Chưa thiết lập vai trò',
 
     // Notifications
     'login_require' => 'Vui lòng đăng nhập để sử dụng tính năng này',
@@ -147,7 +148,6 @@ return [
     'permission_denied' => 'Bạn không có quyền truy cập',
     'reset_password_btn' => 'Đặt lại mật khẩu',
     'enter_new_password_label' => 'Nhập mật khẩu mới',
-    'enter_new_password_label' => 'Nhập mật khẩu mới',
     'confirm_new_password_label' => 'Xác nhận mật khẩu mới',
     'processing' => 'Đang xử lý...',
 
@@ -229,7 +229,6 @@ return [
     'email_unique' => 'Email đã tồn tại',
     'role_required' => 'Vui lòng chọn vai trò',
     'role_exists' => 'Vai trò không tồn tại',
-    'role_exists' => 'Vai trò không tồn tại',
     'add_user_btn' => '+ Thêm người dùng',
     'user_created_success' => 'Tạo người dùng thành công.',
     'resend_activation_email' => 'Gửi lại email kích hoạt',
@@ -254,6 +253,8 @@ return [
     'set_first_password_btn' => 'Đặt mật khẩu',
     'update_user' => 'Cập nhật thông tin người dùng',
     'password' => 'Mật khẩu',
+    'confirm_password_label' => 'Xác nhận mật khẩu',
+    'confirm_password' => 'Nhập lại mật khẩu',
     'user_image' => 'Ảnh người dùng',
     'delete_confirm_title' => 'Bạn có chắc chắn không?',
     'delete_confirm_text' => "Bạn sẽ không thể hoàn tác điều này!",
