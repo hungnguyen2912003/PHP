@@ -85,6 +85,27 @@
                         }
                     });
                 }
+
+                if (e.target.closest('.resend-btn')) {
+                    e.preventDefault();
+                    const button = e.target.closest('.resend-btn');
+                    const form = button.closest('form');
+                    
+                    Swal.fire({
+                        title: {!! json_encode(__('messages.resend_confirm_title')) !!},
+                        text: {!! json_encode(__('messages.resend_confirm_text')) !!},
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: {!! json_encode(__('messages.resend_confirm_btn')) !!},
+                        cancelButtonText: {!! json_encode(__('messages.resend_cancel_btn')) !!}
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                }
             });
         });
     </script>

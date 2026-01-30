@@ -260,6 +260,10 @@ return [
     'delete_confirm_text' => "Bạn sẽ không thể hoàn tác điều này!",
     'delete_confirm_btn' => 'Vâng, xóa nó!',
     'delete_cancel_btn' => 'Hủy',
+    'resend_confirm_title' => 'Bạn có chắc chắn không?',
+    'resend_confirm_text' => 'Bạn có muốn gửi lại email kích hoạt cho người dùng này không?',
+    'resend_confirm_btn' => 'Gửi ngay',
+    'resend_cancel_btn' => 'Hủy bỏ',
     'user_deleted_success' => 'Xóa người dùng thành công.',
     'stt' => 'STT',
 ];

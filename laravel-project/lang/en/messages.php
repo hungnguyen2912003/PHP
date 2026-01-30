@@ -267,6 +267,10 @@ return [
     'delete_confirm_text' => "You won't be able to revert this!",
     'delete_confirm_btn' => 'Yes, delete it!',
     'delete_cancel_btn' => 'Cancel',
+    'resend_confirm_title' => 'Are you sure?',
+    'resend_confirm_text' => 'Do you want to resend the activation email to this user?',
+    'resend_confirm_btn' => 'Send Now',
+    'resend_cancel_btn' => 'Cancel',
     'user_deleted_success' => 'User deleted successfully.',
     'stt' => 'No.',
 ];

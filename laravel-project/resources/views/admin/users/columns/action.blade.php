@@ -2,7 +2,7 @@
     @if ($user->status == 'pending')
     <form action="{{ route('user.resend-activation', $user->id) }}" method="POST" class="d-inline">
         @csrf
-        <button type="submit" class="bg-transparent p-0 border-0 hover-text-warning" data-bs-placement="top" data-bs-title="{{ __('messages.resend_activation_email') }}" data-bs-toggle="tooltip">
+        <button type="button" class="bg-transparent p-0 border-0 hover-text-warning resend-btn" data-bs-placement="top" data-bs-title="{{ __('messages.resend_activation_email') }}" data-bs-toggle="tooltip">
             <i class="material-symbols-outlined fs-16 fw-normal text-body">
             refresh
             </i>
