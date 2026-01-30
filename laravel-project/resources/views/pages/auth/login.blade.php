@@ -8,9 +8,13 @@
             <div class="m-lg-auto my-auto w-930 py-4">
                 <div class="card bg-white border rounded-10 py-100 px-130 position-relative">
                     @include('partials.language-switcher')
+                    <div class="logo-auth position-absolute top-0 start-50 translate-middle-x p-3">
+                         <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="width: 150px;">
+                    </div>
                     <div class="p-md-5 p-4 p-lg-0">
-                        <div class="text-center mb-4">
-                            <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
+                        <div class="text-center mb-4 mt-5 pt-4">
+                             <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
+
                                 {{ __('messages.sign_in_title') }}
                             </h3>
                             <p class="fs-16 text-secondary lh-1-8">
