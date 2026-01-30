@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\DataTables\UsersDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -17,10 +18,9 @@ use App\Mail\ActivationMail;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::paginate(10);
-        return view('admin.users.index', compact('users'));
+        return $dataTable->render('admin.users.index');
     }
 
     public function store()
@@ -88,10 +88,10 @@ class UserController extends Controller
 
         $user->fullname = $validated['fullname'];
         $user->email = $validated['email'];
-        $user->phone = $validated['phone'];
-        $user->address = $validated['address'];
-        $user->gender = $validated['gender'];
-        $user->date_of_birth = $validated['date_of_birth'];
+        $user->phone = $validated['phone'] ?? null;
+        $user->address = $validated['address'] ?? null;
+        $user->gender = $validated['gender'] ?? null;
+        $user->date_of_birth = $validated['date_of_birth'] ?? null;
         $user->role_id = $validated['role_id'];
         $user->status = $validated['status'];
 

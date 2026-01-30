@@ -14,6 +14,8 @@
         <link href="{{ asset('assets/css/swiper-bundle.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/jsvectormap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/style.css?v=' . time()) }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/datatable/dataTables.bootstrap5.min.css') }}" rel="stylesheet"/>
         <!-- Favicon -->
         <!-- Flasher CSS -->
         <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet">
@@ -60,7 +62,10 @@
         <script src="{{ asset('assets/js/custom/apexcharts.js') }}"></script>
         <script src="{{ asset('assets/js/custom/echarts.js') }}"></script>
         <script src="{{ asset('assets/js/custom/maps.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/dataTables.bootstrap5.min.js') }}"></script>
+        
         <script src="{{ asset('assets/js/custom/custom.js?id=' . time()) }}"></script>
         <script>
             (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bc284948f78f7b9',t:'MTc2ODExNDYyNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();

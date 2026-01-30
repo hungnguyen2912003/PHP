@@ -8,6 +8,7 @@ return [
     'vietnamese' => 'ベトナム語',
     'japanese' => '日本語',
     'search_placeholder' => "検索...",
+    'search' => '検索',
     'menu_main' => 'メイン',
     'menu_dashboard' => 'ダッシュボード',
     'menu_apps' => 'アプリ',
@@ -259,4 +260,5 @@ return [
     'delete_confirm_btn' => 'はい、削除します！',
     'delete_cancel_btn' => 'キャンセル',
     'user_deleted_success' => 'ユーザーが正常に削除されました。',
+    'stt' => '番号順',
 ];

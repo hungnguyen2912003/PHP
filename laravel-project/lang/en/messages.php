@@ -8,6 +8,7 @@ return [
     'vietnamese' => 'Vietnamese',
     'japanese' => 'Japanese',
     'search_placeholder' => "Search here...",
+    'search' => 'Search',
     'menu_main' => 'MAIN',
     'menu_dashboard' => 'Dashboard',
     'menu_apps' => 'APPS',
@@ -265,4 +266,5 @@ return [
     'delete_confirm_btn' => 'Yes, delete it!',
     'delete_cancel_btn' => 'Cancel',
     'user_deleted_success' => 'User deleted successfully.',
+    'stt' => 'No.',
 ];

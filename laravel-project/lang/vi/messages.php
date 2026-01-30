@@ -8,6 +8,7 @@ return [
     'vietnamese' => 'Tiếng Việt',
     'japanese' => 'Tiếng Nhật',
     "search_placeholder" => "Tìm kiếm...",
+    'search' => 'Tìm kiếm',
     'menu_main' => 'CHÍNH',
     'menu_dashboard' => 'Bảng điều khiển',
     'menu_apps' => 'ỨNG DỤNG',
@@ -259,4 +260,5 @@ return [
     'delete_confirm_btn' => 'Vâng, xóa nó!',
     'delete_cancel_btn' => 'Hủy',
     'user_deleted_success' => 'Xóa người dùng thành công.',
+    'stt' => 'STT',
 ];

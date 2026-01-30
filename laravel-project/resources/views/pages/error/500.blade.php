@@ -28,6 +28,20 @@
                             <h3 class="text-uppercase">{{ __('messages.error_500_title') }}</h3>
                             <h4 class="">{{ __('messages.error_500_msg') }}</h4>
                             <p class="font-size-15 mx-auto text-muted w-75 mt-4">{{ __('messages.error_500_text') }}</p>
+                            
+                            @if(config('app.debug') && isset($exception))
+                                <div class="mt-4 text-start mx-auto w-75">
+                                    <div class="alert alert-danger">
+                                        <h5 class="alert-heading">Debug info:</h5>
+                                        <p class="mb-1">{{ $exception->getMessage() }}</p>
+                                        @if(method_exists($exception, 'getFile'))
+                                            <hr>
+                                            <p class="mb-0 small text-break">{{ $exception->getFile() }}:{{ $exception->getLine() }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="mt-5 text-center">
                                 <a class="btn btn-primary waves-effect waves-light" href="{{ route('dashboard') }}">{{ __('messages.back_to_home') }}</a>
                             </div>
