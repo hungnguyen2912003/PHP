@@ -18509,16 +18509,50 @@ Dark Mode SCSS
   z-index: 1;
   border-right: 1px solid #eff3f9;
 }
+/* .sidebar-area .logo {
+  padding: 25px 25px 25px 10px;
+} */
+
 .sidebar-area .logo {
   padding: 25px;
 }
+
+/* .sidebar-area .logo img {
+  height: 50px;
+  width: auto;
+} */
+
+.sidebar-area .logo a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
 .sidebar-area .logo .logo-text {
   font-size: 24px;
   position: absolute;
   top: 50%;
-  left: 49px;
+  left: 55px;
   transition: all ease 0.5s;
   transform: translateY(-50%);
+}
+
+.sidebar-area .logo .healthi-text {
+  background: linear-gradient(180deg, #83be36 50%, #076048 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+.sidebar-area .logo .fy-text {
+  background: linear-gradient(180deg, #0185cc 50%, #013182 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
 }
 .sidebar-area .sidebar-burger-menu-close {
   transition: all ease 0.5s;
@@ -18797,7 +18831,14 @@ Dark Mode SCSS
 }
 [sidebar-data-theme=sidebar-hide] .sidebar-area .logo {
   padding: 25px 12px;
+
 }
+/* 
+[sidebar-data-theme=sidebar-hide] .sidebar-area .logo img {
+  height: 20px;
+  width: auto;
+} */
+
 [sidebar-data-theme=sidebar-hide] .sidebar-area .logo .logo-text {
   left: 0;
   opacity: 0;
@@ -18836,14 +18877,25 @@ Dark Mode SCSS
 [sidebar-data-theme=sidebar-hide] .sidebar-area .sidebar-burger-menu {
   display: none;
 }
+
 [sidebar-data-theme=sidebar-hide] .sidebar-area:hover {
   width: 260px;
 }
+/* [sidebar-data-theme=sidebar-hide] .sidebar-area:hover .logo {
+  padding: 25px 25px 25px 10px;
+} */
+
 [sidebar-data-theme=sidebar-hide] .sidebar-area:hover .logo {
   padding: 25px;
 }
+
+/* [sidebar-data-theme=sidebar-hide] .sidebar-area:hover .logo img {
+  height: 50px;
+  width: auto;
+} */
+
 [sidebar-data-theme=sidebar-hide] .sidebar-area:hover .logo .logo-text {
-  left: 49px;
+  left: 55px;
   opacity: 1;
   visibility: visible;
 }
@@ -18955,7 +19007,7 @@ Dark Mode SCSS
     padding: 25px;
   }
   [sidebar-data-theme=sidebar-hide] .sidebar-area .logo .logo-text {
-    left: 49px;
+    left: 55px;
     opacity: 1;
     visibility: visible;
   }

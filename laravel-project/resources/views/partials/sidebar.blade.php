@@ -1,8 +1,8 @@
 <div class="sidebar-area" id="sidebar-area">
     <div class="logo position-relative d-flex align-items-center justify-content-between">
         <a class="d-block text-decoration-none position-relative" href="{{ route('dashboard') }}">
-            <img alt="logo-icon" src="{{ asset('assets/images/logo-icon.png') }}"/>
-            <span class="logo-text text-secondary fw-semibold">App</span>
+            <img alt="logo-icon" src="{{ asset('assets/images/logo-sidebar.png') }}"/>
+            <span class="logo-text text-secondary fw-semibold"><span class="healthi-text">Healthi</span><span class="fy-text">fy</span></span>
         </a>
         <button class="sidebar-burger-menu-close bg-transparent py-3 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y" id="sidebar-burger-menu-close">
             <span class="border-1 d-block for-dark-burger" style="border-bottom: 1px solid #475569; height: 1px; width: 25px; transform: rotate(45deg);">
