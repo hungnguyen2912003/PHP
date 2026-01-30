@@ -157,6 +157,7 @@ This files table contents are outlined below>>>>>
   --bs-body-color: #919aa3;
   --bs-body-color-rgb: 145, 154, 163;
   --bs-body-bg: #eff3f9;
+  --bs-body-bg2: #000;
   --bs-body-bg-rgb: 239, 243, 249;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
@@ -22475,4 +22476,58 @@ body[data-theme="dark"] div.swal2-container div.swal2-html-container {
 }
 .dataTables_wrapper .dataTables_paginate {
     margin-top: 0 !important;
+}
+
+
+/* Dark mode pagination - Bootstrap 5 & Custom */
+[data-bs-theme=dark] .pagination,
+[data-theme=dark] .pagination {
+    --bs-pagination-bg: #1b232d;
+    --bs-pagination-border-color: rgba(255, 255, 255, 0.09);
+    --bs-pagination-color: #dee2e6;
+    --bs-pagination-hover-bg: #28333f;
+    --bs-pagination-hover-border-color: rgba(255, 255, 255, 0.09);
+    --bs-pagination-hover-color: #fff;
+    --bs-pagination-focus-bg: #28333f;
+    --bs-pagination-active-bg: #0f79f3;
+    --bs-pagination-active-border-color: #0f79f3;
+    --bs-pagination-disabled-bg: transparent;
+    --bs-pagination-disabled-border-color: rgba(255, 255, 255, 0.09);
+    --bs-pagination-disabled-color: rgba(255, 255, 255, 0.5);
+}
+
+[data-bs-theme=dark] .page-link,
+[data-theme=dark] .page-link {
+    background-color: var(--bs-pagination-bg) !important;
+    border-color: var(--bs-pagination-border-color) !important;
+    color: var(--bs-pagination-color) !important;
+}
+
+[data-bs-theme=dark] .page-link:hover,
+[data-theme=dark] .page-link:hover {
+    background-color: var(--bs-pagination-hover-bg) !important;
+    border-color: var(--bs-pagination-hover-border-color) !important;
+    color: var(--bs-pagination-hover-color) !important;
+}
+
+[data-bs-theme=dark] .page-item.active .page-link,
+[data-theme=dark] .page-item.active .page-link {
+    background-color: var(--bs-pagination-active-bg) !important;
+    border-color: var(--bs-pagination-active-border-color) !important;
+    color: #fff !important;
+}
+
+[data-bs-theme=dark] .page-item.disabled .page-link,
+[data-theme=dark] .page-item.disabled .page-link {
+    background-color: var(--bs-pagination-disabled-bg) !important;
+    border-color: var(--bs-pagination-disabled-border-color) !important;
+    color: var(--bs-pagination-disabled-color) !important;
+}
+
+/* Dark mode table text correction */
+[data-bs-theme=dark] .table td,
+[data-theme=dark] .table td,
+[data-bs-theme=dark] .table th,
+[data-theme=dark] .table th {
+    color: #dee2e6 !important;
 }

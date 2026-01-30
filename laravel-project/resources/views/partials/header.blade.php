@@ -119,7 +119,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="dropdown-menu border-0 bg-white dropdown-menu-end">
+                                <div class="dropdown-menu border-0 bg-white dropdown-menu-end" style="min-width: 260px;">
                                     <div class="d-flex align-items-center info">
                                         <div class="flex-shrink-0">
                                             <img alt="admin" class="rounded-circle admin-img-width-for-mobile"

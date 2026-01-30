@@ -32,18 +32,18 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'fullname.required' => 'Full Name is required.',
-            'fullname.max' => 'Full Name must be at most 255 characters.',
-            'username.required' => 'Username is required.',
-            'username.max' => 'Username must be at most 255 characters.',
-            'username.unique' => 'This username is already taken.',
-            'email.required' => 'Email is required.',
-            'email.max' => 'Email must be at most 255 characters.',
-            'email.email' => 'Email must be a valid email address.',
-            'email.unique' => 'This email is already registered.',
-            'password.required' => 'Password is required.',
-            'password.min' => 'Password must be at least 6 characters.',
-            'password.confirmed' => 'Password confirmation does not match.',
+            'fullname.required' => __('messages.fullname_required'),
+            'fullname.max' => __('messages.fullname_max'),
+            'username.required' => __('messages.username_required'),
+            'username.max' => __('messages.username_max'),
+            'username.unique' => __('messages.username_unique'),
+            'email.required' => __('messages.email_required'),
+            'email.max' => __('messages.email_max'),
+            'email.email' => __('messages.email_valid'),
+            'email.unique' => __('messages.email_unique'),
+            'password.required' => __('messages.password_required'),
+            'password.min' => __('messages.password_min'),
+            'password.confirmed' => __('messages.password_confirmed'),
         ];
     }
 }

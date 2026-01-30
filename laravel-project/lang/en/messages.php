@@ -232,6 +232,12 @@ return [
     'resend_activation_email' => 'Resend Activation Email',
     'resend_activation_success' => 'Activation email has been resent successfully.',
     'resend_activation_failed' => 'Failed to resend activation email. User is not pending or does not exist.',
+    'login_required' => 'Username or email is required',
+    'login_min' => 'Username or email must be at least 3 characters',
+    'email_exists' => 'Email does not exist',
+    'username_required' => 'Username is required',
+    'username_max' => 'Username must not exceed 255 characters',
+    'username_unique' => 'Username already exists',
     
     // Validation
     'fullname_required' => 'Please enter full name',
@@ -248,6 +254,9 @@ return [
     'date_of_birth_required' => 'Please select date of birth',
     'status_required' => 'Please select status',
     'password_required' => 'Please enter password',
+    'password_min' => 'Password must be at least 6 characters',
+    'password_confirmed' => 'Password confirmation does not match',
+    'password_confirmation_required' => 'Password confirmation is required',
 
     // Roles
     'role_admin' => 'Admin',

@@ -227,6 +227,12 @@ return [
     'email_required' => 'Vui lòng nhập email',
     'email_valid' => 'Email không hợp lệ',
     'email_unique' => 'Email đã tồn tại',
+    'email_exists' => 'Email không tồn tại trong hệ thống',
+    'username_required' => 'Vui lòng nhập tên đăng nhập',
+    'username_max' => 'Tên đăng nhập không được vượt quá 255 ký tự',
+    'username_unique' => 'Tên đăng nhập đã tồn tại',
+    'login_required' => 'Vui lòng nhập tên đăng nhập hoặc email',
+    'login_min' => 'Tên đăng nhập hoặc email phải có ít nhất 3 ký tự',
     'role_required' => 'Vui lòng chọn vai trò',
     'role_exists' => 'Vai trò không tồn tại',
     'add_user_btn' => '+ Thêm người dùng',
@@ -240,6 +246,9 @@ return [
     'date_of_birth_required' => 'Vui lòng chọn ngày sinh',
     'status_required' => 'Vui lòng chọn trạng thái',
     'password_required' => 'Vui lòng nhập mật khẩu',
+    'password_min' => 'Mật khẩu phải có ít nhất 6 ký tự',
+    'password_confirmed' => 'Xác nhận mật khẩu không khớp',
+    'password_confirmation_required' => 'Vui lòng xác nhận mật khẩu',
 
     // Roles
     'role_admin' => 'Quản trị viên',

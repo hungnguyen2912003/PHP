@@ -29,9 +29,9 @@ class ForgotPaswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Email is required.',
-            'email.email' => 'Email must be a valid email address.',
-            'email.exists' => 'Email does not exist.',
+            'email.required' => __('messages.email_required'),
+            'email.email' => __('messages.email_valid'),
+            'email.exists' => __('messages.email_exists'),
         ];
     }
 }
