@@ -14,7 +14,7 @@
     <link href="{{ asset('assets/css/swiper-bundle.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/jsvectormap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/mycss.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/mycss.css?v=' . time()) }}" rel="stylesheet" />
     <!-- Flasher CSS -->
     <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet">
     <!-- Title -->

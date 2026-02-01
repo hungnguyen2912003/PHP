@@ -7,14 +7,66 @@
         <div class="main-content d-flex flex-column p-0">
             <div class="m-lg-auto my-auto w-930 py-4">
                 <div class="card bg-white border rounded-10 py-100 px-130 position-relative">
-                    @include('partials.language-switcher')
-                    <div class="logo-auth position-absolute top-0 start-50 translate-middle-x p-3">
-                         <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="width: 150px;">
+                    <div class="position-absolute top-0 start-0 end-0 p-3">
+                        <div class="lang-switcher-auth d-flex justify-content-end align-items-center">
+                            @php
+                                $locales = [
+                                    'en' => ['name' => __('messages.lang_en'), 'flag' => 'usa.png'],
+                                    'ja' => ['name' => __('messages.lang_ja'), 'flag' => 'japan.png'],
+                                    'vi' => ['name' => __('messages.lang_vi'), 'flag' => 'vietnam.png'],
+                                ];
+                                $currentLocale = App::getLocale();
+                                // Re-evaluate current name based on new keys
+                                $locales = [
+                                    'en' => ['name' => __('messages.lang_en'), 'flag' => 'usa.png'],
+                                    'ja' => ['name' => __('messages.lang_ja'), 'flag' => 'japan.png'],
+                                    'vi' => ['name' => __('messages.lang_vi'), 'flag' => 'vietnam.png'],
+                                ];
+                                $currentFlag = $locales[$currentLocale]['flag'] ?? 'usa.png';
+                                $currentName = $locales[$currentLocale]['name'] ?? 'English';
+                            @endphp
+
+                            <div class="dropdown">
+                                {{-- Button (minimal) --}}
+                                <button class="lang-trigger" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                                    <img src="{{ asset('assets/images/' . $currentFlag) }}" alt="{{ $currentName }}">
+                                    <span>{{ $currentName }}</span>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </button>
+
+                                {{-- Menu --}}
+                                <div class="dropdown-menu lang-menu dropdown-menu-end mt-2">
+                                    <div class="lang-head">
+                                        {{ __('messages.choose_language') }}
+                                    </div>
+
+                                    <div class="lang-items" data-simplebar>
+                                        @foreach ($locales as $key => $data)
+                                            <a href="{{ route('change-language', $key) }}"
+                                            class="lang-item {{ $currentLocale === $key ? 'is-active' : '' }}">
+                                                <img src="{{ asset('assets/images/' . $data['flag']) }}" alt="{{ $data['name'] }}">
+                                                <span class="lang-name">{{ $data['name'] }}</span>
+
+                                                @if ($currentLocale === $key)
+                                                    <i class="ri-check-line"></i>
+                                                @endif
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url('/') }}"
+                        class="position-absolute top-0 start-0 text-decoration-none">
+                            <img src="{{ asset('assets/images/logo.png') }}"
+                                alt="logo"
+                                class="img-fluid"
+                                style="max-height: 120px;">
+                        </a>
                     </div>
                     <div class="p-md-5 p-4 p-lg-0">
-                        <div class="text-center mb-4 mt-5 pt-4">
+                        <div class="text-center mb-4 mt-5">
                              <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">
-
                                 {{ __('messages.sign_in_title') }}
                             </h3>
                             <p class="fs-16 text-secondary lh-1-8">
