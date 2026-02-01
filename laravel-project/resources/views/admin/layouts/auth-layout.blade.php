@@ -14,8 +14,6 @@
         <link href="{{ asset('assets/css/jsvectormap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/mycss.css?v=' . time()) }}" rel="stylesheet" />
-        <!-- Flasher CSS -->
-        <link href="{{ asset('vendor/flasher/flasher.min.css') }}" rel="stylesheet" />
         <!-- Title -->
         <title>@yield('title')</title>
     </head>
@@ -54,6 +52,5 @@
         <script src="{{ asset('assets/js/custom/maps.js') }}"></script>
         <script src="{{ asset('assets/js/custom/custom.js?id=' . time()) }}"></script>
         <script src="{{ asset('assets/js/custom/auth.js?id=' . time()) }}"></script>
-        {{-- @flasher_render --}}
     </body>
 </html>

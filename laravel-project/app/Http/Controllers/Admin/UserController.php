@@ -8,7 +8,6 @@ use App\Models\Role;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\DataTables\UsersDataTable;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -44,7 +43,7 @@ class UserController extends Controller
         }
 
         //Create activation token
-        $activation_token = Str::random(64);        
+        $activation_token = Str::random(64);
 
         $user = User::create([
             'fullname' => $validated['fullname'],
@@ -83,7 +82,7 @@ class UserController extends Controller
     public function editPost(UpdateUserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
-        
+
         $validated = $request->validated();
 
         $user->fullname = $validated['fullname'];

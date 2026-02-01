@@ -22,18 +22,20 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => ['required', 'string', 'min:3'],
-            'password' => ['required', 'string', 'min:6'],
+            'login' => ['required', 'string', 'min:3', 'max:255'],
+            'password' => ['required', 'string', 'min:6', 'max:255'],
         ];
     }
 
     public function messages()
     {
         return [
-            'login.required' => __('messages.login_required'),
-            'login.min' => __('messages.login_min'),
-            'password.required' => __('messages.password_required'),
-            'password.min' => __('messages.password_min'),
+            'login.required' => __('validation.login.required'),
+            'login.min' => __('validation.login.min'),
+            'login.max' => __('validation.login.max'),
+            'password.required' => __('validation.password.required'),
+            'password.min' => __('validation.password.min'),
+            'password.max' => __('validation.password.max'),
         ];
     }
 }

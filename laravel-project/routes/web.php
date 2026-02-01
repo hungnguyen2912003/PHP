@@ -2,38 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\ForgotPasswordController as AdminForgotPasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 
-// admin
-Route::middleware('admin.auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    Route::prefix('setting')->name('setting.')->group(function () {
-        Route::get('/account', [SettingController::class, 'account'])->name('account');
-        Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
-        Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
-        Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
-    });
-    Route::prefix('user')->name('user.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
-        Route::get('/store', [UserController::class, 'store'])->name('store');
-        Route::post('/store', [UserController::class, 'storePost'])->name('store.post');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('edit.post');
-        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
-        Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
-    });
-});
-
-// guest
-Route::middleware('guest')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| Guest (web)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('guest:web')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
@@ -45,29 +26,96 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.update');
+
+    Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
+    Route::post('/activate/{token}', [AuthController::class, 'setFirstPassword'])->name('activate.password');
 });
 
-// user
-Route::middleware('user.auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+/*
+|--------------------------------------------------------------------------
+| User (web) - authenticated
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth:web'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+
     Route::prefix('setting')->name('setting.')->group(function () {
         Route::get('/account', [SettingController::class, 'account'])->name('account');
         Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
+
         Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
         Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
     });
 });
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Admin (prefix /admin)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->name('admin.')->group(function () {
 
-Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
-Route::post('/activate/{token}', [AuthController::class, 'setFirstPassword'])->name('activate.password');
-Route::get('/verified-account', [AuthController::class,'verifiedAccount'])->name('verified-account');
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Guest
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
 
+        Route::get('/forgot-password', [AdminForgotPasswordController::class, 'showForgotPasswordForm'])->name('forgot-password');
+        Route::post('/forgot-password', [AdminForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot-password.post');
 
+        Route::get('/reset-password/{token}', [AdminForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+        Route::post('/reset-password/{token}', [AdminForgotPasswordController::class, 'resetPassword'])->name('password.update');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authenticated Admin
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware(['auth:admin', 'role:admin,staff'])->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
+
+            Route::get('/create', [UserController::class, 'store'])->name('create');
+            Route::post('/create', [UserController::class, 'storePost'])->name('store');
+
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
+
+            Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+
+            Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
+        });
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Public routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return redirect()->route('dashboard');
+});
 
 Route::get('language/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'vi', 'ja'])) {
@@ -75,13 +123,7 @@ Route::get('language/{locale}', function ($locale) {
     }
 
     session()->put('locale', $locale);
-
     return redirect()->back();
 })->name('change-language');
 
-Route::fallback(function () {
-    abort(404);
-});
-
-
-
+Route::fallback(fn () => abort(404));

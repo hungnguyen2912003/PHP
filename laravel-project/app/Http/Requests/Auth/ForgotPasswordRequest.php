@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ForgotPaswordRequest extends FormRequest
+class ForgotPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +23,20 @@ class ForgotPaswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+            ],
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => __('messages.email_required'),
-            'email.email' => __('messages.email_valid'),
-            'email.exists' => __('messages.email_exists'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.valid'),
+            'email.max' => __('validation.email.max'),
         ];
     }
 }

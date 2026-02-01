@@ -3,9 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\AdminAuthenticateMiddleware;
-use App\Http\Middleware\UserAuthenticateMiddleware;
 use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\Admin\AuthenticateAdmin;
+use App\Http\Middleware\Admin\EnsureRole;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,24 +19,25 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
      ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-            'admin.auth' => AdminAuthenticateMiddleware::class,
-            'user.auth' => UserAuthenticateMiddleware::class,
-        ]);
         $middleware->web(append: [
             SetLocale::class,
         ]);
+
+        $middleware->alias([
+            'admin.auth' => AuthenticateAdmin::class,
+            'role'       => EnsureRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-            return response()->view('pages.error.404', [], 404);
-        });
+        // $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+        //     return response()->view('pages.error.404', [], 404);
+        // });
 
-        $exceptions->render(function (\Throwable $e, Request $request) {
-            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
-                return null;
-            }
+        // $exceptions->render(function (\Throwable $e, Request $request) {
+        //     if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+        //         return null;
+        //     }
 
-            return response()->view('pages.error.500', [], 500);
-        });
+        //     return response()->view('pages.error.500', [], 500);
+        // });
     })->create();
