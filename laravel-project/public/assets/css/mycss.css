@@ -1,59 +1,59 @@
 .bg-cover-register {
-    background-image: url("../images/bg-cover3.png");
+    background-image: url('../images/bg-cover3.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-body[data-theme="dark"] .bg-cover-register {
-    background-image: url("../images/bg-cover3-dark.png");
+body[data-theme='dark'] .bg-cover-register {
+    background-image: url('../images/bg-cover3-dark.png');
 }
 
 .bg-cover-login {
-    background-image: url("../images/bg-cover2.png");
+    background-image: url('../images/bg-cover2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-body[data-theme="dark"] .bg-cover-login {
-    background-image: url("../images/bg-cover2-dark.png");
+body[data-theme='dark'] .bg-cover-login {
+    background-image: url('../images/bg-cover2-dark.png');
 }
 
 .bg-cover-reset-password {
-    background-image: url("../images/bg-cover1.png");
+    background-image: url('../images/bg-cover1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-body[data-theme="dark"] .bg-cover-reset-password {
-    background-image: url("../images/bg-cover1-dark.png");
+body[data-theme='dark'] .bg-cover-reset-password {
+    background-image: url('../images/bg-cover1-dark.png');
 }
 
 .bg-cover-forget-password {
-    background-image: url("../images/bg-cover2.png");
+    background-image: url('../images/bg-cover2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-body[data-theme="dark"] .bg-cover-forget-password {
-    background-image: url("../images/bg-cover2-dark.png");
+body[data-theme='dark'] .bg-cover-forget-password {
+    background-image: url('../images/bg-cover2-dark.png');
 }
 
 /* ===== Dark/Light Toggle ===== */
 .switch-toggle {
-    background: rgba(255,255,255,.78);
+    background: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(15, 23, 42, 0.10);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: 12px;
     color: #0f172a;
     transition: 160ms ease;
 }
 .switch-toggle:hover {
-    background: rgba(255,255,255,.92);
+    background: rgba(255, 255, 255, 0.92);
     border-color: rgba(15, 23, 42, 0.16);
     transform: translateY(-1px);
 }
@@ -66,16 +66,16 @@ body[data-theme="dark"] .bg-cover-forget-password {
 }
 
 /* Visibility Logic */
-body[data-theme="dark"] .switch-toggle .dark {
+body[data-theme='dark'] .switch-toggle .dark {
     display: none;
 }
-body[data-theme="dark"] .switch-toggle .light {
+body[data-theme='dark'] .switch-toggle .light {
     display: block;
 }
-body[data-theme="light"] .switch-toggle .dark {
+body[data-theme='light'] .switch-toggle .dark {
     display: block;
 }
-body[data-theme="light"] .switch-toggle .light {
+body[data-theme='light'] .switch-toggle .light {
     display: none;
 }
 /* Default if attribute is missing */
@@ -84,15 +84,17 @@ body[data-theme="light"] .switch-toggle .light {
 }
 
 /* Fix icon color in dark mode */
-body[data-theme="dark"] .switch-toggle i {
+body[data-theme='dark'] .switch-toggle i {
     color: #ffffff;
 }
-body[data-theme="dark"] .switch-toggle:hover i {
+body[data-theme='dark'] .switch-toggle:hover i {
     color: #ffffff;
 }
 
 /* Kill bootstrap caret */
-.lang-switcher-auth .dropdown-toggle::after { display: none !important; }
+.lang-switcher-auth .dropdown-toggle::after {
+    display: none !important;
+}
 
 /* ===== Trigger button (clean) ===== */
 .lang-switcher-auth .lang-trigger {
@@ -100,11 +102,11 @@ body[data-theme="dark"] .switch-toggle:hover i {
     align-items: center;
     gap: 10px;
 
-    background: rgba(255,255,255,.78);
+    background: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    border: 1px solid rgba(15, 23, 42, 0.10);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     padding: 8px 12px;
     border-radius: 12px;
 
@@ -116,15 +118,15 @@ body[data-theme="dark"] .switch-toggle:hover i {
 }
 
 .lang-switcher-auth .lang-trigger:hover {
-    background: rgba(255,255,255,.92);
+    background: rgba(255, 255, 255, 0.92);
     border-color: rgba(15, 23, 42, 0.16);
     transform: translateY(-1px);
 }
 
 .lang-switcher-auth .lang-trigger:focus {
     outline: none;
-    border-color: rgba(59, 130, 246, .55);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, .16);
+    border-color: rgba(59, 130, 246, 0.55);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
 }
 
 .lang-switcher-auth .lang-trigger img {
@@ -145,11 +147,11 @@ body[data-theme="dark"] .switch-toggle:hover i {
     padding: 10px;
     border-radius: 14px;
 
-    background: rgba(255,255,255,.92);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(15, 23, 42, 0.10);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     box-shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
 }
 
@@ -157,7 +159,7 @@ body[data-theme="dark"] .switch-toggle:hover i {
     padding: 8px 10px 10px;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     text-transform: uppercase;
     color: rgba(15, 23, 42, 0.55);
 }
@@ -181,7 +183,9 @@ body[data-theme="dark"] .switch-toggle:hover i {
     font-weight: 600;
     font-size: 14px;
 
-    transition: background .12s ease, color .12s ease;
+    transition:
+        background 0.12s ease,
+        color 0.12s ease;
 }
 
 /* Divider giữa các item */
@@ -221,9 +225,12 @@ body[data-theme="dark"] .switch-toggle:hover i {
     font-size: 18px;
 }
 
-
 /* Avoid bootstrap active flash */
 .lang-switcher-auth .dropdown-item:active {
     background: transparent !important;
     color: inherit !important;
+}
+
+.form-control.is-invalid {
+    background-image: none !important;
 }

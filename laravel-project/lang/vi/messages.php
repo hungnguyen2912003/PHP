@@ -248,7 +248,7 @@ return [
     'password_required' => 'Vui lòng nhập mật khẩu',
     'password_min' => 'Mật khẩu phải có ít nhất 6 ký tự',
     'password_confirmed' => 'Xác nhận mật khẩu không khớp',
-    'password_confirmation_required' => 'Vui lòng xác nhận mật khẩu',
+    'password_confirmation_required' => 'Vui lòng nhập xác nhận mật khẩu',
 
     // Roles
     'role_admin' => 'Quản trị viên',

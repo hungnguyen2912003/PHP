@@ -148,7 +148,6 @@ return [
     'permission_denied' => '権限がありません',
     'reset_password_btn' => 'パスワードをリセット',
     'enter_new_password_label' => '新しいパスワードを入力',
-    'enter_new_password_label' => '新しいパスワードを入力',
     'confirm_new_password_label' => '新しいパスワード（確認）',
     'processing' => '処理中...',
 
@@ -229,7 +228,6 @@ return [
     'email_valid' => 'メールアドレスの形式が正しくありません',
     'email_unique' => 'このメールアドレスは既に使用されています',
     'role_required' => '役割を選択してください',
-    'role_exists' => '選択された役割は存在しません',
     'role_exists' => '選択された役割は存在しません',
     'add_user_btn' => '+ ユーザーを追加',
     'user_created_success' => 'ユーザーが正常に作成されました。',

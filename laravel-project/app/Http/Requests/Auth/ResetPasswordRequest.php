@@ -22,8 +22,8 @@ class ResetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|min:6|same:password',
         ];
     }
 
@@ -32,9 +32,9 @@ class ResetPasswordRequest extends FormRequest
         return [
             'password.required' => __('messages.password_required'),
             'password.min' => __('messages.password_min'),
-            'password.confirmed' => __('messages.password_confirmed'),
             'password_confirmation.required' => __('messages.password_confirmation_required'),
             'password_confirmation.min' => __('messages.password_min'),
+            'password_confirmation.same' => __('messages.password_confirmed'),
         ];
     }
 }

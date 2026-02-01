@@ -111,7 +111,7 @@ return [
     'placeholder_phone' => 'Enter phone number',
     'placeholder_address' => 'Enter address',
     'placeholder_bio_hint' => 'Write here....',
-    
+
     // Backend Messages
     'profile_updated_success' => 'Profile updated successfully.',
     'old_password_mismatch' => 'Your old password does not match.',
@@ -120,7 +120,7 @@ return [
     'new_password_required' => 'The new password is required.',
     'password_min_length' => 'The new password must be at least 6 characters.',
     'password_confirmed_mismatch' => 'The new password confirmation does not match.',
-    
+
     // Auth Pages
     'sign_in_title' => 'Sign In',
     'sign_up_title' => 'Sign Up',
@@ -148,7 +148,6 @@ return [
     'reset_password_desc' => 'Enter your new password and confirm it another time in the field below.',
     'permission_denied' => 'Permission denied',
     'reset_password_btn' => 'Reset Password',
-    'enter_new_password_label' => 'Enter new password',
     'enter_new_password_label' => 'Enter new password',
     'confirm_new_password_label' => 'Confirm new password',
     'processing' => 'Processing...',
@@ -238,7 +237,7 @@ return [
     'username_required' => 'Username is required',
     'username_max' => 'Username must not exceed 255 characters',
     'username_unique' => 'Username already exists',
-    
+
     // Validation
     'fullname_required' => 'Please enter full name',
     'fullname_max' => 'Full name must not exceed 255 characters',
@@ -246,7 +245,6 @@ return [
     'email_valid' => 'Invalid email format',
     'email_unique' => 'Email already exists',
     'role_required' => 'Please select a role',
-    'role_exists' => 'Role does not exist',
     'role_exists' => 'Role does not exist',
     'phone_required' => 'Please enter phone number',
     'address_required' => 'Please enter address',
@@ -256,7 +254,8 @@ return [
     'password_required' => 'Please enter password',
     'password_min' => 'Password must be at least 6 characters',
     'password_confirmed' => 'Password confirmation does not match',
-    'password_confirmation_required' => 'Password confirmation is required',
+    'password_confirmation_required' => 'Please enter password confirmation',
+    ''=> '',
 
     // Roles
     'role_admin' => 'Admin',

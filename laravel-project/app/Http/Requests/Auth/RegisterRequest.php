@@ -23,9 +23,10 @@ class RegisterRequest extends FormRequest
     {
         return [
             'fullname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'username' => 'required|string|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'password_confirmation' => 'required|same:password',
         ];
     }
 
@@ -35,15 +36,14 @@ class RegisterRequest extends FormRequest
             'fullname.required' => __('messages.fullname_required'),
             'fullname.max' => __('messages.fullname_max'),
             'username.required' => __('messages.username_required'),
-            'username.max' => __('messages.username_max'),
             'username.unique' => __('messages.username_unique'),
             'email.required' => __('messages.email_required'),
-            'email.max' => __('messages.email_max'),
             'email.email' => __('messages.email_valid'),
             'email.unique' => __('messages.email_unique'),
             'password.required' => __('messages.password_required'),
             'password.min' => __('messages.password_min'),
-            'password.confirmed' => __('messages.password_confirmed'),
+            'password_confirmation.required' => __('messages.password_confirmation_required'),
+            'password_confirmation.same' => __('messages.password_confirmed'),
         ];
     }
 }
