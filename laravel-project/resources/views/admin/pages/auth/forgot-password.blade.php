@@ -17,7 +17,7 @@
 
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('auth.forgot.email.label') }}
+                {{ __('auth.email.label') }}
                 <span class="text-danger">*</span>
             </label>
 
@@ -25,14 +25,14 @@
                 <input
                     class="form-control @error('email') is-invalid @enderror"
                     id="email"
-                    placeholder="{{ __('auth.forgot.email.placeholder') }}"
+                    placeholder="{{ __('auth.email.placeholder') }}"
                     type="email"
                     name="email"
                     value="{{ old('email') }}"
                 />
                 <label for="email">
                     <i class="ri-mail-line mr-2"></i>
-                    {{ __('auth.forgot.email.placeholder') }}
+                    {{ __('auth.email.placeholder') }}
                 </label>
             </div>
 

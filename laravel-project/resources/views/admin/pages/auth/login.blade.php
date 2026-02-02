@@ -15,20 +15,20 @@
         @csrf
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('auth.login.login.label') }}
+                {{ __('auth.username.label') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-floating">
                 <input
                     class="form-control @error('login') is-invalid @enderror"
                     id="login"
-                    placeholder="{{ __('auth.login.login.placeholder') }}"
+                    placeholder="{{ __('auth.username.placeholder') }}"
                     type="text"
                     name="login"
                 />
                 <label for="login">
                     <i class="ri-user-line"></i>
-                    {{ __('auth.login.login.placeholder') }}
+                    {{ __('auth.username.placeholder') }}
                 </label>
             </div>
             @error('login')
@@ -37,21 +37,21 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('auth.login.password.label') }}
+                {{ __('auth.password.label') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-group" id="password-show-hide">
                 <div class="password-wrapper position-relative password-container form-floating">
                     <input
                         class="form-control text-secondary password @error('password') is-invalid @enderror"
-                        placeholder="{{ __('auth.login.password.placeholder') }}"
+                        placeholder="{{ __('auth.password.placeholder') }}"
                         type="password"
                         name="password"
                         id="password"
                     />
                     <label for="password">
                         <i class="ri-lock-line"></i>
-                        {{ __('auth.login.password.placeholder') }}
+                        {{ __('auth.password.placeholder') }}
                     </label>
                     <i
                         aria-hidden="true"

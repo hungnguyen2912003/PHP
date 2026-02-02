@@ -1,3 +1,10 @@
+.bg-cover-login {
+    background-image: url('../images/bg-cover1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .bg-cover-register {
     background-image: url('../images/bg-cover3.png');
     background-size: cover;
@@ -9,16 +16,7 @@ body[data-theme='dark'] .bg-cover-register {
     background-image: url('../images/bg-cover3-dark.png');
 }
 
-.bg-cover-login {
-    background-image: url('../images/bg-cover2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
 
-body[data-theme='dark'] .bg-cover-login {
-    background-image: url('../images/bg-cover2-dark.png');
-}
 
 .bg-cover-reset-password {
     background-image: url('../images/bg-cover1.png');

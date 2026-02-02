@@ -13,6 +13,11 @@ return [
         'max' => 'The password may not be greater than :max characters.',
     ],
 
+    'password_confirmation' => [
+        'required' => 'The password confirmation field is required.',
+        'same' => 'The password confirmation and password must match.',
+    ],
+
     'email' => [
         'required' => 'The email field is required.',
         'valid' => 'The email must be a valid email address.',

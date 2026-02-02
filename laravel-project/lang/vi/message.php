@@ -38,4 +38,17 @@ return [
             'success' => 'Email đặt lại mật khẩu đã được gửi thành công.',
         ],
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | Reset Password
+    |--------------------------------------------------------------------------
+    */
+    'reset_password' => [
+        'token_invalid' => 'Mã đặt lại mật khẩu không tồn tại hoặc không hợp lệ.',
+        'token_expired' => 'Mã đặt lại mật khẩu đã hết hạn.',
+        'user_not_found' => 'Người dùng không tồn tại.',
+        'status' => [
+            'success' => 'Mật khẩu của bạn đã được đặt lại thành công.',
+        ],
+    ],
 ];

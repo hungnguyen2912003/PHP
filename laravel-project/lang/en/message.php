@@ -39,6 +39,18 @@ return [
             'success' => 'Password reset email sent successfully.',
         ],
     ],
-
+    /*
+    |--------------------------------------------------------------------------
+    | Reset Password
+    |--------------------------------------------------------------------------
+    */
+    'reset_password' => [
+        'token_invalid' => 'The password reset token is invalid or does not exist.',
+        'token_expired' => 'The password reset token has expired.',
+        'user_not_found' => 'User not found.',
+        'status' => [
+            'success' => 'Your password has been reset successfully.',
+        ],
+    ],
 
 ];

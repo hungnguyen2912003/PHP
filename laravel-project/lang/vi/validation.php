@@ -13,6 +13,11 @@ return [
         'max' => 'Mật khẩu không được lớn hơn :max ký tự.',
     ],
 
+    'password_confirmation' => [
+        'required' => 'Trường xác nhận mật khẩu là bắt buộc.',
+        'same' => 'Xác nhận mật khẩu và mật khẩu phải khớp nhau.',
+    ],
+
     'email' => [
         'required' => 'Trường email là bắt buộc.',
         'valid' => 'Email phải là một địa chỉ email hợp lệ.',
