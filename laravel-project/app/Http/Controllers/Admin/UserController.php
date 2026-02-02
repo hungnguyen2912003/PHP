@@ -25,7 +25,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'User')->get();
-        return view('admin.users.create', compact('roles'));
+        return view('admin.pages.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request)
@@ -67,14 +67,14 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return view('admin.users.show', compact('user'));
+        return view('admin.pages.users.show', compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = Role::where('name', '!=', 'User')->get();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.pages.users.edit', compact('user', 'roles'));
     }
 
 

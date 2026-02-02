@@ -5,6 +5,6 @@ return [
         'main' => 'Main Menu',
         'dashboard' => 'Dashboard',
         'apps' => 'Applications',
-        'users' => 'Users',
+        'users' => 'User Management',
     ],
 ];

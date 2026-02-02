@@ -18,7 +18,7 @@ class SettingController extends Controller
     public function account()
     {
         $user = Auth::guard("admin")->user();
-        return view('admin.pages.setting.account', compact('user'));
+        return view('admin.pages.settings.account', compact('user'));
     }
 
     public function updateAccount(UpdateAccountRequest $request)
@@ -36,7 +36,7 @@ class SettingController extends Controller
     */
     public function changePassword()
     {
-        return view('admin.pages.setting.change-password');
+        return view('admin.pages.settings.change-password');
     }
 
     public function changePasswordUpdate(ChangePasswordRequest $request)

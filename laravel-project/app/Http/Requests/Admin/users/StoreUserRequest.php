@@ -31,13 +31,13 @@ class StoreUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'fullname.required' => __('messages.fullname_required'),
-            'fullname.max' => __('messages.fullname_max'),
-            'email.required' => __('messages.email_required'),
-            'email.email' => __('messages.email_valid'),
-            'email.unique' => __('messages.email_unique'),
-            'role_id.required' => __('messages.role_required'),
-            'role_id.exists' => __('messages.role_exists')
+            'fullname.required' => __('validations/users.fullname.required'),
+            'fullname.max' => __('validations/users.fullname.max'),
+            'email.required' => __('validations/users.email.required'),
+            'email.email' => __('validations/users.email.email'),
+            'email.unique' => __('validations/users.email.unique'),
+            'role_id.required' => __('validations/users.role_id.required'),
+            'role_id.exists' => __('validations/users.role_id.exists')
         ];
     }
 }

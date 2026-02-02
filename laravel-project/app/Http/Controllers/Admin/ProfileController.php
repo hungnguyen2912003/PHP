@@ -16,7 +16,7 @@ class ProfileController extends Controller
     */
     public function index()
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         return view('admin.pages.profile.index', compact('user'));
     }
 
@@ -27,7 +27,7 @@ class ProfileController extends Controller
     */
     public function updateAvatar(AvatarUploadRequest $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($request->hasFile('avatar_url_file')) {
             // Delete old avatar if exists

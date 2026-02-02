@@ -5,6 +5,6 @@ return [
         'main' => 'Menu Chính',
         'dashboard' => 'Bảng Điều Khiển',
         'apps' => 'Ứng Dụng',
-        'users' => 'Người Dùng',
+        'users' => 'Quản Lý Người Dùng',
     ],
 ];

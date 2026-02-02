@@ -1,26 +1,26 @@
-@extends('layouts.app-layout')
+@extends('admin.layouts.app-layout')
 
-@section('title', __('messages.profile_page_title'))
+@section('title', __('admin/pages/users/show.title'))
 
 @section('content')
     <div class="main-content-container overflow-hidden">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
-            <h3 class="mb-0">{{ __('messages.profile_page_title') }}</h3>
+            <h3 class="mb-0">{{ __('admin/pages/users/show.title') }}</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('dashboard') }}">
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.dashboard') }}">
                             <i class="ri-home-8-line fs-15 text-primary me-1"></i>
-                            <span class="text-body fs-14 hover">{{ __('messages.menu_dashboard') }}</span>
+                            <span class="text-body fs-14 hover">{{ __('common.breadcrumb.dashboard') }}</span>
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('user.index') }}">
-                            <span class="text-body fs-14 hover">{{ __('messages.user_management') }}</span>
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.users.index') }}">
+                            <span class="text-body fs-14 hover">{{ __('common.breadcrumb.user_management') }}</span>
                         </a>
                     </li>
                     <li aria-current="page" class="breadcrumb-item active">
-                        <span class="text-secondary">{{ __('messages.profile_page_title') }}</span>
+                        <span class="text-secondary">{{ __('admin/pages/users/show.title') }}</span>
                     </li>
                 </ol>
             </nav>
@@ -49,27 +49,27 @@
                             <div class="flex-grow-1 ms-20 mb-10" style="max-width: 1000px;">
                                 <h3 class="mb-1">{{ $user->fullname }}</h3>
                                 <div class="fs-15">
-                                    <span class="text-secondary">{{ __('messages.role') }}:</span>
+                                    <span class="text-secondary">{{ __('common.info.role.title') }}:</span>
                                     @if($user->role)
-                                        {{ __('messages.role_' . strtolower($user->role->name)) }}
+                                        {{ __('admin/pages/users/table.values.role.' . strtolower($user->role->name)) }}
                                     @endif
                                 </div>
                                 <div class="fs-15 text-wrap">
-                                    <span class="text-secondary">{{ __('messages.bio') }}:</span>
-                                    {{ $user->bio ?? __('messages.no_bio') }}
+                                    <span class="text-secondary">{{ __('common.info.bio.title') }}:</span>
+                                    {{ $user->bio ?? __('admin/pages/users/form.no_bio') }}
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-sm-4 gap-2">
-                            <a href="{{ route('user.edit', $user->id) }}"
+                            <a href="{{ route('admin.users.edit', $user->id) }}"
                                 class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg-warning"
                                 style="padding: 12px 15px;">
-                                {{ __('messages.edit') }}
+                                {{ __('common.button.edit') }}
                             </a>
-                            <a href="{{ route('user.index') }}"
+                            <a href="{{ route('admin.users.index') }}"
                                 class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg-secondary"
                                 style="padding: 12px 15px;">
-                                {{ __('messages.back_btn') }}
+                                {{ __('common.button.back') }}
                             </a>
                         </div>
                     </div>
@@ -80,38 +80,38 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('messages.profile_information') }}
+                        {{ __('common.section.profile_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('messages.full_name') }}:
+                            {{ __('common.info.full_name.title') }}:
                             <span class="text-secondary">
                                 {{ $user->fullname }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.date_of_birth') }}:
+                            {{ __('common.info.date_of_birth.title') }}:
                             <span class="text-secondary">
                                 @if ($user->date_of_birth)
                                     {{ $user->date_of_birth->format('d-m-Y') }}
                                 @else
-                                    <span class="text-danger">{{ __('messages.unknown') }}</span>
+                                    <span class="text-danger">{{ __('common.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.gender') }}:
+                            {{ __('common.info.gender.title') }}:
                             <span class="text-secondary">
                                 @if ($user->gender)
                                     @if ($user->gender === 'male')
-                                        {{ __('messages.gender_male') }}
+                                        {{ __('admin/pages/users/form.gender_male') }}
                                     @elseif ($user->gender === 'female')
-                                        {{ __('messages.gender_female') }}
+                                        {{ __('admin/pages/users/form.gender_female') }}
                                     @else
-                                        {{ __('messages.gender_other') }}
+                                        {{ __('admin/pages/users/form.gender_other') }}
                                     @endif
                                 @else
-                                    <span class="text-danger">{{ __('messages.unknown') }}</span>
+                                    <span class="text-danger">{{ __('common.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
@@ -121,32 +121,32 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('messages.contact_information') }}
+                        {{ __('common.section.contact_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('messages.email') }}:
+                            {{ __('common.info.email.title') }}:
                             <span class="text-secondary">
                                 {{ $user->email }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.phone') }}:
+                            {{ __('common.info.phone.title') }}:
                             <span class="text-secondary">
                                 @if ($user->phone)
                                     {{ $user->phone }}
                                 @else
-                                    <span class="text-danger">{{ __('messages.unknown') }}</span>
+                                    <span class="text-danger">{{ __('common.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.address') }}:
+                            {{ __('common.info.address.title') }}:
                             <span class="text-secondary">
                                 @if ($user->address)
                                     {{ $user->address }}
                                 @else
-                                    <span class="text-danger">{{ __('messages.unknown') }}</span>
+                                    <span class="text-danger">{{ __('common.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
@@ -156,31 +156,35 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('messages.account_information') }}
+                        {{ __('common.section.account_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('messages.username') }}:
+                            {{ __('common.info.username.title') }}:
                             <span class="text-secondary">
                                 {{ $user->username }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.status') }}:
+                            {{ __('common.info.status.title') }}:
                             <span class="text-secondary">
                                 @if ($user->status == 'active')
-                                    <span class="badge bg-success">{{ __('messages.status_active') }}</span>
+                                    <span
+                                        class="badge bg-success">{{ __('admin/pages/users/table.values.status.active') }}</span>
                                 @elseif ($user->status == 'pending')
-                                    <span class="badge bg-warning">{{ __('messages.status_pending') }}</span>
+                                    <span
+                                        class="badge bg-warning">{{ __('admin/pages/users/table.values.status.pending') }}</span>
                                 @elseif ($user->status == 'banned')
-                                    <span class="badge bg-danger">{{ __('messages.status_banned') }}</span>
+                                    <span
+                                        class="badge bg-danger">{{ __('admin/pages/users/table.values.status.banned') }}</span>
                                 @else
-                                    <span class="badge bg-secondary">{{ __('messages.status_deleted') }}</span>
+                                    <span
+                                        class="badge bg-secondary">{{ __('admin/pages/users/table.values.status.deleted') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('messages.created_date') }}:
+                            {{ __('admin/pages/users/show.joined_date') }}:
                             <span class="text-secondary">
                                 {{ $user->created_at->format('d-m-Y') }}
                             </span>

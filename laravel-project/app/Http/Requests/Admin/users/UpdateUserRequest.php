@@ -38,18 +38,18 @@ class UpdateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'fullname.required' => __('messages.fullname_required'),
-            'email.required' => __('messages.email_required'),
-            'email.email' => __('messages.email_valid'),
-            'email.unique' => __('messages.email_unique'),
-            'phone.required' => __('messages.phone_required'),
-            'address.required' => __('messages.address_required'),
-            'gender.required' => __('messages.gender_required'),
-            'date_of_birth.required' => __('messages.date_of_birth_required'),
-            'role_id.required' => __('messages.role_required'),
-            'status.required' => __('messages.status_required'),
-            'password.required' => __('messages.password_required'),
-            'password.min' => __('messages.password_min_length'),
+            'fullname.required' => __('validations/users.fullname.required'),
+            'email.required' => __('validations/users.email.required'),
+            'email.email' => __('validations/users.email.email'),
+            'email.unique' => __('validations/users.email.unique'),
+            'phone.required' => __('validations/users.phone.required'),
+            'address.required' => __('validations/users.address.required'),
+            'gender.required' => __('validations/users.gender.required'),
+            'date_of_birth.required' => __('validations/users.date_of_birth.required'),
+            'role_id.required' => __('validations/users.role_id.required'),
+            'status.required' => __('validations/users.status.required'),
+            'password.required' => __('validations/users.password.required'),
+            'password.min' => __('validations/users.password.min'),
         ];
     }
 }

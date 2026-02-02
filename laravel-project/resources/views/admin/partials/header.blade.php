@@ -2,9 +2,11 @@
     .active-language {
         background-color: #f8f9fa;
     }
+
     body[data-theme="dark"] .active-language {
         background-color: #334155 !important;
     }
+
     body[data-theme="dark"] .active-language .text-secondary {
         color: #ffffff !important;
     }
@@ -31,8 +33,8 @@
                     </li>
                     <li>
                         <form class="src-form position-relative">
-                            <input class="form-control" placeholder="{{ __('admin/layouts/header.search_placeholder') }}"
-                                type="text" />
+                            <input class="form-control"
+                                placeholder="{{ __('admin/layouts/header.search_placeholder') }}" type="text" />
                             <div
                                 class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
                                 <span class="material-symbols-outlined">
@@ -101,9 +103,9 @@
                             </button>
                         </div>
                     </li>
-                    @auth
+                    @auth('admin')
                         @php
-                            $user = Auth::user();
+                            $user = Auth::guard('admin')->user();
                         @endphp
                         <li class="header-right-item border-0">
                             <div class="dropdown admin-profile">
@@ -141,7 +143,8 @@
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="{{ route('admin.profile.index') }}">
                                                 <i class="material-symbols-outlined">person</i>
-                                                <span class="ms-2">{{ __('admin/layouts/header.dropdown.my_profile') }}</span>
+                                                <span
+                                                    class="ms-2">{{ __('admin/layouts/header.dropdown.my_profile') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -155,9 +158,10 @@
                                             <form action="{{ route('admin.logout') }}" method="POST">
                                                 @csrf
                                                 <button type="submit"
-                                                        class="dropdown-item admin-item-link d-flex align-items-center text-body">
+                                                    class="dropdown-item admin-item-link d-flex align-items-center text-body">
                                                     <i class="material-symbols-outlined">logout</i>
-                                                    <span class="ms-2">{{ __('admin/layouts/header.dropdown.logout') }}</span>
+                                                    <span
+                                                        class="ms-2">{{ __('admin/layouts/header.dropdown.logout') }}</span>
                                                 </button>
                                             </form>
                                         </li>

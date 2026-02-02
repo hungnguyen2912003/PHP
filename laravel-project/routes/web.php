@@ -66,6 +66,10 @@ Route::middleware('guest:web')->group(function () {
 */
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    Route::get('/', function () {
+        return redirect()->route('admin.dashboard');
+    });
+
     /*
     |--------------------------------------------------------------------------
     | Admin Guest
@@ -87,7 +91,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     | Authenticated Admin
     |--------------------------------------------------------------------------
     */
-    Route::middleware(['auth:admin', 'role:Admin,Staff'])->group(function () {
+    Route::middleware(['admin.auth', 'role:Admin,Staff'])->group(function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
@@ -101,24 +105,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/account', action: [AdminSettingController::class, 'account'])->name('account');
             Route::put('/account', action: [AdminSettingController::class, 'updateAccount'])->name('account.update');
-            
+
             Route::get('/change-password', action: [AdminSettingController::class, 'changePassword'])->name('change-password');
             Route::post('/change-password', action: [AdminSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
         });
 
         Route::prefix('users')->name('users.')->group(function () {
+            // Accessible by Admin and Staff
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
 
-            Route::get('/create', [UserController::class, 'create'])->name('create');
-            Route::post('/store', [UserController::class, 'store'])->name('store');
+            // Restricted to Admin only
+            Route::middleware('role:Admin')->group(function () {
+                Route::get('/create', [UserController::class, 'create'])->name('create');
+                Route::post('/store', [UserController::class, 'store'])->name('store');
 
-            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-            Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
+                Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+                Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
 
-            Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+                Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
 
-            Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
+                Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
+            });
         });
     });
 });
@@ -130,7 +138,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 */
 
 Route::get('language/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'vi', 'ja'])) {
+    if (!in_array($locale, ['en', 'vi', 'ja'])) {
         abort(400);
     }
 
@@ -138,4 +146,4 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name('change-language');
 
-Route::fallback(fn () => abort(404));
+Route::fallback(fn() => abort(404));
