@@ -106,12 +106,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/change-password', action: [AdminSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
         });
 
-        Route::prefix('user')->name('user.')->group(function () {
+        Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
 
-            Route::get('/create', [UserController::class, 'store'])->name('create');
-            Route::post('/create', [UserController::class, 'storePost'])->name('store');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
 
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
             Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');

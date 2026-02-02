@@ -6,10 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
@@ -24,7 +21,7 @@ class UsersDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->editColumn('fullname', function ($user) {
-                return view('admin.users.columns.fullname', compact('user'));
+                return view('admin.pages.users.columns.fullname', compact('user'));
             })
             ->editColumn('date_of_birth', function ($user) {
                 if (!$user->date_of_birth) return '<span class="text-warning">'.__('messages.not_available').'</span>';
@@ -43,13 +40,13 @@ class UsersDataTable extends DataTable
                 };
             })
             ->editColumn('role_id', function ($user) {
-                return view('admin.users.columns.role', compact('user'));
+                return view('admin.pages.users.columns.role', compact('user'));
             })
             ->editColumn('status', function ($user) {
-                return view('admin.users.columns.status', compact('user'));
+                return view('admin.pages.users.columns.status', compact('user'));
             })
             ->addColumn('action', function ($user) {
-                return view('admin.users.columns.action', compact('user'));
+                return view('admin.pages.users.columns.action', compact('user'));
             })
             ->rawColumns(['fullname', 'date_of_birth', 'gender', 'role_id', 'status', 'action'])
             ->setRowId('id');

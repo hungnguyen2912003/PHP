@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
-use App\Http\Requests\Admin\StoreUserRequest;
-use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Http\Requests\Admin\users\StoreUserRequest;
+use App\Http\Requests\Admin\users\UpdateUserRequest;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -19,16 +19,16 @@ class UserController extends Controller
 {
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('admin.users.index');
+        return $dataTable->render('admin.pages.users.index');
     }
 
-    public function store()
+    public function create()
     {
         $roles = Role::where('name', '!=', 'User')->get();
-        return view('admin.users.store', compact('roles'));
+        return view('admin.users.create', compact('roles'));
     }
 
-    public function storePost(StoreUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         $validated = $request->validated();
 
@@ -61,7 +61,7 @@ class UserController extends Controller
 
         //Success message
         flash()->success(__('messages.user_created_success'), [], __('messages.success'));
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     public function show(string $id)

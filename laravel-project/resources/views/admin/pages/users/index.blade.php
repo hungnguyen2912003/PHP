@@ -1,4 +1,4 @@
-@extends('layouts.app-layout')
+@extends('admin.layouts.app-layout')
 
 @section('title', __('messages.user_management'))
 
@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('dashboard') }}">
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.dashboard') }}">
                         <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                         <span class="text-body fs-14 hover">{{ __('messages.menu_dashboard') }}</span>
                         </a>
@@ -37,7 +37,7 @@
                     </div>
                 </form>
                 <div class="d-flex gap-3">
-                    <a class="text-decoration-none fs-16 text-primary" href="{{ route('user.store') }}">
+                    <a class="text-decoration-none fs-16 text-primary" href="{{ route('admin.users.create') }}">
                     + {{ __('messages.add_new_user') }}
                     </a>
                 </div>

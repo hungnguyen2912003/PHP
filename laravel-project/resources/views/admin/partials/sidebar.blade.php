@@ -30,8 +30,8 @@
             </li>
             @if(Auth::check() && optional(Auth::user()->role)->name === 'Admin')
             <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('admin/layouts/sidebar.menu.apps') }}</span></li>
-            <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'open' : '' }}">
-                <a class="menu-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
+            <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'open' : '' }}">
+                <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
                 <span class="material-symbols-outlined menu-icon">account_circle</span>
                 <span class="title">{{ __('admin/layouts/sidebar.menu.users') }}</span>
                 </a>

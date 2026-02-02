@@ -146,7 +146,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
-                                                href="">
+                                                href="{{ route('admin.settings.account') }}">
                                                 <i class="material-symbols-outlined">settings</i>
                                                 <span class="ms-2">{{ __('admin/layouts/header.dropdown.settings') }}</span>
                                             </a>
@@ -166,14 +166,6 @@
                             </div>
                         </li>
                     @endauth
-                    @guest
-                        <li class="header-right-item">
-                            <a href="{{ route('login') }}"
-                                class="btn btn-primary text-white btn-sm rounded-pill px-3 me-2">{{ __('admin.dashboard.login') }}</a>
-                            <a href="{{ route('register') }}"
-                                class="btn btn-info text-white btn-sm rounded-pill px-3">{{ __('admin.dashboard.register') }}</a>
-                        </li>
-                    @endguest
                 </ul>
             </div>
         </div>
