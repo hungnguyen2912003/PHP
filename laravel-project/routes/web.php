@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\ForgotPasswordController as AdminForgotPasswordController;
 use App\Http\Controllers\Admin\ResetPasswordController as AdminResetPasswordController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 
-
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -90,9 +89,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
     */
     Route::middleware(['auth:admin', 'role:Admin,Staff'])->group(function () {
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+        Route::prefix('profile')->name('profile.')->group(function () {
+            Route::get('/', [AdminProfileController::class, 'index'])->name('index');
+            Route::put('/avatar', [AdminProfileController::class, 'updateAvatar'])->name('avatar.update');
+        });
+
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/account', action: [AdminSettingController::class, 'account'])->name('account');
+            Route::put('/account', action: [AdminSettingController::class, 'updateAccount'])->name('account.update');
+            
+            Route::get('/change-password', action: [AdminSettingController::class, 'changePassword'])->name('change-password');
+            Route::post('/change-password', action: [AdminSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
+        });
 
         Route::prefix('user')->name('user.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
@@ -116,9 +128,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 | Public routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
 
 Route::get('language/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'vi', 'ja'])) {

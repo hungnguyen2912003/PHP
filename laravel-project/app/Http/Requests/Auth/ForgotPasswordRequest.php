@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ForgotPasswordRequest extends FormRequest
 {
@@ -34,9 +33,9 @@ class ForgotPasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => __('validation.email.required'),
-            'email.email' => __('validation.email.valid'),
-            'email.max' => __('validation.email.max'),
+            'email.required' => __('validations/auth.email.required'),
+            'email.email' => __('validations/auth.email.valid'),
+            'email.max' => __('validations/auth.email.max'),
         ];
     }
 }

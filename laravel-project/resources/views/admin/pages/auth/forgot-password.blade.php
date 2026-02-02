@@ -1,14 +1,14 @@
 @extends('admin.layouts.auth-layout')
 
-@section('title', __('auth.forgot.title'))
+@section('title', __('admin/pages/auth.forgot.title'))
 
 @section('content')
     <div class="text-center mb-4">
         <h3 class="fs-26 fw-medium mb-1">
-            {{ __('auth.forgot.title') }}
+            {{ __('admin/pages/auth.forgot.title') }}
         </h3>
         <p class="fs-16 text-body lh-1-8 mx-auto" style="max-width: 490px">
-            {{ __('auth.forgot.description') }}
+            {{ __('admin/pages/auth.forgot.description') }}
         </p>
     </div>
 
@@ -17,7 +17,7 @@
 
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('auth.email.label') }}
+                {{ __('admin/pages/auth.email.label') }}
                 <span class="text-danger">*</span>
             </label>
 
@@ -25,14 +25,14 @@
                 <input
                     class="form-control @error('email') is-invalid @enderror"
                     id="email"
-                    placeholder="{{ __('auth.email.placeholder') }}"
+                    placeholder="{{ __('admin/pages/auth.email.placeholder') }}"
                     type="email"
                     name="email"
                     value="{{ old('email') }}"
                 />
                 <label for="email">
                     <i class="ri-mail-line mr-2"></i>
-                    {{ __('auth.email.placeholder') }}
+                    {{ __('admin/pages/auth.email.placeholder') }}
                 </label>
             </div>
 
@@ -49,7 +49,7 @@
                 style="padding-top: 18px; padding-bottom: 18px"
                 type="submit"
             >
-                <span id="btnText">{{ __('auth.forgot.submit') }}</span>
+                <span id="btnText">{{ __('admin/pages/auth.forgot.submit') }}</span>
                 <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
             </button>
         </div>

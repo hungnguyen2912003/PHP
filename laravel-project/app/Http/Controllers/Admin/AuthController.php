@@ -30,22 +30,22 @@ class AuthController extends Controller
 
         // Check account exist
         if (!$user) {
-            flash()->error(__('message.login.account_not_found'), [], __('common.error'));
+            flash()->error(__('messages/auth.login.account_not_found'), [], __('common.error'));
             return back()->withInput($request->only('login', 'remember'));
-        }
+            }
 
         // Check incorrect password
         if (!Auth::guard('admin')->attempt([
             $loginField => $request->login,
             'password'  => $request->password
         ], $request->boolean('remember'))) {
-            flash()->error(__('message.login.invalid_credentials'), [], __('common.error'));
+            flash()->error(__('messages/auth.login.invalid_credentials'), [], __('common.error'));
             return back()->withInput($request->only('login', 'remember'));
         }
 
         // Check role
         if (!in_array($user->role->name, ['Admin', 'Staff'], true)) {
-            flash()->error(__('message.login.no_admin_permission'), [], __('common.error'));
+            flash()->error(__('messages/auth.login.no_admin_permission'), [], __('common.error'));
             return back()->withInput($request->only('login', 'remember'));
         }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
         $user->save();
 
         flash()->success(
-            __('message.login.status.success'),
+            __('messages/auth.login.status.success'),
             [],
             __('common.success')
         );
@@ -72,13 +72,18 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $locale = session('locale');
+    
         Auth::guard('admin')->logout();
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
+        // Set locale session
+        session(['locale' => $locale]);
+
         flash()->success(
-            __('message.logout.status.success'),
+            __('messages/auth.logout.status.success'),
             [],
             __('common.success')
         );

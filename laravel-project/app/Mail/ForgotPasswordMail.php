@@ -34,7 +34,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('mail.forgot.subject'),
+            subject: __('mails/forgot-password.subject'),
         );
     }
 
@@ -44,7 +44,7 @@ class ForgotPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.forgot-password',
+            view: 'mails.forgot-password',
             with: [
                 'reset_url' => route('admin.password.reset', ['token' => $this->token, 'email' => $this->email]),
                 'expires_in' => $this->expires_in,

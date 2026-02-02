@@ -31,12 +31,12 @@ class ResetPasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => __('validation.email.required'),
-            'email.email' => __('validation.email.invalid'),
-            'password.required' => __('validation.password.required'),
-            'password.min' => __('validation.password.min'),
-            'password_confirmation.required' => __('validation.password_confirmation.required'),
-            'password_confirmation.same' => __('validation.password_confirmation.same'),
+            'email.required' => __('validations/auth.email.required'),
+            'email.email' => __('validations/auth.email.valid'),
+            'password.required' => __('validations/auth.password.required'),
+            'password.min' => __('validations/auth.password.min'),
+            'password_confirmation.required' => __('validations/auth.password_confirmation.required'),
+            'password_confirmation.same' => __('validations/auth.password_confirmation.same'),
         ];
     }
 }
