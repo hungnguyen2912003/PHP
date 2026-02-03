@@ -82,7 +82,7 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
         Route::post('/store', [WeightController::class, 'store'])->name('store');
 
         Route::get('/edit/{id}', [WeightController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [WeightController::class, 'editPost'])->name('update');
+        Route::put('/edit/{id}', [WeightController::class, 'update'])->name('update');
 
         Route::delete('/destroy/{id}', [WeightController::class, 'destroy'])->name('destroy');
     });
@@ -91,16 +91,14 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
 
         Route::get('/', [HeightController::class, 'index'])->name('index');
         Route::get('/show/{id}', [HeightController::class, 'show'])->name('show');
-
         Route::get('/create', [HeightController::class, 'create'])->name('create');
         Route::post('/store', [HeightController::class, 'store'])->name('store');
+        Route::get('/edit/{height}', [HeightController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [HeightController::class, 'update'])->name('update');
 
-        Route::get('/edit/{id}', [HeightController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [HeightController::class, 'editPost'])->name('update');
-
-        Route::delete('/destroy/{id}', [HeightController::class, 'destroy'])->name('destroy');
+        Route::delete('/destroy/{height}', [HeightController::class, 'destroy'])->name('destroy');
     });
-    
+
 });
 
 /*

@@ -24,4 +24,6 @@ return [
     'update_height' => 'Update Height',
     'weight_management' => 'Weight Management',
     'height_management' => 'Height Management',
+    'weight_details' => 'Weight Details',
+    'height_details' => 'Height Details',
 ];

@@ -31,18 +31,10 @@
             </nav>
         </div>
         <div class="card bg-white rounded-10 border border-white mb-4">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-                <form class="table-src-form position-relative m-0">
-                    <input class="form-control w-344" placeholder="{{ __('placeholder.search') }}" type="text" id="customSearch"/>
-                    <div class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
-                        <span class="material-symbols-outlined">
-                        search
-                        </span>
-                    </div>
-                </form>
+            <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 p-20">
                 <div class="d-flex gap-3">
                     <a class="text-decoration-none fs-16 text-primary" href="{{ route('client.weight.create') }}">
-                    + {{ __('button.add_weight') }}
+                        + {{ __('button.add_weight') }}
                     </a>
                 </div>
             </div>

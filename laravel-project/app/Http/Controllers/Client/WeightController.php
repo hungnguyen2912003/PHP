@@ -6,30 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Weight;
 use App\DataTables\WeightDataTable;
 use App\Http\Requests\Client\Weight\StoreWeightRequest;
+use App\Http\Requests\Client\Weight\UpdateWeightRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class WeightController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(WeightDataTable $dataTable)
     {
         return $dataTable->render('client.pages.weight.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('client.pages.weight.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreWeightRequest $request)
     {
         $data = $request->validated();
@@ -48,43 +40,61 @@ class WeightController extends Controller
         return redirect()->route('client.weight.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Weight $weight)
+    public function show(string $id)
     {
-        //
+        $weight = Weight::findOrFail($id);
+        return view('client.pages.weight.show', compact('weight'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Weight $weight)
+    public function edit(string $id)
     {
-        //
+        $weight = Weight::findOrFail($id);
+        return view('client.pages.weight.edit', compact('weight'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function editPost(Request $request, $id)
+
+    public function update(UpdateWeightRequest $request, string $id)
     {
-        //
+        $weight = Weight::findOrFail($id);
+        $data = $request->validated();
+
+        if ($request->hasFile('attachment')) {
+            // Delete old attachment if exists
+            if ($weight->attachment_url) {
+                $oldPath = str_replace('storage/', '', $weight->attachment_url);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('attachment');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs(auth()->id() . '/weights', $fileName, 'public');
+            $data['attachment_url'] = 'storage/' . $path;
+        } elseif ($request->input('remove_attachment') == '1') {
+            if ($weight->attachment_url) {
+                $oldPath = str_replace('storage/', '', $weight->attachment_url);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $data['attachment_url'] = null;
+        }
+
+        $weight->update($data);
+
+        flash()->success(__('message.weight.update_success'), [], __('notification.success'));
+        return redirect()->route('client.weight.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Weight $weight)
+    public function destroy(string $id)
     {
-        //
-    }
+        $weight = Weight::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Weight $weight)
-    {
-        //
+        if ($weight->attachment_url) {
+            $oldPath = str_replace('storage/', '', $weight->attachment_url);
+            Storage::disk('public')->delete($oldPath);
+        }
+
+        $weight->delete();
+
+        flash()->success(__('message.weight.delete_success'), [], __('notification.success'));
+        return redirect()->route('client.weight.index');
     }
 }

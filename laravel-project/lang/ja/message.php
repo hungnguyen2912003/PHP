@@ -8,7 +8,7 @@ return [
     */
     'login' => [
         'account_not_found' => 'アカウントが見つかりません。',
-        'no_admin_permission'=> '管理者権限がありません。',
+        'no_admin_permission' => '管理者権限がありません。',
         'invalid_credentials' => '認証情報が正しくありません。',
         'status' => [
             'success' => 'ログインに成功しました。',
@@ -101,8 +101,12 @@ return [
     ],
     'weight' => [
         'create_success' => '体重の記録に成功しました！',
+        'update_success' => '体重を更新しました！',
+        'delete_success' => '体重を削除しました！',
     ],
     'height' => [
         'create_success' => '身長の記録に成功しました！',
+        'update_success' => '身長を更新しました！',
+        'delete_success' => '身長を削除しました！',
     ],
 ];

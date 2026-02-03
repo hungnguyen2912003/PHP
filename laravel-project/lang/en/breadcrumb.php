@@ -13,4 +13,5 @@ return [
     'height_list' => 'Height List',
     'weight_management' => 'Weight Management',
     'height_management' => 'Height Management',
+    'weight_details' => 'Weight Details',
 ];

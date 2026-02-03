@@ -31,4 +31,5 @@ return [
     'recorded_at' => 'Recorded At',
     'attachment' => 'Attachment',
     'notes' => 'Notes',
+    'view_attachment' => 'View Attachment',
 ];

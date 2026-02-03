@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Height;
 use App\DataTables\HeightDataTable;
 use App\Http\Requests\Client\Height\StoreHeightRequest;
+use App\Http\Requests\Client\Height\UpdateHeightRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,9 +52,10 @@ class HeightController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Height $height)
+    public function show(string $id)
     {
-        //
+        $height = Height::findOrFail($id);
+        return view('client.pages.height.show', compact('height'));
     }
 
     /**
@@ -61,23 +63,40 @@ class HeightController extends Controller
      */
     public function edit(Height $height)
     {
-        //
+        return view('client.pages.height.edit', compact('height'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function editPost(Request $request, $id)
+    public function update(UpdateHeightRequest $request, string $id)
     {
-        //
-    }
+        $height = Height::findOrFail($id);
+        $data = $request->validated();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Height $height)
-    {
-        //
+        if ($request->hasFile('attachment')) {
+            // Delete old attachment if exists
+            if ($height->attachment_url) {
+                $oldPath = str_replace('storage/', '', $height->attachment_url);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('attachment');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs(auth()->id() . '/heights', $fileName, 'public');
+            $data['attachment_url'] = 'storage/' . $path;
+        } elseif ($request->input('remove_attachment') == '1') {
+            if ($height->attachment_url) {
+                $oldPath = str_replace('storage/', '', $height->attachment_url);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $data['attachment_url'] = null;
+        }
+
+        $height->update($data);
+
+        flash()->success(__('message.height.update_success'), [], __('notification.success'));
+        return redirect()->route('client.height.index');
     }
 
     /**
@@ -85,6 +104,14 @@ class HeightController extends Controller
      */
     public function destroy(Height $height)
     {
-        //
+        if ($height->attachment_url) {
+            $oldPath = str_replace('storage/', '', $height->attachment_url);
+            Storage::disk('public')->delete($oldPath);
+        }
+
+        $height->delete();
+
+        flash()->success(__('message.height.delete_success'), [], __('notification.success'));
+        return redirect()->route('client.height.index');
     }
 }

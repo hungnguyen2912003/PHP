@@ -169,17 +169,13 @@
                             {{ __('label.status') }}:
                             <span class="text-secondary">
                                 @if ($user->status == 'active')
-                                    <span
-                                        class="badge bg-success">{{ __('value.status.active') }}</span>
+                                    <span class="badge bg-success">{{ __('value.status.active') }}</span>
                                 @elseif ($user->status == 'pending')
-                                    <span
-                                        class="badge bg-warning">{{ __('value.status.pending') }}</span>
+                                    <span class="badge bg-warning">{{ __('value.status.pending') }}</span>
                                 @elseif ($user->status == 'banned')
-                                    <span
-                                        class="badge bg-danger">{{ __('value.status.banned') }}</span>
+                                    <span class="badge bg-danger">{{ __('value.status.banned') }}</span>
                                 @else
-                                    <span
-                                        class="badge bg-secondary">{{ __('value.status.deleted') }}</span>
+                                    <span class="badge bg-secondary">{{ __('value.status.deleted') }}</span>
                                 @endif
                             </span>
                         </li>

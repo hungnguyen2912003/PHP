@@ -8,7 +8,7 @@ return [
     */
     'login' => [
         'account_not_found' => 'Account not found.',
-        'no_admin_permission'=> 'You do not have admin access.',
+        'no_admin_permission' => 'You do not have admin access.',
         'invalid_credentials' => 'Invalid login credentials.',
         'status' => [
             'success' => 'Login successful.',
@@ -106,8 +106,12 @@ return [
     ],
     'weight' => [
         'create_success' => 'Weight recorded successfully!',
+        'update_success' => 'Weight updated successfully!',
+        'delete_success' => 'Weight deleted successfully!',
     ],
     'height' => [
         'create_success' => 'Height recorded successfully!',
+        'update_success' => 'Height updated successfully!',
+        'delete_success' => 'Height deleted successfully!',
     ],
 ];

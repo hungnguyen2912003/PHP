@@ -31,4 +31,5 @@ return [
     'recorded_at' => 'Ngày ghi nhận',
     'attachment' => 'Đính kèm',
     'notes' => 'Ghi chú',
+    'view_attachment' => 'Xem tệp đính kèm',
 ];

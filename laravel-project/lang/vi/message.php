@@ -8,7 +8,7 @@ return [
     */
     'login' => [
         'account_not_found' => 'Tài khoản không tồn tại.',
-        'no_admin_permission'=> 'Bạn không có quyền truy cập quản trị.',
+        'no_admin_permission' => 'Bạn không có quyền truy cập quản trị.',
         'invalid_credentials' => 'Thông tin đăng nhập không hợp lệ.',
         'status' => [
             'success' => 'Đăng nhập thành công.',
@@ -101,8 +101,12 @@ return [
     ],
     'weight' => [
         'create_success' => 'Ghi nhận cân nặng thành công!',
+        'update_success' => 'Cập nhật cân nặng thành công!',
+        'delete_success' => 'Xóa cân nặng thành công!',
     ],
     'height' => [
         'create_success' => 'Ghi nhận chiều cao thành công!',
+        'update_success' => 'Cập nhật chiều cao thành công!',
+        'delete_success' => 'Xóa chiều cao thành công!',
     ],
 ];

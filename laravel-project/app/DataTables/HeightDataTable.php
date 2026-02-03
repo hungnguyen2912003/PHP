@@ -68,11 +68,12 @@ class HeightDataTable extends DataTable
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
             Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap'),
             Column::make('height')->title(__('label.height'))->addClass('text-nowrap'),
-            Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap'),
+            Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap text-center'),
             Column::computed('action')
                 ->title(__('label.action'))
                 ->exportable(false)
                 ->printable(false)
+                ->width(100)
                 ->addClass('text-end text-nowrap'),
         ];
     }

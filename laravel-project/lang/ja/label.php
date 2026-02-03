@@ -31,4 +31,5 @@ return [
     'recorded_at' => '記録日時',
     'attachment' => '添付ファイル',
     'notes' => 'メモ',
+    'view_attachment' => '添付ファイルを表示',
 ];
