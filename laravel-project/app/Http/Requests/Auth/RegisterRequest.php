@@ -33,17 +33,17 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'fullname.required' => __('messages.fullname_required'),
-            'fullname.max' => __('messages.fullname_max'),
-            'username.required' => __('messages.username_required'),
-            'username.unique' => __('messages.username_unique'),
-            'email.required' => __('messages.email_required'),
-            'email.email' => __('messages.email_valid'),
-            'email.unique' => __('messages.email_unique'),
-            'password.required' => __('messages.password_required'),
-            'password.min' => __('messages.password_min'),
-            'password_confirmation.required' => __('messages.password_confirmation_required'),
-            'password_confirmation.same' => __('messages.password_confirmed'),
+            'fullname.required' => __('validation.fullname.required'),
+            'fullname.max' => __('validation.fullname.max'),
+            'username.required' => __('validation.username.required'),
+            'username.unique' => __('validation.username.unique'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.unique' => __('validation.email.unique'),
+            'password.required' => __('validation.password.required'),
+            'password.min' => __('validation.password.min'),
+            'password_confirmation.required' => __('validation.password_confirmation.required'),
+            'password_confirmation.same' => __('validation.password_confirmation.same'),
         ];
     }
 }

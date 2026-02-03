@@ -13,5 +13,7 @@ return [
     'create_user' => '新規ユーザー追加',
     'update_user' => 'ユーザー更新',
     'user_profile' => 'ユーザープロフィール',
-    'set_first_password' => 'パスワード設定',
+    'set_first_password' => '初回パスワード設定',
+    'error_404' => 'ページが見つかりません',
+    'error_500' => 'サーバー内部エラー',
 ];

@@ -14,4 +14,6 @@ return [
     'update_user' => 'Update User',
     'user_profile' => 'User Profile',
     'set_first_password' => 'Set First Password',
+    'error_404' => 'Page Not Found',
+    'error_500' => 'Internal Server Error',
 ];

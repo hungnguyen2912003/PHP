@@ -15,6 +15,11 @@ return [
         ]
     ],
 
+    'register' => [
+        'success' => 'Registration successful! Please check your email to activate your account.',
+        'user_exists' => 'Email or username is already taken.',
+    ],
+
     'logout' => [
         'status' => [
             'success' => 'Logout successful.',

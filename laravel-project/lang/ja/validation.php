@@ -42,6 +42,7 @@ return [
     'username' => [
         'required' => 'ユーザー名は必須です。',
         'exists' => '選択されたユーザー名は無効です。',
+        'unique' => 'このユーザー名は既に使用されています。',
     ],
 
     'fullname' => [

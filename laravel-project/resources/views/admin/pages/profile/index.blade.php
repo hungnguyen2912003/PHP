@@ -190,7 +190,7 @@
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            <label class="form-label text-secondary">{{ __('label.status') }}</label>
+                            <label class="form-label text-secondary">{{ __('label.status') }}:</label>
                             <span class="text-secondary">
                                 @if ($user->status == 'active')
                                     <span class="badge bg-success">{{ __('value.status.active') }}</span>

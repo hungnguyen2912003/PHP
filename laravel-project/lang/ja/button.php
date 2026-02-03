@@ -19,4 +19,6 @@ return [
     'resend_activation' => 'アクティベーションメールを再送信',
     'processing' => '処理中...',
     'set_password' => 'パスワードを設定',
+    'back_to_home' => 'ホームに戻る',
+    'go_back' => '戻る',
 ];

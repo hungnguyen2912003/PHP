@@ -13,4 +13,10 @@ return [
     'reset_password_desc' => 'アカウントの新しいパスワードを入力してください。',
     'reset_password_btn' => 'パスワードをリセット',
     'set_first_password_desc' => 'アカウントの有効化を完了するために、新しいパスワードを設定してください。',
+    'no_account' => 'アカウントをお持ちでないですか？',
+    'sign_up' => '新規登録',
+    'register_title' => '新規登録',
+    'already_have_account' => 'すでにアカウントをお持ちですか？',
+    'sign_in_link' => 'ログイン',
+    'or_sign_up_with' => 'または次で登録',
 ];

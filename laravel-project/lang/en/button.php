@@ -19,4 +19,6 @@ return [
     'resend_activation' => 'Resend Activation Email',
     'processing' => 'Processing...',
     'set_password' => 'Set Password',
+    'back_to_home' => 'Back to Home',
+    'go_back' => 'Go Back',
 ];

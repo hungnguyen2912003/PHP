@@ -9,6 +9,14 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 
+use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
+use App\Http\Controllers\Client\ProfileController as ClientProfileController;
+use App\Http\Controllers\Client\SettingController as ClientSettingController;
+use App\Http\Controllers\Client\AuthController as ClientAuthController;
+use App\Http\Controllers\Client\ForgotPasswordController as ClientForgotPasswordController;
+use App\Http\Controllers\Client\ResetPasswordController as ClientResetPasswordController;
+
+
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -16,21 +24,25 @@ use App\Http\Controllers\Admin\UserController;
 | Guest (web)
 |--------------------------------------------------------------------------
 */
-Route::middleware('guest:web')->group(function () {
-    // Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    // Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+Route::name('client.')->group(function () {
+    Route::get('/', [ClientDashboardController::class, 'index'])->name('dashboard');
+});
 
-    // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    // Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::middleware('guest:web')->name('client.')->group(function () {
 
-    // Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('forgot-password');
-    // Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password.post');
+    Route::get('/login', [ClientAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [ClientAuthController::class, 'login'])->name('login.post');
 
-    // Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
-    // Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.update');
+    Route::get('/register', [ClientAuthController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [ClientAuthController::class, 'register'])->name('register.post');
 
-    // Route::get('/activate/{token}', [AdminAuthController::class, 'activate'])->name('activate');
-    // Route::post('/activate/{token}', [AdminAuthController::class, 'setFirstPassword'])->name('activate.password');
+    Route::get('/forgot-password', [ClientForgotPasswordController::class, 'showForgotPasswordForm'])->name('forgot-password');
+    Route::post('/forgot-password', [ClientForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot-password.post');
+
+    Route::get('/reset-password/{token}', [ClientResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password/{token}', [ClientResetPasswordController::class, 'resetPassword'])->name('password.update');
+
+    Route::get('/activate/{token}', [ClientAuthController::class, 'activate'])->name('activate');
 });
 
 
@@ -39,25 +51,25 @@ Route::middleware('guest:web')->group(function () {
 | User (web) - authenticated
 |--------------------------------------------------------------------------
 */
-// Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web'])->name('client.')->group(function () {
 
-//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [ClientAuthController::class, 'logout'])->name('logout');
 
-//     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/resend-activation', [ClientAuthController::class, 'resendActivation'])->name('resend-activation');
 
-//     Route::post('/resend-activation', [AuthController::class, 'resendActivation'])->name('resend-activation');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ClientProfileController::class, 'index'])->name('index');
+        Route::put('/avatar', [ClientProfileController::class, 'updateAvatar'])->name('avatar.update');
+    });
 
-//     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-//     Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::prefix('setting')->name('setting.')->group(function () {
+        Route::get('/account', [ClientSettingController::class, 'account'])->name('account');
+        Route::put('/account', [ClientSettingController::class, 'updateAccount'])->name('account.update');
 
-//     Route::prefix('setting')->name('setting.')->group(function () {
-//         Route::get('/account', [SettingController::class, 'account'])->name('account');
-//         Route::put('/account', [SettingController::class, 'updateAccount'])->name('account.update');
-
-//         Route::get('/change-password', [SettingController::class, 'changePassword'])->name('change-password');
-//         Route::post('/change-password', [SettingController::class, 'changePasswordUpdate'])->name('change-password.update');
-//     });
-// });
+        Route::get('/change-password', [ClientSettingController::class, 'changePassword'])->name('change-password');
+        Route::post('/change-password', [ClientSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
+    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -98,7 +110,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         Route::prefix('profile')->name('profile.')->group(function () {
             Route::get('/', [AdminProfileController::class, 'index'])->name('index');

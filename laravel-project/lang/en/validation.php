@@ -42,6 +42,7 @@ return [
     'username' => [
         'required' => 'Username is required.',
         'exists' => 'The selected username is invalid.',
+        'unique' => 'Username has already been taken.',
     ],
 
     'fullname' => [

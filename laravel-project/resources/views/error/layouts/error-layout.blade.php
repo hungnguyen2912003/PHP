@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8" />
         <title>@yield('title')</title>
@@ -23,10 +23,10 @@
         <!-- end authentication section -->
 
         <!-- JAVASCRIPT -->
-        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('assets/js/metismenujs/metismenujs.min.js') }}"></script>
-        <script src="{{ asset('assets/js/simplebar/simplebar.min.js') }}"></script>
-        <script src="{{ asset('assets/js/feather-icons/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/metismenujs/metismenujs.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
 
     </body>
 

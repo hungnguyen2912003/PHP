@@ -19,4 +19,6 @@ return [
     'resend_activation' => 'Gửi lại email kích hoạt',
     'processing' => 'Đang xử lý...',
     'set_password' => 'Thiết lập mật khẩu',
+    'back_to_home' => 'Quay lại trang chủ',
+    'go_back' => 'Quay lại',
 ];

@@ -13,5 +13,7 @@ return [
     'create_user' => 'Thêm người dùng mới',
     'update_user' => 'Cập nhật người dùng',
     'user_profile' => 'Hồ sơ người dùng',
-    'set_first_password' => 'Thiết lập mật khẩu',
+    'set_first_password' => 'Thiết lập mật khẩu đầu tiên',
+    'error_404' => 'Không tìm thấy trang',
+    'error_500' => 'Lỗi máy chủ nội bộ',
 ];

@@ -13,4 +13,10 @@ return [
     'reset_password_desc' => 'Enter a new password for your account.',
     'reset_password_btn' => 'Reset Password',
     'set_first_password_desc' => 'Set a new password for your account to complete activation.',
+    'no_account' => 'Don\'t have an account yet?',
+    'sign_up' => 'Sign Up',
+    'register_title' => 'Sign Up',
+    'already_have_account' => 'Already have an account?',
+    'sign_in_link' => 'Sign In',
+    'or_sign_up_with' => 'Or sign up with',
 ];

@@ -2,16 +2,16 @@
     <div class="lang-switcher-auth d-flex justify-content-end align-items-center">
         @php
             $locales = [
-                'en' => ['name' => __('common.lang.en'), 'flag' => 'usa.png'],
-                'ja' => ['name' => __('common.lang.ja'), 'flag' => 'japan.png'],
-                'vi' => ['name' => __('common.lang.vi'), 'flag' => 'vietnam.png'],
+                'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
+                'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
+                'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
             ];
             $currentLocale = App::getLocale();
             // Re-evaluate current name based on new keys
             $locales = [
-                'en' => ['name' => __('common.lang.en'), 'flag' => 'usa.png'],
-                'ja' => ['name' => __('common.lang.ja'), 'flag' => 'japan.png'],
-                'vi' => ['name' => __('common.lang.vi'), 'flag' => 'vietnam.png'],
+                'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
+                'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
+                'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
             ];
             $currentFlag = $locales[$currentLocale]['flag'] ?? 'usa.png';
             $currentName = $locales[$currentLocale]['name'] ?? 'English';
@@ -36,7 +36,7 @@
             {{-- Menu --}}
             <div class="dropdown-menu lang-menu dropdown-menu-end mt-2">
                 <div class="lang-head">
-                    {{ __('common.lang.title') }}
+                    {{ __('label.lang') }}
                 </div>
 
                 <div class="lang-items" data-simplebar>

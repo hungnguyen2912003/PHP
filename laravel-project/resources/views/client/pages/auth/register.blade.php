@@ -1,24 +1,24 @@
-@extends('layouts.auth-layout')
+@extends('client.layouts.auth-layout')
 
-@section('title', __('messages.sign_up_title'))
+@section('title', __('auth.register_title'))
 
 @section('content')
-    <div class="text-center mb-4">
+    <div class="text-center mb-4 mt-5">
         <h3 class="fs-26 fw-medium" style="margin-bottom: 6px">
-            {{ __('messages.sign_up_title') }}
+            {{ __('auth.register_title') }}
         </h3>
         <p class="fs-16 text-secondary lh-1-8">
-            {{ __('messages.already_have_account') }}
-            <a class="text-primary text-decoration-none" href="{{ route('login') }}">
-                {{ __('messages.sign_in_link') }}
+            {{ __('auth.already_have_account') }}
+            <a class="text-primary text-decoration-none" href="{{ route('client.login') }}">
+                {{ __('auth.sign_in_link') }}
             </a>
         </p>
     </div>
-    <form action="{{ route('register.post') }}" method="POST" id="registerForm">
+    <form action="{{ route('client.register.post') }}" method="POST" id="registerForm">
         @csrf
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('messages.full_name') }}
+                {{ __('label.full_name') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-floating">
@@ -26,13 +26,13 @@
                     class="form-control @error('fullname') is-invalid @enderror"
                     name="fullname"
                     id="fullname"
-                    placeholder="{{ __('messages.enter_full_name') }}"
+                    placeholder="{{ __('placeholder.full_name') }}"
                     type="text"
                     value="{{ old('fullname') }}"
                 />
                 <label for="fullname">
-                    <i class="ri-user-line mr-2"></i>
-                    {{ __('messages.enter_full_name') }}
+                    <i class="ri-user-line"></i>
+                    {{ __('placeholder.full_name') }}
                 </label>
             </div>
             @error('fullname')
@@ -41,7 +41,7 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('messages.username') }}
+                {{ __('label.username') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-floating">
@@ -49,13 +49,13 @@
                     class="form-control @error('username') is-invalid @enderror"
                     name="username"
                     id="username"
-                    placeholder="{{ __('messages.enter_username') }}"
+                    placeholder="{{ __('placeholder.username') }}"
                     type="text"
                     value="{{ old('username') }}"
                 />
                 <label for="username">
-                    <i class="ri-user-line mr-2"></i>
-                    {{ __('messages.enter_username') }}
+                    <i class="ri-user-line"></i>
+                    {{ __('placeholder.username') }}
                 </label>
             </div>
             @error('username')
@@ -64,7 +64,7 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('messages.email') }}
+                {{ __('label.email') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-floating">
@@ -72,13 +72,13 @@
                     class="form-control @error('email') is-invalid @enderror"
                     name="email"
                     id="email"
-                    placeholder="{{ __('messages.enter_email') }}"
+                    placeholder="{{ __('placeholder.email') }}"
                     type="email"
                     value="{{ old('email') }}"
                 />
                 <label for="email">
-                    <i class="ri-mail-line mr-2"></i>
-                    {{ __('messages.enter_email') }}
+                    <i class="ri-mail-line"></i>
+                    {{ __('placeholder.email') }}
                 </label>
             </div>
             @error('email')
@@ -87,7 +87,7 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('messages.password_label') }}
+                {{ __('label.password') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-group" id="password-show-hide">
@@ -96,12 +96,12 @@
                         class="form-control text-secondary password @error('password') is-invalid @enderror"
                         name="password"
                         id="password"
-                        placeholder="{{ __('messages.enter_password') }}"
+                        placeholder="{{ __('placeholder.enter_password') }}"
                         type="password"
                     />
                     <label for="password">
-                        <i class="ri-lock-line mr-2"></i>
-                        {{ __('messages.enter_password') }}
+                        <i class="ri-lock-line"></i>
+                        {{ __('placeholder.enter_password') }}
                     </label>
                     <i
                         aria-hidden="true"
@@ -116,21 +116,21 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('messages.confirm_new_password') }}
+                {{ __('label.new_password_confirmation') }}
                 <span class="text-danger">*</span>
             </label>
-            <div class="form-group" id="password-show-hide">
+            <div class="form-group" id="password-show-hide-confirm">
                 <div class="password-wrapper position-relative password-container form-floating">
                     <input
                         class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror"
                         name="password_confirmation"
                         id="password_confirmation"
-                        placeholder="{{ __('messages.enter_confirm_password') }}"
+                        placeholder="{{ __('placeholder.new_password_confirmation') }}"
                         type="password"
                     />
                     <label for="password_confirmation">
-                        <i class="ri-lock-line mr-2"></i>
-                        {{ __('messages.enter_confirm_password') }}
+                        <i class="ri-lock-line"></i>
+                        {{ __('placeholder.new_password_confirmation') }}
                     </label>
                     <i
                         aria-hidden="true"
@@ -147,64 +147,13 @@
             <button
                 class="btn btn-primary fw-normal text-white w-100"
                 id="submitBtn"
-                data-processing-text="{{ __('messages.processing') }}"
+                data-processing-text="{{ __('notification.processing') }}"
                 style="padding-top: 18px; padding-bottom: 18px"
                 type="submit"
             >
-                <span id="btnText">{{ __('messages.sign_up_link') }}</span>
+                <span id="btnText">{{ __('auth.sign_up') }}</span>
                 <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
             </button>
         </div>
-        <div class="position-relative text-center z-1 mb-12">
-            <span class="fs-16 bg-white px-4 text-secondary card d-inline-block border-0">
-                {{ __('messages.or_sign_in_with') }}
-            </span>
-            <span
-                class="d-block border-bottom border-2 position-absolute w-100 z-n1"
-                style="top: 13px"
-            ></span>
-        </div>
-        <ul class="p-0 mb-0 list-unstyled d-flex justify-content-center" style="gap: 10px">
-            <li>
-                <a
-                    class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
-                    href="https://www.facebook.com/"
-                    style="width: 30px; height: 30px; line-height: 30px; background-color: #3a559f"
-                    target="_blank"
-                >
-                    <i class="ri-facebook-fill"></i>
-                </a>
-            </li>
-            <li>
-                <a
-                    class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
-                    href="https://www.twitter.com/"
-                    style="width: 30px; height: 30px; line-height: 30px; background-color: #0f1419"
-                    target="_blank"
-                >
-                    <i class="ri-twitter-x-line"></i>
-                </a>
-            </li>
-            <li>
-                <a
-                    class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
-                    href="https://www.google.com/"
-                    style="width: 30px; height: 30px; line-height: 30px; background-color: #e02f2f"
-                    target="_blank"
-                >
-                    <i class="ri-google-fill"></i>
-                </a>
-            </li>
-            <li>
-                <a
-                    class="d-inline-block rounded-circle text-decoration-none text-center text-white transition-y fs-16"
-                    href="https://www.linkedin.com/"
-                    style="width: 30px; height: 30px; line-height: 30px; background-color: #007ab9"
-                    target="_blank"
-                >
-                    <i class="ri-linkedin-fill"></i>
-                </a>
-            </li>
-        </ul>
     </form>
 @endsection

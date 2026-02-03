@@ -13,4 +13,10 @@ return [
     'reset_password_desc' => 'Nhập mật khẩu mới cho tài khoản của bạn.',
     'reset_password_btn' => 'Đặt lại mật khẩu',
     'set_first_password_desc' => 'Thiết lập mật khẩu mới cho tài khoản của bạn để hoàn tất kích hoạt.',
+    'no_account' => 'Bạn chưa có tài khoản?',
+    'sign_up' => 'Đăng ký',
+    'register_title' => 'Đăng ký',
+    'already_have_account' => 'Bạn đã có tài khoản?',
+    'sign_in_link' => 'Đăng nhập',
+    'or_sign_up_with' => 'Hoặc đăng ký bằng',
 ];

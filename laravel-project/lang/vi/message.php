@@ -15,6 +15,11 @@ return [
         ]
     ],
 
+    'register' => [
+        'success' => 'Đăng ký tài khoản thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.',
+        'user_exists' => 'Email hoặc tên đăng nhập đã được sử dụng.',
+    ],
+
     'logout' => [
         'status' => [
             'success' => 'Đăng xuất thành công.',

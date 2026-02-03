@@ -29,15 +29,17 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-        //     return response()->view('pages.error.404', [], 404);
-        // });
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            return response()->view('error.pages.404', [], 404);
+        });
 
-        // $exceptions->render(function (\Throwable $e, Request $request) {
-        //     if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
-        //         return null;
-        //     }
+        $exceptions->render(function (\Throwable $e, Request $request) {
+            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+                return null;
+            }
 
-        //     return response()->view('pages.error.500', [], 500);
-        // });
+            return response()->view('error.pages.500', [
+                'exception' => $e
+            ], 500);
+        });
     })->create();

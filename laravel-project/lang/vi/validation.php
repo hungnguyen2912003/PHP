@@ -42,6 +42,7 @@ return [
     'username' => [
         'required' => 'Tên đăng nhập là bắt buộc.',
         'exists' => 'Tên đăng nhập được chọn không hợp lệ.',
+        'unique' => 'Tên đăng nhập đã được sử dụng.',
     ],
 
     'fullname' => [
