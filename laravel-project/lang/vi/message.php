@@ -99,4 +99,10 @@ return [
             'already_active' => 'Tài khoản của bạn đã được kích hoạt.',
         ],
     ],
+    'weight' => [
+        'create_success' => 'Ghi nhận cân nặng thành công!',
+    ],
+    'height' => [
+        'create_success' => 'Ghi nhận chiều cao thành công!',
+    ],
 ];

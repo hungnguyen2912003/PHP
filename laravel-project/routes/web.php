@@ -16,6 +16,9 @@ use App\Http\Controllers\Client\AuthController as ClientAuthController;
 use App\Http\Controllers\Client\ForgotPasswordController as ClientForgotPasswordController;
 use App\Http\Controllers\Client\ResetPasswordController as ClientResetPasswordController;
 
+use App\Http\Controllers\Client\WeightController;
+use App\Http\Controllers\Client\HeightController;
+
 
 use App\Http\Controllers\Admin\UserController;
 
@@ -69,6 +72,35 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
         Route::get('/change-password', [ClientSettingController::class, 'changePassword'])->name('change-password');
         Route::post('/change-password', [ClientSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
     });
+
+    Route::prefix('weight')->name('weight.')->group(function () {
+
+        Route::get('/', [WeightController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [WeightController::class, 'show'])->name('show');
+
+        Route::get('/create', [WeightController::class, 'create'])->name('create');
+        Route::post('/store', [WeightController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [WeightController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [WeightController::class, 'editPost'])->name('update');
+
+        Route::delete('/destroy/{id}', [WeightController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('height')->name('height.')->group(function () {
+
+        Route::get('/', [HeightController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [HeightController::class, 'show'])->name('show');
+
+        Route::get('/create', [HeightController::class, 'create'])->name('create');
+        Route::post('/store', [HeightController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [HeightController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [HeightController::class, 'editPost'])->name('update');
+
+        Route::delete('/destroy/{id}', [HeightController::class, 'destroy'])->name('destroy');
+    });
+    
 });
 
 /*

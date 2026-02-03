@@ -21,4 +21,6 @@ return [
     'set_password' => 'Thiết lập mật khẩu',
     'back_to_home' => 'Quay lại trang chủ',
     'go_back' => 'Quay lại',
+    'add_weight' => 'Thêm cân nặng',
+    'add_height' => 'Thêm chiều cao',
 ];

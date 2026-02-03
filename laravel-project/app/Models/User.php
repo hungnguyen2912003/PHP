@@ -61,4 +61,14 @@ class User extends Authenticatable
     {
         return $this->status === 'deleted';
     }
+
+    public function weights()
+    {
+        return $this->hasMany(Weight::class);
+    }
+
+    public function heights()
+    {
+        return $this->hasMany(Height::class);
+    }
 }

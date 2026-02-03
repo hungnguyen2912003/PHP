@@ -16,4 +16,12 @@ return [
     'set_first_password' => '初回パスワード設定',
     'error_404' => 'ページが見つかりません',
     'error_500' => 'サーバー内部エラー',
+    'weight_list' => '体重リスト',
+    'height_list' => '身長リスト',
+    'create_weight' => '体重の記録を追加',
+    'update_weight' => '体重の記録を更新',
+    'create_height' => '身長の記録を追加',
+    'update_height' => '身長の記録を更新',
+    'weight_management' => '体重管理',
+    'height_management' => '身長管理',
 ];

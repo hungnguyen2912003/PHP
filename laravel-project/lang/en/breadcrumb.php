@@ -9,4 +9,8 @@ return [
     ],
     'user_management' => 'User Management',
     'users_list' => 'Users List',
+    'weight_list' => 'Weight List',
+    'height_list' => 'Height List',
+    'weight_management' => 'Weight Management',
+    'height_management' => 'Height Management',
 ];

@@ -83,11 +83,35 @@ return [
         'required' => 'Ảnh đại diện là bắt buộc.',
         'image' => 'Ảnh đại diện phải là một tệp hình ảnh.',
         'mimes' => 'Ảnh đại diện phải có định dạng: jpeg, png, jpg, gif.',
-        'max' => 'Kích thước ảnh đại diện phải nhỏ hơn 2MB.',
+        'max' => 'Kích thước ảnh đại diện không được vượt quá 2MB.',
     ],
 
     'bio' => [
         'string' => 'Tiểu sử phải là chuỗi ký tự.',
         'max' => 'Tiểu sử không được vượt quá 1000 ký tự.',
+    ],
+    'notes' => [
+        'string' => 'Ghi chú phải là chuỗi ký tự.',
+        'max' => 'Ghi chú không được vượt quá 1000 ký tự.',
+    ],
+    'weight' => [
+        'required' => 'Cân nặng là bắt buộc.',
+        'numeric' => 'Cân nặng phải là một con số.',
+        'min' => 'Cân nặng không được nhỏ hơn :min.',
+    ],
+    'height' => [
+        'required' => 'Chiều cao là bắt buộc.',
+        'numeric' => 'Chiều cao phải là một con số.',
+        'min' => 'Chiều cao không được nhỏ hơn :min.',
+    ],
+    'recorded_at' => [
+        'required' => 'Thời gian ghi nhận là bắt buộc.',
+        'date' => 'Thời gian ghi nhận không hợp lệ.',
+        'before_or_equal' => 'Thời gian ghi nhận không được vượt quá hiện tại.',
+    ],
+    'attachment' => [
+        'file' => 'Tệp đính kèm không hợp lệ.',
+        'image' => 'Tệp đính kèm phải là hình ảnh.',
+        'max' => 'Tệp đính kèm không được vượt quá 2MB.',
     ],
 ];

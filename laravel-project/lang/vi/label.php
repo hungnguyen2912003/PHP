@@ -26,4 +26,9 @@ return [
     'email_support' => 'Hỗ trợ Email',
     'privacy_policy' => 'Chính sách bảo mật',
     'terms_of_service' => 'Điều khoản dịch vụ',
+    'weight' => 'Cân nặng',
+    'height' => 'Chiều cao',
+    'recorded_at' => 'Ngày ghi nhận',
+    'attachment' => 'Đính kèm',
+    'notes' => 'Ghi chú',
 ];

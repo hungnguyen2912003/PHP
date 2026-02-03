@@ -17,4 +17,8 @@ return [
     'new_password_confirmation' => 'Nhập xác nhận mật khẩu mới',
     'username_or_email' => 'Nhập email hoặc tên đăng nhập',
     'enter_password' => 'Nhập mật khẩu của bạn',
+    'weight' => 'Nhập cân nặng của bạn (kg)',
+    'height' => 'Nhập chiều cao của bạn (cm)',
+    'recorded_at' => 'Chọn ngày và giờ ghi nhận',
+    'notes' => 'Nhập ghi chú (nếu có)',
 ];

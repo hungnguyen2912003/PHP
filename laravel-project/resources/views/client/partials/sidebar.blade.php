@@ -41,11 +41,18 @@
             @if(Auth::guard('web')->check())
                 <li class="menu-title small text-uppercase"><span
                         class="menu-title-text">{{ __('section.apps') }}</span></li>
-                <li class="menu-item {{ request()->routeIs('client.profile.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('client.profile.*') ? 'active' : '' }}"
-                        href="{{ route('client.profile.index') }}">
-                        <span class="material-symbols-outlined menu-icon">account_circle</span>
-                        <span class="title">{{ __('label.my_profile') }}</span>
+                <li class="menu-item {{ request()->routeIs('client.weight.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('client.weight.*') ? 'active' : '' }}"
+                        href="{{ route('client.weight.index') }}">
+                        <span class="material-symbols-outlined menu-icon">weight</span>
+                        <span class="title">{{ __('label.weight') }}</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('client.height.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('client.height.*') ? 'active' : '' }}"
+                        href="{{ route('client.height.index') }}">
+                        <span class="material-symbols-outlined menu-icon">height</span>
+                        <span class="title">{{ __('label.height') }}</span>
                     </a>
                 </li>
             @endif

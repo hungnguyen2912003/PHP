@@ -26,4 +26,9 @@ return [
     'email_support' => 'メールサポート',
     'privacy_policy' => 'プライバシーポリシー',
     'terms_of_service' => '利用規約',
+    'weight' => '体重',
+    'height' => '身長',
+    'recorded_at' => '記録日時',
+    'attachment' => '添付ファイル',
+    'notes' => 'メモ',
 ];

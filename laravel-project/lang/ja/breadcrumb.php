@@ -9,4 +9,8 @@ return [
     ],
     'user_management' => 'ユーザー管理',
     'users_list' => 'ユーザーリスト',
+    'weight_list' => '体重リスト',
+    'height_list' => '身長リスト',
+    'weight_management' => '体重管理',
+    'height_management' => '身長管理',
 ];

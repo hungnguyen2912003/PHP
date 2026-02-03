@@ -9,4 +9,6 @@ return [
     'main_menu' => 'メインメニュー',
     'apps' => 'アプリケーション',
     'user_image' => 'ユーザー画像',
+    'weight_info' => '体重情報',
+    'height_info' => '身長情報',
 ];

@@ -99,4 +99,10 @@ return [
             'already_active' => 'アカウントは既に有効化されています。',
         ],
     ],
+    'weight' => [
+        'create_success' => '体重の記録に成功しました！',
+    ],
+    'height' => [
+        'create_success' => '身長の記録に成功しました！',
+    ],
 ];

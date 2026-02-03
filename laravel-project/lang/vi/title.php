@@ -16,4 +16,12 @@ return [
     'set_first_password' => 'Thiết lập mật khẩu đầu tiên',
     'error_404' => 'Không tìm thấy trang',
     'error_500' => 'Lỗi máy chủ nội bộ',
+    'weight_list' => 'Danh sách cân nặng',
+    'height_list' => 'Danh sách chiều cao',
+    'create_weight' => 'Thêm cân nặng mới',
+    'update_weight' => 'Cập nhật cân nặng',
+    'create_height' => 'Thêm chiều cao mới',
+    'update_height' => 'Cập nhật chiều cao',
+    'weight_management' => 'Quản lý cân nặng',
+    'height_management' => 'Quản lý chiều cao',
 ];

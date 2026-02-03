@@ -17,4 +17,8 @@ return [
     'new_password_confirmation' => 'Confirm new password',
     'username_or_email' => 'Enter your email or username',
     'enter_password' => 'Enter your password',
+    'weight' => 'Enter your weight (kg)',
+    'height' => 'Enter your height (cm)',
+    'recorded_at' => 'Select recorded date and time',
+    'notes' => 'Enter notes (optional)',
 ];

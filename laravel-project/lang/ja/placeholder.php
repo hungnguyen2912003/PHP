@@ -17,4 +17,8 @@ return [
     'new_password_confirmation' => '新しいパスワード（確認）を入力してください',
     'username_or_email' => 'メールアドレスまたはユーザー名を入力してください',
     'enter_password' => 'パスワードを入力してください',
+    'weight' => '体重を入力してください (kg)',
+    'height' => '身長を入力してください (cm)',
+    'recorded_at' => '記録日時を選択してください',
+    'notes' => 'メモを入力してください (任意)',
 ];

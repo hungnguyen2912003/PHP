@@ -104,4 +104,10 @@ return [
             'already_active' => 'Your account is already active.',
         ],
     ],
+    'weight' => [
+        'create_success' => 'Weight recorded successfully!',
+    ],
+    'height' => [
+        'create_success' => 'Height recorded successfully!',
+    ],
 ];

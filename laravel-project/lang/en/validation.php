@@ -92,4 +92,28 @@ return [
         'string' => 'Bio must be a string.',
         'max' => 'Bio must not exceed 1000 characters.',
     ],
+    'notes' => [
+        'string' => 'Notes must be a string.',
+        'max' => 'Notes must not exceed 1000 characters.',
+    ],
+    'weight' => [
+        'required' => 'Weight is required.',
+        'numeric' => 'Weight must be a number.',
+        'min' => 'Weight must be at least :min.',
+    ],
+    'height' => [
+        'required' => 'Height is required.',
+        'numeric' => 'Height must be a number.',
+        'min' => 'Height must be at least :min.',
+    ],
+    'recorded_at' => [
+        'required' => 'Recorded at is required.',
+        'date' => 'Recorded at must be a valid date.',
+        'before_or_equal' => 'Recorded at must be today or earlier.',
+    ],
+    'attachment' => [
+        'file' => 'Attachment must be a file.',
+        'image' => 'Attachment must be an image.',
+        'max' => 'Attachment size must be less than 2MB.',
+    ],
 ];

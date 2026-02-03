@@ -26,4 +26,9 @@ return [
     'email_support' => 'Email Support',
     'privacy_policy' => 'Privacy Policy',
     'terms_of_service' => 'Terms of Service',
+    'weight' => 'Weight',
+    'height' => 'Height',
+    'recorded_at' => 'Recorded At',
+    'attachment' => 'Attachment',
+    'notes' => 'Notes',
 ];

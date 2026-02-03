@@ -21,4 +21,6 @@ return [
     'set_password' => 'Set Password',
     'back_to_home' => 'Back to Home',
     'go_back' => 'Go Back',
+    'add_weight' => 'Add Weight',
+    'add_height' => 'Add Height',
 ];

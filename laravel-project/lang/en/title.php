@@ -16,4 +16,12 @@ return [
     'set_first_password' => 'Set First Password',
     'error_404' => 'Page Not Found',
     'error_500' => 'Internal Server Error',
+    'weight_list' => 'Weight List',
+    'height_list' => 'Height List',
+    'create_weight' => 'Create Weight',
+    'update_weight' => 'Update Weight',
+    'create_height' => 'Create Height',
+    'update_height' => 'Update Height',
+    'weight_management' => 'Weight Management',
+    'height_management' => 'Height Management',
 ];

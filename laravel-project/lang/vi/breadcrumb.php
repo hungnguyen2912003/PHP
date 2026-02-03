@@ -9,4 +9,8 @@ return [
     ],
     'user_management' => 'Quản lý người dùng',
     'users_list' => 'Danh sách người dùng',
+    'weight_list' => 'Danh sách cân nặng',
+    'height_list' => 'Danh sách chiều cao',
+    'weight_management' => 'Quản lý cân nặng',
+    'height_management' => 'Quản lý chiều cao',
 ];

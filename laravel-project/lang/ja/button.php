@@ -21,4 +21,6 @@ return [
     'set_password' => 'パスワードを設定',
     'back_to_home' => 'ホームに戻る',
     'go_back' => '戻る',
+    'add_weight' => '体重の記録',
+    'add_height' => '身長の記録',
 ];
