@@ -26,7 +26,7 @@ class SettingController extends Controller
         $user = Auth::guard("admin")->user();
         $data = $request->validated();
         $user->update($data);
-        flash()->success(__('messages/settings.account.status.success'), [], __('common.success'));
+        flash()->success(__('message.account.status.success'), [], __('notification.success'));
         return redirect()->back();
     }
     /*
@@ -44,7 +44,7 @@ class SettingController extends Controller
         $user = Auth::guard("admin")->user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            flash()->error(__('messages/settings.change_password.current_password_mismatch'), [], __('common.error'));
+            flash()->error(__('message.change_password.current_password_mismatch'), [], __('notification.error'));
             return redirect()->back();
         }
 
@@ -52,7 +52,7 @@ class SettingController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        flash()->success(__('messages/settings.change_password.status.success'), [], __('common.success'));
+        flash()->success(__('message.change_password.status.success'), [], __('notification.success'));
         return redirect()->back();
     }
 }

@@ -34,7 +34,7 @@
                     <li>
                         <form class="src-form position-relative">
                             <input class="form-control"
-                                placeholder="{{ __('admin/layouts/header.search_placeholder') }}" type="text" />
+                                placeholder="{{ __('placeholder.search') }}" type="text" />
                             <div
                                 class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
                                 <span class="material-symbols-outlined">
@@ -62,14 +62,14 @@
                             <div class="dropdown-menu dropdown-lg p-0 border-0 dropdown-menu-end">
                                 <span class="fw-medium fs-16 text-secondary d-block title"
                                     style="padding-top: 20px; padding-bottom: 20px;">
-                                    {{ __('common.lang.title') }}
+                                    {{ __('label.lang') }}
                                 </span>
                                 <div class="max-h-275" data-simplebar="">
                                     @php
                                         $locales = [
-                                            'en' => ['name' => __('common.lang.en'), 'flag' => 'usa.png'],
-                                            'ja' => ['name' => __('common.lang.ja'), 'flag' => 'japan.png'],
-                                            'vi' => ['name' => __('common.lang.vi'), 'flag' => 'vietnam.png'],
+                                            'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
+                                            'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
+                                            'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
                                         ];
                                         $currentLocale = App::getLocale();
                                     @endphp
@@ -132,9 +132,9 @@
                                             <h3 class="fw-medium fs-17 mb-0">
                                                 {{ $user->fullname }}
                                             </h3>
-                                            <span class="fs-15 fw-medium">{{ __('common.info.role.title') }}:</span>
+                                            <span class="fs-15 fw-medium">{{ __('label.role') }}:</span>
                                             @if($user->role)
-                                                {{ __('common.info.role.' . strtolower($user->role->name)) }}
+                                                {{ __('value.role.' . strtolower($user->role->name)) }}
                                             @endif
                                         </div>
                                     </div>
@@ -144,14 +144,14 @@
                                                 href="{{ route('admin.profile.index') }}">
                                                 <i class="material-symbols-outlined">person</i>
                                                 <span
-                                                    class="ms-2">{{ __('admin/layouts/header.dropdown.my_profile') }}</span>
+                                                    class="ms-2">{{ __('label.my_profile') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body"
                                                 href="{{ route('admin.settings.account') }}">
                                                 <i class="material-symbols-outlined">settings</i>
-                                                <span class="ms-2">{{ __('admin/layouts/header.dropdown.settings') }}</span>
+                                                <span class="ms-2">{{ __('button.settings') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -161,7 +161,7 @@
                                                     class="dropdown-item admin-item-link d-flex align-items-center text-body">
                                                     <i class="material-symbols-outlined">logout</i>
                                                     <span
-                                                        class="ms-2">{{ __('admin/layouts/header.dropdown.logout') }}</span>
+                                                        class="ms-2">{{ __('button.logout') }}</span>
                                                 </button>
                                             </form>
                                         </li>

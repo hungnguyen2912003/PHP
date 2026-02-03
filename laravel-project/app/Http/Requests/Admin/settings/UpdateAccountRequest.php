@@ -33,23 +33,23 @@ class UpdateAccountRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'fullname.required' => __('validations/setting.fullname.required'),
-            'fullname.string' => __('validations/setting.fullname.string'),
-            'fullname.max' => __('validations/setting.fullname.max'),
+            'fullname.required' => __('validation.fullname.required'),
+            'fullname.string' => __('validation.fullname.string'),
+            'fullname.max' => __('validation.fullname.max'),
 
-            'date_of_birth.date' => __('validations/setting.date_of_birth.date'),
-            'date_of_birth.before_or_equal' => __('validations/setting.date_of_birth.before_or_equal'),
+            'date_of_birth.date' => __('validation.date_of_birth.date'),
+            'date_of_birth.before_or_equal' => __('validation.date_of_birth.before_or_equal'),
 
-            'gender.in' => __('validations/setting.gender.in'),
+            'gender.in' => __('validation.gender.in'),
 
-            'phone.regex' => __('validations/setting.phone.regex'),
-            'phone.unique' => __('validations/setting.phone.unique'),
+            'phone.regex' => __('validation.phone.regex'),
+            'phone.unique' => __('validation.phone.unique'),
 
-            'address.string' => __('validations/setting.address.string'),
-            'address.max' => __('validations/setting.address.max'),
+            'address.string' => __('validation.address.string'),
+            'address.max' => __('validation.address.max'),
 
-            'bio.string'=> __('validations/setting.bio.string'),
-            'bio.max' => __('validations/setting.bio.max'),
+            'bio.string'=> __('validation.bio.string'),
+            'bio.max' => __('validation.bio.max'),
         ];
     }
 }

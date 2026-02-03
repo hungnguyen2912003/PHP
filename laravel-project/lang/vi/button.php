@@ -1,0 +1,20 @@
+<?php
+
+return [
+    'add' => 'Thêm',
+    'update' => 'Cập nhật',
+    'edit' => 'Chỉnh sửa',
+    'delete' => 'Xóa',
+    'cancel' => 'Hủy bỏ',
+    'back' => 'Quay lại',
+    'save' => 'Lưu',
+    'settings' => 'Cài đặt',
+    'back_to_login' => 'Quay lại đăng nhập',
+    'sending' => 'Đang gửi...',
+    'resend_in' => 'Gửi lại sau :seconds giây',
+    'activate' => 'Kích hoạt tài khoản',
+    'add_user' => 'Thêm người dùng mới',
+    'logout' => 'Đăng xuất',
+    'view' => 'Xem',
+    'resend_activation' => 'Gửi lại email kích hoạt',
+];

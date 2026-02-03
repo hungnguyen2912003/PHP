@@ -1,14 +1,14 @@
 @extends('admin.layouts.auth-layout')
 
-@section('title', __('admin/pages/auth.forgot.title'))
+@section('title', __('auth.forgot_password_title'))
 
 @section('content')
     <div class="text-center mb-4">
         <h3 class="fs-26 fw-medium mb-1">
-            {{ __('admin/pages/auth.forgot.title') }}
+            {{ __('auth.forgot_password_title') }}
         </h3>
         <p class="fs-16 text-body lh-1-8 mx-auto" style="max-width: 490px">
-            {{ __('admin/pages/auth.forgot.description') }}
+            {{ __('auth.forgot_password_desc') }}
         </p>
     </div>
 
@@ -17,7 +17,7 @@
 
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('admin/pages/auth.email.label') }}
+                {{ __('label.email') }}
                 <span class="text-danger">*</span>
             </label>
 
@@ -25,14 +25,14 @@
                 <input
                     class="form-control @error('email') is-invalid @enderror"
                     id="email"
-                    placeholder="{{ __('admin/pages/auth.email.placeholder') }}"
+                    placeholder="{{ __('placeholder.email') }}"
                     type="email"
                     name="email"
                     value="{{ old('email') }}"
                 />
                 <label for="email">
                     <i class="ri-mail-line mr-2"></i>
-                    {{ __('admin/pages/auth.email.placeholder') }}
+                    {{ __('placeholder.email') }}
                 </label>
             </div>
 
@@ -45,11 +45,11 @@
             <button
                 class="btn btn-primary fw-normal text-white w-100"
                 id="submitBtn"
-                data-processing-text="{{ __('common.processing') }}"
+                data-processing-text="{{ __('notification.processing') }}"
                 style="padding-top: 18px; padding-bottom: 18px"
                 type="submit"
             >
-                <span id="btnText">{{ __('admin/pages/auth.forgot.submit') }}</span>
+                <span id="btnText">{{ __('auth.send_reset_link') }}</span>
                 <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
             </button>
         </div>
@@ -59,7 +59,7 @@
             href="{{ route('admin.login') }}"
         >
             <i class="ri-arrow-left-s-line fs-22 position-relative top-2"></i>
-            <span>{{ __('common.back_to_login') }}</span>
+            <span>{{ __('button.back_to_login') }}</span>
         </a>
     </form>
 @endsection

@@ -30,12 +30,12 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'login.required' => __('validations/auth.login.required'),
-            'login.min' => __('validations/auth.login.min'),
-            'login.max' => __('validations/auth.login.max'),
-            'password.required' => __('validations/auth.password.required'),
-            'password.min' => __('validations/auth.password.min'),
-            'password.max' => __('validations/auth.password.max'),
+            'login.required' => __('validation.login.required'),
+            'login.min' => __('validation.login.min'),
+            'login.max' => __('validation.login.max'),
+            'password.required' => __('validation.password.required'),
+            'password.min' => __('validation.password.min'),
+            'password.max' => __('validation.password.max'),
         ];
     }
 }

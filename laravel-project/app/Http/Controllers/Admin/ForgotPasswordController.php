@@ -34,13 +34,13 @@ class ForgotPasswordController extends Controller
 
         if (!$user)
         {
-            flash()->error(__('messages/auth.forgot_password.email_not_found'), [], __('common.error'));
+            flash()->error(__('message.forgot_password.email_not_found'), [], __('notification.error'));
             return redirect()->back()->withInput();
         }
 
         $roleName = $user->role->name;
         if (!in_array($roleName, ['Admin', 'Staff'], true)) {
-            flash()->error(__('messages/auth.forgot_password.email_not_admin_or_staff'), [], __('common.error'));
+            flash()->error(__('message.forgot_password.email_not_admin_or_staff'), [], __('notification.error'));
             return redirect()->back()->withInput();
         }
 
@@ -63,7 +63,7 @@ class ForgotPasswordController extends Controller
             ->send(new ForgotPasswordMail($token, $user->email, $user, $expiresAt));
 
 
-        flash()->success(__('messages/auth.forgot_password.status.success'), [], __('common.success'));
+        flash()->success(__('message.forgot_password.status.success'), [], __('notification.success'));
         return redirect()->route('admin.login');
     }
 }

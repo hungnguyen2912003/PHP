@@ -29,10 +29,10 @@ class AvatarUploadRequest extends FormRequest
     public function messages()
     {
         return [
-            'avatar_url_file.required' => __('validations/profile.avatar_url_file.required'),
-            'avatar_url_file.image' => __('validations/profile.avatar_url_file.image'),
-            'avatar_url_file.mimes' => __('validations/profile.avatar_url_file.mimes'),
-            'avatar_url_file.max' => __('validations/profile.avatar_url_file.max'),
+            'avatar_url_file.required' => __('validation.avatar_url_file.required'),
+            'avatar_url_file.image' => __('validation.avatar_url_file.image'),
+            'avatar_url_file.mimes' => __('validation.avatar_url_file.mimes'),
+            'avatar_url_file.max' => __('validation.avatar_url_file.max'),
         ];
     }
 }

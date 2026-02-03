@@ -1,0 +1,20 @@
+<?php
+
+return [
+    'role' => 'Select a role',
+    'gender' => 'Select Gender',
+    'bio' => 'Enter your biography',
+    'full_name' => 'Enter your full name',
+    'date_of_birth' => 'Select your date of birth',
+    'email' => 'Enter your email address',
+    'phone' => 'Enter your phone number',
+    'address' => 'Enter your address',
+    'username' => 'Enter your username',
+    'password' => 'Enter new password',
+    'search' => 'Search...',
+    'current_password' => 'Enter current password',
+    'new_password' => 'Enter new password',
+    'new_password_confirmation' => 'Confirm new password',
+    'username_or_email' => 'Enter your email or username',
+    'enter_password' => 'Enter your password',
+];

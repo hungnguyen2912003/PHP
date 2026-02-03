@@ -33,9 +33,9 @@ class ForgotPasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => __('validations/auth.email.required'),
-            'email.email' => __('validations/auth.email.valid'),
-            'email.max' => __('validations/auth.email.max'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.max' => __('validation.email.max'),
         ];
     }
 }

@@ -38,18 +38,18 @@ class UpdateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'fullname.required' => __('validations/users.fullname.required'),
-            'email.required' => __('validations/users.email.required'),
-            'email.email' => __('validations/users.email.email'),
-            'email.unique' => __('validations/users.email.unique'),
-            'phone.required' => __('validations/users.phone.required'),
-            'address.required' => __('validations/users.address.required'),
-            'gender.required' => __('validations/users.gender.required'),
-            'date_of_birth.required' => __('validations/users.date_of_birth.required'),
-            'role_id.required' => __('validations/users.role_id.required'),
-            'status.required' => __('validations/users.status.required'),
-            'password.required' => __('validations/users.password.required'),
-            'password.min' => __('validations/users.password.min'),
+            'fullname.required' => __('validation.fullname.required'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.unique' => __('validation.email.unique'),
+            'phone.required' => __('validation.phone.required'),
+            'address.required' => __('validation.address.required'),
+            'gender.required' => __('validation.gender.required'),
+            'date_of_birth.required' => __('validation.date_of_birth.required'),
+            'role_id.required' => __('validation.role_id.required'),
+            'status.required' => __('validation.status.required'),
+            'password.required' => __('validation.password.required'),
+            'password.min' => __('validation.password.min'),
         ];
     }
 }

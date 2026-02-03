@@ -1,22 +1,22 @@
 @extends('admin.layouts.app-layout')
 
-@section('title', __('admin/pages/profile.title'))
+@section('title', __('title.profile'))
 
 @section('content')
 
     <div class="main-content-container overflow-hidden">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
-            <h3 class="mb-0">{{ __('admin/pages/profile.title') }}</h3>
+            <h3 class="mb-0">{{ __('title.profile') }}</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
                         <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.dashboard') }}">
                             <i class="ri-home-8-line fs-15 text-primary me-1"></i>
-                            <span class="text-body fs-14 hover">{{ __('common.breadcrumb.dashboard') }}</span>
+                            <span class="text-body fs-14 hover">{{ __('breadcrumb.dashboard') }}</span>
                         </a>
                     </li>
                     <li aria-current="page" class="breadcrumb-item active">
-                        <span class="text-secondary">{{ __('common.breadcrumb.profile') }}</span>
+                        <span class="text-secondary">{{ __('title.profile') }}</span>
                     </li>
                 </ol>
             </nav>
@@ -55,24 +55,24 @@
                             <div class="flex-grow-1 ms-20 mb-10" style="max-width: 1000px;">
                                 <h3 class="mb-1">{{ $user->fullname }}</h3>
                                 <div class="fs-15">
-                                    <span class="text-secondary">{{ __('common.info.role.title') }}:</span>
+                                    <label class="form-label text-secondary">{{ __('label.role') }}:</label>
                                     @if ($user->role)
                                         @if ($user->role->name === 'Admin')
-                                            {{ __('common.info.role.admin') }}
+                                            {{ __('value.role.admin') }}
                                         @elseif ($user->role->name === 'User')
-                                            {{ __('common.info.role.user') }}
+                                            {{ __('value.role.user') }}
                                         @elseif ($user->role->name === 'Staff')
-                                            {{ __('common.info.role.staff') }}
+                                            {{ __('value.role.staff') }}
                                         @else
                                             {{ $user->role->name }}
                                         @endif
                                     @else
-                                        {{ __('common.info.role.no_role') }}
+                                        {{ __('value.role.no_role') }}
                                     @endif
                                 </div>
                                 <div class="fs-15 text-wrap">
-                                    <span class="text-secondary">{{ __('common.info.bio.title') }}:</span>
-                                    {{ $user->bio ?? __('common.info.bio.no_bio') }}
+                                    <span class="text-secondary">{{ __('label.bio') }}:</span>
+                                    {{ $user->bio ?? __('value.no_bio') }}
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                                     <button id="resend-activation-btn" type="submit"
                                         class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;">
                                         <i class="ri-error-warning-line"></i> <span
-                                            id="btnTextActivation" data-sending-text="{{ __('admin/pages/profile.sending') }}" data-resend-in-text="{{ __('admin/pages/profile.resend_in') }}" data-original-text="{{ __('admin/pages/profile.activate_account') }}">{{ __('admin/pages/profile.activate_account') }}</span>
+                                            id="btnTextActivation" data-sending-text="{{ __('button.sending') }}" data-resend-in-text="{{ __('button.resend_in') }}" data-original-text="{{ __('button.activate') }}">{{ __('button.activate') }}</span>
                                         <span id="btnLoadingActivation"
                                             class="spinner-border spinner-border-sm ml-2 d-none"></span>
                                     </button>
@@ -93,7 +93,7 @@
                             <a href="{{ route('admin.settings.account') }}"
                                 class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg"
                                 style="padding: 12px 15px;">
-                                {{ __('common.setting.title') }}
+                                {{ __('button.settings') }}
                             </a>
                         </div>
                     </div>
@@ -104,38 +104,38 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('admin/pages/profile.infomation.profile') }}
+                        {{ __('section.profile_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.full_name.title') }}:
+                            {{ __('label.full_name') }}:
                             <span class="text-secondary">
                                 {{ $user->fullname }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.date_of_birth.title') }}:
+                            {{ __('label.date_of_birth') }}:
                             <span class="text-secondary">
                                 @if ($user->date_of_birth)
                                     {{ $user->date_of_birth }}
                                 @else
-                                    <span class="text-danger">{{ __('common.unknown') }}</span>
+                                    <span class="text-danger">{{ __('value.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.gender.title') }}:
+                            {{ __('label.gender') }}:
                             <span class="text-secondary">
                                 @if ($user->gender)
                                     @if ($user->gender === 'male')
-                                        {{ __('common.info.gender.male') }}
+                                        {{ __('value.gender.male') }}
                                     @elseif ($user->gender === 'female')
-                                        {{ __('common.info.gender.female') }}
+                                        {{ __('value.gender.female') }}
                                     @else
-                                        {{ __('common.info.gender.other') }}
+                                        {{ __('value.gender.other') }}
                                     @endif
                                 @else
-                                    <span class="text-danger">{{ __('common.unknown') }}</span>
+                                    <span class="text-danger">{{ __('value.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
@@ -145,32 +145,32 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('admin/pages/profile.infomation.contact') }}
+                        {{ __('section.contact_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.email.title') }}:
+                            {{ __('label.email') }}:
                             <span class="text-secondary">
                                 {{ $user->email }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.phone.title') }}:
+                            {{ __('label.phone') }}:
                             <span class="text-secondary">
                                 @if ($user->phone)
                                     {{ $user->phone }}
                                 @else
-                                    <span class="text-danger">{{ __('common.unknown') }}</span>
+                                    <span class="text-danger">{{ __('value.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.address.title') }}:
+                            {{ __('label.address') }}:
                             <span class="text-secondary">
                                 @if ($user->address)
                                     {{ $user->address }}
                                 @else
-                                    <span class="text-danger">{{ __('common.unknown') }}</span>
+                                    <span class="text-danger">{{ __('value.unknown') }}</span>
                                 @endif
                             </span>
                         </li>
@@ -180,31 +180,31 @@
             <div class="col-lg-4 col-xxl-4 col-xxxl-4">
                 <div class="card bg-white border border-white rounded-10 p-20 mb-4">
                     <h3 class="mb-20">
-                        {{ __('admin/pages/profile.infomation.account') }}
+                        {{ __('section.account_information') }}
                     </h3>
                     <ul class="p-0 mb-0 list-unstyled last-child-none">
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.username.title') }}:
+                            {{ __('label.username') }}:
                             <span class="text-secondary">
                                 {{ $user->username }}
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.status.title') }}:
+                            <label class="form-label text-secondary">{{ __('label.status') }}</label>
                             <span class="text-secondary">
                                 @if ($user->status == 'active')
-                                    <span class="badge bg-success">{{ __('common.info.status.active') }}</span>
+                                    <span class="badge bg-success">{{ __('value.status.active') }}</span>
                                 @elseif ($user->status == 'pending')
-                                    <span class="badge bg-warning">{{ __('common.info.status.pending') }}</span>
+                                    <span class="badge bg-warning">{{ __('value.status.pending') }}</span>
                                 @elseif ($user->status == 'banned')
-                                    <span class="badge bg-danger">{{ __('common.info.status.banned') }}</span>
+                                    <span class="badge bg-danger">{{ __('value.status.banned') }}</span>
                                 @else
-                                    <span class="badge bg-secondary">{{ __('common.info.status.deleted') }}</span>
+                                    <span class="badge bg-secondary">{{ __('value.status.deleted') }}</span>
                                 @endif
                             </span>
                         </li>
                         <li class="mb-10 fs-16">
-                            {{ __('common.info.created_date.title') }}:
+                            {{ __('label.created_date') }}:
                             <span class="text-secondary">
                                 {{ $user->created_at->format('d-m-Y') }}
                             </span>

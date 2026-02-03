@@ -1,6 +1,6 @@
 @extends('admin.layouts.app-layout')
 
-@section('title', __('admin/pages/dashboard.title'))
+@section('title', __('title.dashboard'))
 
 @section('content')
 <div class="main-content-container overflow-hidden">

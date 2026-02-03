@@ -1,34 +1,34 @@
 @extends('admin.layouts.auth-layout')
 
-@section('title', __('admin/pages/auth.login.title'))
+@section('title', __('auth.login_title'))
 
 @section('content')
     <div class="text-center mb-4 mt-5">
         <h3 class="fs-26 fw-medium" style="margin-bottom: 6px">
-            {{ __('admin/pages/auth.login.title') }}
+            {{ __('auth.login_title') }}
         </h3>
         <h4 class="text-muted small mb-4">
-            {{ __('admin/pages/auth.login.subtitle') }}
+            {{ __('auth.login_subtitle') }}
         </h4>
     </div>
     <form action="{{ route('admin.login.post') }}" method="POST" id="loginForm">
         @csrf
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('admin/pages/auth.username.label') }}
+                {{ __('label.username') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-floating">
                 <input
                     class="form-control @error('login') is-invalid @enderror"
                     id="login"
-                    placeholder="{{ __('admin/pages/auth.username.placeholder') }}"
+                    placeholder="{{ __('placeholder.username_or_email') }}"
                     type="text"
                     name="login"
                 />
                 <label for="login">
                     <i class="ri-user-line"></i>
-                    {{ __('admin/pages/auth.username.placeholder') }}
+                    {{ __('placeholder.username_or_email') }}
                 </label>
             </div>
             @error('login')
@@ -37,21 +37,21 @@
         </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
-                {{ __('admin/pages/auth.password.label') }}
+                {{ __('label.password') }}
                 <span class="text-danger">*</span>
             </label>
             <div class="form-group" id="password-show-hide">
                 <div class="password-wrapper position-relative password-container form-floating">
                     <input
                         class="form-control text-secondary password @error('password') is-invalid @enderror"
-                        placeholder="{{ __('admin/pages/auth.password.placeholder') }}"
+                        placeholder="{{ __('placeholder.enter_password') }}"
                         type="password"
                         name="password"
                         id="password"
                     />
                     <label for="password">
                         <i class="ri-lock-line"></i>
-                        {{ __('admin/pages/auth.password.placeholder') }}
+                        {{ __('placeholder.enter_password') }}
                     </label>
                     <i
                         aria-hidden="true"
@@ -74,14 +74,14 @@
                         value=""
                     />
                     <label class="form-check-label fs-16" for="flexCheckDefault">
-                        {{ __('admin/pages/auth.login.remember') }}
+                        {{ __('auth.remember_me') }}
                     </label>
                 </div>
                 <a
                     class="fs-16 text-primary fw-normal text-decoration-none"
                     href="{{ route('admin.forgot-password') }}"
                 >
-                    {{ __('admin/pages/auth.login.forgot') }}
+                    {{ __('auth.forgot_password') }}
                 </a>
             </div>
         </div>
@@ -89,11 +89,11 @@
             <button
                 class="btn btn-primary fw-normal text-white w-100"
                 id="submitBtn"
-                data-processing-text="{{ __('common.processing') }}"
+                data-processing-text="{{ __('notification.processing') }}"
                 style="padding-top: 18px; padding-bottom: 18px"
                 type="submit"
             >
-                <span id="btnText">{{ __('admin/pages/auth.login.submit') }}</span>
+                <span id="btnText">{{ __('auth.sign_in') }}</span>
                 <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
             </button>
         </div>

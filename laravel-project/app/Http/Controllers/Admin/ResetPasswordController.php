@@ -22,7 +22,7 @@ class ResetPasswordController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            flash()->error(__('messages/auth.reset_password.user_not_found'), [], __('common.error'));
+            flash()->error(__('message.reset_password.user_not_found'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
 
@@ -39,26 +39,26 @@ class ResetPasswordController extends Controller
 
         // Check if token exists
         if (!$reset) {
-            flash()->error(__('messages/auth.reset_password.token_invalid'), [], __('common.error'));
+            flash()->error(__('message.reset_password.token_invalid'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
 
         // Check if token is expired (60 mins)
         if (Carbon::parse($reset->created_at)->addMinutes(60)->isPast()) {
-            flash()->error(__('messages/auth.reset_password.token_expired'), [], __('common.error'));
+            flash()->error(__('message.reset_password.token_expired'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
 
         // Check if token is valid
         if (!Hash::check($token, $reset->token)) {
-            flash()->error(__('messages/auth.reset_password.token_invalid'), [], __('common.error'));
+            flash()->error(__('message.reset_password.token_invalid'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
 
         // Check user existence
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            flash()->error(__('messages/auth.reset_password.user_not_found'), [], __('common.error'));
+            flash()->error(__('message.reset_password.user_not_found'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
 
@@ -70,7 +70,7 @@ class ResetPasswordController extends Controller
         //Delete password reset token
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
-        flash()->success(__('messages/auth.reset_password.status.success'), [], __('common.success'));
+        flash()->success(__('message.reset_password.status.success'), [], __('notification.success'));
         return redirect()->route('admin.login');
     }
 }
