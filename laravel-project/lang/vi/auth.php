@@ -12,4 +12,5 @@ return [
     'reset_password_title' => 'Đặt lại mật khẩu',
     'reset_password_desc' => 'Nhập mật khẩu mới cho tài khoản của bạn.',
     'reset_password_btn' => 'Đặt lại mật khẩu',
+    'set_first_password_desc' => 'Thiết lập mật khẩu mới cho tài khoản của bạn để hoàn tất kích hoạt.',
 ];

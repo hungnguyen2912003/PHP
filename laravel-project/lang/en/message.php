@@ -91,5 +91,12 @@ return [
         'deleted' => 'User deleted successfully.',
         'resend_activation_success' => 'Activation email sent successfully.',
         'resend_activation_failed' => 'Failed to send activation email.',
+        'please_wait_seconds' => 'Please wait :seconds seconds before trying again.',
+        'activation' => [
+            'invalid_link' => 'The activation link is invalid.',
+            'expired_link' => 'The activation link has expired.',
+            'success' => 'Your account has been activated successfully.',
+            'already_active' => 'Your account is already active.',
+        ],
     ],
 ];

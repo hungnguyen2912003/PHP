@@ -12,4 +12,5 @@ return [
     'reset_password_title' => 'Reset Password',
     'reset_password_desc' => 'Enter a new password for your account.',
     'reset_password_btn' => 'Reset Password',
+    'set_first_password_desc' => 'Set a new password for your account to complete activation.',
 ];

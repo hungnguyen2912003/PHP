@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Admin;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ForgotPasswordMail extends Mailable
+class ActivationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $token;
+    public $user;
+    public $expires_in;
 
     /**
      * Create a new message instance.
      */
-    public $token;
-    public $email;
-    public $user;
-    public $expires_in;
-
-    public function __construct($token, $email, $user, $expires_in)
+    public function __construct($token, $user, $expires_in)
     {
         $this->token = $token;
-        $this->email = $email;
         $this->user = $user;
         $this->expires_in = $expires_in;
     }
@@ -34,7 +33,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('mails/forgot-password.subject'),
+            subject: __('mail.activation.subject'),
         );
     }
 
@@ -44,9 +43,9 @@ class ForgotPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.forgot-password',
+            view: 'mails.activation',
             with: [
-                'reset_url' => route('admin.password.reset', ['token' => $this->token, 'email' => $this->email]),
+                'activation_url' => route('admin.activate', ['token' => $this->token, 'email' => $this->user->email]),
                 'expires_in' => $this->expires_in,
                 'year' => date('Y'),
             ],

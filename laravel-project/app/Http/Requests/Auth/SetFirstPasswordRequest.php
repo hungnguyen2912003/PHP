@@ -22,7 +22,8 @@ class SetFirstPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+            'password_confirmation' => 'required|string|min:6|same:password',
             'username' => 'required|exists:users,username',
             'email' => 'required|email|exists:users,email',
         ];
@@ -31,9 +32,16 @@ class SetFirstPasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-             'password.required' => __('messages.new_password_required'),
-             'password.min' => __('messages.password_min_length'),
-             'password.confirmed' => __('messages.password_confirmed_mismatch'),
+            'password.required' => __('validation.password.required'),
+            'password.min' => __('validation.password.min', ['min' => 6]),
+            'password_confirmation.required' => __('validation.password_confirmation.required'),
+            'password_confirmation.same' => __('validation.password_confirmation.same'),
+            'password_confirmation.min' => __('validation.password.min', ['min' => 6]),
+            'username.required' => __('validation.username.required'),
+            'username.exists' => __('validation.username.exists'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.exists' => __('validation.email.exists'),
         ];
     }
 }

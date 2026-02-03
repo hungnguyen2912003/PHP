@@ -25,7 +25,34 @@ return [
         'security_tip_title'=> 'Mẹo bảo mật:',
         'reset_security_tip_body' => 'Nếu bạn không yêu cầu đặt lại mật khẩu, hãy bảo vệ tài khoản của bạn ngay lập tức.',
         'email_footer_reset_reason' => 'Email này được gửi vì có yêu cầu đặt lại mật khẩu cho tài khoản của bạn.',
-        'email_website' => 'Trang web',
-        'email_support' => 'Hỗ trợ',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Activation
+    |--------------------------------------------------------------------------
+    */
+    'activation' => [
+        'title' => 'Kích hoạt tài khoản của bạn',
+        'subject' => 'Kích hoạt tài khoản của bạn',
+        'preheader' => 'Chào mừng bạn đến với nền tảng của chúng tôi! Vui lòng kích hoạt tài khoản của bạn để bắt đầu.',
+        'header' => 'KÍCH HOẠT TÀI KHOẢN',
+        'greeting' => 'Xin chào :name,',
+        'intro' => 'Chào mừng bạn! Vui lòng nhấp vào nút bên dưới để kích hoạt tài khoản và hoàn tất đăng ký.',
+        'reg_details' => 'Chi tiết đăng ký:',
+        'username' => 'Tên đăng nhập',
+        'email' => 'Địa chỉ email',
+        'requested_at' => 'Thời gian yêu cầu',
+        'expires_in' => 'Hết hạn trong',
+        'btn_activate' => 'Kích hoạt tài khoản',
+        'expire_note' => 'Liên kết kích hoạt này sẽ hết hạn sau :count phút.',
+        'ignore_note' => 'Nếu bạn nhận được email này do nhầm lẫn, bạn không cần thực hiện thêm hành động nào.',
+        'fallback_text' => 'Nếu bạn không thể nhấp vào nút "Kích hoạt tài khoản", hãy sao chép và dán URL sau vào trình duyệt web của bạn:',
+        'security_tip_title' => 'Mẹo bảo mật:',
+        'security_tip_body' => 'Không bao giờ chia sẻ liên kết kích hoạt của bạn với bất kỳ ai khác.',
+        'footer_reason' => 'Bạn nhận được email này vì một tài khoản đã được tạo bằng địa chỉ email này.',
+    ],
+
+    'email_website' => 'Trang web',
+    'email_support' => 'Hỗ trợ',
 ];

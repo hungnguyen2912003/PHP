@@ -13,4 +13,5 @@ return [
     'create_user' => 'Thêm người dùng mới',
     'update_user' => 'Cập nhật người dùng',
     'user_profile' => 'Hồ sơ người dùng',
+    'set_first_password' => 'Thiết lập mật khẩu',
 ];

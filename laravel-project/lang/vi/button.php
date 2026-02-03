@@ -17,4 +17,6 @@ return [
     'logout' => 'Đăng xuất',
     'view' => 'Xem',
     'resend_activation' => 'Gửi lại email kích hoạt',
+    'processing' => 'Đang xử lý...',
+    'set_password' => 'Thiết lập mật khẩu',
 ];

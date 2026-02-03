@@ -1,24 +1,31 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Admin;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SetPasswordMail extends Mailable
+class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $token;
+    public $email;
+    public $user;
+    public $expires_in;
+
+    public function __construct($token, $email, $user, $expires_in)
     {
-        //
+        $this->token = $token;
+        $this->email = $email;
+        $this->user = $user;
+        $this->expires_in = $expires_in;
     }
 
     /**
@@ -27,7 +34,7 @@ class SetPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Set Password Mail',
+            subject: __('mail.forgot_password.subject'),
         );
     }
 
@@ -37,7 +44,12 @@ class SetPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.forgot-password',
+            with: [
+                'reset_url' => route('admin.password.reset', ['token' => $this->token, 'email' => $this->email]),
+                'expires_in' => $this->expires_in,
+                'year' => date('Y'),
+            ],
         );
     }
 

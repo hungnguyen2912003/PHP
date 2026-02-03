@@ -13,4 +13,5 @@ return [
     'create_user' => '新規ユーザー追加',
     'update_user' => 'ユーザー更新',
     'user_profile' => 'ユーザープロフィール',
+    'set_first_password' => 'パスワード設定',
 ];

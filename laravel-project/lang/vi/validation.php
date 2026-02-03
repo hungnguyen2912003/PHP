@@ -37,6 +37,11 @@ return [
         'email' => 'Email phải là một địa chỉ email hợp lệ.',
         'max' => 'Email không được lớn hơn :max ký tự.',
         'unique' => 'Email đã được sử dụng.',
+        'exists' => 'Email được chọn không hợp lệ.',
+    ],
+    'username' => [
+        'required' => 'Tên đăng nhập là bắt buộc.',
+        'exists' => 'Tên đăng nhập được chọn không hợp lệ.',
     ],
 
     'fullname' => [

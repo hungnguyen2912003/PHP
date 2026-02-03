@@ -86,5 +86,12 @@ return [
         'deleted' => 'ユーザーが正常に削除されました。',
         'resend_activation_success' => 'アクティベーションメールが正常に送信されました。',
         'resend_activation_failed' => 'アクティベーションメールの送信に失敗しました。',
+        'please_wait_seconds' => 'もう一度お試しになるまで :seconds 秒お待ちください。',
+        'activation' => [
+            'invalid_link' => 'アクティベーションリンクが無効です。',
+            'expired_link' => 'アクティベーションリンクの有効期限が切れています。',
+            'success' => 'アカウントが正常に有効化されました。',
+            'already_active' => 'アカウントは既に有効化されています。',
+        ],
     ],
 ];

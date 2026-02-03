@@ -37,6 +37,11 @@ return [
         'email' => 'Email must be a valid email address.',
         'max' => 'Email must not exceed :max characters.',
         'unique' => 'Email has already been taken.',
+        'exists' => 'The selected email is invalid.',
+    ],
+    'username' => [
+        'required' => 'Username is required.',
+        'exists' => 'The selected username is invalid.',
     ],
 
     'fullname' => [

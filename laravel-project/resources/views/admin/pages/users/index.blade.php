@@ -46,7 +46,7 @@
                     </a>
                 </div>
             </div>
-            <div class="default-table-area mx-minus-1 style-two table-students-list">
+            <div class="default-table-area mx-minus-1 style-two table-list">
                 <div class="table-responsive">
                     {{ $dataTable->table(['class' => 'table align-middle w-100']) }}
                 </div>
@@ -103,10 +103,16 @@
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
                         confirmButtonText: {!! json_encode(__('modal.confirm.resend.btn')) !!},
-                        cancelButtonText: {!! json_encode(__('modal.confirm.resend.cancel')) !!}
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
+                        cancelButtonText: {!! json_encode(__('modal.confirm.resend.cancel')) !!},
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                const confirmBtn = Swal.getConfirmButton();
+                                confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' + {!! json_encode(__('button.processing')) !!};
+                                confirmBtn.disabled = true;
+                                form.submit();
+                            });
                         }
                     });
                 }

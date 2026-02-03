@@ -12,4 +12,5 @@ return [
     'reset_password_title' => 'パスワードのリセット',
     'reset_password_desc' => 'アカウントの新しいパスワードを入力してください。',
     'reset_password_btn' => 'パスワードをリセット',
+    'set_first_password_desc' => 'アカウントの有効化を完了するために、新しいパスワードを設定してください。',
 ];

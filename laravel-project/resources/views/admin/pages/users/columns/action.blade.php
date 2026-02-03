@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-end text-nowrap gap-2">
     @if ($user->status == 'pending')
-    <form action="" method="POST" class="d-inline">
+    <form action="{{ route('admin.users.resend-activation', $user->id) }}" method="POST" class="d-inline">
         @csrf
-        <button type="submit" class="bg-transparent p-0 border-0 hover-text-warning" data-bs-placement="top" data-bs-title="{{ __('button.resend_activation') }}" data-bs-toggle="tooltip">
+        <button type="button" class="bg-transparent p-0 border-0 hover-text-warning resend-btn" data-bs-placement="top" data-bs-title="{{ __('button.resend_activation') }}" data-bs-toggle="tooltip">
             <i class="material-symbols-outlined fs-16 fw-normal text-body">
             refresh
             </i>

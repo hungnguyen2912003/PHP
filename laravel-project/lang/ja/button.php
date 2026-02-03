@@ -17,4 +17,6 @@ return [
     'logout' => 'ログアウト',
     'view' => '表示',
     'resend_activation' => 'アクティベーションメールを再送信',
+    'processing' => '処理中...',
+    'set_password' => 'パスワードを設定',
 ];

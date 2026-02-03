@@ -97,7 +97,6 @@ class AuthController extends Controller
             return redirect()->route('verified-account');
         }
 
-        // For Admin/Staff, redirect to set-first-password
         return view('pages.auth.set-first-password', [
             'token' => $token,
             'email' => $email,
@@ -133,36 +132,6 @@ class AuthController extends Controller
         session()->flash('verified_access', true);
         
         return redirect()->route('login');
-    }
-
-    public function resendActivation(Request $request)
-    {
-        $user = Auth::user();
-
-        if (!$user) {
-            flash()->error(__('messages.user_not_found'), [], __('messages.error'));
-            return redirect()->back();
-        }
-
-        if ($user->status !== 'pending') {
-            flash()->error(__('messages.account_already_active'), [], __('messages.error'));
-            return redirect()->back();
-        }
-
-        // Create new activation token
-        $activation_token = Str::random(64);
-
-        // Update user
-        $user->update([
-            'activation_token' => $activation_token,
-            'activation_token_sent_at' => Carbon::now(),
-        ]);
-
-        // Send activation email
-        Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
-
-        flash()->success(__('messages.activation_link_sent'), [], __('messages.success'));
-        return redirect()->back();
     }
 
     public function verifiedAccount()

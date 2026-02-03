@@ -29,8 +29,8 @@ Route::middleware('guest:web')->group(function () {
     // Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
     // Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.update');
 
-    // Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
-    // Route::post('/activate/{token}', [AuthController::class, 'setFirstPassword'])->name('activate.password');
+    // Route::get('/activate/{token}', [AdminAuthController::class, 'activate'])->name('activate');
+    // Route::post('/activate/{token}', [AdminAuthController::class, 'setFirstPassword'])->name('activate.password');
 });
 
 
@@ -84,6 +84,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/reset-password/{token}', [AdminResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
         Route::post('/reset-password/{token}', [AdminResetPasswordController::class, 'resetPassword'])->name('password.update');
+
+        Route::get('/activate/{token}', [AdminAuthController::class, 'activate'])->name('activate');
+        Route::post('/activate/{token}', [AdminAuthController::class, 'setFirstPassword'])->name('activate.password');
     });
 
     /*
@@ -95,7 +98,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         Route::prefix('profile')->name('profile.')->group(function () {
             Route::get('/', [AdminProfileController::class, 'index'])->name('index');
@@ -111,11 +114,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::prefix('users')->name('users.')->group(function () {
-            // Accessible by Admin and Staff
+
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
 
-            // Restricted to Admin only
             Route::middleware('role:Admin')->group(function () {
                 Route::get('/create', [UserController::class, 'create'])->name('create');
                 Route::post('/store', [UserController::class, 'store'])->name('store');
@@ -125,7 +127,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
                 Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
 
-                Route::post('/resend-activation/{id}', [UserController::class, 'resendActivation'])->name('resend-activation');
+                Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
             });
         });
     });

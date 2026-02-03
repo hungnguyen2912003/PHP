@@ -86,5 +86,12 @@ return [
         'deleted' => 'Xóa người dùng thành công.',
         'resend_activation_success' => 'Gửi email kích hoạt thành công.',
         'resend_activation_failed' => 'Gửi email kích hoạt thất bại.',
+        'please_wait_seconds' => 'Vui lòng đợi :seconds giây trước khi thử lại.',
+        'activation' => [
+            'invalid_link' => 'Liên kết kích hoạt không hợp lệ.',
+            'expired_link' => 'Liên kết kích hoạt đã hết hạn.',
+            'success' => 'Tài khoản của bạn đã được kích hoạt thành công.',
+            'already_active' => 'Tài khoản của bạn đã được kích hoạt.',
+        ],
     ],
 ];

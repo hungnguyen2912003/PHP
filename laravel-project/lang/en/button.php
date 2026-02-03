@@ -17,4 +17,6 @@ return [
     'logout' => 'Logout',
     'view' => 'View',
     'resend_activation' => 'Resend Activation Email',
+    'processing' => 'Processing...',
+    'set_password' => 'Set Password',
 ];
