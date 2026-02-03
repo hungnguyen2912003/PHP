@@ -71,7 +71,25 @@ return [
     | Hints / Notes
     |--------------------------------------------------------------------------
     */
-    'hint' => [
-        'password_min' => 'Password must be at least 6 characters.',
+    'confirm' => [
+        'delete' => [
+            'title' => 'Are you sure?',
+            'text' => 'You will not be able to revert this!',
+            'btn' => 'Yes, delete it!',
+            'cancel' => 'Cancel',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User
+    |--------------------------------------------------------------------------
+    */
+    'user' => [
+        'created' => 'User created successfully.',
+        'updated' => 'User updated successfully.',
+        'deleted' => 'User deleted successfully.',
+        'resend_activation_success' => 'Activation email sent successfully.',
+        'resend_activation_failed' => 'Failed to send activation email.',
     ],
 ];

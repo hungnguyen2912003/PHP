@@ -8,4 +8,5 @@ return [
     'account_desc' => 'Manage your account settings and set e-mail preferences.',
     'main_menu' => 'Main Menu',
     'apps' => 'Applications',
+    'user_image' => 'User Image',
 ];

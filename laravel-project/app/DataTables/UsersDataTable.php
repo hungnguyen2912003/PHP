@@ -80,20 +80,20 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start'),
-            Column::make('fullname')->title(__('label.full_name')),
-            Column::make('date_of_birth')->title(__('label.date_of_birth')),
-            Column::make('gender')->title(__('label.gender')),
-            Column::make('email')->title(__('label.email')),
-            Column::make('phone')->title(__('label.phone'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>'),
-            Column::make('address')->title(__('label.address'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>'),
-            Column::make('role_id')->title(__('label.role')),
-            Column::make('status')->title(__('label.status')),
+            Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
+            Column::make('fullname')->title(__('label.full_name'))->addClass('text-nowrap')->width(300),
+            Column::make('date_of_birth')->title(__('label.date_of_birth'))->addClass('text-nowrap'),
+            Column::make('gender')->title(__('label.gender'))->addClass('text-nowrap'),
+            Column::make('email')->title(__('label.email'))->addClass('text-nowrap'),
+            Column::make('phone')->title(__('label.phone'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>')->addClass('text-nowrap'),
+            Column::make('address')->title(__('label.address'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>')->width(500),
+            Column::make('role_id')->title(__('label.role'))->addClass('text-nowrap'),
+            Column::make('status')->title(__('label.status'))->addClass('text-nowrap'),
             Column::computed('action')
                 ->title(__('label.action'))
                 ->exportable(false)
                 ->printable(false)
-                ->width(100),
+                ->addClass('text-end text-nowrap'),
         ];
     }
 

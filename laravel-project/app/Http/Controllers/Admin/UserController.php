@@ -60,7 +60,7 @@ class UserController extends Controller
         Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
         //Success message
-        flash()->success(__('messages.user_created_success'), [], __('messages.success'));
+        flash()->success(__('message.user.created'), [], __('notification.success'));
         return redirect()->route('users.index');
     }
 
@@ -100,7 +100,7 @@ class UserController extends Controller
 
         $user->save();
 
-        flash()->success(__('messages.profile_updated_success'), [], __('messages.success'));
+        flash()->success(__('message.user.updated'), [], __('notification.success'));
         return redirect()->back();
     }
 
@@ -109,7 +109,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        flash()->success(__('messages.user_deleted_success'), [], __('messages.success'));
+        flash()->success(__('message.user.deleted'), [], __('notification.success'));
         return redirect()->back();
     }
 
@@ -127,9 +127,9 @@ class UserController extends Controller
             // Send activation email
             Mail::to($user->email)->locale(App::getLocale())->send(new ActivationMail($activation_token, $user, Carbon::now()->addMinutes(30)));
 
-            flash()->success(__('messages.resend_activation_success'), [], __('messages.success'));
+            flash()->success(__('message.user.resend_activation_success'), [], __('notification.success'));
         } else {
-            flash()->error(__('messages.resend_activation_failed'), [], __('messages.error'));
+            flash()->error(__('message.user.resend_activation_failed'), [], __('notification.error'));
         }
 
         return redirect()->back();

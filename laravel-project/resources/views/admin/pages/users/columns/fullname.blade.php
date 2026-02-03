@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center text-nowrap">
     <div class="flex-shrink-0">
         <img alt="avatar" class="rounded-circle" src="{{ $user->avatar_url ? asset($user->avatar_url) : asset('assets/images/user.png') }}" style="width: 35px; height: 35px;"/>
     </div>

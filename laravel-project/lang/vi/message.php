@@ -74,4 +74,17 @@ return [
     'hint' => [
         'password_min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User
+    |--------------------------------------------------------------------------
+    */
+    'user' => [
+        'created' => 'Tạo người dùng thành công.',
+        'updated' => 'Cập nhật người dùng thành công.',
+        'deleted' => 'Xóa người dùng thành công.',
+        'resend_activation_success' => 'Gửi email kích hoạt thành công.',
+        'resend_activation_failed' => 'Gửi email kích hoạt thất bại.',
+    ],
 ];

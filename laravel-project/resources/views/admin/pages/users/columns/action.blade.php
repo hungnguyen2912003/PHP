@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end" style="gap: 12px;">
+<div class="d-flex justify-content-end text-nowrap gap-2">
     @if ($user->status == 'pending')
     <form action="" method="POST" class="d-inline">
         @csrf

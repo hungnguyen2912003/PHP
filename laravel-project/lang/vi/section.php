@@ -8,4 +8,5 @@ return [
     'account_desc' => 'Quản lý cài đặt tài khoản của bạn và thiết lập tùy chọn email.',
     'main_menu' => 'Menu chính',
     'apps' => 'Ứng dụng',
+    'user_image' => 'Ảnh đại diện',
 ];
