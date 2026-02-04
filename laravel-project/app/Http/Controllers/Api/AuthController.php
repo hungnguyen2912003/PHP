@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Api\BaseApiController;
+use App\Http\Requests\Api\LoginRequest;
+use App\Http\Requests\Api\RegisterRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends BaseApiController
 {
@@ -16,20 +19,29 @@ class AuthController extends BaseApiController
         // Notice: Middlewares are better defined in routes/api.php in newer Laravel versions
     }
 
+    public function register(RegisterRequest $request)
+    {
+        $user = $request->validated();
+        $user['password'] = Hash::make($user['password']);
+        $user = User::create($user);
+
+        return $this->success($user, 201);
+    }
+
     /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(LoginRequest $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->validated();
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return $this->error(null, 401);
         }
 
-        return $this->respondWithToken($token);
+        return $this->success($this->respondWithToken($token), 200);
     }
 
     /**
@@ -39,7 +51,7 @@ class AuthController extends BaseApiController
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return $this->success(auth('api')->user(), 200);
     }
 
     /**
@@ -49,9 +61,9 @@ class AuthController extends BaseApiController
      */
     public function logout()
     {
-        auth()->logout();
+        auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->success(null, 200);
     }
 
     /**
@@ -61,7 +73,7 @@ class AuthController extends BaseApiController
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->success($this->respondWithToken(auth('api')->refresh()), 200);
     }
 
     /**
@@ -69,14 +81,14 @@ class AuthController extends BaseApiController
      *
      * @param  string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken(string $token): array
     {
-        return response()->json([
+        return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ];
     }
 }
