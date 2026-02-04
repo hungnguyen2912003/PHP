@@ -35,12 +35,15 @@ class AuthController extends BaseApiController
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validated();
-
+        $login = $request->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $credentials = [
+            $field => $login,
+            'password' => $request->input('password'),
+        ];
         if (!$token = auth('api')->attempt($credentials)) {
             return $this->error(null, 401);
         }
-
         return $this->success($this->respondWithToken($token), 200);
     }
 
