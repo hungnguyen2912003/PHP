@@ -42,4 +42,9 @@ return [
     'days' => 'Ngày',
     'weeks' => 'Tuần',
     'months' => 'Tháng',
+    'total_users' => 'Tổng người dùng',
+    'new_users' => 'Người dùng mới',
+    'pending_users' => 'Chờ kích hoạt',
+    'banned_users' => 'Bị khóa',
+    'this_month' => 'Tháng này',
 ];

@@ -60,6 +60,8 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
 
     Route::post('/resend-activation', [ClientAuthController::class, 'resendActivation'])->name('resend-activation');
 
+    Route::get('/dashboard/chart-data', [ClientDashboardController::class, 'getChartData'])->name('dashboard.chart-data');
+
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ClientProfileController::class, 'index'])->name('index');
         Route::put('/avatar', [ClientProfileController::class, 'updateAvatar'])->name('avatar.update');

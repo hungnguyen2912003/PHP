@@ -42,4 +42,9 @@ return [
     'days' => '日',
     'weeks' => '週',
     'months' => '月',
+    'total_users' => '総ユーザー数',
+    'new_users' => '新規ユーザー',
+    'pending_users' => '保留中',
+    'banned_users' => '利用停止',
+    'this_month' => '今月',
 ];

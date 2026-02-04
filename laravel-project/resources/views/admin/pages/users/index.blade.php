@@ -95,7 +95,7 @@
                         <button type="button" class="btn btn-secondary text-white px-4 rounded-3" data-bs-dismiss="modal">
                             {{ __('modal.confirm.import.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary text-white px-4 rounded-3 shadow-sm">
+                        <button type="submit" id="importSubmitBtn" class="btn btn-primary text-white px-4 rounded-3 shadow-sm">
                             {{ __('modal.confirm.import.btn') }}
                         </button>
                     </div>
@@ -134,6 +134,18 @@
                 // Reset FilePond when modal is hidden
                 document.getElementById('importModal').addEventListener('hidden.bs.modal', function () {
                     pond.removeFiles();
+                    
+                    // Reset submit button state
+                    const submitBtn = document.getElementById('importSubmitBtn');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = {!! json_encode(__('modal.confirm.import.btn')) !!};
+                });
+
+                // Handle form submission loading state
+                importForm.addEventListener('submit', function () {
+                    const submitBtn = document.getElementById('importSubmitBtn');
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' + {!! json_encode(__('button.processing')) !!};
                 });
             }
 

@@ -42,4 +42,9 @@ return [
     'days' => 'Days',
     'weeks' => 'Weeks',
     'months' => 'Months',
+    'total_users' => 'Total Users',
+    'new_users' => 'New Users',
+    'pending_users' => 'Pending Activation',
+    'banned_users' => 'Banned Users',
+    'this_month' => 'This Month',
 ];
