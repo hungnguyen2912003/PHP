@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\Api\LoginRequest;
+use App\Http\Controllers\Api\BaseApiController;
 
-class AuthController extends ApiController
+class AuthController extends BaseApiController
 {
     /**
      * Create a new AuthController instance.
@@ -26,19 +21,15 @@ class AuthController extends ApiController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function login()
     {
-        $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $credentials = request(['email', 'password']);
 
-        $request->merge([$loginType => $request->login]);
-
-        $credentials = $request->only($loginType, 'password');
-
-        if (! $token = auth('api')->attempt($credentials)) {
-            return $this->error('Unauthorized', 401);
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->success($this->respondWithToken($token, auth('api')->user()));
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -48,7 +39,7 @@ class AuthController extends ApiController
      */
     public function me()
     {
-        return $this->success(auth('api')->user());
+        return response()->json(auth()->user());
     }
 
     /**
@@ -58,9 +49,9 @@ class AuthController extends ApiController
      */
     public function logout()
     {
-        auth('api')->logout();
+        auth()->logout();
 
-        return $this->success(null);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
@@ -70,7 +61,7 @@ class AuthController extends ApiController
      */
     public function refresh()
     {
-        return $this->success($this->respondWithToken(auth('api')->refresh(), auth('api')->user()));
+        return $this->respondWithToken(auth()->refresh());
     }
 
     /**
@@ -80,13 +71,12 @@ class AuthController extends ApiController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token, $user)
+    protected function respondWithToken($token)
     {
-        return [
+        return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => $user
-        ];
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }
