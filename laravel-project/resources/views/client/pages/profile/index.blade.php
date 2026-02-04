@@ -117,7 +117,7 @@
                             {{ __('label.date_of_birth') }}:
                             <span class="text-secondary">
                                 @if ($user->date_of_birth)
-                                    {{ $user->date_of_birth }}
+                                    {{ $user->date_of_birth->format('d-m-Y') }}
                                 @else
                                     <span class="text-danger">{{ __('value.unknown') }}</span>
                                 @endif

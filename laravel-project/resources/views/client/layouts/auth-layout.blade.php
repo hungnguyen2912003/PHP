@@ -23,7 +23,7 @@
             <div class="main-content d-flex flex-column p-0">
                 <div class="m-lg-auto my-auto w-930 py-4">
                     <div class="card bg-white border rounded-10 py-100 px-130 position-relative">
-                        @include('admin.components.language-switcher-auth')
+                        @include('client.components.language-switcher-auth')
                         <div class="p-md-5 p-4 p-lg-0">
                             @yield('content')
                         </div>
