@@ -21,4 +21,5 @@ return [
     'height' => 'Enter your height (cm)',
     'recorded_at' => 'Select recorded date and time',
     'notes' => 'Enter notes (optional)',
+    'drag_drop_file' => 'Drag & Drop your file or <span class="filepond--label-action">Browse</span>',
 ];

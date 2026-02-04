@@ -34,7 +34,14 @@ class WeightController extends Controller
             $data['attachment_url'] = 'storage/' . $path;
         }
 
-        Weight::create($data);
+        // Use updateOrCreate based on user_id and recorded_at
+        Weight::updateOrCreate(
+            [
+                'user_id'     => $data['user_id'],
+                'recorded_at' => $data['recorded_at'],
+            ],
+            $data
+        );
 
         flash()->success(__('message.weight.create_success'), [], __('notification.success'));
         return redirect()->route('client.weight.index');
@@ -77,7 +84,19 @@ class WeightController extends Controller
             $data['attachment_url'] = null;
         }
 
-        $weight->update($data);
+        // Check if there's another record with the same user_id and recorded_at
+        $existingRecord = Weight::where('user_id', auth()->id())
+            ->where('recorded_at', $data['recorded_at'])
+            ->where('id', '!=', $weight->id)
+            ->first();
+
+        if ($existingRecord) {
+            // Overwrite existing record and delete current one
+            $existingRecord->update($data);
+            $weight->delete();
+        } else {
+            $weight->update($data);
+        }
 
         flash()->success(__('message.weight.update_success'), [], __('notification.success'));
         return redirect()->route('client.weight.index');

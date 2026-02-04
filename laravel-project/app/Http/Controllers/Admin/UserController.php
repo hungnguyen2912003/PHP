@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Mail\Admin\ActivationMail;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\WeightImport;
+use App\Imports\HeightImport;
+use App\Http\Requests\Admin\users\ImportUserRequest;
 
 class UserController extends Controller
 {
@@ -125,4 +130,23 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function import(ImportUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        try {
+            if ($request->type === 'weight') {
+                Excel::import(new WeightImport($user->id), $request->file('file'));
+            } else {
+                Excel::import(new HeightImport($user->id), $request->file('file'));
+            }
+
+            flash()->success(__('message.import.success'), [], __('notification.success'));
+        } catch (\Throwable $e) {
+            report($e);
+            flash()->error(__('message.import.failed'), [], __('notification.error'));
+        }
+
+        return redirect()->back();
+    }
 }

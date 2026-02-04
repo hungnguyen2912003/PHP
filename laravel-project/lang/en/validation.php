@@ -116,4 +116,15 @@ return [
         'image' => 'Attachment must be an image.',
         'max' => 'Attachment size must be less than 2MB.',
     ],
+    'import' => [
+        'type' => [
+            'required' => 'Import type is required.',
+            'in' => 'Import type is invalid.',
+        ],
+        'file' => [
+            'required' => 'File is required.',
+            'mimes' => 'File must be a file of type: xlsx, xls, csv.',
+            'max' => 'File size must be less than 2MB.',
+        ],
+    ],
 ];

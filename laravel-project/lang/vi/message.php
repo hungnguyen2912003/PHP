@@ -109,4 +109,8 @@ return [
         'update_success' => 'Cập nhật chiều cao thành công!',
         'delete_success' => 'Xóa chiều cao thành công!',
     ],
+    'import' => [
+        'success' => 'Nhập dữ liệu thành công.',
+        'failed' => 'Nhập dữ liệu thất bại. Vui lòng kiểm tra định dạng file.',
+    ],
 ];

@@ -47,7 +47,7 @@
                                                     placeholder="{{ __('placeholder.height') }}" type="number" step="0.1"
                                                     value="{{ old('height', $height->height) }}" />
                                                 <label for="height"><i
-                                                        class="material-symbols-outlined fs-16">height</i>{{ __('placeholder.height') }}</label>
+                                                        class="ri-ruler-line"></i>{{ __('placeholder.height') }}</label>
                                             </div>
                                             @error('height')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -126,6 +126,7 @@
                 const pond = FilePond.create(inputElement, {
                     allowImagePreview: true,
                     storeAsFile: true,
+                    labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
                     acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
                     files: [
                         @if ($height->attachment_url)

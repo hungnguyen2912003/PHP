@@ -49,7 +49,7 @@
                                                     placeholder="{{ __('placeholder.weight') }}" type="number" step="0.1"
                                                     value="{{ old('weight', $weight->weight) }}" />
                                                 <label for="weight">
-                                                    <i class="material-symbols-outlined fs-16">weight</i>
+                                                    <i class="ri-weight-line"></i>
                                                     {{ __('placeholder.weight') }}
                                                 </label>
                                             </div>
@@ -139,6 +139,7 @@
                 const pond = FilePond.create(inputElement, {
                     allowImagePreview: true,
                     storeAsFile: true,
+                    labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
                     acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
                     files: [
                         @if ($weight->attachment_url)

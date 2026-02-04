@@ -16,6 +16,7 @@ return [
     'add_user' => 'Thêm người dùng mới',
     'logout' => 'Đăng xuất',
     'view' => 'Xem',
+    'import' => 'Nhập file',
     'resend_activation' => 'Gửi lại email kích hoạt',
     'processing' => 'Đang xử lý...',
     'set_password' => 'Thiết lập mật khẩu',

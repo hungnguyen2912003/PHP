@@ -16,6 +16,7 @@ return [
     'add_user' => 'Add New User',
     'logout' => 'Logout',
     'view' => 'View',
+    'import' => 'Import',
     'resend_activation' => 'Resend Activation Email',
     'processing' => 'Processing...',
     'set_password' => 'Set Password',

@@ -170,6 +170,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
 
                 Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
+
+                Route::post('/import/{id}', [UserController::class, 'import'])->name('import');
             });
         });
     });

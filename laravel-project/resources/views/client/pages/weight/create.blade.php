@@ -45,7 +45,7 @@
                                                     placeholder="{{ __('placeholder.weight') }}" type="number" step="0.1"
                                                     value="{{ old('weight') }}" />
                                                 <label for="weight">
-                                                    <i class="material-symbols-outlined fs-16">weight</i>
+                                                    <i class="ri-weight-line"></i>
                                                     {{ __('placeholder.weight') }}
                                                 </label>
                                             </div>

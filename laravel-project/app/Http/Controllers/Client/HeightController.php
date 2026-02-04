@@ -43,7 +43,14 @@ class HeightController extends Controller
             $data['attachment_url'] = 'storage/' . $path;
         }
 
-        Height::create($data);
+        // Use updateOrCreate based on user_id and recorded_at
+        Height::updateOrCreate(
+            [
+                'user_id'     => $data['user_id'],
+                'recorded_at' => $data['recorded_at'],
+            ],
+            $data
+        );
 
         flash()->success(__('message.height.create_success'), [], __('notification.success'));
         return redirect()->route('client.height.index');
@@ -93,7 +100,19 @@ class HeightController extends Controller
             $data['attachment_url'] = null;
         }
 
-        $height->update($data);
+        // Check if there's another record with the same user_id and recorded_at
+        $existingRecord = Height::where('user_id', auth()->id())
+            ->where('recorded_at', $data['recorded_at'])
+            ->where('id', '!=', $height->id)
+            ->first();
+
+        if ($existingRecord) {
+            // Overwrite existing record and delete current one
+            $existingRecord->update($data);
+            $height->delete();
+        } else {
+            $height->update($data);
+        }
 
         flash()->success(__('message.height.update_success'), [], __('notification.success'));
         return redirect()->route('client.height.index');

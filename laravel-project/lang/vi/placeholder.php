@@ -20,5 +20,6 @@ return [
     'weight' => 'Nhập cân nặng của bạn (kg)',
     'height' => 'Nhập chiều cao của bạn (cm)',
     'recorded_at' => 'Chọn ngày và giờ ghi nhận',
-    'notes' => 'Nhập ghi chú (nếu có)',
+    'notes' => 'Nhập ghi chú (không bắt buộc)',
+    'drag_drop_file' => 'Kéo & Thả file của bạn hoặc <span class="filepond--label-action">Chọn tệp</span>',
 ];

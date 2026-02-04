@@ -114,4 +114,15 @@ return [
         'image' => 'Tệp đính kèm phải là hình ảnh.',
         'max' => 'Tệp đính kèm không được vượt quá 2MB.',
     ],
+    'import' => [
+        'type' => [
+            'required' => 'Loại nhập dữ liệu là bắt buộc.',
+            'in' => 'Loại nhập dữ liệu không hợp lệ.',
+        ],
+        'file' => [
+            'required' => 'Tệp là bắt buộc.',
+            'mimes' => 'Tệp phải là một tệp loại: xlsx, xls, csv.',
+            'max' => 'Kích thước tệp phải nhỏ hơn 2MB.',
+        ],
+    ],
 ];

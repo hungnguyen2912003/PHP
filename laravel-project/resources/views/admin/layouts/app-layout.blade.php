@@ -16,10 +16,9 @@
         <link href="{{ asset('assets/css/style.css?v=' . time()) }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/mycss.css?v=' . time()) }}" rel="stylesheet" />
-        <link
-            href="{{ asset('assets/css/datatable/dataTables.bootstrap5.min.css') }}"
-            rel="stylesheet"
-        />
+        <link href="{{ asset('assets/css/datatable/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/filepond.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/filepond-plugin-image-preview.css') }}" rel="stylesheet" />
         <!-- Favicon -->
     </head>
     <body class="bg-body-bg">
@@ -61,6 +60,8 @@
         <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/dataTables.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/js/filepond.js') }}"></script>
+        <script src="{{ asset('assets/js/filepond-plugin-image-preview.js') }}"></script>
 
         <script src="{{ asset('assets/js/custom/custom.js?id=' . time()) }}"></script>
         <script>

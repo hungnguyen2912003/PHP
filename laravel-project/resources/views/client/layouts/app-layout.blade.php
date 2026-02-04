@@ -113,6 +113,7 @@
         FilePond.create(document.querySelector('.image-preview-filepond'), {
             allowImagePreview: true,
             storeAsFile: true,
+            labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
             acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
             fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
                 // Do custom type detection here and return with promise

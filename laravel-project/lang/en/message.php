@@ -114,4 +114,8 @@ return [
         'update_success' => 'Height updated successfully!',
         'delete_success' => 'Height deleted successfully!',
     ],
+    'import' => [
+        'success' => 'Data imported successfully.',
+        'failed' => 'Data import failed. Please check your file format.',
+    ],
 ];

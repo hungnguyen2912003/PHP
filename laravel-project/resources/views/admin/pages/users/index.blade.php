@@ -52,6 +52,57 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+
+                <form id="importForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" id="importModalLabel">
+                            <i class="ri-upload-cloud-2-line text-primary fs-4"></i>
+                            {{ __('modal.confirm.import.title') }}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body pt-3">
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-muted small text-uppercase">
+                                {{ __('modal.confirm.import.type') }}
+                            </label>
+                            <select name="type" class="form-select form-select-lg rounded-3" required>
+                                <option value="weight">{{ __('modal.confirm.import.weight') }}</option>
+                                <option value="height">{{ __('modal.confirm.import.height') }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-medium text-muted small text-uppercase">
+                                {{ __('modal.confirm.import.file') }}
+                            </label>
+                            <input type="file"
+                                name="file"
+                                class="import-file-filepond"
+                                accept=".xlsx,.xls,.csv"
+                                required>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer border-0 pt-4 d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary text-white px-4 rounded-3" data-bs-dismiss="modal">
+                            {{ __('modal.confirm.import.cancel') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary text-white px-4 rounded-3 shadow-sm">
+                            {{ __('modal.confirm.import.btn') }}
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -67,7 +118,26 @@
                 });
             }
 
-            // Function to handle delete button click (delegated)
+            const importModal = new bootstrap.Modal(document.getElementById('importModal'));
+            const importForm = document.getElementById('importForm');
+
+            // Initialize FilePond
+            if (typeof FilePond !== 'undefined') {
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+                const pond = FilePond.create(document.querySelector('.import-file-filepond'), {
+                    allowImagePreview: false,
+                    storeAsFile: true,
+                    labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
+                    acceptedFileTypes: ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv']
+                });
+                
+                // Reset FilePond when modal is hidden
+                document.getElementById('importModal').addEventListener('hidden.bs.modal', function () {
+                    pond.removeFiles();
+                });
+            }
+
+            // Function to handle delegated clicks
             document.body.addEventListener('click', function (e) {
                 if (e.target.closest('.delete-btn')) {
                     e.preventDefault();
@@ -88,6 +158,18 @@
                             form.submit();
                         }
                     });
+                }
+
+                if (e.target.closest('.import-btn')) {
+                    e.preventDefault();
+                    const button = e.target.closest('.import-btn');
+                    const userId = button.getAttribute('data-user-id');
+                    
+                    // Update form action URL
+                    importForm.action = `/admin/users/import/${userId}`;
+                    
+                    // Open modal
+                    importModal.show();
                 }
 
                 if (e.target.closest('.resend-btn')) {
