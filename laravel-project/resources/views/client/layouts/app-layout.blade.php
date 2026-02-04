@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Links Of CSS File -->
     <link href="{{ asset('assets/css/sidebar-menu.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/simplebar.css') }}" rel="stylesheet" />

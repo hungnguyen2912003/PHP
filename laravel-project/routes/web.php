@@ -56,7 +56,7 @@ Route::middleware('guest:web')->name('client.')->group(function () {
 */
 Route::middleware(['auth:web'])->name('client.')->group(function () {
 
-    Route::post('/logout', [ClientAuthController::class, 'logout'])->name('logout');
+    Route::match(['get', 'post'], '/logout', [ClientAuthController::class, 'logout'])->name('logout');
 
     Route::post('/resend-activation', [ClientAuthController::class, 'resendActivation'])->name('resend-activation');
 
@@ -140,7 +140,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::match(['get', 'post'], '/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         Route::prefix('profile')->name('profile.')->group(function () {
             Route::get('/', [AdminProfileController::class, 'index'])->name('index');

@@ -16,11 +16,11 @@ class HeightDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->editColumn('recorded_at', function ($height) {
-                $format = 'Y-m-d H:i:s';
+                $format = 'Y-m-d H:i';
                 if (app()->getLocale() == 'vi')
-                    $format = 'd/m/Y H:i:s';
+                    $format = 'd/m/Y H:i';
                 elseif (app()->getLocale() == 'ja')
-                    $format = 'Y/m/d H:i:s';
+                    $format = 'Y/m/d H:i';
                 return $height->recorded_at->format($format);
             })
             ->editColumn('height', function ($height) {
@@ -66,7 +66,7 @@ class HeightDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
-            Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap'),
+            Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap')->type('string'),
             Column::make('height')->title(__('label.height'))->addClass('text-nowrap'),
             Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap text-center'),
             Column::computed('action')

@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
             SetLocale::class,
         ]);
 
+        $middleware->validateCsrfTokens(except: [
+            'logout',
+            'admin/logout',
+        ]);
+
         $middleware->alias([
             'admin.auth' => AuthenticateAdmin::class,
             'role'       => EnsureRole::class,

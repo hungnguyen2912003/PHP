@@ -43,7 +43,7 @@
 
                 <div class="mt-5">
                     <a href="javascript:void(0)" onclick="window.history.back()"
-                        class="btn btn-primary btn-lg rounded-pill px-5 waves-effect waves-light">
+                        class="btn btn-danger btn-lg rounded-pill px-5 waves-effect waves-light">
                         <i class="ri-arrow-left-line align-bottom me-1"></i> {{ __('button.go_back') }}
                     </a>
                 </div>

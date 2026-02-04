@@ -16,11 +16,13 @@ class WeightDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->editColumn('recorded_at', function ($weight) {
-                $format = 'Y-m-d H:i:s';
+                if (!$weight->recorded_at)
+                    return '<span class="text-warning">' . __('value.not_available') . '</span>';
+                $format = 'Y-m-d H:i';
                 if (app()->getLocale() == 'vi')
-                    $format = 'd/m/Y H:i:s';
+                    $format = 'd/m/Y H:i';
                 elseif (app()->getLocale() == 'ja')
-                    $format = 'Y/m/d H:i:s';
+                    $format = 'Y/m/d H:i';
                 return $weight->recorded_at->format($format);
             })
             ->editColumn('weight', function ($weight) {
@@ -32,7 +34,7 @@ class WeightDataTable extends DataTable
             ->addColumn('action', function ($weight) {
                 return view('client.pages.weight.columns.action', compact('weight'));
             })
-            ->rawColumns(['attachment', 'action'])
+            ->rawColumns(['recorded_at', 'weight', 'attachment', 'action'])
             ->setRowId('id');
     }
 
@@ -66,7 +68,7 @@ class WeightDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
-            Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap'),
+            Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap')->type('string'),
             Column::make('weight')->title(__('label.weight'))->addClass('text-nowrap'),
             Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap text-center'),
             Column::computed('action')
