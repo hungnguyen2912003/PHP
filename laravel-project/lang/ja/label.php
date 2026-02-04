@@ -32,4 +32,11 @@ return [
     'attachment' => '添付ファイル',
     'notes' => 'メモ',
     'view_attachment' => '添付ファイルを表示',
+    'weight_avg' => '平均体重',
+    'height_avg' => '平均身長',
+    'bmi_underweight' => '低体重',
+    'bmi_normal' => '普通体重',
+    'bmi_overweight' => '過体重',
+    'bmi_obese' => '肥満',
+    'dashboard_date_format' => 'Y年n月j日(l)',
 ];

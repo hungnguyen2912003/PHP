@@ -32,4 +32,11 @@ return [
     'attachment' => 'Đính kèm',
     'notes' => 'Ghi chú',
     'view_attachment' => 'Xem tệp đính kèm',
+    'weight_avg' => 'Cân nặng trung bình',
+    'height_avg' => 'Chiều cao trung bình',
+    'bmi_underweight' => 'Nhẹ cân',
+    'bmi_normal' => 'Bình thường',
+    'bmi_overweight' => 'Thừa cân',
+    'bmi_obese' => 'Béo phì',
+    'dashboard_date_format' => 'l, \N\g\à\y d/m/Y',
 ];

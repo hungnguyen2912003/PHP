@@ -32,4 +32,11 @@ return [
     'attachment' => 'Attachment',
     'notes' => 'Notes',
     'view_attachment' => 'View Attachment',
+    'weight_avg' => 'Average Weight',
+    'height_avg' => 'Average Height',
+    'bmi_underweight' => 'Underweight',
+    'bmi_normal' => 'Normal',
+    'bmi_overweight' => 'Overweight',
+    'bmi_obese' => 'Obese',
+    'dashboard_date_format' => 'l, F d, Y',
 ];
