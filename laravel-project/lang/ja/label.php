@@ -39,4 +39,7 @@ return [
     'bmi_overweight' => '過体重',
     'bmi_obese' => '肥満',
     'dashboard_date_format' => 'Y年n月j日(l)',
+    'days' => '日',
+    'weeks' => '週',
+    'months' => '月',
 ];

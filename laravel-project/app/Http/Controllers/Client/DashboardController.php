@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Weight;
 use App\Models\Height;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -12,44 +14,15 @@ class DashboardController extends Controller
     |--------------------------------------------------------------------------
     | Dashboard
     |--------------------------------------------------------------------------
+    |
     */
     public function index()
     {
+        // ... (preserving existing index logic)
         $userId = auth()->id();
 
-        $weights = Weight::where('user_id', $userId)
-            ->orderBy('recorded_at', 'desc')
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->recorded_at->format('Y-m-d');
-            })
-            ->take(7)
-            ->map(function ($dayRecords) {
-                return [
-                    'date' => $dayRecords->first()->recorded_at->format('Y-m-d'),
-                    'value' => round($dayRecords->avg('weight'), 2),
-                ];
-            })
-            ->values()
-            ->reverse()
-            ->values();
-
-        $heights = Height::where('user_id', $userId)
-            ->orderBy('recorded_at', 'desc')
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->recorded_at->format('Y-m-d');
-            })
-            ->take(7)
-            ->map(function ($dayRecords) {
-                return [
-                    'date' => $dayRecords->first()->recorded_at->format('Y-m-d'),
-                    'value' => round($dayRecords->avg('height'), 2),
-                ];
-            })
-            ->values()
-            ->reverse()
-            ->values();
+        $weights = $this->fetchData('weight', 'days', $userId);
+        $heights = $this->fetchData('height', 'days', $userId);
 
         // Get today's values (specifically for today's date if exists)
         $todayDate = now()->format('Y-m-d');
@@ -97,5 +70,80 @@ class DashboardController extends Controller
             'bmiPercentage',
             'bmiColor',
         ));
+    }
+
+    /**
+     * AJAX endpoint for chart data
+     */
+    public function getChartData(Request $request)
+    {
+        $type = $request->get('type', 'weight'); // weight or height
+        $filter = $request->get('filter', 'days'); // days, weeks, months
+        $userId = auth()->id();
+
+        $data = $this->fetchData($type, $filter, $userId);
+
+        return response()->json($data);
+    }
+
+    /**
+     * Helper to fetch and aggregate data
+     */
+    private function fetchData($type, $filter, $userId)
+    {
+        $model = ($type === 'weight') ? new Weight() : new Height();
+        $column = $type; // weight column or height column
+
+        $query = $model::where('user_id', $userId)->orderBy('recorded_at', 'desc');
+
+        if ($filter === 'weeks') {
+            // Group by Week (Year-Week)
+            return $query->get()
+                ->groupBy(function ($item) {
+                    return $item->recorded_at->format('Y-W');
+                })
+                ->take(8) // Last 8 weeks
+                ->map(function ($records) {
+                    return [
+                        'date' => 'W' . $records->first()->recorded_at->format('W, Y'),
+                        'value' => round($records->avg($records->first()->getTable() === 'weights' ? 'weight' : 'height'), 2),
+                    ];
+                })
+                ->values()
+                ->reverse()
+                ->values();
+        } elseif ($filter === 'months') {
+            // Group by Month (Year-Month)
+            return $query->get()
+                ->groupBy(function ($item) {
+                    return $item->recorded_at->format('Y-m');
+                })
+                ->take(6) // Last 6 months
+                ->map(function ($records) {
+                    return [
+                        'date' => $records->first()->recorded_at->locale(app()->getLocale())->translatedFormat('M Y'),
+                        'value' => round($records->avg($records->first()->getTable() === 'weights' ? 'weight' : 'height'), 2),
+                    ];
+                })
+                ->values()
+                ->reverse()
+                ->values();
+        } else {
+            // Default: Days (Last 7 days with records)
+            return $query->get()
+                ->groupBy(function ($item) {
+                    return $item->recorded_at->format('Y-m-d');
+                })
+                ->take(7)
+                ->map(function ($dayRecords) use ($type) {
+                    return [
+                        'date' => $dayRecords->first()->recorded_at->format('Y-m-d'),
+                        'value' => round($dayRecords->avg($type), 2),
+                    ];
+                })
+                ->values()
+                ->reverse()
+                ->values();
+        }
     }
 }

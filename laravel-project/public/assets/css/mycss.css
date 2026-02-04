@@ -318,3 +318,49 @@ body[data-theme="dark"] .bmi-labels-top,
 body[data-theme="dark"] .bmi-labels-bottom span {
     color: #94a3b8 !important;
 }
+
+/* ===== Chart Filter Toggle ===== */
+.chart-filter-toggle {
+    display: flex;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 3px;
+    border-radius: 999px;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.chart-filter-item {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 18px;
+    cursor: pointer;
+    border-radius: 999px;
+    color: #64748b;
+    transition: all 0.3s ease;
+    border: none;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+}
+
+.chart-filter-item.active {
+    color: #fff !important;
+    background: linear-gradient(90deg, #9333ea 0%, #2563eb 100%);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+body[data-theme="dark"] .chart-filter-toggle {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: none;
+}
+
+body[data-theme="dark"] .chart-filter-item {
+    color: #94a3b8;
+}
+
+body[data-theme="dark"] .chart-filter-item.active {
+    color: #fff !important;
+}

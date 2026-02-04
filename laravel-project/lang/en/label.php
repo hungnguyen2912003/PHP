@@ -39,4 +39,7 @@ return [
     'bmi_overweight' => 'Overweight',
     'bmi_obese' => 'Obese',
     'dashboard_date_format' => 'l, F d, Y',
+    'days' => 'Days',
+    'weeks' => 'Weeks',
+    'months' => 'Months',
 ];

@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\UserController;
 */
 Route::name('client.')->group(function () {
     Route::get('/', [ClientDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/chart-data', [ClientDashboardController::class, 'getChartData'])->name('dashboard.chart-data');
 });
 
 Route::middleware('guest:web')->name('client.')->group(function () {

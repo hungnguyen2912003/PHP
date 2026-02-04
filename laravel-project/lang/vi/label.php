@@ -39,4 +39,7 @@ return [
     'bmi_overweight' => 'Thừa cân',
     'bmi_obese' => 'Béo phì',
     'dashboard_date_format' => 'l, \N\g\à\y d/m/Y',
+    'days' => 'Ngày',
+    'weeks' => 'Tuần',
+    'months' => 'Tháng',
 ];

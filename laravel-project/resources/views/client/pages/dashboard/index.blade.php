@@ -11,6 +11,11 @@
             <div class="card p-20 rounded-10 border mb-4 summary-card" style="background-color: white; border-color: white;">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
                     <h3 class="mb-0">{{ __('label.weight') }}</h3>
+                    <div class="chart-filter-toggle" data-chart="weight">
+                        <button class="chart-filter-item active" data-filter="days">{{ __('label.days') }}</button>
+                        <button class="chart-filter-item" data-filter="weeks">{{ __('label.weeks') }}</button>
+                        <button class="chart-filter-item" data-filter="months">{{ __('label.months') }}</button>
+                    </div>
                 </div>
                 <div id="weight_chart"></div>
             </div>
@@ -20,6 +25,11 @@
             <div class="card p-20 rounded-10 border mb-4 summary-card" style="background-color: white; border-color: white;">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
                     <h3 class="mb-0">{{ __('label.height') }}</h3>
+                    <div class="chart-filter-toggle" data-chart="height">
+                        <button class="chart-filter-item active" data-filter="days">{{ __('label.days') }}</button>
+                        <button class="chart-filter-item" data-filter="weeks">{{ __('label.weeks') }}</button>
+                        <button class="chart-filter-item" data-filter="months">{{ __('label.months') }}</button>
+                    </div>
                 </div>
                 <div id="height_chart"></div>
             </div>
@@ -101,54 +111,75 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const weightData = @json($weights);
-        const heightData = @json($heights);
+        let weightChart, heightChart;
 
-        const sparklineOptions = {
-            chart: {
-                type: 'area',
-                height: 40,
-                sparkline: {
-                    enabled: true
-                },
-                animations: {
-                    enabled: true
-                }
-            },
-            stroke: {
-                curve: 'smooth',
-                width: 2,
-            },
-            fill: {
-                opacity: 0.3,
-            },
-            yaxis: {
-                min: 0
-            },
-            colors: ['#008FFB'],
-            tooltip: {
-                enabled: false
+        // Helper to format date label
+        const formatLabel = (date, filter) => {
+            if (filter === 'days' && date.includes('-')) {
+                const parts = date.split('-');
+                if (parts.length === 3) return `${parts[2]}/${parts[1]}`;
+            }
+            return date;
+        };
+
+        // Function to update chart via AJAX
+        const updateChart = async (type, filter) => {
+            const chartArea = document.querySelector(`#${type}_chart`);
+            if (!chartArea) return;
+
+            chartArea.style.opacity = '0.5';
+
+            try {
+                const response = await fetch(`{{ route('client.dashboard.chart-data') }}?type=${type}&filter=${filter}`);
+                const data = await response.json();
+                
+                const chart = (type === 'weight') ? weightChart : heightChart;
+                if (!chart) return;
+
+                const values = data.map(item => item.value);
+                const categories = data.map(item => formatLabel(item.date, filter));
+
+                chart.updateOptions({
+                    xaxis: {
+                        categories: categories
+                    }
+                }, true, true);
+                
+                chart.updateSeries([{
+                    name: (type === 'weight') ? '{{ __('label.weight') }}' : '{{ __('label.height') }}',
+                    data: values
+                }], true);
+                
+            } catch (error) {
+                console.error('Error fetching chart data:', error);
+            } finally {
+                chartArea.style.opacity = '1';
             }
         };
 
-        // Weight Sparkline
-        const weightSparkline = new ApexCharts(document.querySelector("#weight_sparkline"), {
-            ...sparklineOptions,
-            series: [{
-                data: weightData.map(item => item.value)
-            }],
+        // ... preserving filter toggle logic ...
+        const filterToggles = document.querySelectorAll('.chart-filter-toggle');
+        filterToggles.forEach(toggle => {
+            const items = toggle.querySelectorAll('.chart-filter-item');
+            items.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    
+                    items.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const type = toggle.dataset.chart;
+                    const filter = this.dataset.filter;
+                    
+                    updateChart(type, filter);
+                });
+            });
         });
-        weightSparkline.render();
 
-        // Height Sparkline
-        const heightSparkline = new ApexCharts(document.querySelector("#height_sparkline"), {
-            ...sparklineOptions,
-            series: [{
-                data: heightData.map(item => item.value)
-            }],
-        });
-        heightSparkline.render();
+        const weightData = @json($weights);
+        const heightData = @json($heights);
 
+        // ... preserving commonOptions ...
         const commonOptions = {
             chart: {
                 height: 350,
@@ -162,6 +193,11 @@
                     left: 2,
                     blur: 4,
                     opacity: 1,
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
                 }
             },
             dataLabels: {
@@ -228,6 +264,16 @@
                     stops: [0, 50, 100]
                 }
             },
+            noData: {
+                text: '{{ __('value.not_available') }}',
+                align: 'center',
+                verticalAlign: 'middle',
+                style: {
+                    color: '#919aa3',
+                    fontSize: '16px',
+                    fontFamily: 'Outfit'
+                }
+            }
         };
 
         const weightOptions = {
@@ -238,10 +284,7 @@
             }],
             xaxis: {
                 type: 'category',
-                categories: weightData.map(item => {
-                    const parts = item.date.split('-');
-                    return `${parts[2]}/${parts[1]}`;
-                }),
+                categories: weightData.map(item => formatLabel(item.date, 'days')),
                 labels: {
                     style: {
                         colors: "#919aa3",
@@ -264,10 +307,7 @@
             }],
             xaxis: {
                 type: 'category',
-                categories: heightData.map(item => {
-                    const parts = item.date.split('-');
-                    return `${parts[2]}/${parts[1]}`;
-                }),
+                categories: heightData.map(item => formatLabel(item.date, 'days')),
                 labels: {
                     style: {
                         colors: "#919aa3",
@@ -283,12 +323,12 @@
         };
 
         if (document.querySelector("#weight_chart")) {
-            const weightChart = new ApexCharts(document.querySelector("#weight_chart"), weightOptions);
+            weightChart = new ApexCharts(document.querySelector("#weight_chart"), weightOptions);
             weightChart.render();
         }
 
         if (document.querySelector("#height_chart")) {
-            const heightChart = new ApexCharts(document.querySelector("#height_chart"), heightOptions);
+            heightChart = new ApexCharts(document.querySelector("#height_chart"), heightOptions);
             heightChart.render();
         }
     });
