@@ -18,6 +18,9 @@ class RolesDataTable extends DataTable
             ->addColumn('users_count', function ($role) {
                 return $role->users_count;
             })
+            ->editColumn('name', function ($role) {
+                return __('value.role.' . strtolower($role->name));
+            })
             ->addColumn('action', function ($role) {
                 return view('admin.pages.roles.columns.action', compact('role'));
             })

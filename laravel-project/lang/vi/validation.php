@@ -50,6 +50,12 @@ return [
         'max' => 'Họ và tên không được vượt quá 255 ký tự.',
         'string' => 'Họ và tên phải là một chuỗi ký tự.',
     ],
+    'name' => [
+        'required' => ':attribute là bắt buộc.',
+        'unique' => ':attribute đã tồn tại.',
+        'string' => ':attribute phải là chuỗi ký tự.',
+        'max' => ':attribute không được vượt quá 255 ký tự.',
+    ],
 
     'role_id' => [
         'required' => 'Vai trò là bắt buộc.',

@@ -50,6 +50,12 @@ return [
         'max' => '氏名は255文字以内で入力してください。',
         'string' => '氏名は文字列である必要があります。',
     ],
+    'name' => [
+        'required' => ':attributeは必須です。',
+        'unique' => 'この:attributeは既に登録されています。',
+        'string' => ':attributeは文字列でなければなりません。',
+        'max' => ':attributeは255文字以内で入力してください。',
+    ],
 
     'role_id' => [
         'required' => '役割は必須です。',

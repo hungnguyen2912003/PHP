@@ -22,6 +22,8 @@ use App\Http\Controllers\Client\HeightController;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\WeightController as AdminWeightController;
+use App\Http\Controllers\Admin\HeightController as AdminHeightController;
 
 /*
 |--------------------------------------------------------------------------
@@ -191,6 +193,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
                 Route::delete('/destroy/{id}', [RoleController::class, 'destroy'])->name('destroy');
             });
+        });
+
+        Route::prefix('weights')->name('weights.')->group(function () {
+            Route::get('/', [AdminWeightController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [AdminWeightController::class, 'show'])->name('show');
+            Route::get('/edit/{id}', [AdminWeightController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminWeightController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AdminWeightController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('heights')->name('heights.')->group(function () {
+            Route::get('/', [AdminHeightController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [AdminHeightController::class, 'show'])->name('show');
+            Route::get('/edit/{id}', [AdminHeightController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminHeightController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AdminHeightController::class, 'destroy'])->name('destroy');
         });
     });
 });

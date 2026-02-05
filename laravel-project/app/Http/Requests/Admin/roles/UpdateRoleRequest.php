@@ -17,4 +17,21 @@ class UpdateRoleRequest extends FormRequest
             'name' => 'required|string|max:255|unique:roles,name,' . $this->route('id'),
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('label.name'),
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.name.required'),
+            'name.unique' => __('validation.name.unique'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
+        ];
+    }
 }

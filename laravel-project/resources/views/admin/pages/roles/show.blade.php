@@ -36,7 +36,7 @@
                         <div class="col-lg-12">
                             <div class="mb-20">
                                 <label class="label fs-16 mb-2">{{ __('label.name') }}</label>
-                                <div class="fs-18 fw-medium">{{ $role->name }}</div>
+                                <div class="fs-18 fw-medium">{{ __('value.role.' . strtolower($role->name)) }}</div>
                             </div>
                         </div>
                         <div class="col-lg-12">

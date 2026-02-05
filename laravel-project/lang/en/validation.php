@@ -50,6 +50,12 @@ return [
         'max' => 'Full name must not exceed 255 characters.',
         'string' => 'Full name must be a string.',
     ],
+    'name' => [
+        'required' => 'The :attribute is required.',
+        'unique' => 'The :attribute has already been taken.',
+        'string' => 'The :attribute must be a string.',
+        'max' => 'The :attribute must not exceed 255 characters.',
+    ],
 
     'role_id' => [
         'required' => 'Role is required.',
