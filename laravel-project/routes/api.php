@@ -33,6 +33,9 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
+
+    Route::get('weights/chart', [WeightController::class, 'chart']);
     Route::apiResource('weights', WeightController::class);
+
     Route::apiResource('heights', HeightController::class);
 });

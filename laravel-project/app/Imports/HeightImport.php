@@ -20,17 +20,33 @@ class HeightImport implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        $recorded_at = $row['recorded_at'];
-        
-        if (is_numeric($recorded_at)) {
-            $recorded_at = Date::excelToDateTimeObject($recorded_at);
+        $recorded_at_raw = $row['recorded_at'];
+        $recorded_at = null;
+
+        if (is_numeric($recorded_at_raw)) {
+            $recorded_at = Date::excelToDateTimeObject($recorded_at_raw);
             $recorded_at = Carbon::instance($recorded_at);
         } else {
-            $recorded_at = Carbon::parse($recorded_at);
+            // Priority for d/m/Y H:i as seen in user's image
+            try {
+                $recorded_at = Carbon::createFromFormat('d/m/Y H:i', $recorded_at_raw);
+            } catch (\Exception $e) {
+                try {
+                    $recorded_at = Carbon::createFromFormat('d/m/Y', $recorded_at_raw);
+                } catch (\Exception $e2) {
+                    $recorded_at = Carbon::parse($recorded_at_raw);
+                }
+            }
         }
 
         // Format to minute precision to ensure overwrite logic works as expected
         $recorded_at = $recorded_at->startOfMinute();
+
+        // Handle comma as decimal separator
+        $height = $row['height'];
+        if (is_string($height)) {
+            $height = str_replace(',', '.', $height);
+        }
 
         return Height::updateOrCreate(
             [
@@ -38,7 +54,7 @@ class HeightImport implements ToModel, WithHeadingRow, SkipsEmptyRows
                 'recorded_at' => $recorded_at,
             ],
             [
-                'height'      => $row['height'],
+                'height'      => $height ?? 0,
             ]
         );
     }
