@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'gender' => 'sometimes|in:Male,Female,Other',
             'phone' => 'sometimes|string|max:255',
             'address' => 'sometimes|string|max:255',
-            'role' => 'sometimes|in:Admin,Staff',
+            'role_id' => 'sometimes|exists:roles,id',
         ];
     }
 }

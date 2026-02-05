@@ -3,19 +3,28 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Api\BaseApiController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Api\User\Height\StoreHeightRequest;
 use App\Http\Requests\Api\User\Height\UpdateHeightRequest;
 use App\Models\Height;
+use App\Http\Resources\Api\User\Height\HeightResource;
+
 
 class HeightController extends BaseApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Height::class, 'height');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $heights = Height::all();
-        return $this->success($heights, 200);
+        $user = Auth::user();
+        $heights = $user->isAdmin() ? Height::all() : Height::where('user_id', $user->id)->get();
+        return $this->success(HeightResource::collection($heights), 200);
     }
 
     /**
@@ -23,36 +32,32 @@ class HeightController extends BaseApiController
      */
     public function store(StoreHeightRequest $request)
     {
-        $height = $request->validated();
-        $height = Height::create($height);
-        return $this->success($height, 201);
+        $height = Height::create($request->validated());
+        return $this->success(new HeightResource($height), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Height $height)
     {
-        $height = Height::findOrFail($id);
-        return $this->success($height, 200);
+        return $this->success(new HeightResource($height), 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHeightRequest $request, string $id)
+    public function update(UpdateHeightRequest $request, Height $height)
     {
-        $height = Height::findOrFail($id);
         $height->update($request->validated());
-        return $this->success($height, 200);
+        return $this->success(new HeightResource($height), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Height $height)
     {
-        $height = Height::findOrFail($id);
         $height->delete();
         return $this->success(null, 200);
     }

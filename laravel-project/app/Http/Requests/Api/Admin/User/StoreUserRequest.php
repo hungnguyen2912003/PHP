@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -23,8 +24,10 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'fullname' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|in:Admin,Staff',
+            'password' => 'required|string|min:6',
+            'role_id' => 'required|exists:roles,id',
         ];
     }
 }

@@ -28,16 +28,11 @@ Route::prefix('auth')->group(function () {
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::post('logout', [AuthController::class, 'logout']);
     });
-
-    Route::middleware('auth:api', 'api.role:Admin,Staff')->group(function () {
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('roles', RoleController::class);
-    });
-
-    Route::middleware('auth:api', 'api.role:User')->group(function () {
-        Route::apiResource('weights', WeightController::class);
-        Route::apiResource('heights', HeightController::class);
-    });
 });
 
-// Other API routes can be added here
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('roles', RoleController::class);
+    Route::apiResource('weights', WeightController::class);
+    Route::apiResource('heights', HeightController::class);
+});

@@ -6,17 +6,23 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\Admin\User\StoreUserRequest;
 use App\Http\Requests\Api\Admin\User\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\Api\Admin\User\UserResource;
+
 
 class UserController extends BaseApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::all();
-        return $this->success($users, 200);
+        $users = User::with('role')->get();
+        return $this->success(UserResource::collection($users), 200);
     }
 
 
@@ -25,37 +31,32 @@ class UserController extends BaseApiController
      */
     public function store(StoreUserRequest $request)
     {
-        $user = $request->validated();
-        $user['password'] = Hash::make($user['password']);
-        $user = User::create($user);
-        return $this->success($user, 201);
+        $user = User::create($request->validated());
+        return $this->success(new UserResource($user->load('role')), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-        return $this->success($user, 200);
+        return $this->success(new UserResource($user->load('role')), 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
         $user->update($request->validated());
-        return $this->success($user, 200);
+        return $this->success(new UserResource($user->load('role')), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
         return $this->success(null, 200);
     }

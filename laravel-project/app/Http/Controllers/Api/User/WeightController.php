@@ -3,19 +3,28 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Api\BaseApiController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Api\User\Weight\StoreWeightRequest;
 use App\Http\Requests\Api\User\Weight\UpdateWeightRequest;
 use App\Models\Weight;
+use App\Http\Resources\Api\User\Weight\WeightResource;
+
 
 class WeightController extends BaseApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Weight::class, 'weight');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $weights = Weight::all();
-        return $this->success($weights, 200);
+        $user = Auth::user();
+        $weights = $user->isAdmin() ? Weight::all() : Weight::where('user_id', $user->id)->get();
+        return $this->success(WeightResource::collection($weights), 200);
     }
 
     /**
@@ -23,36 +32,32 @@ class WeightController extends BaseApiController
      */
     public function store(StoreWeightRequest $request)
     {
-        $weight = $request->validated();
-        $weight = Weight::create($weight);
-        return $this->success($weight, 201);
+        $weight = Weight::create($request->validated());
+        return $this->success(new WeightResource($weight), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Weight $weight)
     {
-        $weight = Weight::findOrFail($id);
-        return $this->success($weight, 200);
+        return $this->success(new WeightResource($weight), 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWeightRequest $request, string $id)
+    public function update(UpdateWeightRequest $request, Weight $weight)
     {
-        $weight = Weight::findOrFail($id);
         $weight->update($request->validated());
-        return $this->success($weight, 200);
+        return $this->success(new WeightResource($weight), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Weight $weight)
     {
-        $weight = Weight::findOrFail($id);
         $weight->delete();
         return $this->success(null, 200);
     }
