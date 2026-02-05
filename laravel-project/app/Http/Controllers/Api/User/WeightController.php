@@ -83,18 +83,18 @@ class WeightController extends BaseApiController
             |======================
             */
             case 'days':
+                $startOfWeek = now()->startOfWeek();
+                $endOfWeek = now()->endOfWeek();
                 $data = $query
+                    ->whereBetween('recorded_at', [$startOfWeek, $endOfWeek])
                     ->select(
                         DB::raw('DATE(recorded_at) as label'),
                         DB::raw('AVG(weight) as value')
                     )
                     ->groupBy(DB::raw('DATE(recorded_at)'))
-                    ->orderBy('label', 'desc')   
-                    ->limit(7)                   
+                    ->orderBy('label', 'asc')
                     ->get()
-                    ->sortBy('label')           
-                    ->values()
-                    ->map(fn ($item) => [
+                    ->map(fn($item) => [
                         'label' => Carbon::parse($item->label)->format('d M'),
                         'value' => round($item->value, 1),
                     ]);
@@ -122,8 +122,8 @@ class WeightController extends BaseApiController
                     ->map(function ($item) {
                         return [
                             'label' => Carbon::parse($item->start_date)->format('d M') .
-                                    ' - ' .
-                                    Carbon::parse($item->end_date)->format('d M'),
+                                ' - ' .
+                                Carbon::parse($item->end_date)->format('d M'),
                             'value' => round($item->value, 1),
                         ];
                     });
@@ -153,7 +153,7 @@ class WeightController extends BaseApiController
                     ->orderBy('month')
                     ->limit(6)
                     ->get()
-                    ->map(fn ($item) => [
+                    ->map(fn($item) => [
                         'label' => Carbon::createFromFormat('Y-m', $item->month)->format('M Y'),
                         'value' => round($item->value, 2),
                     ]);
