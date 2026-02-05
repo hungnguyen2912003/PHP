@@ -6,12 +6,16 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\SetLocale;
 use App\Http\Middleware\Admin\AuthenticateAdmin;
 use App\Http\Middleware\Admin\EnsureRole;
+use App\Http\Middleware\Api\EnsureRole as ApiEnsureRole;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -33,21 +37,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => AuthenticateAdmin::class,
             'role' => EnsureRole::class,
+            'api.role' => ApiEnsureRole::class,
         ]);
-    })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-            return response()->view('error.pages.404', [], 404);
-        });
 
-        $exceptions->render(function (\Throwable $e, Request $request) {
-            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+        $middleware->redirectGuestsTo(function (Request $request) {
+            if ($request->is('api/*')) {
                 return null;
             }
-
-            return response()->view('error.pages.500', [
-                'exception' => $e
-            ], 500);
+            return route('login');
         });
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -56,7 +53,40 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status_code' => 401,
                     'body' => [
-                        'data' => $e->getMessage(),
+                        'data' => 'Unauthorized',
+                    ],
+                ], 401);
+            }
+        });
+
+        $exceptions->render(function (TokenExpiredException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'status_code' => 401,
+                    'body' => [
+                        'data' => 'Token has expired',
+                    ],
+                ], 401);
+            }
+        });
+
+        $exceptions->render(function (TokenInvalidException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'status_code' => 401,
+                    'body' => [
+                        'data' => 'Token is invalid',
+                    ],
+                ], 401);
+            }
+        });
+
+        $exceptions->render(function (JWTException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'status_code' => 401,
+                    'body' => [
+                        'data' => 'Token error: ' . $e->getMessage(),
                     ],
                 ], 401);
             }
@@ -82,6 +112,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     ],
                 ], 404);
             }
+            return response()->view('error.pages.404', [], 404);
         });
 
         $exceptions->render(function (HttpException $e, Request $request) {
@@ -100,9 +131,18 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status_code' => 500,
                     'body' => [
-                        'data' => null,
+                        'data' => config('app.debug') ? $e->getMessage() : null,
                     ],
                 ], 500);
             }
+
+            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+                return null;
+            }
+
+            return response()->view('error.pages.500', [
+                'exception' => $e
+            ], 500);
         });
-    })->create();
+    })
+->create();

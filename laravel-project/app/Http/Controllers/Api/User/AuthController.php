@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Api\BaseApiController;
-use App\Http\Requests\Api\LoginRequest;
-use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends BaseApiController
 {
@@ -23,6 +24,10 @@ class AuthController extends BaseApiController
     {
         $user = $request->validated();
         $user['password'] = Hash::make($user['password']);
+
+        $role = Role::where('name', 'User')->first();
+        $user['role_id'] = $role ? $role->id : null;
+
         $user = User::create($user);
 
         return $this->success($user, 201);

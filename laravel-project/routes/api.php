@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Admin\AuthController;
+use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Admin\RoleController;
+use App\Http\Controllers\Api\User\WeightController;
+use App\Http\Controllers\Api\User\HeightController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +27,16 @@ Route::prefix('auth')->group(function () {
         Route::get('me', [AuthController::class, 'me']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::middleware('auth:api', 'api.role:Admin,Staff')->group(function () {
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('roles', RoleController::class);
+    });
+
+    Route::middleware('auth:api', 'api.role:User')->group(function () {
+        Route::apiResource('weights', WeightController::class);
+        Route::apiResource('heights', HeightController::class);
     });
 });
 

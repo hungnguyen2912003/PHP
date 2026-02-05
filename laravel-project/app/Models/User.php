@@ -64,6 +64,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->status === 'deleted';
     }
 
+    public function isAdmin()
+    {
+        return $this->role && $this->role->name === 'Admin';
+    }
+
+    public function isStaff()
+    {
+        return $this->role && $this->role->name === 'Staff';
+    }
+
+    public function isUser()
+    {
+        return $this->role && $this->role->name === 'User';
+    }
+
     public function weights()
     {
         return $this->hasMany(Weight::class);
@@ -91,6 +106,8 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'role' => $this->role->name,
+        ];
     }
 }
