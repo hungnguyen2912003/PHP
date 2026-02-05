@@ -47,4 +47,6 @@ return [
     'pending_users' => '保留中',
     'banned_users' => '利用停止',
     'this_month' => '今月',
+    'name' => '名前',
+    'users_count' => 'ユーザー数',
 ];

@@ -14,4 +14,6 @@ return [
     'weight_management' => '体重管理',
     'height_management' => '身長管理',
     'weight_details' => '体重の詳細',
+    'role_management' => '役割管理',
+    'roles_list' => '役割リスト',
 ];

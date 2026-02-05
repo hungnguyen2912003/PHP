@@ -26,4 +26,9 @@ return [
     'height_management' => '身長管理',
     'weight_details' => '体重の詳細',
     'height_details' => '身長の詳細',
+    'roles_list' => '役割リスト',
+    'role_management' => '役割管理',
+    'create_role' => '役割を追加',
+    'update_role' => '役割を更新',
+    'role_details' => '役割の詳細',
 ];

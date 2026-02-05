@@ -118,4 +118,11 @@ return [
         'success' => 'Data imported successfully.',
         'failed' => 'Data import failed. Please check your file format.',
     ],
+    'role' => [
+        'created' => 'Role created successfully.',
+        'updated' => 'Role updated successfully.',
+        'deleted' => 'Role deleted successfully.',
+        'delete_admin_denied' => 'The Admin role cannot be deleted.',
+        'has_users' => 'This role cannot be deleted because it is assigned to users.',
+    ],
 ];

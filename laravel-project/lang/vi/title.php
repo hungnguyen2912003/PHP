@@ -26,4 +26,9 @@ return [
     'height_management' => 'Quản lý chiều cao',
     'weight_details' => 'Chi tiết cân nặng',
     'height_details' => 'Chi tiết chiều cao',
+    'roles_list' => 'Danh sách vai trò',
+    'role_management' => 'Quản lý vai trò',
+    'create_role' => 'Thêm vai trò mới',
+    'update_role' => 'Cập nhật vai trò',
+    'role_details' => 'Chi tiết vai trò',
 ];

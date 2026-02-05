@@ -48,6 +48,13 @@
                         <span class="title">{{ __('breadcrumb.user_management') }}</span>
                     </a>
                 </li>
+                <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}"
+                        href="{{ route('admin.roles.index') }}">
+                        <span class="material-symbols-outlined menu-icon">shield_person</span>
+                        <span class="title">{{ __('breadcrumb.role_management') }}</span>
+                    </a>
+                </li>
             @endif
         </ul>
     </aside>

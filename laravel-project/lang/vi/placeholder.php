@@ -21,5 +21,6 @@ return [
     'height' => 'Nhập chiều cao của bạn (cm)',
     'recorded_at' => 'Chọn ngày và giờ ghi nhận',
     'notes' => 'Nhập ghi chú (không bắt buộc)',
-    'drag_drop_file' => 'Kéo & Thả file của bạn hoặc <span class="filepond--label-action">Chọn tệp</span>',
+    'drag_drop_file' => 'Kéo & Thả tệp của bạn hoặc <span class="filepond--label-action">Chọn tệp</span>',
+    'role_name' => 'Nhập tên vai trò',
 ];

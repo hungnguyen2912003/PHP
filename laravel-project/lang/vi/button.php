@@ -24,4 +24,5 @@ return [
     'go_back' => 'Quay lại',
     'add_weight' => 'Thêm cân nặng',
     'add_height' => 'Thêm chiều cao',
+    'add_role' => 'Thêm vai trò mới',
 ];

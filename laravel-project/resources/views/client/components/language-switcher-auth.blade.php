@@ -65,7 +65,7 @@
             src="{{ asset('assets/images/logo.png') }}"
             alt="logo"
             class="img-fluid"
-            style="max-height: 120px; padding: 20px"
+            style="max-height: 100px; padding: 20px"
         />
     </a>
 </div>

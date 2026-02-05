@@ -47,4 +47,6 @@ return [
     'pending_users' => 'Chờ kích hoạt',
     'banned_users' => 'Bị khóa',
     'this_month' => 'Tháng này',
+    'name' => 'Tên',
+    'users_count' => 'Số người dùng',
 ];

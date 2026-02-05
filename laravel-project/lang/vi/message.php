@@ -111,6 +111,13 @@ return [
     ],
     'import' => [
         'success' => 'Nhập dữ liệu thành công.',
-        'failed' => 'Nhập dữ liệu thất bại. Vui lòng kiểm tra định dạng file.',
+        'failed' => 'Nhập dữ liệu thất bại. Vui lòng kiểm tra định dạng tệp của bạn.',
+    ],
+    'role' => [
+        'created' => 'Vai trò đã được tạo thành công.',
+        'updated' => 'Vai trò đã được cập nhật thành công.',
+        'deleted' => 'Vai trò đã được xóa thành công.',
+        'delete_admin_denied' => 'Không thể xóa vai trò Admin.',
+        'has_users' => 'Vai trò này không thể xóa vì đang được gán cho người dùng.',
     ],
 ];

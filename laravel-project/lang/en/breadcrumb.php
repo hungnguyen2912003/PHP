@@ -14,4 +14,6 @@ return [
     'weight_management' => 'Weight Management',
     'height_management' => 'Height Management',
     'weight_details' => 'Weight Details',
+    'role_management' => 'Role Management',
+    'roles_list' => 'Roles List',
 ];

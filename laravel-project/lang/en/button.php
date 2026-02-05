@@ -24,4 +24,5 @@ return [
     'go_back' => 'Go Back',
     'add_weight' => 'Add Weight',
     'add_height' => 'Add Height',
+    'add_role' => 'Add New Role',
 ];

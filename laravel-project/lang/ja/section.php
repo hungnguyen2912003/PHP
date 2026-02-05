@@ -11,4 +11,5 @@ return [
     'user_image' => 'ユーザー画像',
     'weight_info' => '体重情報',
     'height_info' => '身長情報',
+    'role_information' => '役割情報',
 ];

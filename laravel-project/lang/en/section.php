@@ -11,4 +11,5 @@ return [
     'user_image' => 'User Image',
     'weight_info' => 'Weight Information',
     'height_info' => 'Height Information',
+    'role_information' => 'Role Information',
 ];

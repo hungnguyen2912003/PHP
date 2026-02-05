@@ -26,4 +26,9 @@ return [
     'height_management' => 'Height Management',
     'weight_details' => 'Weight Details',
     'height_details' => 'Height Details',
+    'roles_list' => 'Roles List',
+    'role_management' => 'Role Management',
+    'create_role' => 'Add New Role',
+    'update_role' => 'Update Role',
+    'role_details' => 'Role Details',
 ];

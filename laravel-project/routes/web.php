@@ -21,6 +21,7 @@ use App\Http\Controllers\Client\HeightController;
 
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,6 +175,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
 
                 Route::post('/import/{id}', [UserController::class, 'import'])->name('import');
+            });
+        });
+
+        Route::prefix('roles')->name('roles.')->group(function () {
+            Route::get('/', [RoleController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [RoleController::class, 'show'])->name('show');
+
+            Route::middleware('role:Admin')->group(function () {
+                Route::get('/create', [RoleController::class, 'create'])->name('create');
+                Route::post('/store', [RoleController::class, 'store'])->name('store');
+
+                Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
+                Route::post('/edit/{id}', [RoleController::class, 'editPost'])->name('update');
+
+                Route::delete('/destroy/{id}', [RoleController::class, 'destroy'])->name('destroy');
             });
         });
     });

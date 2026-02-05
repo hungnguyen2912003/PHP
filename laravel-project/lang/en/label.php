@@ -47,4 +47,6 @@ return [
     'pending_users' => 'Pending Activation',
     'banned_users' => 'Banned Users',
     'this_month' => 'This Month',
+    'name' => 'Name',
+    'users_count' => 'Users Count',
 ];
