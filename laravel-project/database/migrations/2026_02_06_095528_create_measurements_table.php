@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('measurements', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('weight', 8, 2);
-            $table->decimal('height', 8, 2);
+            $table->decimal('weight', 8, 2)->nullable();
+            $table->decimal('height', 8, 2)->nullable();
             $table->timestamp('recorded_at');
             $table->string('attachment_url')->nullable();
             $table->text('notes')->nullable();

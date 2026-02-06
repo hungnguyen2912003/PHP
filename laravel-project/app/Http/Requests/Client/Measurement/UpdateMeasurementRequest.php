@@ -15,8 +15,8 @@ class UpdateMeasurementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight' => 'required|numeric|min:0',
-            'height' => 'required|numeric|min:0',
+            'weight' => 'sometimes|numeric|min:0',
+            'height' => 'sometimes|numeric|min:0',
             'recorded_at' => 'required|date|before_or_equal:now',
             'notes' => 'nullable|string|max:1000',
             'attachment' => 'nullable|file|image|max:2048',
@@ -26,10 +26,8 @@ class UpdateMeasurementRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'weight.required' => __('validation.weight.required'),
             'weight.numeric' => __('validation.weight.numeric'),
             'weight.min' => __('validation.weight.min'),
-            'height.required' => __('validation.height.required'),
             'height.numeric' => __('validation.height.numeric'),
             'height.min' => __('validation.height.min'),
             'recorded_at.required' => __('validation.recorded_at.required'),

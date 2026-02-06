@@ -15,10 +15,7 @@ return [
             'cancel' => 'Hủy',
         ],
         'import' => [
-            'title' => 'Nhập dữ liệu người dùng',
-            'type' => 'Loại dữ liệu',
-            'weight' => 'Cân nặng',
-            'height' => 'Chiều cao',
+            'title' => 'Nhập chỉ số cơ thể',
             'file' => 'File Excel/CSV',
             'btn' => 'Nhập',
             'cancel' => 'Hủy',

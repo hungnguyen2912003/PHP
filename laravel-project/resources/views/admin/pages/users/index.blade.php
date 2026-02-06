@@ -167,6 +167,18 @@
                     e.preventDefault();
                     const button = e.target.closest('.import-btn');
                     const userId = button.getAttribute('data-user-id');
+                    const status = button.getAttribute('data-user-status');
+
+                    if (status === 'pending') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: {!! json_encode(__('modal.confirm.import.title')) !!},
+                            text: {!! json_encode(__('message.import.user_pending')) !!},
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                        return;
+                    }
                     
                     // Update form action URL
                     importForm.action = `/admin/users/import/${userId}`;

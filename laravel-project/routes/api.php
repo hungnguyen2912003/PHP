@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\Admin\UserController;
-use App\Http\Controllers\Api\Admin\RoleController;
-use App\Http\Controllers\Api\User\WeightController;
-use App\Http\Controllers\Api\User\HeightController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Api\MeasurementController;
 
 
 /*
@@ -32,10 +30,7 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class);
-    Route::apiResource('roles', RoleController::class);
 
-    Route::get('weights/chart', [WeightController::class, 'chart']);
-    Route::apiResource('weights', WeightController::class);
-
-    Route::apiResource('heights', HeightController::class);
+    Route::get('measurements/weight-chart', [MeasurementController::class, 'weightChart']);
+    Route::apiResource('measurements', MeasurementController::class);
 });

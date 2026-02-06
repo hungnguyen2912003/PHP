@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::where('name', '!=', 'User')->get();
+        $roles = Role::get();
         return view('admin.pages.users.create', compact('roles'));
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::where('name', '!=', 'User')->get();
+        $roles = Role::get();
         return view('admin.pages.users.edit', compact('user', 'roles'));
     }
 

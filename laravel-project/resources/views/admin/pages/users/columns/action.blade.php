@@ -5,7 +5,8 @@
        data-bs-title="{{ __('button.import') }}" 
        data-bs-toggle="tooltip"
        data-user-id="{{ $user->id }}"
-       data-user-name="{{ $user->fullname }}">
+       data-user-name="{{ $user->fullname }}"
+       data-user-status="{{ $user->status }}">
     <i class="material-symbols-outlined fs-16 fw-normal text-body">upload_file</i>
     </a>
     @if ($user->status == 'pending')

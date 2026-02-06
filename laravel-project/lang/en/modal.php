@@ -15,10 +15,7 @@ return [
             'cancel' => 'Cancel',
         ],
         'import' => [
-            'title' => 'Import User Data',
-            'type' => 'Data Type',
-            'weight' => 'Weight',
-            'height' => 'Height',
+            'title' => 'Import Measurement Data',
             'file' => 'Excel/CSV File',
             'btn' => 'Import',
             'cancel' => 'Cancel',

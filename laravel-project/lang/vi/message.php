@@ -107,6 +107,7 @@ return [
     'import' => [
         'success' => 'Nhập dữ liệu thành công.',
         'failed' => 'Nhập dữ liệu thất bại. Vui lòng kiểm tra định dạng tệp của bạn.',
+        'user_pending' => 'Không thể nhập dữ liệu cho người dùng đang ở trạng thái chờ kích hoạt.',
     ],
     'role' => [
         'created' => 'Vai trò đã được tạo thành công.',

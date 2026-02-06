@@ -26,7 +26,7 @@ class MeasurementDataTable extends DataTable
                 if ($row->attachment_url) {
                     return '<a href="' . asset($row->attachment_url) . '" target="_blank" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="' . __('label.view_attachment') . '"><i class="ri-attachment-line"></i></a>';
                 }
-                return '<span class="text-muted">' . __('value.not_available') . '</span>';
+                return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
             ->addColumn('action', 'client.pages.measurement.columns.action')
             ->rawColumns(['attachment', 'action'])

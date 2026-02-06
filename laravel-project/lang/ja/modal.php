@@ -15,10 +15,7 @@ return [
             'cancel' => 'キャンセル',
         ],
         'import' => [
-            'title' => 'ユーザーデータのインポート',
-            'type' => 'データ型',
-            'weight' => '体重',
-            'height' => '身長',
+            'title' => '計測データのインポート',
             'file' => 'Excel/CSVファイル',
             'btn' => 'インポート',
             'cancel' => 'キャンセル',

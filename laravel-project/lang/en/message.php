@@ -112,6 +112,7 @@ return [
     'import' => [
         'success' => 'Data imported successfully.',
         'failed' => 'Data import failed. Please check your file format.',
+        'user_pending' => 'Cannot import data for users in pending activation status.',
     ],
     'role' => [
         'created' => 'Role created successfully.',

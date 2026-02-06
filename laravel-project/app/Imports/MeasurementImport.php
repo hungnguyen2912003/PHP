@@ -4,12 +4,12 @@ namespace App\Imports;
 
 use App\Models\Measurement;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Carbon\Carbon;
 
-class MeasurementImport implements ToModel, WithHeadingRow, SkipsEmptyRows
+class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
 {
     protected $userId;
 
@@ -18,9 +18,14 @@ class MeasurementImport implements ToModel, WithHeadingRow, SkipsEmptyRows
         $this->userId = $userId;
     }
 
+    public function startRow(): int
+    {
+        return 2;
+    }
+
     public function model(array $row)
     {
-        $recorded_at_raw = $row['recorded_at'] ?? null;
+        $recorded_at_raw = $row[0] ?? null;
         if (!$recorded_at_raw) {
             return null;
         }
@@ -44,16 +49,16 @@ class MeasurementImport implements ToModel, WithHeadingRow, SkipsEmptyRows
         // Format to minute precision
         $recorded_at = $recorded_at->startOfMinute();
 
-        // Handle weight
-        $weight = $row['weight'] ?? 0;
-        if (is_string($weight)) {
-            $weight = (float) str_replace(',', '.', $weight);
-        }
-
-        // Handle height
-        $height = $row['height'] ?? 0;
+        // Handle height (Column B)
+        $height = $row[1] ?? 0;
         if (is_string($height)) {
             $height = (float) str_replace(',', '.', $height);
+        }
+
+        // Handle weight (Column C)
+        $weight = $row[2] ?? 0;
+        if (is_string($weight)) {
+            $weight = (float) str_replace(',', '.', $weight);
         }
 
         // Check for existing records for the same user and timestamp
