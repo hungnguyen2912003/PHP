@@ -79,14 +79,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->role && $this->role->name === 'User';
     }
 
-    public function weights()
+    public function measurements()
     {
-        return $this->hasMany(Weight::class);
-    }
-
-    public function heights()
-    {
-        return $this->hasMany(Height::class);
+        return $this->hasMany(Measurement::class);
     }
 
     /**

@@ -99,15 +99,10 @@ return [
             'already_active' => 'Tài khoản của bạn đã được kích hoạt.',
         ],
     ],
-    'weight' => [
-        'create_success' => 'Ghi nhận cân nặng thành công!',
-        'update_success' => 'Cập nhật cân nặng thành công!',
-        'delete_success' => 'Xóa cân nặng thành công!',
-    ],
-    'height' => [
-        'create_success' => 'Ghi nhận chiều cao thành công!',
-        'update_success' => 'Cập nhật chiều cao thành công!',
-        'delete_success' => 'Xóa chiều cao thành công!',
+    'measurement' => [
+        'create_success' => 'Ghi nhận chỉ số cơ thể thành công!',
+        'update_success' => 'Cập nhật chỉ số cơ thể thành công!',
+        'delete_success' => 'Xóa chỉ số cơ thể thành công!',
     ],
     'import' => [
         'success' => 'Nhập dữ liệu thành công.',

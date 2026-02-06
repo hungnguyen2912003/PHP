@@ -16,14 +16,11 @@ use App\Http\Controllers\Client\AuthController as ClientAuthController;
 use App\Http\Controllers\Client\ForgotPasswordController as ClientForgotPasswordController;
 use App\Http\Controllers\Client\ResetPasswordController as ClientResetPasswordController;
 
-use App\Http\Controllers\Client\WeightController;
-use App\Http\Controllers\Client\HeightController;
+use App\Http\Controllers\Client\MeasurementController;
 
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\WeightController as AdminWeightController;
-use App\Http\Controllers\Admin\HeightController as AdminHeightController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,30 +75,18 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
         Route::post('/change-password', [ClientSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
     });
 
-    Route::prefix('weight')->name('weight.')->group(function () {
+    Route::prefix('measurement')->name('measurement.')->group(function () {
 
-        Route::get('/', [WeightController::class, 'index'])->name('index');
-        Route::get('/show/{id}', [WeightController::class, 'show'])->name('show');
+        Route::get('/', [MeasurementController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [MeasurementController::class, 'show'])->name('show');
 
-        Route::get('/create', [WeightController::class, 'create'])->name('create');
-        Route::post('/store', [WeightController::class, 'store'])->name('store');
+        Route::get('/create', [MeasurementController::class, 'create'])->name('create');
+        Route::post('/store', [MeasurementController::class, 'store'])->name('store');
 
-        Route::get('/edit/{id}', [WeightController::class, 'edit'])->name('edit');
-        Route::put('/edit/{id}', [WeightController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [MeasurementController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [MeasurementController::class, 'update'])->name('update');
 
-        Route::delete('/destroy/{id}', [WeightController::class, 'destroy'])->name('destroy');
-    });
-
-    Route::prefix('height')->name('height.')->group(function () {
-
-        Route::get('/', [HeightController::class, 'index'])->name('index');
-        Route::get('/show/{id}', [HeightController::class, 'show'])->name('show');
-        Route::get('/create', [HeightController::class, 'create'])->name('create');
-        Route::post('/store', [HeightController::class, 'store'])->name('store');
-        Route::get('/edit/{height}', [HeightController::class, 'edit'])->name('edit');
-        Route::put('/edit/{id}', [HeightController::class, 'update'])->name('update');
-
-        Route::delete('/destroy/{height}', [HeightController::class, 'destroy'])->name('destroy');
+        Route::delete('/destroy/{id}', [MeasurementController::class, 'destroy'])->name('destroy');
     });
 
 });
@@ -193,22 +178,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
                 Route::delete('/destroy/{id}', [RoleController::class, 'destroy'])->name('destroy');
             });
-        });
-
-        Route::prefix('weights')->name('weights.')->group(function () {
-            Route::get('/', [AdminWeightController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [AdminWeightController::class, 'show'])->name('show');
-            Route::get('/edit/{id}', [AdminWeightController::class, 'edit'])->name('edit');
-            Route::put('/edit/{id}', [AdminWeightController::class, 'update'])->name('update');
-            Route::delete('/destroy/{id}', [AdminWeightController::class, 'destroy'])->name('destroy');
-        });
-
-        Route::prefix('heights')->name('heights.')->group(function () {
-            Route::get('/', [AdminHeightController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [AdminHeightController::class, 'show'])->name('show');
-            Route::get('/edit/{id}', [AdminHeightController::class, 'edit'])->name('edit');
-            Route::put('/edit/{id}', [AdminHeightController::class, 'update'])->name('update');
-            Route::delete('/destroy/{id}', [AdminHeightController::class, 'destroy'])->name('destroy');
         });
     });
 });

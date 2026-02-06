@@ -32,8 +32,6 @@ return [
     'attachment' => 'Đính kèm',
     'notes' => 'Ghi chú',
     'view_attachment' => 'Xem tệp đính kèm',
-    'weight_avg' => 'Cân nặng trung bình',
-    'height_avg' => 'Chiều cao trung bình',
     'bmi_underweight' => 'Nhẹ cân',
     'bmi_normal' => 'Bình thường',
     'bmi_overweight' => 'Thừa cân',
@@ -49,4 +47,5 @@ return [
     'this_month' => 'Tháng này',
     'name' => 'Tên',
     'users_count' => 'Số người dùng',
+    'measurement' => 'Chỉ số cơ thể',
 ];

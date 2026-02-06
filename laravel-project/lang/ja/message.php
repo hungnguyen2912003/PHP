@@ -99,15 +99,10 @@ return [
             'already_active' => 'アカウントは既に有効化されています。',
         ],
     ],
-    'weight' => [
-        'create_success' => '体重の記録に成功しました！',
-        'update_success' => '体重を更新しました！',
-        'delete_success' => '体重を削除しました！',
-    ],
-    'height' => [
-        'create_success' => '身長の記録に成功しました！',
-        'update_success' => '身長を更新しました！',
-        'delete_success' => '身長を削除しました！',
+    'measurement' => [
+        'create_success' => '健康指標を記録しました！',
+        'update_success' => '健康指標を更新しました！',
+        'delete_success' => '健康指標を削除しました！',
     ],
     'import' => [
         'success' => 'データを正常にインポートしました。',

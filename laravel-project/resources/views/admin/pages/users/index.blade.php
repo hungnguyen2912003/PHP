@@ -70,15 +70,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body pt-3">
-                        <div class="mb-4">
-                            <label class="form-label fw-medium text-muted small text-uppercase">
-                                {{ __('modal.confirm.import.type') }}
-                            </label>
-                            <select name="type" class="form-select form-select-lg rounded-3" required>
-                                <option value="weight">{{ __('modal.confirm.import.weight') }}</option>
-                                <option value="height">{{ __('modal.confirm.import.height') }}</option>
-                            </select>
-                        </div>
                         <div>
                             <label class="form-label fw-medium text-muted small text-uppercase">
                                 {{ __('modal.confirm.import.file') }}

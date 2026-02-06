@@ -55,22 +55,6 @@
                         <span class="title">{{ __('breadcrumb.role_management') }}</span>
                     </a>
                 </li>
-                <li class="menu-title small text-uppercase"><span
-                        class="menu-title-text">{{ __('breadcrumb.health_data') }}</span></li>
-                <li class="menu-item {{ request()->routeIs('admin.weights.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.weights.*') ? 'active' : '' }}"
-                        href="{{ route('admin.weights.index') }}">
-                        <span class="material-symbols-outlined menu-icon">fitness_center</span>
-                        <span class="title">{{ __('breadcrumb.weight_list') }}</span>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('admin.heights.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.heights.*') ? 'active' : '' }}"
-                        href="{{ route('admin.heights.index') }}">
-                        <span class="material-symbols-outlined menu-icon">height</span>
-                        <span class="title">{{ __('breadcrumb.height_list') }}</span>
-                    </a>
-                </li>
             @endif
         </ul>
     </aside>

@@ -41,18 +41,11 @@
             @if(Auth::guard('web')->check())
                 <li class="menu-title small text-uppercase"><span
                         class="menu-title-text">{{ __('section.apps') }}</span></li>
-                <li class="menu-item {{ request()->routeIs('client.weight.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('client.weight.*') ? 'active' : '' }}"
-                        href="{{ route('client.weight.index') }}">
-                        <span class="material-symbols-outlined menu-icon">weight</span>
-                        <span class="title">{{ __('label.weight') }}</span>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('client.height.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('client.height.*') ? 'active' : '' }}"
-                        href="{{ route('client.height.index') }}">
-                        <span class="material-symbols-outlined menu-icon">height</span>
-                        <span class="title">{{ __('label.height') }}</span>
+                <li class="menu-item {{ request()->routeIs('client.measurement.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('client.measurement.*') ? 'active' : '' }}"
+                        href="{{ route('client.measurement.index') }}">
+                        <span class="material-symbols-outlined menu-icon">monitoring</span>
+                        <span class="title">{{ __('label.measurement') }}</span>
                     </a>
                 </li>
             @endif

@@ -104,15 +104,10 @@ return [
             'already_active' => 'Your account is already active.',
         ],
     ],
-    'weight' => [
-        'create_success' => 'Weight recorded successfully!',
-        'update_success' => 'Weight updated successfully!',
-        'delete_success' => 'Weight deleted successfully!',
-    ],
-    'height' => [
-        'create_success' => 'Height recorded successfully!',
-        'update_success' => 'Height updated successfully!',
-        'delete_success' => 'Height deleted successfully!',
+    'measurement' => [
+        'create_success' => 'Measurement recorded successfully!',
+        'update_success' => 'Measurement updated successfully!',
+        'delete_success' => 'Measurement deleted successfully!',
     ],
     'import' => [
         'success' => 'Data imported successfully.',

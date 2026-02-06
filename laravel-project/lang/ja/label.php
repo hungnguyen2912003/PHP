@@ -32,8 +32,6 @@ return [
     'attachment' => '添付ファイル',
     'notes' => 'メモ',
     'view_attachment' => '添付ファイルを表示',
-    'weight_avg' => '平均体重',
-    'height_avg' => '平均身長',
     'bmi_underweight' => '低体重',
     'bmi_normal' => '普通体重',
     'bmi_overweight' => '過体重',
@@ -49,4 +47,5 @@ return [
     'this_month' => '今月',
     'name' => '名前',
     'users_count' => 'ユーザー数',
+    'measurement' => '健康指標',
 ];
