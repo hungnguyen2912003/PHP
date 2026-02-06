@@ -17,9 +17,11 @@ class StoreMeasurementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight' => 'required|numeric|min:0',
-            'height' => 'required|numeric|min:0',
-            'recorded_at' => 'required|date|before_or_equal:now',
+            'weight' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
+            'recorded_at' => 'nullable|date|before_or_equal:now',
+            'date' => 'nullable|date_format:Y-m-d',
+            'time' => 'nullable|date_format:H:i',
             'notes' => 'nullable|string|max:1000',
             'attachment' => 'nullable|file|image|max:2048',
         ];

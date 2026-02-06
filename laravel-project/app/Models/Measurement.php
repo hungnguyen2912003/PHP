@@ -20,7 +20,9 @@ class Measurement extends Model
     ];
 
     protected $casts = [
-        'recorded_at' => 'datetime',
+        'recorded_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
         'height' => 'decimal:2',
         'weight' => 'decimal:2',
     ];

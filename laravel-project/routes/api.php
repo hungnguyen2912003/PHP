@@ -32,5 +32,6 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class);
 
     Route::get('measurements/weight-chart', [MeasurementController::class, 'weightChart']);
+    Route::get('measurements/daily-summary', [MeasurementController::class, 'dailySummary']);
     Route::apiResource('measurements', MeasurementController::class);
 });

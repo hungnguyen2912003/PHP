@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MeasurementController extends BaseApiController
 {
@@ -40,22 +41,80 @@ class MeasurementController extends BaseApiController
         $data = $request->validated();
         $data['user_id'] = auth()->id();
 
+        // Combine date and time if available
+        if ($request->filled('date') && $request->filled('time')) {
+            $data['recorded_at'] = $request->date . ' ' . $request->time . ':00';
+        } elseif (!$request->filled('recorded_at')) {
+            $data['recorded_at'] = now();
+        }
+
         if ($request->hasFile('attachment')) {
             $path = $request->file('attachment')->store('measurements', 'public');
             $data['attachment_url'] = Storage::url($path);
         }
 
-        $measurement = Measurement::create($data);
+        $measurement = Measurement::updateOrCreate(
+            [
+                'user_id' => $data['user_id'],
+                'recorded_at' => $data['recorded_at'],
+            ],
+            $data
+        );
 
         return $this->success($measurement, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Measurement $measurement)
     {
-        return $this->success($measurement);
+        $user = $measurement->user;
+        $weight = (float) $measurement->weight;
+        $height = (float) $measurement->height;
+        
+        $bmiValue = 0.0;
+        if ($height > 0) {
+            $bmiValue = round($weight / pow($height / 100, 2), 1);
+        }
+
+        $bodyFat = null;
+        $fatFreeWeight = null;
+
+        if ($user && $user->date_of_birth && $user->gender && $bmiValue > 0) {
+            $age = $user->date_of_birth->age;
+            
+            if ($user->gender === 'male') {
+                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 16.2;
+            } else {
+                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 5.4;
+            }
+
+            $bodyFat = max(0, round($bodyFat, 1));
+            
+            $fatFreeWeight = round($weight * (1 - $bodyFat / 100), 1);
+        }
+
+        return $this->success([
+            'record' => $measurement,
+            'metrics' => [
+                'bmi' => [
+                    'value' => $bmiValue
+                ],
+                'body_fat' => [
+                    'value' => $bodyFat
+                ],
+                'fat_free_weight' => [
+                    'value' => $fatFreeWeight
+                ],
+            ]
+        ]);
+    }
+
+    private function getBmiStatus($bmiValue)
+    {
+        if ($bmiValue <= 0) return 'Unknown';
+        if ($bmiValue < 18.5) return 'Underweight';
+        if ($bmiValue < 23) return 'Normal';
+        if ($bmiValue < 25) return 'Overweight';
+        return 'Obese';
     }
 
     /**
@@ -172,8 +231,65 @@ class MeasurementController extends BaseApiController
     }
 
     /**
-     * 
+     * Get a summary of metrics (Weight, Height, BMI) for a specific date.
      */
+    public function dailySummary(Request $request)
+    {
+        $user = Auth::user();
 
-    
+        $request->validate([
+            'recorded_at' => ['nullable', 'date_format:Y-m-d'],
+        ]);
+
+        $date = $request->query('recorded_at', now()->toDateString());
+
+        // get records in day
+        $records = Measurement::where('user_id', $user->id)
+            ->whereDate('recorded_at', $date)
+            ->orderBy('recorded_at', 'desc')
+            ->get(['id', 'weight', 'height', 'recorded_at']);
+
+        if ($records->isEmpty()) {
+            return $this->error('No measurement record found for this date', 404);
+        }
+
+        $avgWeight = (float) $records->avg('weight');
+        $avgHeight = (float) $records->avg('height');
+
+        $weight = round($avgWeight, 1);
+        $height = round($avgHeight, 1);
+
+        $bmiValue = 0.0;
+        $bmiStatus = 'Unknown';
+
+        if ($height > 0) {
+            $bmiValue = round($weight / pow($height / 100, 2), 1);
+            $bmiStatus = $this->getBmiStatus($bmiValue);
+        }
+
+        // get records daily
+        $items = $records->map(function ($r) {
+            $w = (float) $r->weight;
+            $h = (float) $r->height;
+
+            return [
+                'id' => $r->id,
+                'weight' => round($w, 1),
+                'height' => round($h, 1),
+                'time' => Carbon::parse($r->recorded_at)->format('H:i')
+            ];
+        });
+
+        return $this->success([
+            'date' => $date,
+            'summary' => [
+                'avg_weight' => $weight,
+                'avg_height' => $height,
+                'bmi_value' => $bmiValue,
+                'bmi_status' => $bmiStatus,
+            ],
+            'records' => $items,
+        ]);
+    }
+
 }
