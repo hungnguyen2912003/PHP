@@ -26,7 +26,8 @@
             </nav>
         </div>
 
-        <form id="addMeasurementForm" action="{{ route('client.measurement.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="addMeasurementForm" action="{{ route('client.measurement.store') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12">
@@ -44,7 +45,8 @@
                                                 <input class="form-control" id="weight" name="weight"
                                                     placeholder="{{ __('label.weight') }}" type="number" step="0.1"
                                                     value="{{ old('weight') }}" />
-                                                <label for="weight"><i class="ri-scales-3-line"></i>{{ __('label.weight') }}</label>
+                                                <label for="weight"><i
+                                                        class="ri-scales-3-line"></i>{{ __('label.weight') }}</label>
                                             </div>
                                             @error('weight')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -56,7 +58,8 @@
                                                 <input class="form-control" id="height" name="height"
                                                     placeholder="{{ __('label.height') }}" type="number" step="0.1"
                                                     value="{{ old('height') }}" />
-                                                <label for="height"><i class="ri-ruler-line"></i>{{ __('label.height') }}</label>
+                                                <label for="height"><i
+                                                        class="ri-ruler-line"></i>{{ __('label.height') }}</label>
                                             </div>
                                             @error('height')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -125,7 +128,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/custom/auth.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/common.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const inputElement = document.querySelector('.image-filepond');

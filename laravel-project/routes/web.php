@@ -21,6 +21,7 @@ use App\Http\Controllers\Client\MeasurementController;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\MeasurementController as AdminMeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,39 +147,29 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::prefix('users')->name('users.')->group(function () {
-
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
 
             Route::middleware('role:Admin')->group(function () {
                 Route::get('/create', [UserController::class, 'create'])->name('create');
                 Route::post('/store', [UserController::class, 'store'])->name('store');
-
                 Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
                 Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
-
                 Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
-
                 Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
-
-                Route::post('/import/{id}', [UserController::class, 'import'])->name('import');
             });
         });
 
-        Route::prefix('roles')->name('roles.')->group(function () {
-            Route::get('/', [RoleController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [RoleController::class, 'show'])->name('show');
-
-            Route::middleware('role:Admin')->group(function () {
-                Route::get('/create', [RoleController::class, 'create'])->name('create');
-                Route::post('/store', [RoleController::class, 'store'])->name('store');
-
-                Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
-                Route::post('/edit/{id}', [RoleController::class, 'editPost'])->name('update');
-
-                Route::delete('/destroy/{id}', [RoleController::class, 'destroy'])->name('destroy');
-            });
+        Route::prefix('measurements')->name('measurements.')->group(function () {
+            Route::get('/', [AdminMeasurementController::class, 'index'])->name('index');
+            Route::get('/user/{id}', [AdminMeasurementController::class, 'user'])->name('user');
+            Route::post('/import/{id}', [AdminMeasurementController::class, 'import'])->name('import');
+            Route::get('/edit/{id}', [AdminMeasurementController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminMeasurementController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AdminMeasurementController::class, 'destroy'])->name('destroy');
         });
+
+
     });
 });
 

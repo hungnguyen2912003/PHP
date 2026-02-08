@@ -35,7 +35,8 @@
             </nav>
         </div>
 
-        <form action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="common-form" action="{{ route('admin.users.update', $user->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-4">
@@ -45,7 +46,8 @@
                         </h3>
                         <div class="text-center">
                             <img src="{{ $user->avatar_url ? asset($user->avatar_url) : asset('assets/images/user.png') }}"
-                                class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="user">
+                                class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;"
+                                alt="user">
                         </div>
                     </div>
                     <div class="card bg-white p-20 rounded-10 border border-white mb-4">
@@ -73,9 +75,12 @@
                                     </label>
                                     <div class="form-group" id="password-show-hide">
                                         <div class="password-wrapper position-relative password-container form-floating">
-                                            <input class="form-control password @error('password') is-invalid @enderror" name="password"
-                                                placeholder="{{ __('placeholder.password') }}" type="password" />
-                                            <i aria-hidden="true" class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary" style="color: #A9A9C8; font-size: 22px; right: 15px;"></i>
+                                            <input class="form-control password @error('password') is-invalid @enderror"
+                                                name="password" placeholder="{{ __('placeholder.password') }}"
+                                                type="password" />
+                                            <i aria-hidden="true"
+                                                class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
+                                                style="color: #A9A9C8; font-size: 22px; right: 15px;"></i>
                                             <label for="password">
                                                 {{ __('placeholder.password') }}
                                             </label>
@@ -119,8 +124,8 @@
                                     <label class="label fs-16 mb-2">
                                         {{ __('label.gender') }}
                                     </label>
-                                    <select class="form-select form-control @error('gender') is-invalid @enderror" name="gender"
-                                        aria-label="Default select example">
+                                    <select class="form-select form-control @error('gender') is-invalid @enderror"
+                                        name="gender" aria-label="Default select example">
                                         <option value="" selected disabled>{{ __('placeholder.gender') }}
                                         </option>
                                         <option value="male" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>
@@ -261,8 +266,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex gap-2 justify-content-center">
                                     <button class="btn btn-primary fw-normal text-white" type="submit" id="submitBtn"
-                                        data-processing-text="{{ __('button.sending') }}">
+                                        data-processing-text="{{ __('button.processing') }}">
                                         <span id="btnText">{{ __('button.update') }}</span>
+                                        <span id="btnLoading" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                                     </button>
                                     <a href="{{ route('admin.users.index') }}" class="btn btn-danger fw-normal text-white">
                                         {{ __('button.cancel') }}
@@ -276,3 +282,7 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/js/custom/common.js') }}"></script>
+@endpush

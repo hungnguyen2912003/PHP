@@ -1,4 +1,4 @@
-@extends('client.layouts.app-layout')
+@extends('admin.layouts.app-layout')
 
 @section('title', __('title.update_measurement'))
 
@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('client.dashboard') }}">
+                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.dashboard') }}">
                             <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                             <span class="text-body fs-14 hover">{{ __('breadcrumb.dashboard') }}</span>
                         </a>
@@ -20,13 +20,18 @@
                         <span>{{ __('breadcrumb.measurement_management') }}</span>
                     </li>
                     <li aria-current="page" class="breadcrumb-item active">
+                        <span>
+                            {{ __('breadcrumb.measurement_list') }}
+                        </span>
+                    </li>
+                    <li aria-current="page" class="breadcrumb-item active">
                         <span class="text-secondary">{{ __('title.update_measurement') }}</span>
                     </li>
                 </ol>
             </nav>
         </div>
 
-        <form id="common-form" action="{{ route('client.measurement.update', $measurement->id) }}" method="POST"
+        <form id="common-form" action="{{ route('admin.measurements.update', $measurement->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -34,7 +39,7 @@
                 <div class="col-lg-12">
                     <div class="card bg-white p-20 rounded-10 border border-white mb-4">
                         <h3 class="mb-20">
-                            {{ __('label.measurement') }}
+                            {{ __('label.measurement') }} - {{ $measurement->user?->fullname }}
                         </h3>
                         <div class="row">
                             <div class="row g-3">
@@ -110,12 +115,12 @@
                                 <div class="col-12">
                                     <div class="d-flex gap-2 justify-content-center mt-2">
                                         <button class="btn btn-primary fw-normal text-white" type="submit" id="submitBtn"
-                                            data-processing-text="{{ __('button.sending') }}">
+                                            data-processing-text="{{ __('button.processing') }}">
                                             <span id="btnText">{{ __('button.update') }}</span>
                                             <span id="btnLoading"
                                                 class="spinner-border spinner-border-sm ms-2 d-none"></span>
                                         </button>
-                                        <a href="{{ route('client.measurement.index') }}"
+                                        <a href="{{ route('admin.measurements.index') }}"
                                             class="btn btn-danger fw-normal text-white">
                                             {{ __('button.cancel') }}
                                         </a>
@@ -142,14 +147,15 @@
                     labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
                     acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
                     files: [
-                        @if ($measurement->attachment_url){
+                        @if ($measurement->attachment_url)
+                        {
                                 source: '{{ asset($measurement->attachment_url) }}',
                                 options: {
                                     type: 'local',
                                 },
                             }
-                        @endif
-                    ],
+                         @endif
+                                                                                 ],
                     server: {
                         load: (source, load, error, progress, abort, headers) => {
                             fetch(source).then(response => response.blob()).then(load);

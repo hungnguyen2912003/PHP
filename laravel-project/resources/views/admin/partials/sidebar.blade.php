@@ -39,8 +39,8 @@
                 </a>
             </li>
             @if(Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Admin')
-                <li class="menu-title small text-uppercase"><span
-                        class="menu-title-text">{{ __('section.apps') }}</span></li>
+                <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('section.apps') }}</span>
+                </li>
                 <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'open' : '' }}">
                     <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
                         href="{{ route('admin.users.index') }}">
@@ -48,14 +48,59 @@
                         <span class="title">{{ __('breadcrumb.user_management') }}</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}"
-                        href="{{ route('admin.roles.index') }}">
-                        <span class="material-symbols-outlined menu-icon">shield_person</span>
-                        <span class="title">{{ __('breadcrumb.role_management') }}</span>
+                <li class="menu-item {{ request()->routeIs('admin.measurements.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('admin.measurements.*') ? 'active' : '' }}"
+                        href="{{ route('admin.measurements.index') }}">
+                        <span class="material-symbols-outlined menu-icon">monitoring</span>
+                        <span class="title">{{ __('breadcrumb.measurement_management') }}</span>
                     </a>
                 </li>
             @endif
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">{{ __('section.system') }}</span>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{{ route('admin.profile.index') }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        account_circle
+                    </span>
+                    <span class="title">
+                        {{ __('label.my_profile') }}
+                    </span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link menu-toggle active" href="javascript:void(0);">
+                    <span class="material-symbols-outlined menu-icon">
+                        settings
+                    </span>
+                    <span class="title">
+                        {{ __('section.settings') }}
+                    </span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.settings.account') }}">
+                            {{ __('breadcrumb.settings.account') }}
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.settings.change-password') }}">
+                            {{ __('breadcrumb.settings.change_password') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{{ route('admin.logout') }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        logout
+                    </span>
+                    <span class="title">
+                        {{ __('button.logout') }}
+                    </span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

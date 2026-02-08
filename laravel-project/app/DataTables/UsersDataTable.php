@@ -53,7 +53,17 @@ class UsersDataTable extends DataTable
 
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()->with('role');
+        return $model->newQuery()
+            ->with('role')
+            ->when($this->request->get('gender'), function ($query, $gender) {
+                $query->where('gender', $gender);
+            })
+            ->when($this->request->get('role_id'), function ($query, $role_id) {
+                $query->where('role_id', $role_id);
+            })
+            ->when($this->request->get('status'), function ($query, $status) {
+                $query->where('status', $status);
+            });
     }
 
     public function html(): HtmlBuilder
@@ -61,7 +71,11 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->setTableId('users-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax('', null, [
+                'gender' => '$("#genderFilterValue").val()',
+                'role_id' => '$("#roleFilterValue").val()',
+                'status' => '$("#statusFilterValue").val()',
+            ])
             ->orders([])
             ->selectStyleSingle()
             ->parameters([

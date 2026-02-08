@@ -26,7 +26,7 @@
             </nav>
         </div>
 
-        <form id="addUserForm" action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="common-form" action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-12">
@@ -87,9 +87,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex gap-2 justify-content-center">
                                     <button class="btn btn-primary fw-normal text-white" type="submit" id="submitBtn"
-                                        data-processing-text="{{ __('button.sending') }}">
+                                        data-processing-text="{{ __('button.processing') }}">
                                         <span id="btnText">{{ __('button.add') }}</span>
-                                        <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
+                                        <span id="btnLoading" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                                     </button>
                                     <a href="{{ route('admin.users.index') }}" class="btn btn-danger fw-normal text-white">
                                         {{ __('button.cancel') }}
@@ -105,5 +105,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/custom/auth.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/common.js') }}"></script>
 @endpush

@@ -12,4 +12,5 @@ return [
     'weight_info' => 'Thông tin cân nặng',
     'height_info' => 'Thông tin chiều cao',
     'role_information' => 'Thông tin vai trò',
+    'system' => 'Hệ thống',
 ];

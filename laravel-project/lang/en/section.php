@@ -12,4 +12,5 @@ return [
     'weight_info' => 'Weight Information',
     'height_info' => 'Height Information',
     'role_information' => 'Role Information',
+    'system' => 'System',
 ];

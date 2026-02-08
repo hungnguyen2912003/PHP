@@ -48,4 +48,9 @@ return [
     'name' => 'Tên',
     'users_count' => 'Số người dùng',
     'measurement' => 'Chỉ số cơ thể',
+    'all' => 'Tất cả',
+    'measurement_record' => 'Số bản ghi chỉ số',
+    'bmi' => 'Chỉ số BMI',
+    'from' => 'Từ',
+    'to' => 'Đến',
 ];

@@ -15,21 +15,17 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Mail\Admin\ActivationMail;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\MeasurementImport;
-use App\Http\Requests\Admin\users\ImportMeasurementRequest;
-
 class UserController extends Controller
 {
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.users.index');
+        $roles = Role::get();
+        return $dataTable->render('admin.pages.users.index', compact('roles'));
     }
 
     public function create()
     {
-        $roles = Role::get();
+        $roles = Role::whereIn('name', ['Admin', 'Staff'])->get();
         return view('admin.pages.users.create', compact('roles'));
     }
 
@@ -126,22 +122,6 @@ class UserController extends Controller
         $user->delete();
 
         flash()->success(__('message.user.deleted'), [], __('notification.success'));
-        return redirect()->back();
-    }
-
-    public function import(ImportMeasurementRequest $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        try {
-            Excel::import(new MeasurementImport($user->id), $request->file('file'));
-
-            flash()->success(__('message.import.success'), [], __('notification.success'));
-        } catch (\Throwable $e) {
-            report($e);
-            flash()->error(__('message.import.failed'), [], __('notification.error'));
-        }
-
         return redirect()->back();
     }
 }

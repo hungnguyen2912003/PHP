@@ -11,13 +11,13 @@
             {{ __('auth.set_first_password_desc') }}
         </p>
     </div>
-    <form id="setFirstPasswordForm" action="{{ route('admin.activate.password', $token) }}" method="POST">
+    <form id="common-form" action="{{ route('admin.activate.password', $token) }}" method="POST">
         @csrf
         <div class="mb-20">
             <label class="label fs-16 mb-2">{{ __('label.username') }} <span class="text-danger">*</span></label>
             <div class="form-floating">
-                <input class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="{{ __('placeholder.username') }}"
-                    type="text" value="{{ $username }}" readonly />
+                <input class="form-control @error('username') is-invalid @enderror" name="username" id="username"
+                    placeholder="{{ __('placeholder.username') }}" type="text" value="{{ $username }}" readonly />
                 <label for="username"><i class="ri-user-line mr-2"></i> {{ __('placeholder.username') }}</label>
             </div>
             @error('username')
@@ -27,8 +27,8 @@
         <div class="mb-20">
             <label class="label fs-16 mb-2">{{ __('label.email') }} <span class="text-danger">*</span></label>
             <div class="form-floating">
-                <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="{{ __('placeholder.email') }}"
-                    type="email" value="{{ $email }}" readonly />
+                <input class="form-control @error('email') is-invalid @enderror" name="email" id="email"
+                    placeholder="{{ __('placeholder.email') }}" type="email" value="{{ $email }}" readonly />
                 <label for="email"><i class="ri-mail-line mr-2"></i> {{ __('placeholder.email') }}</label>
             </div>
             @error('email')
@@ -41,8 +41,9 @@
             </label>
             <div class="form-group" id="password-show-hide">
                 <div class="password-wrapper position-relative password-container form-floating">
-                    <input class="form-control text-secondary password @error('password') is-invalid @enderror" placeholder="{{ __('placeholder.enter_password') }}"
-                        type="password" name="password" id="password" />
+                    <input class="form-control text-secondary password @error('password') is-invalid @enderror"
+                        placeholder="{{ __('placeholder.enter_password') }}" type="password" name="password"
+                        id="password" />
                     <label for="password">{{ __('placeholder.enter_password') }}</label>
                     <i aria-hidden="true"
                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
@@ -60,8 +61,9 @@
             </label>
             <div class="form-group" id="password-show-hide">
                 <div class="password-wrapper position-relative password-container form-floating">
-                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('label.new_password_confirmation') }}"
-                        type="password" name="password_confirmation" id="password_confirmation" />
+                    <input class="form-control text-secondary password @error('password_confirmation') is-invalid @enderror"
+                        placeholder="{{ __('label.new_password_confirmation') }}" type="password"
+                        name="password_confirmation" id="password_confirmation" />
                     <label for="password_confirmation">{{ __('label.new_password_confirmation') }}</label>
                     <i aria-hidden="true"
                         class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 position-absolute cursor text-secondary"
@@ -74,8 +76,9 @@
             @enderror
         </div>
         <div class="mb-20">
-            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn" data-processing-text="{{ __('button.processing') }}"
-                style="padding-top: 18px; padding-bottom: 18px;" type="submit">
+            <button class="btn btn-primary fw-normal text-white w-100" id="submitBtn"
+                data-processing-text="{{ __('button.processing') }}" style="padding-top: 18px; padding-bottom: 18px;"
+                type="submit">
                 <span id="btnText">{{ __('button.set_password') }}</span>
                 <span id="btnLoading" class="spinner-border spinner-border-sm ml-2 d-none"></span>
             </button>

@@ -48,4 +48,9 @@ return [
     'name' => 'Name',
     'users_count' => 'Users Count',
     'measurement' => 'Measurement',
+    'all' => 'All',
+    'measurement_record' => 'Measurement Records',
+    'bmi' => 'BMI Indicator',
+    'from' => 'From',
+    'to' => 'To',
 ];

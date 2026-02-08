@@ -48,4 +48,9 @@ return [
     'name' => '名前',
     'users_count' => 'ユーザー数',
     'measurement' => '健康指標',
+    'all' => 'すべて',
+    'measurement_record' => '健康指標の記録',
+    'bmi' => 'BMI指標',
+    'from' => 'から',
+    'to' => 'まで',
 ];

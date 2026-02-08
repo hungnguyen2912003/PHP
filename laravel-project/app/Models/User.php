@@ -84,6 +84,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Measurement::class);
     }
 
+    public function latestMeasurement()
+    {
+        return $this->hasOne(Measurement::class)->latestOfMany('recorded_at');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
