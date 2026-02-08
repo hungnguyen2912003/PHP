@@ -1,4 +1,4 @@
-(function() {
+(function () {
 	"use strict";
 
 	//**<---- Dashboard E-Commerce Charts ---->**//
@@ -340,7 +340,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "k";
 					}
 				}
@@ -350,7 +350,7 @@
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#profit_chart'), options);
 		chart.render();
-		
+
 	}
 
 	/* Average Daily Sales Chart JS*/
@@ -433,7 +433,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val;
 					}
 				}
@@ -500,7 +500,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -604,7 +604,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val;
 					}
 				}
@@ -782,7 +782,7 @@
 	/* Lead Conversation Chart JS*/
 	const getLeadConversationId = document.getElementById('lead_conversation_chart');
 	if (getLeadConversationId) {
-		
+
 		var options = {
 			series: [
 				{
@@ -853,7 +853,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -943,7 +943,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val;
 					}
 				}
@@ -991,7 +991,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -1265,7 +1265,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -1281,7 +1281,7 @@
 	/* Total Leads Chart JS*/
 	const getTotalLeadsId = document.getElementById('total_leads_chart');
 	if (getTotalLeadsId) {
-		
+
 		var options = {
 			series: [
 				{
@@ -1501,7 +1501,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -1565,7 +1565,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -1689,7 +1689,7 @@
 	/* Welcome Chart JS*/
 	const getWelcomeId = document.getElementById('welcome_chart');
 	if (getWelcomeId) {
-		 
+
 		var options = {
 			series: [75],
 			chart: {
@@ -1771,7 +1771,7 @@
 					columnWidth: "45%"
 				}
 			},
-			colors:[
+			colors: [
 				'#00cae3', '#d2d2e4', '#796df6'
 			],
 			fill: {
@@ -1857,7 +1857,7 @@
 	/* Total Courses Sales Chart JS*/
 	const getTotalCoursesSalesId = document.getElementById('total_courses_sales_chart');
 	if (getTotalCoursesSalesId) {
-		
+
 		var options = {
 			series: [
 				{
@@ -1978,7 +1978,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + " hrs";
 					}
 				}
@@ -2874,7 +2874,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "mins";
 					}
 				}
@@ -3001,7 +3001,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "mins";
 					}
 				}
@@ -3071,7 +3071,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -3190,7 +3190,7 @@
 	/* Tickets By Channel Chart JS*/
 	const getTicketsByChannelId = document.getElementById('tickets_by_channel_chart');
 	if (getTicketsByChannelId) {
-		
+
 		var options = {
 			series: [50, 35, 25, 15],
 			chart: {
@@ -3236,7 +3236,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -3291,7 +3291,7 @@
 			],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -3529,7 +3529,7 @@
 	/* Complaints Chart JS*/
 	const getComplaintsId = document.getElementById('complaints_chart');
 	if (getComplaintsId) {
-		
+
 		var options = {
 			series: [
 				{
@@ -3899,7 +3899,7 @@
 					horizontal: 10,
 					vertical: 0
 				},
-				tooltipHoverFormatter: function(val, opts) {
+				tooltipHoverFormatter: function (val, opts) {
 					return (
 						val +
 						" - <strong>" +
@@ -3950,21 +3950,21 @@
 				y: [
 					{
 						title: {
-							formatter: function(val) {
+							formatter: function (val) {
 								return val + " (mins)";
 							}
 						}
 					},
 					{
 						title: {
-							formatter: function(val) {
+							formatter: function (val) {
 								return val + " per session";
 							}
 						}
 					},
 					{
 						title: {
-							formatter: function(val) {
+							formatter: function (val) {
 								return val;
 							}
 						}
@@ -4636,7 +4636,7 @@
 				height: 350,
 				stacked: true,
 				events: {
-					selection: function(chart , e ) {
+					selection: function (chart, e) {
 						console.log(new Date(e.xaxis.min));
 					}
 				},
@@ -8667,7 +8667,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val;
 					}
 				}
@@ -8700,7 +8700,7 @@
 
 	}
 
-	/* Data Labels Column Chart JS*/ 
+	/* Data Labels Column Chart JS*/
 	const getDataLabelsColumnId = document.getElementById('data_labels_column_chart');
 	if (getDataLabelsColumnId) {
 		var options = {
@@ -8727,7 +8727,7 @@
 			},
 			dataLabels: {
 				enabled: true,
-				formatter: function(val) {
+				formatter: function (val) {
 					return val + "%";
 				},
 				offsetY: -25,
@@ -8798,7 +8798,7 @@
 				},
 				labels: {
 					show: false,
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					},
 					style: {
@@ -9238,7 +9238,7 @@
 				height: 350,
 				type: "bar",
 				events: {
-					click: function(chart, w, e) {
+					click: function (chart, w, e) {
 						// console.log(chart, w, e)
 					}
 				}
@@ -9779,7 +9779,7 @@
 				shared: true,
 				intersect: false,
 				y: {
-					formatter: function(y) {
+					formatter: function (y) {
 						if (typeof y !== "undefined") {
 							return y.toFixed(0) + " points";
 						}
@@ -9929,7 +9929,7 @@
 				shared: true,
 				intersect: false,
 				y: {
-					formatter: function(y) {
+					formatter: function (y) {
 						if (typeof y !== "undefined") {
 							return y.toFixed(0) + " points";
 						}
@@ -10016,7 +10016,7 @@
 							show: true,
 							label: "Total",
 							fontFamily: 'Outfit',
-							formatter: function(w) {
+							formatter: function (w) {
 								return "249";
 							}
 						}
@@ -10062,7 +10062,7 @@
 							fontSize: "22px",
 							fontFamily: 'Outfit',
 							color: undefined,
-							formatter: function(val) {
+							formatter: function (val) {
 								return val + "%";
 							}
 						}
@@ -10200,7 +10200,7 @@
 				labels: {
 					colors: '#5B5B98'
 				},
-				formatter: function(seriesName, opts) {
+				formatter: function (seriesName, opts) {
 					return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex];
 				}
 			}
@@ -10265,7 +10265,7 @@
 							fontFamily: 'Outfit',
 						},
 						value: {
-							formatter: function(val) {
+							formatter: function (val) {
 								return parseInt(val.toString(), 10).toString();
 							},
 							color: "#111",
@@ -10301,7 +10301,7 @@
 
 	}
 
-	/* Basic Radar Chart JS*/ 
+	/* Basic Radar Chart JS*/
 	const getBasicRadarId = document.getElementById('basic_radar_chart');
 	if (getBasicRadarId) {
 		var options = {
@@ -10342,7 +10342,7 @@
 
 	}
 
-	/* Multiple Radar Chart JS*/ 
+	/* Multiple Radar Chart JS*/
 	const getMultipleRadarId = document.getElementById('multiple_radar_chart');
 	if (getMultipleRadarId) {
 		var options = {
@@ -10423,7 +10423,7 @@
 
 	}
 
-	/* Polygon Radar Chart JS*/ 
+	/* Polygon Radar Chart JS*/
 	const getPolygonRadarId = document.getElementById('polygon_radar_chart');
 	if (getPolygonRadarId) {
 		var options = {
@@ -10473,7 +10473,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val;
 					}
 				}
@@ -10500,7 +10500,7 @@
 
 	}
 
-	/* Basic Pie Chart JS*/ 
+	/* Basic Pie Chart JS*/
 	const getBasicPieId = document.getElementById('basic_pie_chart');
 	if (getBasicPieId) {
 		var options = {
@@ -10557,7 +10557,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -10570,7 +10570,7 @@
 
 	}
 
-	/* Pie Donut Chart JS*/ 
+	/* Pie Donut Chart JS*/
 	const getPieDonutId = document.getElementById('pie_donut_chart');
 	if (getPieDonutId) {
 		var options = {
@@ -10624,7 +10624,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -10637,7 +10637,7 @@
 
 	}
 
-	/* Pie Monochrome Chart JS*/ 
+	/* Pie Monochrome Chart JS*/
 	const getPieMonochromeId = document.getElementById('pie_monochrome_chart');
 	if (getPieMonochromeId) {
 		var options = {
@@ -10712,7 +10712,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val + "%";
 					}
 				}
@@ -10725,7 +10725,7 @@
 
 	}
 
-	/* Basic Polar Chart JS*/ 
+	/* Basic Polar Chart JS*/
 	const getBasicPolarId = document.getElementById('basic_polar_chart');
 	if (getBasicPolarId) {
 		var options = {
@@ -10783,7 +10783,7 @@
 
 	}
 
-	/* Polar Monochrome Chart JS*/ 
+	/* Polar Monochrome Chart JS*/
 	const getPolarMonochromeId = document.getElementById('polar_monochrome_chart');
 	if (getPolarMonochromeId) {
 		var options = {
@@ -10840,8 +10840,8 @@
 		chart.render();
 
 	}
-	
-	/* Basic Range Area Chart JS*/ 
+
+	/* Basic Range Area Chart JS*/
 	const getBasicRangeAreaId = document.getElementById('basic_range_area_chart');
 	if (getBasicRangeAreaId) {
 		var options = {
@@ -10979,7 +10979,7 @@
 
 	}
 
-	/* Basic Timeline Area Chart JS*/ 
+	/* Basic Timeline Area Chart JS*/
 	const getBasicTimelineId = document.getElementById('basic_timeline_chart');
 	if (getBasicTimelineId) {
 		var options = {
@@ -11067,7 +11067,7 @@
 			colors: [
 				"#0f79f3"
 			],
-			
+
 		};
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#basic_timeline_chart'), options);
@@ -11075,7 +11075,7 @@
 
 	}
 
-	/* Basic Candlestick Area Chart JS*/ 
+	/* Basic Candlestick Area Chart JS*/
 	const getBasicCandlestickId = document.getElementById('basic_candlestick_chart');
 	if (getBasicCandlestickId) {
 		var options = {
@@ -11385,7 +11385,7 @@
 				strokeDashArray: 5,
 				borderColor: "#e0e0e0"
 			}
-			
+
 		};
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#basic_candlestick_chart'), options);
@@ -11393,7 +11393,7 @@
 
 	}
 
-	/* Basic Boxplot Chart JS*/ 
+	/* Basic Boxplot Chart JS*/
 	const getBasicBoxplotId = document.getElementById('basic_boxplot_chart');
 	if (getBasicBoxplotId) {
 		var options = {
@@ -11532,7 +11532,7 @@
 					vertical: 0
 				}
 			}
-			
+
 		};
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#basic_boxplot_chart'), options);
@@ -11551,7 +11551,7 @@
 				var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
 				var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 				var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
-			
+
 				series.push([x, y, z]);
 				baseval += 86400000;
 				i++;
@@ -11561,7 +11561,7 @@
 		var options = {
 			series: [
 				{
-				  name: 'Bubble 1',
+					name: 'Bubble 1',
 					data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
 						min: 10,
 						max: 60
@@ -11658,8 +11658,8 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
-					return "$" + val + "k";
+					formatter: function (val) {
+						return "$" + val + "k";
 					}
 				}
 			},
@@ -11673,19 +11673,19 @@
 	const getBasicScatterId = document.getElementById('basic_scatter_chart');
 	if (getBasicScatterId) {
 		var options = {
-			
+
 			series: [{
 				name: "Sample A",
 				data: [
-				[16.4, 5.4], [21.7, 2], [25.4, 3], [19, 2], [10.9, 1], [13.6, 3.2], [10.9, 7.4], [10.9, 0], [10.9, 8.2], [16.4, 0], [16.4, 1.8], [13.6, 0.3], [13.6, 0], [29.9, 0], [27.1, 2.3], [16.4, 0], [13.6, 3.7], [10.9, 5.2], [16.4, 6.5], [10.9, 0], [24.5, 7.1], [10.9, 0], [8.1, 4.7], [19, 0], [21.7, 1.8], [27.1, 0], [24.5, 0], [27.1, 0], [29.9, 1.5], [27.1, 0.8], [22.1, 2]]
-			},{
+					[16.4, 5.4], [21.7, 2], [25.4, 3], [19, 2], [10.9, 1], [13.6, 3.2], [10.9, 7.4], [10.9, 0], [10.9, 8.2], [16.4, 0], [16.4, 1.8], [13.6, 0.3], [13.6, 0], [29.9, 0], [27.1, 2.3], [16.4, 0], [13.6, 3.7], [10.9, 5.2], [16.4, 6.5], [10.9, 0], [24.5, 7.1], [10.9, 0], [8.1, 4.7], [19, 0], [21.7, 1.8], [27.1, 0], [24.5, 0], [27.1, 0], [29.9, 1.5], [27.1, 0.8], [22.1, 2]]
+			}, {
 				name: "Sample B",
 				data: [
-				[36.4, 13.4], [1.7, 11], [5.4, 8], [9, 17], [1.9, 4], [3.6, 12.2], [1.9, 14.4], [1.9, 9], [1.9, 13.2], [1.4, 7], [6.4, 8.8], [3.6, 4.3], [1.6, 10], [9.9, 2], [7.1, 15], [1.4, 0], [3.6, 13.7], [1.9, 15.2], [6.4, 16.5], [0.9, 10], [4.5, 17.1], [10.9, 10], [0.1, 14.7], [9, 10], [12.7, 11.8], [2.1, 10], [2.5, 10], [27.1, 10], [2.9, 11.5], [7.1, 10.8], [2.1, 12]]
-			},{
+					[36.4, 13.4], [1.7, 11], [5.4, 8], [9, 17], [1.9, 4], [3.6, 12.2], [1.9, 14.4], [1.9, 9], [1.9, 13.2], [1.4, 7], [6.4, 8.8], [3.6, 4.3], [1.6, 10], [9.9, 2], [7.1, 15], [1.4, 0], [3.6, 13.7], [1.9, 15.2], [6.4, 16.5], [0.9, 10], [4.5, 17.1], [10.9, 10], [0.1, 14.7], [9, 10], [12.7, 11.8], [2.1, 10], [2.5, 10], [27.1, 10], [2.9, 11.5], [7.1, 10.8], [2.1, 12]]
+			}, {
 				name: "Sample C",
 				data: [
-				[21.7, 3], [23.6, 3.5], [24.6, 3], [29.9, 3], [21.7, 20], [23, 2], [10.9, 3], [28, 4], [27.1, 0.3], [16.4, 4], [13.6, 0], [19, 5], [22.4, 3], [24.5, 3], [32.6, 3], [27.1, 4], [29.6, 6], [31.6, 8], [21.6, 5], [20.9, 4], [22.4, 0], [32.6, 10.3], [29.7, 20.8], [24.5, 0.8], [21.4, 0], [21.7, 6.9], [28.6, 7.7], [15.4, 0], [18.1, 0], [33.4, 0], [16.4, 0]]
+					[21.7, 3], [23.6, 3.5], [24.6, 3], [29.9, 3], [21.7, 20], [23, 2], [10.9, 3], [28, 4], [27.1, 0.3], [16.4, 4], [13.6, 0], [19, 5], [22.4, 3], [24.5, 3], [32.6, 3], [27.1, 4], [29.6, 6], [31.6, 8], [21.6, 5], [20.9, 4], [22.4, 0], [32.6, 10.3], [29.7, 20.8], [24.5, 0.8], [21.4, 0], [21.7, 6.9], [28.6, 7.7], [15.4, 0], [18.1, 0], [33.4, 0], [16.4, 0]]
 			}],
 			chart: {
 				height: 350,
@@ -11704,7 +11704,7 @@
 			xaxis: {
 				tickAmount: 10,
 				labels: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return parseFloat(val).toFixed(1)
 					},
 					show: true,
@@ -11968,288 +11968,8 @@
 
 	//**<---- HR Charts ---->**//
 
-	/* Employee Performance Chart JS*/
-	const getEmployeePerformanceId = document.getElementById('employee_performance_chart');
-	if (getEmployeePerformanceId) {
-		var options = {
-			series: [
-				{
-					type: "rangeArea",
-					name: "Task Done",
-					data: [
-						{
-							x: "Jan",
-							y: [11, 19]
-						},
-						{
-							x: "Feb",
-							y: [12, 18]
-						},
-						{
-							x: "Mar",
-							y: [20, 29]
-						},
-						{
-							x: "Apr",
-							y: [14, 27]
-						},
-						{
-							x: "May",
-							y: [26, 39]
-						},
-						{
-							x: "Jun",
-							y: [20, 17]
-						},
-						{
-							x: "Jul",
-							y: [10, 23]
-						},
-						{
-							x: "Aug",
-							y: [10, 15]
-						}
-					]
-				},
-				{
-					type: "rangeArea",
-					name: "On Progress",
-					data: [
-						{
-							x: "Jan",
-							y: [31, 34]
-						},
-						{
-							x: "Feb",
-							y: [42, 52]
-						},
-						{
-							x: "Mar",
-							y: [39, 49]
-						},
-						{
-							x: "Apr",
-							y: [34, 39]
-						},
-						{
-							x: "May",
-							y: [51, 59]
-						},
-						{
-							x: "Jun",
-							y: [54, 67]
-						},
-						{
-							x: "Jul",
-							y: [43, 46]
-						},
-						{
-							x: "Aug",
-							y: [21, 29]
-						}
-					]
-				},
-				{
-					type: "line",
-					name: "Task Done",
-					data: [
-						{
-							x: "Jan",
-							y: 15
-						},
-						{
-							x: "Feb",
-							y: 17
-						},
-						{
-							x: "Mar",
-							y: 19
-						},
-						{
-							x: "Apr",
-							y: 22
-						},
-						{
-							x: "May",
-							y: 30
-						},
-						{
-							x: "Jun",
-							y: 10
-						},
-						{
-							x: "Jul",
-							y: 21
-						},
-						{
-							x: "Aug",
-							y: 12
-						},
-						{
-							x: "Sep",
-							y: 18
-						},
-						{
-							x: "Oct",
-							y: 20
-						},
-						{
-							x: "Nov",
-							y: 20
-						},
-						{
-							x: "Dec",
-							y: 20
-						},
-					]
-				},
-				{
-					type: "line",
-					name: "On Progress",
-					data: [
-						{
-							x: "Jan",
-							y: 33
-						},
-						{
-							x: "Feb",
-							y: 49
-						},
-						{
-							x: "Mar",
-							y: 43
-						},
-						{
-							x: "Apr",
-							y: 37
-						},
-						{
-							x: "May",
-							y: 55
-						},
-						{
-							x: "Jun",
-							y: 59
-						},
-						{
-							x: "Jul",
-							y: 45
-						},
-						{
-							x: "Aug",
-							y: 24
-						},
-						{
-							x: "Sep",
-							y: 21
-						},
-						{
-							x: "Oct",
-							y: 15
-						},
-						{
-							x: "Nov",
-							y: 15
-						},
-						{
-							x: "Dec",
-							y: 15
-						},
-					]
-				}
-			],
-			chart: {
-				height: 282,
-				type: "rangeArea",
-				animations: {
-					speed: 500
-				},
-				toolbar: {
-					show: false
-				}
-			},
-			colors: [
-				"#63F0FD", "#FFB264", "#63F0FD", "#FFB264"
-			],
-			dataLabels: {
-				enabled: false
-			},
-			fill: {
-				opacity: [0.24, 0.24, 1, 1]
-			},
-			forecastDataPoints: {
-				count: 2,
-				dashArray: 4
-			},
-			xaxis: {
-				axisBorder: {
-					show: true,
-					color: '#fff'
-				},
-				axisTicks: {
-					show: true,
-					color: '#fff'
-				},
-				labels: {
-					style: {
-						colors: "#fff",
-						fontSize: "14px",
-						fontFamily: 'Outfit',
-					},
-				}
-			},
-			yaxis: {
-				max: 100,
-				tickAmount: 4,
-				labels: {
-					style: {
-						colors: "#fff",
-						fontSize: "14px",
-						fontFamily: 'Outfit',
-					},
-					formatter: (val) => {
-						return '' + val / 1 + '%'
-					},
-				}
-			},
-			stroke: {
-				curve: "straight",
-				width: [0, 0, 2, 2]
-			},
-			legend: {
-				position: "bottom",
-				fontSize: "14px",
-				fontFamily: 'Outfit',
-				customLegendItems: ["Task Done", "On Progress"],
-				labels: {
-					colors: "#F6F7F9",
-				},
-				offsetY: 8,
-				itemMargin: {
-					horizontal: 29,
-					vertical: 0
-				},
-				markers: {
-					width: 10,
-					height: 10,
-					strokeWidth: 0,
-					shape: "square",
-				}
-			},
-			markers: {
-				hover: {
-					sizeOffset: 5
-				}
-			},
-			grid: {
-				strokeDashArray: 0,
-				borderColor: "#705ae0",
-				opacity: 0
-			}
-		};
-		var chart = new ApexCharts(document.querySelector("#employee_performance_chart"), options);
-		chart.render();
-	}
+	// History charts are now initialized in the Blade view for dynamic data binding.
+
 
 	/* Total Applications JS*/
 	const getTotalApplicationsId = document.getElementById('total_applications_chart');
@@ -12332,13 +12052,13 @@
 					}
 				}
 			},
-			
+
 		};
 
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#total_applications_chart'), options);
 		chart.render();
-		
+
 	}
 
 	/* Employee Structure JS*/
@@ -12538,7 +12258,7 @@
 	/* Welcome Chart JS*/
 	const getWelcome2Id = document.getElementById('welcome_chart_2');
 	if (getWelcome2Id) {
-		 
+
 		var options = {
 			series: [98],
 			chart: {
@@ -12675,7 +12395,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return '' + val / 1 + '%'
 					}
 				}
@@ -12785,12 +12505,12 @@
 			series: [
 				{
 					name: 'Social Media Marketing',
-					data: [0, 1500, 2000, 800, 1200, 800, 1500, 2000, 1200, 700 ,1400]
-					
+					data: [0, 1500, 2000, 800, 1200, 800, 1500, 2000, 1200, 700, 1400]
+
 				},
 				{
 					name: 'Email Marketing',
-					data: [0, 1200, 1700, 500, 900, 500, 1200, 1700, 900, 400 ,1100]
+					data: [0, 1200, 1700, 500, 900, 500, 1200, 1700, 900, 400, 1100]
 				},
 			],
 			colors: ["#FFB264", "#796DF6",],
@@ -12808,7 +12528,7 @@
 				curve: 'smooth'
 			},
 			grid: {
-				borderColor: '#F4F6FC', 
+				borderColor: '#F4F6FC',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -12874,7 +12594,7 @@
 		var chart = new ApexCharts(document.querySelector("#lead_generation_chart"), options);
 		chart.render();
 
-    }
+	}
 
 	/* Facebook Campaign Chart JS*/
 	const getFacebookCampaignId = document.getElementById('facebook_campaign_chart');
@@ -13139,13 +12859,13 @@
 	/* SEO Performance Chart JS*/
 	const geSeoPerformanceId = document.getElementById('seo_performance_chart');
 	if (geSeoPerformanceId) {
-		
+
 		var options = {
 			series: [{
 				name: 'Organic Traffic',
 				type: 'column',
 				data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-			},  {
+			}, {
 				name: 'Keyword Ranking',
 				type: 'line',
 				data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
@@ -13174,7 +12894,7 @@
 				size: 0
 			},
 			grid: {
-				borderColor: '#F4F6FC', 
+				borderColor: '#F4F6FC',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -13260,12 +12980,12 @@
 							return y.toFixed(0) + " points";
 						}
 						return y;
-		
+
 					}
 				}
 			}
 		};
-		
+
 		var chart = new ApexCharts(document.querySelector("#seo_performance_chart"), options);
 		chart.render();
 
@@ -13359,7 +13079,7 @@
 				}
 			},
 			grid: {
-				borderColor: '#EAECF2', 
+				borderColor: '#EAECF2',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -13374,13 +13094,13 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "%";
 					}
 				}
-			}	
+			}
 		};
-		
+
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#channel_performance_chart'), options);
 		chart.render();
@@ -13413,17 +13133,17 @@
 			plotOptions: {
 				pie: {
 					donut: {
-					  size: '40%'
+						size: '40%'
 					}
 				}
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "K";
 					}
 				}
-			}	
+			}
 		};
 		var chart = new ApexCharts(document.querySelector("#profit_loss_chart"), options);
 		chart.render();
@@ -13471,7 +13191,7 @@
 			},
 			grid: {
 				show: false,
-				borderColor: '#EDEFF5', 
+				borderColor: '#EDEFF5',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -13521,7 +13241,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "K";
 					}
 				}
@@ -13557,7 +13277,7 @@
 				strokeWidth: 0,
 				colors: '#0F79F3',
 				hover: {
-				  size: 7
+					size: 7
 				}
 			},
 			dataLabels: {
@@ -13623,7 +13343,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "k";
 					}
 				}
@@ -13633,13 +13353,13 @@
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#sales_chart'), options);
 		chart.render();
-		
+
 	}
 
 	/* Payment JS*/
 	const getPaymentId = document.getElementById('payment_profit_chart');
 	if (getPaymentId) {
-		var options = { 
+		var options = {
 			series: [
 				{
 					name: "Payment",
@@ -13709,7 +13429,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "k";
 					}
 				}
@@ -13772,7 +13492,7 @@
 			dataLabels: {
 				enabled: true,
 				enabledOnSeries: [1],
-				formatter: function(val) {
+				formatter: function (val) {
 					return "" + val + "K";
 				},
 				style: {
@@ -13790,14 +13510,14 @@
 					borderColor: '#2ED47E',
 					opacity: 0.9,
 					dropShadow: {
-					  enabled: false,
-					  top: 1,
-					  left: 1,
-					  blur: 1,
-					  color: '#000',
-					  opacity: 0.45
+						enabled: false,
+						top: 1,
+						left: 1,
+						blur: 1,
+						color: '#000',
+						opacity: 0.45
 					}
-				  },
+				},
 			},
 			xaxis: {
 				categories: [
@@ -13848,7 +13568,7 @@
 						fontSize: "12px",
 						fontFamily: 'Outfit',
 					},
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "K";
 					}
 				}
@@ -13857,10 +13577,10 @@
 		};
 		var chart = new ApexCharts(document.querySelector("#revenue_vs_operating_margin_chart"), options);
 		chart.render();
-		
+
 	}
 
-	/* Revenue By Division JS */ 
+	/* Revenue By Division JS */
 	const getRevenueByDivisionId = document.getElementById('revenue_by_division_chart');
 	if (getRevenueByDivisionId) {
 
@@ -13922,7 +13642,7 @@
 						fontSize: "12px",
 						fontFamily: 'Outfit',
 					},
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "K";
 					}
 				},
@@ -13933,7 +13653,7 @@
 
 	}
 
-	/* Total Receivables Vs Total Payable JS */ 
+	/* Total Receivables Vs Total Payable JS */
 	const getTotalReceivablesVsTotalPayableId = document.getElementById('total_receivables_vs_total_payable_chart');
 	if (getTotalReceivablesVsTotalPayableId) {
 		var options = {
@@ -14164,7 +13884,7 @@
 						fontSize: "12px",
 						fontFamily: 'Outfit',
 					},
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "K";
 					}
 				}
@@ -14210,7 +13930,7 @@
 	const getPatientsSummaryId = document.getElementById('patients_summary_chart');
 	if (getPatientsSummaryId) {
 		var options = {
-			series: [34, 36.1,  26.8],
+			series: [34, 36.1, 26.8],
 			chart: {
 				height: 392,
 				type: "donut"
@@ -14289,7 +14009,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "%";
 					}
 				}
@@ -14330,7 +14050,7 @@
 					columnWidth: "50%",
 					borderRadius: 4,
 					borderRadiusApplication: 'around',
-          			borderRadiusWhenStacked: 'last',
+					borderRadiusWhenStacked: 'last',
 				}
 			},
 			dataLabels: {
@@ -14391,7 +14111,7 @@
 					lines: {
 						show: true
 					}
-				},   
+				},
 				yaxis: {
 					lines: {
 						show: true
@@ -14429,17 +14149,17 @@
 			series: [{
 				name: 'Income',
 				data: [20, 30, 40, 30, 20, 30, 40, 35, 25, 40]
-		  	}, {
+			}, {
 				name: 'Expense',
 				data: [10, 20, 30, 40, 30, 20, 20, 20, 30, 20]
-		  	}],
+			}],
 			chart: {
 				height: 350,
 				type: 'area',
 				toolbar: {
 					show: false,
 				}
-		  	},
+			},
 			dataLabels: {
 				enabled: false
 			},
@@ -14487,7 +14207,7 @@
 						fontSize: "14px",
 						fontFamily: 'Outfit',
 					},
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "K";
 					}
 				}
@@ -14498,7 +14218,7 @@
 					lines: {
 						show: true
 					}
-				},   
+				},
 				yaxis: {
 					lines: {
 						show: true
@@ -14525,12 +14245,12 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "%";
 					}
 				}
 			},
-			
+
 		};
 		var chart = new ApexCharts(document.querySelector("#revenue_chart_2"), options);
 		chart.render();
@@ -14611,7 +14331,7 @@
 	/* Net Income JS*/
 	const getNetIncomeId = document.getElementById('net_income_chart');
 	if (getNetIncomeId) {
-		var options = { 
+		var options = {
 			series: [
 				{
 					name: "Net Income",
@@ -14685,7 +14405,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "$" + val + "K";
 					}
 				}
@@ -14722,7 +14442,7 @@
 					columnWidth: "30%",
 					borderRadius: 4,
 					borderRadiusApplication: 'around',
-          			borderRadiusWhenStacked: 'last',
+					borderRadiusWhenStacked: 'last',
 				}
 			},
 			dataLabels: {
@@ -14783,7 +14503,7 @@
 					lines: {
 						show: true
 					}
-				},   
+				},
 				yaxis: {
 					lines: {
 						show: true
@@ -14821,7 +14541,7 @@
 				{
 					name: 'Desktop',
 					data: [100, 10, 60, 10, 60, 20, 60],
-				}, 
+				},
 				{
 					name: 'Mobile',
 					data: [20, 30, 20, 60, 55, 90, 45],
@@ -14843,7 +14563,7 @@
 			},
 			legend: {
 				position: 'bottom',
-				horizontalAlign: 'center', 
+				horizontalAlign: 'center',
 				fontWeight: 400,
 				fontFamily: 'Outfit',
 				fontSize: '14',
@@ -14872,7 +14592,7 @@
 			colors: ['#6560F0', '#06B48A', '#FE9039'],
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return val
 					}
 				}
@@ -14893,9 +14613,9 @@
 				tickAmount: 5,
 				labels: {
 					show: false,
-					formatter: function(val, i) {
+					formatter: function (val, i) {
 						if (i % 1 === 0) {
-						return val
+							return val
 						} else {
 							return ''
 						}
@@ -14954,7 +14674,7 @@
 				width: 3
 			},
 			grid: {
-				borderColor: '#F5F5F5', 
+				borderColor: '#F5F5F5',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -15044,14 +14764,14 @@
 		chart.render();
 	}
 
-	/* Top Browsing Pages Per Minute Chart JS */ 
+	/* Top Browsing Pages Per Minute Chart JS */
 	const getTopBrowsingPagesPerMinuteId = document.getElementById('top_browsing_pages_per_minute_chart');
 	if (getTopBrowsingPagesPerMinuteId) {
 		var options = {
 			series: [{
 				name: 'Top Browsing Pages Per Minute',
 				data: [18, 30, 42, 18, 37, 26, 11, 34, 15, 22]
-		  	},],
+			},],
 			colors: ["#2ED47E"],
 			chart: {
 				type: 'bar',
@@ -15063,7 +14783,7 @@
 				zoom: {
 					enabled: false
 				}
-		  	},
+			},
 			plotOptions: {
 				bar: {
 					horizontal: false,
@@ -15145,9 +14865,9 @@
 			fill: {
 				opacity: 1
 			},
-			
+
 			grid: {
-				borderColor: '#F5F5F5', 
+				borderColor: '#F5F5F5',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -15162,10 +14882,10 @@
 	}
 
 	/* Visits By Country JS*/
-    const getVisitsByCountryId = document.getElementById('visits_by_country_chart');
-    if (getVisitsByCountryId) {
+	const getVisitsByCountryId = document.getElementById('visits_by_country_chart');
+	if (getVisitsByCountryId) {
 
-        var options = {
+		var options = {
 			series: [
 				{
 					name: "Projects",
@@ -15250,7 +14970,7 @@
 				}
 			},
 			grid: {
-				borderColor: '#EAECF2', 
+				borderColor: '#EAECF2',
 				strokeDashArray: 0,
 				xaxis: {
 					lines: {
@@ -15265,24 +14985,24 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "%";
 					}
 				}
-			}	
+			}
 		};
-		
+
 		// Initialize and render the chart
 		const chart = new ApexCharts(document.querySelector('#visits_by_country_chart'), options);
 		chart.render();
 
-    }
+	}
 
 	/* Users By Device JS*/
 	const getUsersByDeviceId = document.getElementById('users_by_device_chart');
 	if (getUsersByDeviceId) {
 		var options = {
-			series: [34, 36.1,  26.8, 20.8],
+			series: [34, 36.1, 26.8, 20.8],
 			chart: {
 				height: 400,
 				type: "donut"
@@ -15363,7 +15083,7 @@
 			},
 			tooltip: {
 				y: {
-					formatter: function(val) {
+					formatter: function (val) {
 						return "" + val + "%";
 					}
 				}
@@ -15374,132 +15094,132 @@
 	}
 
 	/* Performance Overview Chart JS*/
-    const getPerformanceOverviewId = document.getElementById("performance_overview_chart");
-    if (getPerformanceOverviewId) {
-        var options = {
-            series: [
-                {
-                    name: 'Email',
-                    data: [[100, 20, 50]]
-                },
-                {
-                    name: 'Organic Search',
-                    data: [[300, 50, 70]]
-                },
-                {
-                    name: 'Direct Browse',
-                    data: [[500, 80, 80]]
-                },
-                {
-                    name: 'Paid Search',
-                    data: [[650, 40, 50]]
-                },
-                {
-                    name: 'Social',
-                    data: [[850, 60, 70]]
-                },
-                {
-                    name: 'Referral',
-                    data: [[900, 20, 60]]
-                }
-            ],
-            chart: {
-                type: 'bubble',
-                height: 370,
+	const getPerformanceOverviewId = document.getElementById("performance_overview_chart");
+	if (getPerformanceOverviewId) {
+		var options = {
+			series: [
+				{
+					name: 'Email',
+					data: [[100, 20, 50]]
+				},
+				{
+					name: 'Organic Search',
+					data: [[300, 50, 70]]
+				},
+				{
+					name: 'Direct Browse',
+					data: [[500, 80, 80]]
+				},
+				{
+					name: 'Paid Search',
+					data: [[650, 40, 50]]
+				},
+				{
+					name: 'Social',
+					data: [[850, 60, 70]]
+				},
+				{
+					name: 'Referral',
+					data: [[900, 20, 60]]
+				}
+			],
+			chart: {
+				type: 'bubble',
+				height: 370,
 				toolbar: {
 					show: false
 				}
-            },
-            colors: [
-                '#FC7013', '#2ECC71', '#817EFB', '#00CAE3', '#E74C3C', '#2AA9FF'
-            ],
-            dataLabels: {
-                enabled: false
-            },
-            grid: {
-                show: true,
-                strokeDashArray: 0,
-                borderColor: "#F5F5F5"
-            },
-            xaxis: {
-                min: 0,
-                max: 1000,
-                axisTicks: {
-                    show: false,
-                    color: '#DDE4FF'
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#DDE4FF'
-                },
-                labels: {
-                    show: true,
-                    style: {
-                        colors: "#8695AA",
-                        fontSize: "14px",
+			},
+			colors: [
+				'#FC7013', '#2ECC71', '#817EFB', '#00CAE3', '#E74C3C', '#2AA9FF'
+			],
+			dataLabels: {
+				enabled: false
+			},
+			grid: {
+				show: true,
+				strokeDashArray: 0,
+				borderColor: "#F5F5F5"
+			},
+			xaxis: {
+				min: 0,
+				max: 1000,
+				axisTicks: {
+					show: false,
+					color: '#DDE4FF'
+				},
+				axisBorder: {
+					show: true,
+					color: '#DDE4FF'
+				},
+				labels: {
+					show: true,
+					style: {
+						colors: "#8695AA",
+						fontSize: "14px",
 						fontFamily: 'Outfit',
-                    }
-                }
-            },
-            yaxis: {
-                tickAmount: 5,
-                max: 100,
-                min: 0,
-                labels: {
-                    formatter: (val) => {
-                        return '$' + val + 'K'
-                    },
-                    style: {
-                        colors: "#8695AA",
-                        fontSize: "14px",
+					}
+				}
+			},
+			yaxis: {
+				tickAmount: 5,
+				max: 100,
+				min: 0,
+				labels: {
+					formatter: (val) => {
+						return '$' + val + 'K'
+					},
+					style: {
+						colors: "#8695AA",
+						fontSize: "14px",
 						fontFamily: 'Outfit',
-                    }
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#DDE4FF'
-                },
-                axisTicks: {
-                    show: false,
-                    color: '#DDE4FF'
-                }
-            },
-            legend: {
-                show: true,
-                position: 'bottom',
-                fontSize: '14px',
+					}
+				},
+				axisBorder: {
+					show: true,
+					color: '#DDE4FF'
+				},
+				axisTicks: {
+					show: false,
+					color: '#DDE4FF'
+				}
+			},
+			legend: {
+				show: true,
+				position: 'bottom',
+				fontSize: '14px',
 				fontFamily: 'Outfit',
-                itemMargin: {
-                    horizontal: 8,
-                    vertical: 8
-                },
-                labels: {
-                    colors: '#919AA3'
-                },
-                markers: {
-                    size: 6,
-                    offsetX: -2,
-                    offsetY: -.5,
-                    shape: 'square'
-                }
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return "$" + val + "k";
-                    }
-                }
-            }
-        };
-        var chart = new ApexCharts(document.querySelector("#performance_overview_chart"), options);
-        chart.render();
-    }
+				itemMargin: {
+					horizontal: 8,
+					vertical: 8
+				},
+				labels: {
+					colors: '#919AA3'
+				},
+				markers: {
+					size: 6,
+					offsetX: -2,
+					offsetY: -.5,
+					shape: 'square'
+				}
+			},
+			tooltip: {
+				y: {
+					formatter: function (val) {
+						return "$" + val + "k";
+					}
+				}
+			}
+		};
+		var chart = new ApexCharts(document.querySelector("#performance_overview_chart"), options);
+		chart.render();
+	}
 
 	/* Students Attendance Chart JS*/
-    const getSalaryStatisticsId = document.getElementById("salary_statistics_chart");
-    if (getSalaryStatisticsId) {
+	const getSalaryStatisticsId = document.getElementById("salary_statistics_chart");
+	if (getSalaryStatisticsId) {
 
-        var options = {
+		var options = {
 			series: [{
 				name: 'Salary Statistics',
 				data: [7000, 20000, 15000, 8000, 10000, 18000, 15000]
@@ -15573,15 +15293,15 @@
 				max: 20000,
 				min: 0,
 				labels: {
-                    formatter: (val) => {
-                        return '$' + val + ''
-                    },
-                    style: {
-                        colors: "#8695AA",
-                        fontSize: "14px",
+					formatter: (val) => {
+						return '$' + val + ''
+					},
+					style: {
+						colors: "#8695AA",
+						fontSize: "14px",
 						fontFamily: 'Outfit',
-                    }
-                },
+					}
+				},
 			},
 			grid: {
 				borderColor: "#F5F5F5",
@@ -15602,6 +15322,6 @@
 		const chart = new ApexCharts(document.querySelector('#salary_statistics_chart'), options);
 		chart.render();
 
-    }
+	}
 
 })();

@@ -30,6 +30,18 @@ class MeasurementDataTable extends DataTable
             ->editColumn('recorded_at', function ($row) {
                 return \Carbon\Carbon::parse($row->recorded_at)->format('d/m/Y H:i');
             })
+            ->editColumn('weight', function ($row) {
+                if ($row->weight) {
+                    return $row->weight;
+                }
+                return '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
+            ->editColumn('height', function ($row) {
+                if ($row->height) {
+                    return $row->height;
+                }
+                return '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
             ->editColumn('attachment', function ($row) {
                 if ($row->attachment_url) {
                     return '<a href="' . asset($row->attachment_url) . '" target="_blank" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="' . __('label.view_attachment') . '"><i class="ri-attachment-line"></i></a>';
@@ -37,7 +49,7 @@ class MeasurementDataTable extends DataTable
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
             ->addColumn('action', 'client.pages.measurement.columns.action')
-            ->rawColumns(['attachment', 'action'])
+            ->rawColumns(['weight', 'height', 'attachment', 'action'])
             ->setRowId('id')
             ->addIndexColumn();
     }

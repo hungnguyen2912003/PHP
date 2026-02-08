@@ -29,7 +29,7 @@ use App\Http\Controllers\Admin\MeasurementController as AdminMeasurementControll
 |--------------------------------------------------------------------------
 */
 Route::name('client.')->group(function () {
-    Route::get('/', [ClientDashboardController::class, 'index'])->name('dashboard');
+    // Moved to auth group below
 });
 
 Route::middleware('guest:web')->name('client.')->group(function () {
@@ -58,6 +58,8 @@ Route::middleware('guest:web')->name('client.')->group(function () {
 Route::middleware(['auth:web'])->name('client.')->group(function () {
 
     Route::match(['get', 'post'], '/logout', [ClientAuthController::class, 'logout'])->name('logout');
+
+    Route::get('/', [ClientDashboardController::class, 'index'])->name('dashboard');
 
     Route::post('/resend-activation', [ClientAuthController::class, 'resendActivation'])->name('resend-activation');
 

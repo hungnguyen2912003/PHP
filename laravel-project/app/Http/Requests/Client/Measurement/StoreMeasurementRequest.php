@@ -14,13 +14,21 @@ class StoreMeasurementRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'weight' => 'sometimes|numeric|min:0',
-            'height' => 'sometimes|numeric|min:0',
-            'recorded_at' => 'required|date|before_or_equal:now',
+        $rules = [
+            'weight' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
             'notes' => 'nullable|string|max:1000',
             'attachment' => 'nullable|file|image|max:2048',
         ];
+
+        if ($this->filled('date')) {
+            $rules['recorded_at'] = 'required';
+            $rules['date'] = 'required|date';
+        } else {
+            $rules['recorded_at'] = 'required|date|before_or_equal:now';
+        }
+
+        return $rules;
     }
 
     public function messages(): array

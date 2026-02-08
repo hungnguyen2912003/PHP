@@ -44,7 +44,10 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return null;
             }
-            return route('login');
+            if ($request->is('admin/*') || $request->is('admin')) {
+                return route('admin.login');
+            }
+            return route('client.login');
         });
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -140,13 +143,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 500);
             }
 
-            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException) {
+            if ($e instanceof ValidationException || $e instanceof NotFoundHttpException || $e instanceof AuthenticationException) {
                 return null;
             }
 
-            // If it's an HttpException with a specific status code (other than 404, which is handled above)
             if ($e instanceof HttpException && $e->getStatusCode() !== 500) {
-                return null; // Let Laravel handle other HttpExceptions naturally or through the renderers above
+                return null;
             }
 
             return response()->view('error.pages.500', [

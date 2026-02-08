@@ -29,6 +29,9 @@
         <form id="addMeasurementForm" action="{{ route('client.measurement.store') }}" method="POST"
             enctype="multipart/form-data">
             @csrf
+            @if(isset($date))
+                <input type="hidden" name="date" value="{{ $date }}">
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card bg-white p-20 rounded-10 border border-white mb-4">
@@ -66,11 +69,23 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="label fs-16 mb-2">{{ __('label.recorded_at') }}</label>
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.recorded_at') }}
+                                                @if(isset($date))
+                                                    <span
+                                                        class="badge bg-info-subtle text-info ms-2">{{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</span>
+                                                @endif
+                                            </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="recorded_at" name="recorded_at"
-                                                    placeholder="{{ __('placeholder.recorded_at') }}" type="datetime-local"
-                                                    value="{{ old('recorded_at', now()->format('Y-m-d\TH:i')) }}" />
+                                                @if(isset($date))
+                                                    <input class="form-control" id="recorded_at" name="recorded_at"
+                                                        placeholder="{{ __('placeholder.recorded_at') }}" type="time"
+                                                        value="{{ old('recorded_at', now()->format('H:i')) }}" />
+                                                @else
+                                                    <input class="form-control" id="recorded_at" name="recorded_at"
+                                                        placeholder="{{ __('placeholder.recorded_at') }}" type="datetime-local"
+                                                        value="{{ old('recorded_at', now()->format('Y-m-d\TH:i')) }}" />
+                                                @endif
                                                 <label for="recorded_at"><i
                                                         class="ri-calendar-line"></i>{{ __('placeholder.recorded_at') }}</label>
                                             </div>

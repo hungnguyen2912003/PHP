@@ -9,6 +9,7 @@ use App\Http\Requests\Client\Measurement\StoreMeasurementRequest;
 use App\Http\Requests\Client\Measurement\UpdateMeasurementRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class MeasurementController extends Controller
 {
@@ -17,15 +18,22 @@ class MeasurementController extends Controller
         return $dataTable->render('client.pages.measurement.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('client.pages.measurement.create');
+        $date = $request->query('date');
+        return view('client.pages.measurement.create', compact('date'));
     }
 
     public function store(StoreMeasurementRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
+
+        if ($request->filled('date')) {
+            $date = $request->input('date');
+            $time = $request->input('recorded_at');
+            $data['recorded_at'] = Carbon::parse($date . ' ' . $time)->toDateTimeString();
+        }
 
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
@@ -37,7 +45,7 @@ class MeasurementController extends Controller
         // Use updateOrCreate based on user_id and recorded_at to avoid duplicates
         Measurement::updateOrCreate(
             [
-                'user_id'     => $data['user_id'],
+                'user_id' => $data['user_id'],
                 'recorded_at' => $data['recorded_at'],
             ],
             $data

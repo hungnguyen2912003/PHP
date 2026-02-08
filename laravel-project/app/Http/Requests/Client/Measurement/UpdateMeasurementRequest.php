@@ -15,8 +15,8 @@ class UpdateMeasurementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight' => 'sometimes|numeric|min:0',
-            'height' => 'sometimes|numeric|min:0',
+            'weight' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
             'recorded_at' => 'required|date|before_or_equal:now',
             'notes' => 'nullable|string|max:1000',
             'attachment' => 'nullable|file|image|max:2048',
