@@ -31,7 +31,17 @@
             </nav>
         </div>
         <div class="card bg-white rounded-10 border border-white mb-4">
-            <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 p-20">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+                <div class="d-flex align-items-center flex-wrap gap-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="mb-0 text-nowrap fs-14">{{ __('label.from') }}</label>
+                        <input type="date" class="form-control" id="fromDate">
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="mb-0 text-nowrap fs-14">{{ __('label.to') }}</label>
+                        <input type="date" class="form-control" id="toDate">
+                    </div>
+                </div>
                 <div class="d-flex gap-3">
                     <a class="text-decoration-none fs-16 text-primary" href="{{ route('client.measurement.create') }}">
                         + {{ __('title.create_measurement') }}
@@ -51,11 +61,19 @@
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Custom Search for DataTable
-            const searchInput = document.getElementById('customSearch');
-            if (searchInput) {
-                searchInput.addEventListener('keyup', function () {
-                    window.LaravelDataTables["measurement-table"].search(this.value).draw();
+            // Date Filter trigger
+            const fromDateInput = document.getElementById('fromDate');
+            const toDateInput = document.getElementById('toDate');
+
+            if (fromDateInput) {
+                fromDateInput.addEventListener('change', function () {
+                    window.LaravelDataTables["measurement-table"].draw();
+                });
+            }
+
+            if (toDateInput) {
+                toDateInput.addEventListener('change', function () {
+                    window.LaravelDataTables["measurement-table"].draw();
                 });
             }
 

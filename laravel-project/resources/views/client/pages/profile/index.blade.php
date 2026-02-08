@@ -83,14 +83,16 @@
                                     @csrf
                                     <button id="resend-activation-btn" type="submit"
                                         class="btn btn-warning text-white fw-normal fs-16 hover-bg" style="padding: 12px 15px;">
-                                        <i class="ri-error-warning-line"></i> <span
-                                            id="btnTextActivation" data-sending-text="{{ __('button.sending') }}" data-resend-in-text="{{ __('button.resend_in') }}" data-original-text="{{ __('button.activate') }}">{{ __('button.activate') }}</span>
+                                        <i class="ri-error-warning-line"></i> <span id="btnTextActivation"
+                                            data-sending-text="{{ __('button.sending') }}"
+                                            data-resend-in-text="{{ __('button.resend_in') }}"
+                                            data-original-text="{{ __('button.activate') }}">{{ __('button.activate') }}</span>
                                         <span id="btnLoadingActivation"
                                             class="spinner-border spinner-border-sm ml-2 d-none"></span>
                                     </button>
                                 </form>
                             @endif
-                            <a href="{{ route('client.setting.account') }}"
+                            <a href="{{ route('client.settings.account') }}"
                                 class="btn btn-outline-border-color-70 text-secondary fw-normal fs-16 hover-bg"
                                 style="padding: 12px 15px;">
                                 {{ __('button.settings') }}

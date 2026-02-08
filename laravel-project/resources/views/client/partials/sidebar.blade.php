@@ -39,8 +39,8 @@
                 </a>
             </li>
             @if(Auth::guard('web')->check())
-                <li class="menu-title small text-uppercase"><span
-                        class="menu-title-text">{{ __('section.apps') }}</span></li>
+                <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('section.apps') }}</span>
+                </li>
                 <li class="menu-item {{ request()->routeIs('client.measurement.*') ? 'open' : '' }}">
                     <a class="menu-link {{ request()->routeIs('client.measurement.*') ? 'active' : '' }}"
                         href="{{ route('client.measurement.index') }}">
@@ -49,6 +49,51 @@
                     </a>
                 </li>
             @endif
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">{{ __('section.system') }}</span>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{{ route('client.profile.index') }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        account_circle
+                    </span>
+                    <span class="title">
+                        {{ __('label.my_profile') }}
+                    </span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link menu-toggle active" href="javascript:void(0);">
+                    <span class="material-symbols-outlined menu-icon">
+                        settings
+                    </span>
+                    <span class="title">
+                        {{ __('section.settings') }}
+                    </span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ route('client.settings.account') }}">
+                            {{ __('breadcrumb.settings.account') }}
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ route('client.settings.change-password') }}">
+                            {{ __('breadcrumb.settings.change_password') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{{ route('client.logout') }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        logout
+                    </span>
+                    <span class="title">
+                        {{ __('button.logout') }}
+                    </span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

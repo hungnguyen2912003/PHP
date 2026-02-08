@@ -33,8 +33,7 @@
                     </li>
                     <li>
                         <form class="src-form position-relative">
-                            <input class="form-control"
-                                placeholder="{{ __('placeholder.search') }}" type="text" />
+                            <input class="form-control" placeholder="{{ __('placeholder.search') }}" type="text" />
                             <div
                                 class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
                                 <span class="material-symbols-outlined">
@@ -146,7 +145,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item admin-item-link d-flex align-items-center text-body py-2"
-                                                href="{{ route('client.setting.account') }}">
+                                                href="{{ route('client.settings.account') }}">
                                                 <i class="material-symbols-outlined fs-20 me-2">settings</i>
                                                 <span>{{ __('button.settings') }}</span>
                                             </a>
@@ -168,10 +167,12 @@
                     @else
                         <li class="header-right-item ms-3">
                             <div class="d-flex gap-2">
-                                <a href="{{ route('client.login') }}" class="btn btn-primary text-white btn-sm rounded-pill px-3">
+                                <a href="{{ route('client.login') }}"
+                                    class="btn btn-primary text-white btn-sm rounded-pill px-3">
                                     {{ __('auth.sign_in') }}
                                 </a>
-                                <a href="{{ route('client.register') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                <a href="{{ route('client.register') }}"
+                                    class="btn btn-outline-primary btn-sm rounded-pill px-3">
                                     {{ __('auth.sign_up') }}
                                 </a>
                             </div>

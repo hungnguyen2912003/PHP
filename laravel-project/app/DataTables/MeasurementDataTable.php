@@ -13,7 +13,15 @@ class MeasurementDataTable extends DataTable
 {
     public function query(Measurement $model): QueryBuilder
     {
-        return $model->newQuery()->where('user_id', auth()->id())->orderBy('recorded_at', 'desc');
+        return $model->newQuery()
+            ->where('user_id', auth()->id())
+            ->when($this->request->get('from_date'), function ($query, $fromDate) {
+                return $query->whereDate('recorded_at', '>=', $fromDate);
+            })
+            ->when($this->request->get('to_date'), function ($query, $toDate) {
+                return $query->whereDate('recorded_at', '<=', $toDate);
+            })
+            ->orderBy('recorded_at', 'desc');
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -39,7 +47,10 @@ class MeasurementDataTable extends DataTable
         return $this->builder()
             ->setTableId('measurement-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax('', null, [
+                'from_date' => '$("#fromDate").val()',
+                'to_date' => '$("#toDate").val()',
+            ])
             ->orders([])
             ->selectStyleSingle()
             ->parameters([

@@ -68,7 +68,7 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
         Route::put('/avatar', [ClientProfileController::class, 'updateAvatar'])->name('avatar.update');
     });
 
-    Route::prefix('setting')->name('setting.')->group(function () {
+    Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('/account', [ClientSettingController::class, 'account'])->name('account');
         Route::put('/account', [ClientSettingController::class, 'updateAccount'])->name('account.update');
 
