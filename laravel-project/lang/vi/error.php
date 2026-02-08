@@ -1,6 +1,10 @@
 <?php
 
 return [
+    '403' => [
+        'title' => 'Truy cập bị cấm',
+        'text' => 'Bạn không có quyền truy cập vào trang này.',
+    ],
     '404' => [
         'title' => 'Rất tiếc! Không tìm thấy trang',
         'text' => 'Chúng tôi không thể tìm thấy trang mà bạn đang yêu cầu.',

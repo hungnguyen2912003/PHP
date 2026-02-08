@@ -38,16 +38,23 @@
                     <span class="title">{{ __('breadcrumb.dashboard') }}</span>
                 </a>
             </li>
-            @if(Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Admin')
+            @php
+                $isAdmin = Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Admin';
+                $isStaff = Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Staff';
+            @endphp
+
+            @if($isAdmin || $isStaff)
                 <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('section.apps') }}</span>
                 </li>
-                <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
-                        href="{{ route('admin.users.index') }}">
-                        <span class="material-symbols-outlined menu-icon">account_circle</span>
-                        <span class="title">{{ __('breadcrumb.user_management') }}</span>
-                    </a>
-                </li>
+                @if($isAdmin)
+                    <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'open' : '' }}">
+                        <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
+                            href="{{ route('admin.users.index') }}">
+                            <span class="material-symbols-outlined menu-icon">account_circle</span>
+                            <span class="title">{{ __('breadcrumb.user_management') }}</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="menu-item {{ request()->routeIs('admin.measurements.*') ? 'open' : '' }}">
                     <a class="menu-link {{ request()->routeIs('admin.measurements.*') ? 'active' : '' }}"
                         href="{{ route('admin.measurements.index') }}">

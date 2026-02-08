@@ -146,18 +146,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/change-password', action: [AdminSettingController::class, 'changePasswordUpdate'])->name('change-password.update');
         });
 
-        Route::prefix('users')->name('users.')->group(function () {
+        Route::middleware('role:Admin')->prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
-
-            Route::middleware('role:Admin')->group(function () {
-                Route::get('/create', [UserController::class, 'create'])->name('create');
-                Route::post('/store', [UserController::class, 'store'])->name('store');
-                Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-                Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
-                Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
-                Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
-            });
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [UserController::class, 'editPost'])->name('update');
+            Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+            Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
         });
 
         Route::prefix('measurements')->name('measurements.')->group(function () {

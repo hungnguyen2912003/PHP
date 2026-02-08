@@ -124,6 +124,10 @@ return Application::configure(basePath: dirname(__DIR__))
                     ],
                 ], $e->getStatusCode());
             }
+
+            if ($e->getStatusCode() === 403) {
+                return response()->view('error.pages.403', [], 403);
+            }
         });
 
         $exceptions->render(function (\Throwable $e, Request $request) {
@@ -140,9 +144,14 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
+            // If it's an HttpException with a specific status code (other than 404, which is handled above)
+            if ($e instanceof HttpException && $e->getStatusCode() !== 500) {
+                return null; // Let Laravel handle other HttpExceptions naturally or through the renderers above
+            }
+
             return response()->view('error.pages.500', [
                 'exception' => $e
             ], 500);
         });
     })
-->create();
+    ->create();
