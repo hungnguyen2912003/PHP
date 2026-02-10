@@ -54,7 +54,7 @@ class AuthController extends Controller
         }
 
         // Check role
-        if (!in_array($user->role->name, ['Admin', 'Staff'], true)) {
+        if (!in_array($user->role, ['admin', 'staff', 'Admin', 'Staff'], true)) {
             flash()->error(__('message.login.no_admin_permission'), [], __('notification.error'));
             return back()->withInput($request->only('login', 'remember'));
         }

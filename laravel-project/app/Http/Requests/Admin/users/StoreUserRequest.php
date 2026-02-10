@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
         return [
             'fullname' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'role_id' => 'required|exists:roles,id,name,Admin,name,Staff'
+            'role' => 'required|in:admin,staff,user'
         ];
     }
 
@@ -36,8 +36,8 @@ class StoreUserRequest extends FormRequest
             'email.required' => __('validation.email.required'),
             'email.email' => __('validation.email.email'),
             'email.unique' => __('validation.email.unique'),
-            'role_id.required' => __('validation.role_id.required'),
-            'role_id.exists' => __('validation.role_id.exists')
+            'role.required' => __('validation.role.required'),
+            'role.in' => __('validation.role.in')
         ];
     }
 }

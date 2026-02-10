@@ -250,15 +250,15 @@
                                     <label class="label fs-16 mb-2">
                                         {{ __('label.role') }} <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select form-control @error('role_id') is-invalid @enderror"
-                                        name="role_id">
-                                        @foreach($roles as $role)
-                                            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
-                                                {{ __('value.role.' . strtolower($role->name)) ?? $role->name }}
+                                    <select class="form-select form-control @error('role') is-invalid @enderror"
+                                        name="role">
+                                        @foreach(['admin', 'staff', 'user'] as $roleName)
+                                            <option value="{{ $roleName }}" {{ old('role', $user->role) == $roleName ? 'selected' : '' }}>
+                                                {{ __('value.role.' . $roleName) }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('role_id')
+                                    @error('role')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

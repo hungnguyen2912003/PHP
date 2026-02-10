@@ -24,7 +24,7 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'bio',
         'status',
-        'role_id',
+        'role',
         'google_id',
         'activation_token',
         'activation_token_sent_at',
@@ -39,10 +39,6 @@ class User extends Authenticatable implements JWTSubject
         'date_of_birth' => 'date',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function isPending()
     {
@@ -66,17 +62,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function isAdmin()
     {
-        return $this->role && $this->role->name === 'Admin';
+        return $this->role === 'admin';
     }
 
     public function isStaff()
     {
-        return $this->role && $this->role->name === 'Staff';
+        return $this->role === 'staff';
     }
 
     public function isUser()
     {
-        return $this->role && $this->role->name === 'User';
+        return $this->role === 'user';
     }
 
     public function measurements()
@@ -107,7 +103,7 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [
-            'role' => $this->role->name,
+            'role' => $this->role,
         ];
     }
 }

@@ -14,9 +14,7 @@ class AdminMeasurementDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         return $model->newQuery()
-            ->whereHas('role', function ($q) {
-                $q->where('name', 'User');
-            })
+            ->where('role', 'user')
             ->with(['measurements'])
             ->withCount('measurements');
     }

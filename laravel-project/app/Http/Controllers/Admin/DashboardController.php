@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Role;
 use App\Models\User;
 
 class DashboardController extends Controller
@@ -18,19 +17,16 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Fetch statistics for "User" role
-        $userRoleId = Role::where('name', 'User')->first()?->id;
-
         $stats = [
-            'total_users' => User::where('role_id', $userRoleId)->count(),
-            'new_users_month' => User::where('role_id', $userRoleId)
+            'total_users' => User::where('role', 'user')->count(),
+            'new_users_month' => User::where('role', 'user')
                 ->whereMonth('created_at', now()->month)
                 ->whereYear('created_at', now()->year)
                 ->count(),
-            'pending_users' => User::where('role_id', $userRoleId)
+            'pending_users' => User::where('role', 'user')
                 ->where('status', 'pending')
                 ->count(),
-            'banned_users' => User::where('role_id', $userRoleId)
+            'banned_users' => User::where('role', 'user')
                 ->where('status', 'banned')
                 ->count(),
         ];
@@ -39,12 +35,12 @@ class DashboardController extends Controller
         $days = 10;
         $trendDates = collect(range($days - 1, 0))->map(fn($i) => now()->subDays($i)->format('Y-m-d'));
         
-        $registrations = User::where('role_id', $userRoleId)
+        $registrations = User::where('role', 'user')
             ->where('created_at', '>=', now()->subDays($days))
             ->get()
             ->groupBy(fn($u) => $u->created_at->format('Y-m-d'));
 
-        $totalUsersBefore = User::where('role_id', $userRoleId)
+        $totalUsersBefore = User::where('role', 'user')
             ->where('created_at', '<', now()->subDays($days))
             ->count();
 

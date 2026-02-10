@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Role;
 use App\Http\Requests\Admin\users\StoreUserRequest;
 use App\Http\Requests\Admin\users\UpdateUserRequest;
 use App\DataTables\UsersDataTable;
@@ -19,14 +18,12 @@ class UserController extends Controller
 {
     public function index(UsersDataTable $dataTable)
     {
-        $roles = Role::get();
-        return $dataTable->render('admin.pages.users.index', compact('roles'));
+        return $dataTable->render('admin.pages.users.index');
     }
 
     public function create()
     {
-        $roles = Role::whereIn('name', ['Admin', 'Staff'])->get();
-        return view('admin.pages.users.create', compact('roles'));
+        return view('admin.pages.users.create');
     }
 
     public function store(StoreUserRequest $request)
@@ -54,7 +51,7 @@ class UserController extends Controller
                     'email' => $validated['email'],
                     'username' => $username,
                     'password' => Hash::make('123456'),
-                    'role_id' => $validated['role_id'],
+                    'role' => $validated['role'],
                     'status' => 'pending',
                     'activation_token' => $hashedToken,
                     'activation_token_sent_at' => Carbon::now(),
@@ -85,8 +82,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::get();
-        return view('admin.pages.users.edit', compact('user', 'roles'));
+        return view('admin.pages.users.edit', compact('user'));
     }
 
 
@@ -103,7 +99,7 @@ class UserController extends Controller
         $user->address = $validated['address'] ?? null;
         $user->gender = $validated['gender'] ?? null;
         $user->date_of_birth = $validated['date_of_birth'] ?? null;
-        $user->role_id = $validated['role_id'];
+        $user->role = $validated['role'];
         $user->status = $validated['status'];
 
         if (!empty($validated['password'])) {

@@ -1,10 +1,10 @@
-@php $roleName = optional($user->role)->name; @endphp
-@if ($roleName === 'Admin')
+@php $roleLabel = strtolower($user->role); @endphp
+@if ($roleLabel === 'admin')
     <span class="badge bg-primary">{{ __('value.role.admin') }}</span>
-@elseif ($roleName === 'User')
+@elseif ($roleLabel === 'user')
     <span class="badge bg-info">{{ __('value.role.user') }}</span>
-@elseif ($roleName === 'Staff')
+@elseif ($roleLabel === 'staff')
     <span class="badge bg-success">{{ __('value.role.staff') }}</span>
 @else
-    {{ $roleName }}
+    {{ $user->role }}
 @endif

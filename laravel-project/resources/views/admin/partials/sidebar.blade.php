@@ -39,8 +39,9 @@
                 </a>
             </li>
             @php
-                $isAdmin = Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Admin';
-                $isStaff = Auth::guard('admin')->check() && optional(Auth::guard('admin')->user()->role)->name === 'Staff';
+                $user = Auth::guard('admin')->user();
+                $isAdmin = $user && strtolower($user->role) === 'admin';
+                $isStaff = $user && strtolower($user->role) === 'staff';
             @endphp
 
             @if($isAdmin || $isStaff)

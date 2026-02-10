@@ -69,17 +69,17 @@
                                 <div class="mb-20">
                                     <label class="label fs-16 mb-2">{{ __('label.role') }}</label>
                                     <div class="form-floating">
-                                        <select class="form-select form-control" id="role_id" name="role_id">
+                                        <select class="form-select form-control" id="role" name="role">
                                             <option value="">{{ __('placeholder.role') }}</option>
-                                            @foreach($roles as $role)
-                                                <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
-                                                    {{ __('value.role.' . strtolower($role->name)) }}
+                                            @foreach(['admin', 'staff', 'user'] as $roleName)
+                                                <option value="{{ $roleName }}" {{ old('role') == $roleName ? 'selected' : '' }}>
+                                                    {{ __('value.role.' . $roleName) }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <label for="role_id">{{ __('placeholder.role') }}</label>
+                                        <label for="role">{{ __('placeholder.role') }}</label>
                                     </div>
-                                    @error('role_id')
+                                    @error('role')
                                         <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>

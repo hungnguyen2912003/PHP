@@ -54,9 +54,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (AuthenticationException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 401,
+                    'status' => 401,
                     'body' => [
-                        'data' => 'Unauthorized',
+                        'message' => 'Unauthorized',
+                        'errors' => null,
                     ],
                 ], 401);
             }
@@ -65,9 +66,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (TokenExpiredException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 401,
+                    'status' => 401,
                     'body' => [
-                        'data' => 'Token has expired',
+                        'message' => 'Token has expired',
+                        'errors' => null,
                     ],
                 ], 401);
             }
@@ -76,9 +78,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (TokenInvalidException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 401,
+                    'status' => 401,
                     'body' => [
-                        'data' => 'Token is invalid',
+                        'message' => 'Token is invalid',
+                        'errors' => null,
                     ],
                 ], 401);
             }
@@ -87,9 +90,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (JWTException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 401,
+                    'status' => 401,
                     'body' => [
-                        'data' => 'Token error: ' . $e->getMessage(),
+                        'message' => 'Token error: ' . $e->getMessage(),
+                        'errors' => null,
                     ],
                 ], 401);
             }
@@ -98,9 +102,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (ValidationException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 422,
+                    'status' => 422,
                     'body' => [
-                        'data' => $e->errors()
+                        'message' => 'Validation Error',
+                        'errors' => $e->errors()
                     ],
                 ], 422);
             }
@@ -109,9 +114,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 404,
+                    'status' => 404,
                     'body' => [
-                        'data' => null,
+                        'message' => 'Resource Not Found',
+                        'errors' => null,
                     ],
                 ], 404);
             }
@@ -121,9 +127,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (HttpException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => $e->getStatusCode(),
+                    'status' => $e->getStatusCode(),
                     'body' => [
-                        'data' => null
+                        'message' => $e->getMessage() ?: 'Http Error',
+                        'errors' => null
                     ],
                 ], $e->getStatusCode());
             }
@@ -136,9 +143,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Throwable $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'status_code' => 500,
+                    'status' => 500,
                     'body' => [
-                        'data' => config('app.debug') ? $e->getMessage() : null,
+                        'message' => 'Internal Server Error',
+                        'errors' => config('app.debug') ? $e->getMessage() : null,
                     ],
                 ], 500);
             }

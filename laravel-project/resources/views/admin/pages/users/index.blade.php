@@ -86,16 +86,16 @@
                         <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10"
                             data-simplebar="">
                             <li>
-                                <button class="dropdown-item text-secondary filter-option" data-filter="role_id"
+                                <button class="dropdown-item text-secondary filter-option" data-filter="role"
                                     data-value="">
                                     {{ __('label.role') }} ({{ __('label.all') }})
                                 </button>
                             </li>
-                            @foreach($roles as $role)
+                            @foreach(['admin', 'staff', 'user'] as $roleName)
                                 <li>
-                                    <button class="dropdown-item text-secondary filter-option" data-filter="role_id"
-                                        data-value="{{ $role->id }}">
-                                        {{ __('value.role.' . strtolower($role->name)) }}
+                                    <button class="dropdown-item text-secondary filter-option" data-filter="role"
+                                        data-value="{{ $roleName }}">
+                                        {{ __('value.role.' . $roleName) }}
                                     </button>
                                 </li>
                             @endforeach
@@ -181,7 +181,7 @@
                     if (filterType === 'gender') {
                         document.getElementById('genderFilterValue').value = value;
                         document.getElementById('genderFilterBtn').innerText = text;
-                    } else if (filterType === 'role_id') {
+                    } else if (filterType === 'role') {
                         document.getElementById('roleFilterValue').value = value;
                         document.getElementById('roleFilterBtn').innerText = text;
                     } else if (filterType === 'status') {

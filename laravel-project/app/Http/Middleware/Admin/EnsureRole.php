@@ -16,7 +16,10 @@ class EnsureRole
             return redirect()->route('admin.login');
         }
 
-        if (!in_array($user->role->name, $roles, true)) {
+        $requiredRoles = array_map('strtolower', $roles);
+        $userRole = strtolower($user->role);
+
+        if (!in_array($userRole, $requiredRoles, true)) {
             abort(403);
         }
 

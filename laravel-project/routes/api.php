@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\MeasurementController;
 
 
@@ -29,9 +28,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:api')->group(function () {
-    Route::apiResource('users', UserController::class);
 
-    Route::get('measurements/weight-chart', [MeasurementController::class, 'weightChart']);
-    Route::get('measurements/daily-summary', [MeasurementController::class, 'dailySummary']);
-    Route::apiResource('measurements', MeasurementController::class);
+    Route::get('measurements/weights/chart/{range?}', [MeasurementController::class, 'weightChart']);
+    Route::get('measurements/weights/daily-summary/{date}', [MeasurementController::class, 'dailySummary']);
+    Route::post('measurements/weights/{date}', [MeasurementController::class, 'storeWeight']);
+    Route::get('measurements/weights/{measurement}', [MeasurementController::class, 'show']);
 });

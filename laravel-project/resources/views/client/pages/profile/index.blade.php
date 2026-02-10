@@ -57,15 +57,7 @@
                                 <div class="fs-15">
                                     <label class="form-label text-secondary">{{ __('label.role') }}:</label>
                                     @if ($user->role)
-                                        @if ($user->role->name === 'Admin')
-                                            {{ __('value.role.admin') }}
-                                        @elseif ($user->role->name === 'User')
-                                            {{ __('value.role.user') }}
-                                        @elseif ($user->role->name === 'Staff')
-                                            {{ __('value.role.staff') }}
-                                        @else
-                                            {{ $user->role->name }}
-                                        @endif
+                                        {{ __('value.role.' . strtolower($user->role)) }}
                                     @else
                                         {{ __('value.role.no_role') }}
                                     @endif

@@ -281,14 +281,24 @@ body[data-theme='dark'] .switch-toggle:hover i {
     transform: translateX(-50%);
 }
 
+.summary-data-card .text-primary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .bmi-labels-bottom {
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
     font-weight: 500;
 }
 .bmi-labels-bottom span {
     flex: 1;
     color: #495057;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
 }
 
 /* Dark Mode Overrides */

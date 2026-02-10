@@ -4,164 +4,76 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Measurement;
-use App\Http\Requests\Api\Measurement\StoreMeasurementRequest;
-use App\Http\Requests\Api\Measurement\UpdateMeasurementRequest;
+use App\Http\Requests\Api\Measurement\StoreWeightRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use OpenApi\Attributes as OA;
 
 class MeasurementController extends BaseApiController
 {
     public function __construct()
     {
-        $this->authorizeResource(Measurement::class, 'measurement');
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $query = Measurement::query();
-
-        if (!auth()->user()->isAdmin()) {
-            $query->where('user_id', auth()->id());
-        }
-
-        return $this->success($query->latest('recorded_at')->get());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMeasurementRequest $request)
-    {
-        $data = $request->validated();
-        $data['user_id'] = auth()->id();
-
-        // Combine date and time if available
-        if ($request->filled('date') && $request->filled('time')) {
-            $data['recorded_at'] = $request->date . ' ' . $request->time . ':00';
-        } elseif (!$request->filled('recorded_at')) {
-            $data['recorded_at'] = now();
-        }
-
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('measurements', 'public');
-            $data['attachment_url'] = Storage::url($path);
-        }
-
-        $measurement = Measurement::updateOrCreate(
-            [
-                'user_id' => $data['user_id'],
-                'recorded_at' => $data['recorded_at'],
-            ],
-            $data
-        );
-
-        return $this->success($measurement, 201);
-    }
-
-    public function show(Measurement $measurement)
-    {
-        $user = $measurement->user;
-        $weight = (float) $measurement->weight;
-        $height = (float) $measurement->height;
-        
-        $bmiValue = 0.0;
-        if ($height > 0) {
-            $bmiValue = round($weight / pow($height / 100, 2), 1);
-        }
-
-        $bodyFat = null;
-        $fatFreeWeight = null;
-
-        if ($user && $user->date_of_birth && $user->gender && $bmiValue > 0) {
-            $age = $user->date_of_birth->age;
-            
-            if ($user->gender === 'male') {
-                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 16.2;
-            } else {
-                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 5.4;
-            }
-
-            $bodyFat = max(0, round($bodyFat, 1));
-            
-            $fatFreeWeight = round($weight * (1 - $bodyFat / 100), 1);
-        }
-
-        return $this->success([
-            'record' => $measurement,
-            'metrics' => [
-                'bmi' => [
-                    'value' => $bmiValue
-                ],
-                'body_fat' => [
-                    'value' => $bodyFat
-                ],
-                'fat_free_weight' => [
-                    'value' => $fatFreeWeight
-                ],
-            ]
-        ]);
-    }
-
-    private function getBmiStatus($bmiValue)
-    {
-        if ($bmiValue <= 0) return 'Unknown';
-        if ($bmiValue < 18.5) return 'Underweight';
-        if ($bmiValue < 23) return 'Normal';
-        if ($bmiValue < 25) return 'Overweight';
-        return 'Obese';
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMeasurementRequest $request, Measurement $measurement)
-    {
-        $data = $request->validated();
-
-        if ($request->hasFile('attachment')) {
-            // Delete old attachment if exists
-            if ($measurement->attachment_url) {
-                $oldPath = str_replace('/storage/', '', $measurement->attachment_url);
-                Storage::disk('public')->delete($oldPath);
-            }
-
-            $path = $request->file('attachment')->store('measurements', 'public');
-            $data['attachment_url'] = Storage::url($path);
-        }
-
-        $measurement->update($data);
-
-        return $this->success($measurement);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Measurement $measurement)
-    {
-        if ($measurement->attachment_url) {
-            $path = str_replace('/storage/', '', $measurement->attachment_url);
-            Storage::disk('public')->delete($path);
-        }
-
-        $measurement->delete();
-
-        return $this->success(null, 204);
+        // Explicit authorization handled in methods
     }
 
     /**
      * Get weight chart data for the authenticated user.
      */
-    public function weightChart(Request $request)
+    #[OA\Get(
+        path: "/api/measurements/weights/chart/{range}",
+        summary: "Get weight chart data",
+        tags: ["Measurements"],
+        security: [["bearerAuth" => []]],
+        parameters: [
+            new OA\Parameter(
+                name: "range",
+                in: "path",
+                description: "Time range for the chart (days, weeks, months)",
+                required: true,
+                schema: new OA\Schema(type: "string", enum: ["days", "weeks", "months"], default: "days")
+            )
+        ]
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "Weight chart data",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: "body",
+                            properties: [
+                                new OA\Property(property: "message", type: "string", example: "Success"),
+                                new OA\Property(
+                                    property: "data",
+                                    type: "array",
+                                    items: new OA\Items(
+                                        properties: [
+                                            new OA\Property(property: "label", type: "string", example: "2026-02-09"),
+                                            new OA\Property(property: "value", type: "number", format: "float", example: 70.5),
+                                            new OA\Property(property: "start_date", type: "string", format: "date", nullable: true, example: "2026-02-09"),
+                                            new OA\Property(property: "end_date", type: "string", format: "date", nullable: true, example: "2026-02-09")
+                                        ]
+                                    )
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+    )]
+    public function weightChart($range = null)
     {
+        $this->authorize('viewAny', Measurement::class);
+        
+        $range = $range ?? request('range', 'days');
         $user = Auth::user();
-        $range = $request->query('range', 'days');
 
         $query = Measurement::query();
         if (!$user->isAdmin()) {
@@ -231,17 +143,175 @@ class MeasurementController extends BaseApiController
     }
 
     /**
+     * Store a weight-only record.
+     */
+    #[OA\Post(
+        path: "/api/measurements/weights/{date}",
+        summary: "Create a new weight-only measurement",
+        tags: ["Measurements"],
+        security: [["bearerAuth" => []]],
+        parameters: [
+            new OA\Parameter(
+                name: "date",
+                in: "path",
+                required: true,
+                description: "The date of the measurement (YYYY-MM-DD)",
+                schema: new OA\Schema(type: "string", format: "date", example: "2026-02-09")
+            )
+        ]
+    )]
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\MediaType(
+            mediaType: "multipart/form-data",
+            schema: new OA\Schema(
+                required: ["weight", "time"],
+                properties: [
+                    new OA\Property(property: "weight", type: "number", format: "float", example: 70.5),
+                    new OA\Property(property: "time", type: "string", format: "time", example: "10:00"),
+                    new OA\Property(property: "attachment", type: "string", format: "binary")
+                ]
+            )
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: "Weight record created successfully",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: "body",
+                            properties: [
+                                new OA\Property(property: "message", type: "string", example: "Success"),
+                                new OA\Property(
+                                    property: "data",
+                                    properties: [
+                                        new OA\Property(property: "id", type: "string", format: "uuid"),
+                                        new OA\Property(property: "user_id", type: "string", format: "uuid"),
+                                        new OA\Property(property: "weight", type: "number", format: "float"),
+                                        new OA\Property(property: "recorded_at", type: "string", format: "date-time"),
+                                        new OA\Property(property: "attachment_url", type: "string", nullable: true),
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Validation error",
+        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+    )]
+    public function storeWeight(StoreWeightRequest $request, $date)
+    {
+        $userId = auth()->id();
+        $recordedAt = $date . ' ' . $request->time . ':00';
+
+        $data = [
+            'user_id' => $userId,
+            'weight' => $request->weight,
+            'recorded_at' => $recordedAt,
+        ];
+
+        if ($request->hasFile('attachment')) {
+            $path = $request->file('attachment')->store($userId . '/measurements', 'public');
+            $data['attachment_url'] = '/storage/' . $path;
+        }
+
+        $measurement = Measurement::updateOrCreate(
+            [
+                'user_id' => $userId,
+                'recorded_at' => $recordedAt,
+            ],
+            $data
+        );
+
+        return $this->success($measurement, 201);
+    }
+
+    /**
      * Get a summary of metrics (Weight, Height, BMI) for a specific date.
      */
-    public function dailySummary(Request $request)
+    #[OA\Get(
+        path: "/api/measurements/weights/daily-summary/{date}",
+        summary: "Get daily summary metrics",
+        tags: ["Measurements"],
+        security: [["bearerAuth" => []]],
+        parameters: [
+            new OA\Parameter(
+                name: "date",
+                in: "path",
+                description: "Date for the summary (YYYY-MM-DD)",
+                required: true,
+                schema: new OA\Schema(type: "string", format: "date", example: "2026-02-09")
+            )
+        ]
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "Daily summary metrics",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: "body",
+                            properties: [
+                                new OA\Property(property: "message", type: "string", example: "Success"),
+                                new OA\Property(
+                                    property: "data",
+                                    properties: [
+                                        new OA\Property(property: "date", type: "string", format: "date", example: "2026-02-09"),
+                                        new OA\Property(
+                                            property: "summary",
+                                            properties: [
+                                                new OA\Property(property: "avg_weight", type: "number", format: "float", example: 70.5),
+                                                new OA\Property(property: "avg_height", type: "number", format: "float", example: 175.0),
+                                                new OA\Property(property: "bmi_value", type: "number", format: "float", example: 23.0),
+                                                new OA\Property(property: "bmi_status", type: "string", example: "Normal")
+                                            ]
+                                        ),
+                                        new OA\Property(
+                                            property: "records",
+                                            type: "array",
+                                            items: new OA\Items(
+                                                properties: [
+                                                    new OA\Property(property: "id", type: "integer", example: 1),
+                                                    new OA\Property(property: "weight", type: "number", format: "float", example: 70.5),
+                                                    new OA\Property(property: "height", type: "number", format: "float", example: 175.0),
+                                                    new OA\Property(property: "time", type: "string", example: "10:00")
+                                                ]
+                                            )
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "No records found",
+        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+    )]
+    public function dailySummary($date)
     {
+        $this->authorize('viewAny', Measurement::class);
         $user = Auth::user();
 
-        $request->validate([
-            'recorded_at' => ['nullable', 'date_format:Y-m-d'],
-        ]);
-
-        $date = $request->query('recorded_at', now()->toDateString());
+        if (!$date) {
+            $date = now()->toDateString();
+        }
 
         // get records in day
         $records = Measurement::where('user_id', $user->id)
@@ -292,4 +362,201 @@ class MeasurementController extends BaseApiController
         ]);
     }
 
+    /**
+     * Get a specific measurement.
+     */
+    #[OA\Get(
+        path: "/api/measurements/weights/{id}",
+        summary: "Get a specific measurement",
+        tags: ["Measurements"],
+        security: [["bearerAuth" => []]],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "string", format: "uuid")
+            )
+        ]
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "Measurement details with health metrics and UI thresholds",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: "body",
+                            properties: [
+                                new OA\Property(property: "message", type: "string", example: "Success"),
+                                new OA\Property(
+                                    property: "data",
+                                    properties: [
+                                        new OA\Property(
+                                            property: "record",
+                                            ref: "#/components/schemas/Measurement"
+                                        ),
+                                        new OA\Property(
+                                            property: "metrics",
+                                            properties: [
+                                                new OA\Property(
+                                                    property: "weight",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float"),
+                                                        new OA\Property(property: "unit", type: "string", example: "kg"),
+                                                        new OA\Property(property: "status", type: "string"),
+                                                        new OA\Property(property: "thresholds", type: "array", items: new OA\Items(type: "number"))
+                                                    ]
+                                                ),
+                                                new OA\Property(
+                                                    property: "bmi",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float"),
+                                                        new OA\Property(property: "status", type: "string"),
+                                                        new OA\Property(property: "thresholds", type: "array", items: new OA\Items(type: "number"))
+                                                    ]
+                                                ),
+                                                new OA\Property(
+                                                    property: "body_fat",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", nullable: true),
+                                                        new OA\Property(property: "status", type: "string", nullable: true),
+                                                        new OA\Property(property: "thresholds", type: "array", items: new OA\Items(type: "number"))
+                                                    ]
+                                                ),
+                                                new OA\Property(
+                                                    property: "fat_free_weight",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", nullable: true),
+                                                        new OA\Property(property: "status", type: "string", nullable: true),
+                                                        new OA\Property(property: "thresholds", type: "array", items: new OA\Items(type: "number"))
+                                                    ]
+                                                )
+                                            ]
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "Measurement not found",
+        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+    )]
+    public function show(Measurement $measurement)
+    {
+        $this->authorize('view', $measurement);
+        $user = $measurement->user;
+        $weight = (float) $measurement->weight;
+        $height = (float) $measurement->height; // cm
+        
+        // --- 1. BMI ---
+        $bmiValue = 0.0;
+        $bmiStatus = 'Unknown';
+        $bmiThresholds = [18.5, 23.0, 25.0, 30.0];
+
+        if ($height > 0) {
+            $bmiValue = round($weight / pow($height / 100, 2), 1);
+            $bmiStatus = $this->getBmiStatus($bmiValue);
+        }
+
+        // --- 2. Weight (Thresholds based on BMI for current height) ---
+        $weightStatus = $bmiStatus;
+        $weightThresholds = [];
+        if ($height > 0) {
+            $h2 = pow($height / 100, 2);
+            $weightThresholds = [
+                round(18.5 * $h2, 1),
+                round(23.0 * $h2, 1),
+                round(25.0 * $h2, 1),
+                round(30.0 * $h2, 1),
+            ];
+        }
+
+        // --- 3. Body Fat & Fat Free Weight ---
+        $bodyFat = null;
+        $bodyFatStatus = null;
+        $bodyFatThresholds = [6.0, 13.0, 17.0, 25.0]; // Standard for UI slider
+
+        $fatFreeWeight = null;
+        $fatFreeStatus = null;
+        $fatFreeThresholds = $weightThresholds; // Usually mirrors weight categories
+
+        if ($user && $user->date_of_birth && $user->gender && $bmiValue > 0) {
+            $age = $user->date_of_birth->age;
+            
+            if ($user->gender === 'male') {
+                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 16.2;
+                $bodyFatStatus = $this->getBodyFatStatus($bodyFat, 'male');
+            } else {
+                $bodyFat = (1.20 * $bmiValue) + (0.23 * $age) - 5.4;
+                $bodyFatStatus = $this->getBodyFatStatus($bodyFat, 'female');
+            }
+
+            $bodyFat = max(0, round($bodyFat, 1));
+            $fatFreeWeight = round($weight * (1 - $bodyFat / 100), 1);
+            $fatFreeStatus = $weightStatus;
+        }
+
+        return $this->success([
+            'record' => $measurement,
+            'metrics' => [
+                'weight' => [
+                    'value' => round($weight, 1),
+                    'unit' => 'kg',
+                    'status' => $weightStatus,
+                    'thresholds' => $weightThresholds
+                ],
+                'bmi' => [
+                    'value' => $bmiValue,
+                    'status' => $bmiStatus,
+                    'thresholds' => $bmiThresholds
+                ],
+                'body_fat' => [
+                    'value' => $bodyFat,
+                    'status' => $bodyFatStatus,
+                    'thresholds' => $bodyFatThresholds
+                ],
+                'fat_free_weight' => [
+                    'value' => $fatFreeWeight,
+                    'status' => $fatFreeStatus,
+                    'thresholds' => $fatFreeThresholds
+                ],
+            ]
+        ]);
+    }
+
+    private function getBodyFatStatus($value, $gender)
+    {
+        if ($gender === 'male') {
+            if ($value < 6) return 'Essential Fat';
+            if ($value < 13) return 'Athletes';
+            if ($value < 17) return 'Fitness';
+            if ($value < 25) return 'Acceptable';
+            return 'Obesity';
+        } else {
+            // Female standards are higher
+            if ($value < 13) return 'Essential Fat';
+            if ($value < 20) return 'Athletes';
+            if ($value < 24) return 'Fitness';
+            if ($value < 31) return 'Acceptable';
+            return 'Obesity';
+        }
+    }
+
+    private function getBmiStatus($bmiValue)
+    {
+        if ($bmiValue <= 0) return 'Unknown';
+        if ($bmiValue < 18.5) return 'Underweight';
+        if ($bmiValue < 23) return 'Normal';
+        if ($bmiValue < 25) return 'Overweight';
+        return 'Obese';
+    }
 }

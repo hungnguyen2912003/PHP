@@ -14,7 +14,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\Client\ActivationMail;
 use App\Models\User;
-use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -39,7 +38,6 @@ class AuthController extends Controller
             return redirect()->back()->withInput();
         }
 
-        $role = Role::where('name', 'User')->first();
 
         //Create activation token
         $plainToken = Str::random(64);
@@ -51,7 +49,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'role_id' => $role->id,
+            'role' => 'user',
             'status' => 'pending',
             'activation_token' => $hashedToken,
             'activation_token_sent_at' => Carbon::now(),

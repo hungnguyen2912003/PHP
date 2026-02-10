@@ -28,8 +28,7 @@ class ForgotPasswordController extends Controller
     public function sendResetLinkEmail(ForgotPasswordRequest $request)
     {
         // Check role
-        $user = User::with('role')
-            ->where('email', $request->email)
+        $user = User::where('email', $request->email)
             ->first();
 
         if (!$user)
@@ -38,8 +37,8 @@ class ForgotPasswordController extends Controller
             return redirect()->back()->withInput();
         }
 
-        $roleName = $user->role->name;
-        if (!in_array($roleName, ['Admin', 'Staff'], true)) {
+        $roleName = strtolower($user->role);
+        if (!in_array($roleName, ['admin', 'staff'], true)) {
             flash()->error(__('message.forgot_password.email_not_admin_or_staff'), [], __('notification.error'));
             return redirect()->back()->withInput();
         }

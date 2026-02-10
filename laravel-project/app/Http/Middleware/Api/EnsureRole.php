@@ -11,12 +11,22 @@ class EnsureRole
     {
         $user = auth('api')->user();
 
-        if (! $user || ! $user->role || ! in_array($user->role->name, $roles)) {
+        if (! $user || ! $user->role) {
             return response()->json([
-                'status_code' => 403,
-                'body' => [
-                    'data' => null
-                ]
+                'status' => 403,
+                'message' => 'Forbidden',
+                'data' => null
+            ], 403);
+        }
+
+        $requiredRoles = array_map('strtolower', $roles);
+        $userRole = strtolower($user->role);
+
+        if (! in_array($userRole, $requiredRoles, true)) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Forbidden',
+                'data' => null
             ], 403);
         }
 

@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'address' => 'nullable|string|max:255',
             'gender' => 'nullable|in:male,female,other',
             'date_of_birth' => 'nullable|date',
-            'role_id' => 'required|exists:roles,id',
+            'role' => 'required|in:admin,staff,user',
             'status' => 'required|in:active,pending,banned',
             'password' => 'nullable|min:6',
         ];
@@ -46,7 +46,7 @@ class UpdateUserRequest extends FormRequest
             'address.required' => __('validation.address.required'),
             'gender.required' => __('validation.gender.required'),
             'date_of_birth.required' => __('validation.date_of_birth.required'),
-            'role_id.required' => __('validation.role_id.required'),
+            'role.required' => __('validation.role.required'),
             'status.required' => __('validation.status.required'),
             'password.required' => __('validation.password.required'),
             'password.min' => __('validation.password.min'),

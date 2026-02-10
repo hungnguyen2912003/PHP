@@ -134,7 +134,7 @@
                                             </h3>
                                             <span class="fs-15 fw-medium">{{ __('label.role') }}:</span>
                                             @if($user->role)
-                                                {{ __('value.role.' . strtolower($user->role->name)) }}
+                                                {{ __('value.role.' . strtolower($user->role)) }}
                                             @endif
                                         </div>
                                     </div>

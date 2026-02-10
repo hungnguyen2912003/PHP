@@ -38,7 +38,7 @@ class UsersDataTable extends DataTable
                     default => $user->gender,
                 };
             })
-            ->editColumn('role_id', function ($user) {
+            ->editColumn('role', function ($user) {
                 return view('admin.pages.users.columns.role', compact('user'));
             })
             ->editColumn('status', function ($user) {
@@ -47,19 +47,18 @@ class UsersDataTable extends DataTable
             ->addColumn('action', function ($user) {
                 return view('admin.pages.users.columns.action', compact('user'));
             })
-            ->rawColumns(['fullname', 'date_of_birth', 'gender', 'role_id', 'status', 'action'])
+            ->rawColumns(['fullname', 'date_of_birth', 'gender', 'role', 'status', 'action'])
             ->setRowId('id');
     }
 
     public function query(User $model): QueryBuilder
     {
         return $model->newQuery()
-            ->with('role')
             ->when($this->request->get('gender'), function ($query, $gender) {
                 $query->where('gender', $gender);
             })
-            ->when($this->request->get('role_id'), function ($query, $role_id) {
-                $query->where('role_id', $role_id);
+            ->when($this->request->get('role'), function ($query, $role) {
+                $query->where('role', $role);
             })
             ->when($this->request->get('status'), function ($query, $status) {
                 $query->where('status', $status);
@@ -73,7 +72,7 @@ class UsersDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax('', null, [
                 'gender' => '$("#genderFilterValue").val()',
-                'role_id' => '$("#roleFilterValue").val()',
+                'role' => '$("#roleFilterValue").val()',
                 'status' => '$("#statusFilterValue").val()',
             ])
             ->orders([])
@@ -101,7 +100,7 @@ class UsersDataTable extends DataTable
             Column::make('email')->title(__('label.email'))->addClass('text-nowrap'),
             Column::make('phone')->title(__('label.phone'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>')->addClass('text-nowrap'),
             Column::make('address')->title(__('label.address'))->defaultContent('<span class="text-warning">' . __('value.not_available') . '</span>')->width(500),
-            Column::make('role_id')->title(__('label.role'))->addClass('text-nowrap'),
+            Column::make('role')->title(__('label.role'))->addClass('text-nowrap'),
             Column::make('status')->title(__('label.status'))->addClass('text-nowrap'),
             Column::computed('action')
                 ->title(__('label.action'))
