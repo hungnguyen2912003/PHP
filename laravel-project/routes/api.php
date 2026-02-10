@@ -31,6 +31,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('measurements/weights/chart/{range?}', [MeasurementController::class, 'weightChart']);
     Route::get('measurements/weights/daily-summary/{date}', [MeasurementController::class, 'dailySummary']);
-    Route::post('measurements/weights/{date}', [MeasurementController::class, 'storeWeight']);
+    Route::post('measurements/weights', [MeasurementController::class, 'storeWeight']);
     Route::get('measurements/weights/{measurement}', [MeasurementController::class, 'show']);
 });

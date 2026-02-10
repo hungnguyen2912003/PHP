@@ -39,13 +39,5 @@ class StoreWeightRequest extends FormRequest
         ];
     }
 
-    /**
-     * Prepare the data for validation.
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'date' => $this->route('date'),
-        ]);
-    }
+
 }

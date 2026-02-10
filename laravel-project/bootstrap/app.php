@@ -56,7 +56,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 401,
                     'body' => [
-                        'message' => 'Unauthorized',
                         'errors' => null,
                     ],
                 ], 401);
@@ -68,7 +67,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 401,
                     'body' => [
-                        'message' => 'Token has expired',
                         'errors' => null,
                     ],
                 ], 401);
@@ -80,7 +78,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 401,
                     'body' => [
-                        'message' => 'Token is invalid',
                         'errors' => null,
                     ],
                 ], 401);
@@ -92,7 +89,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 401,
                     'body' => [
-                        'message' => 'Token error: ' . $e->getMessage(),
                         'errors' => null,
                     ],
                 ], 401);
@@ -104,7 +100,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 422,
                     'body' => [
-                        'message' => 'Validation Error',
                         'errors' => $e->errors()
                     ],
                 ], 422);
@@ -116,7 +111,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 404,
                     'body' => [
-                        'message' => 'Resource Not Found',
                         'errors' => null,
                     ],
                 ], 404);
@@ -129,7 +123,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => $e->getStatusCode(),
                     'body' => [
-                        'message' => $e->getMessage() ?: 'Http Error',
                         'errors' => null
                     ],
                 ], $e->getStatusCode());
@@ -145,7 +138,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'status' => 500,
                     'body' => [
-                        'message' => 'Internal Server Error',
                         'errors' => config('app.debug') ? $e->getMessage() : null,
                     ],
                 ], 500);

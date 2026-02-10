@@ -14,6 +14,9 @@ class Measurement extends Model
         'user_id',
         'weight',
         'height',
+        'bmi',
+        'body_fat',
+        'fat_free_body_weight',
         'recorded_at',
         'attachment_url',
         'notes',
@@ -25,6 +28,9 @@ class Measurement extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
         'height' => 'decimal:2',
         'weight' => 'decimal:2',
+        'bmi' => 'decimal:2',
+        'body_fat' => 'decimal:2',
+        'fat_free_body_weight' => 'decimal:2',
     ];
 
     public function user()

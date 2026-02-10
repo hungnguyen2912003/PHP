@@ -28,7 +28,9 @@ class UserMeasurementsDataTable extends DataTable
             ->when($this->request->get('to_date'), function ($query, $toDate) {
                 return $query->whereDate('recorded_at', '<=', $toDate);
             })
-            ->orderBy('recorded_at', 'desc');
+            ->when(!$this->request->get('order'), function ($query) {
+                $query->orderBy('recorded_at', 'desc');
+            });
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -37,14 +39,26 @@ class UserMeasurementsDataTable extends DataTable
             ->editColumn('recorded_at', function ($row) {
                 return \Carbon\Carbon::parse($row->recorded_at)->format('d/m/Y H:i');
             })
+            ->editColumn('height', function ($row) {
+                return $row->height ? $row->height : '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
+            ->editColumn('bmi', function ($row) {
+                return $row->bmi ? $row->bmi : '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
+            ->editColumn('body_fat', function ($row) {
+                return $row->body_fat ? $row->body_fat : '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
+            ->editColumn('fat_free_body_weight', function ($row) {
+                return $row->fat_free_body_weight ? $row->fat_free_body_weight : '<span class="text-warning">' . __('value.not_available') . '</span>';
+            })
             ->editColumn('attachment', function ($row) {
                 if ($row->attachment_url) {
-                    return '<a href="' . asset($row->attachment_url) . '" target="_blank" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="' . __('label.view_attachment') . '"><i class="ri-attachment-line"></i></a>';
+                    return '<img src="' . asset($row->attachment_url) . '" alt="Attachment" class="img-thumbnail" style="height: 50px;">';
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
             ->addColumn('action', 'admin.pages.measurements.columns.action')
-            ->rawColumns(['attachment', 'action'])
+            ->rawColumns(['height', 'bmi', 'body_fat', 'fat_free_body_weight', 'attachment', 'action'])
             ->setRowId('id')
             ->addIndexColumn();
     }
@@ -80,7 +94,10 @@ class UserMeasurementsDataTable extends DataTable
             Column::make('recorded_at')->title(__('label.recorded_at'))->addClass('text-nowrap'),
             Column::make('weight')->title(__('label.weight') . ' ' . '(kg)')->addClass('text-nowrap')->type('string'),
             Column::make('height')->title(__('label.height') . ' ' . '(cm)')->addClass('text-nowrap')->type('string'),
-            Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap text-center'),
+            Column::make('bmi')->title(__('label.bmi'))->addClass('text-nowrap')->type('string'),
+            Column::make('body_fat')->title(__('label.body_fat'))->addClass('text-nowrap')->type('string'),
+            Column::make('fat_free_body_weight')->title(__('label.fat_free_body_weight'))->addClass('text-nowrap')->type('string'),
+            Column::make('attachment')->title(__('label.attachment'))->addClass('text-nowrap text-center')->orderable(false),
             Column::computed('action')
                 ->title(__('label.action'))
                 ->exportable(false)

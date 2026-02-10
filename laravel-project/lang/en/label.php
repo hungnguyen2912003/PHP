@@ -62,4 +62,6 @@ return [
     'to' => 'To',
     'weight_history' => 'Weight History',
     'height_history' => 'Height History',
+    'body_fat' => 'Body Fat (%)',
+    'fat_free_body_weight' => 'Fat Free Body Weight (kg)',
 ];

@@ -61,6 +61,24 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
             $weight = (float) str_replace(',', '.', $weight);
         }
 
+        // Handle bmi (Column D)
+        $bmi = $row[3] ?? null;
+        if (is_string($bmi)) {
+            $bmi = (float) str_replace(',', '.', $bmi);
+        }
+
+        // Handle body_fat (Column E)
+        $body_fat = $row[4] ?? null;
+        if (is_string($body_fat)) {
+            $body_fat = (float) str_replace(',', '.', $body_fat);
+        }
+
+        // Handle fat_free_body_weight (Column F)
+        $fat_free_body_weight = $row[5] ?? null;
+        if (is_string($fat_free_body_weight)) {
+            $fat_free_body_weight = (float) str_replace(',', '.', $fat_free_body_weight);
+        }
+
         // Check for existing records for the same user and timestamp
         $query = Measurement::where('user_id', $this->userId)
             ->where('recorded_at', $recorded_at);
@@ -82,6 +100,9 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
             [
                 'weight' => $weight,
                 'height' => $height,
+                'bmi' => $bmi,
+                'body_fat' => $body_fat,
+                'fat_free_body_weight' => $fat_free_body_weight,
             ]
         );
     }

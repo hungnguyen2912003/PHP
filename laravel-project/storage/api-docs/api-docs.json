@@ -17,49 +17,15 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Register a new user",
-                "operationId": "c7bb21a0d87049e161b8e4c9b0d909f2",
+                "summary": "Đăng ký tài khoản",
+                "description": "Đăng ký tài khoản người dùng.",
+                "operationId": "registerUser",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "fullname",
-                                    "email",
-                                    "username",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "fullname": {
-                                        "type": "string",
-                                        "example": "John Doe"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "test@example.com"
-                                    },
-                                    "username": {
-                                        "type": "string",
-                                        "example": "test1"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "12345678"
-                                    },
-                                    "role": {
-                                        "type": "string",
-                                        "enum": [
-                                            "user",
-                                            "admin",
-                                            "staff"
-                                        ],
-                                        "example": "user"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/RegisterRequest"
                             }
                         }
                     }
@@ -69,70 +35,60 @@
                         "description": "User registered successfully",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ApiResponse"
-                                        },
-                                        {
-                                            "properties": {
-                                                "data": {
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "string",
-                                                            "example": "019c4042-12c0-7014-8b0b-33e181251437"
-                                                        },
-                                                        "fullname": {
-                                                            "type": "string",
-                                                            "example": "John Doe"
-                                                        },
-                                                        "username": {
-                                                            "type": "string",
-                                                            "example": "test1"
-                                                        },
-                                                        "email": {
-                                                            "type": "string",
-                                                            "example": "test@example.com"
-                                                        },
-                                                        "role": {
-                                                            "type": "string",
-                                                            "example": "user",
-                                                            "nullable": true
-                                                        },
-                                                        "status": {
-                                                            "type": "string",
-                                                            "example": "active",
-                                                            "nullable": true
-                                                        },
-                                                        "avatar_url": {
-                                                            "type": "string",
-                                                            "nullable": true
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "example": "2026-02-09 09:36:37"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "example": "2026-02-09 09:36:37"
-                                                        }
-                                                    },
-                                                    "type": "object"
-                                                }
-                                            },
-                                            "type": "object"
+                                "schema": {},
+                                "example": {
+                                    "status": 201,
+                                    "body": {
+                                        "data": {
+                                            "id": "019c4042-12c0-7014-8b0b-33e181251437",
+                                            "fullname": "John Doe",
+                                            "username": "test1",
+                                            "email": "test@example.com",
+                                            "role": "user",
+                                            "status": "active",
+                                            "avatar_url": null,
+                                            "created_at": "2026-02-09 09:36:37",
+                                            "updated_at": "2026-02-09 09:36:37"
                                         }
-                                    ]
+                                    }
                                 }
                             }
                         }
                     },
                     "422": {
-                        "description": "Validation error",
+                        "description": "Validate exception",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                "schema": {},
+                                "example": {
+                                    "status": 422,
+                                    "body": {
+                                        "errors": {
+                                            "fullname": [
+                                                "The fullname field is required."
+                                            ],
+                                            "email": [
+                                                "The email field is required"
+                                            ],
+                                            "username": [
+                                                "The username has already been taken."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "status": 500,
+                                    "body": {
+                                        "errors": []
+                                    }
                                 }
                             }
                         }
@@ -145,37 +101,26 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Get a JWT via given credentials",
-                "operationId": "dd51a484b7fa0f97c7680fdbde14cf5f",
+                "summary": "Đăng nhập",
+                "description": "Đăng nhập tài khoản người dùng.",
+                "operationId": "loginUser",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "login",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "login": {
-                                        "description": "Email or username",
-                                        "type": "string",
-                                        "example": "test1"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "12345678"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/LoginRequest"
+                            },
+                            "example": {
+                                "login": "test1",
+                                "password": "12345678"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Login successful",
+                        "description": "Login successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -184,30 +129,45 @@
                                             "$ref": "#/components/schemas/ApiResponse"
                                         },
                                         {
-                                            "properties": {
-                                                "data": {
-                                                    "properties": {
-                                                        "access_token": {
-                                                            "type": "string",
-                                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
-                                                        },
-                                                        "token_type": {
-                                                            "type": "string",
-                                                            "example": "bearer"
-                                                        },
-                                                        "expires_in": {
-                                                            "type": "integer",
-                                                            "example": 3600
-                                                        },
-                                                        "refresh_token": {
-                                                            "type": "string",
-                                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                            "example": {
+                                                "status": 200,
+                                                "body": {
+                                                    "data": {
+                                                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                                                        "token_type": "bearer",
+                                                        "expires_in": 3600
+                                                    }
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error (missing or invalid fields)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 422,
+                                                "body": {
+                                                    "errors": {
+                                                        "login": [
+                                                            "The login field is required."
+                                                        ],
+                                                        "password": [
+                                                            "The password field is required."
+                                                        ]
+                                                    }
+                                                }
+                                            }
                                         }
                                     ]
                                 }
@@ -215,11 +175,45 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized",
+                        "description": "Invalid credentials (wrong username or password)",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 401,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 500,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -232,12 +226,12 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Get the authenticated User",
-                "description": "Get the authenticated User.",
-                "operationId": "b5de204f5e452ef51327c691aa99e77c",
+                "summary": "Lấy thông tin tài khoản hiện tại",
+                "description": "Lấy thông tin cá nhân người dùng đang đăng nhập.",
+                "operationId": "profileUser",
                 "responses": {
                     "200": {
-                        "description": "Fetch successful",
+                        "description": "Fetch successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -246,52 +240,22 @@
                                             "$ref": "#/components/schemas/ApiResponse"
                                         },
                                         {
-                                            "properties": {
-                                                "data": {
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "string",
-                                                            "example": "019c4042-12c0-7014-8b0b-33e181251437"
-                                                        },
-                                                        "fullname": {
-                                                            "type": "string",
-                                                            "example": "John Doe"
-                                                        },
-                                                        "username": {
-                                                            "type": "string",
-                                                            "example": "test1"
-                                                        },
-                                                        "email": {
-                                                            "type": "string",
-                                                            "example": "test@example.com"
-                                                        },
-                                                        "role": {
-                                                            "type": "string",
-                                                            "example": "user",
-                                                            "nullable": true
-                                                        },
-                                                        "status": {
-                                                            "type": "string",
-                                                            "example": "active",
-                                                            "nullable": true
-                                                        },
-                                                        "avatar_url": {
-                                                            "type": "string",
-                                                            "nullable": true
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "example": "2026-02-09 09:36:37"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "example": "2026-02-09 09:36:37"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                            "example": {
+                                                "status": 200,
+                                                "body": {
+                                                    "data": {
+                                                        "id": "019c4042-12c0-7014-8b0b-33e181251437",
+                                                        "fullname": "John Doe",
+                                                        "username": "test1",
+                                                        "email": "test@example.com",
+                                                        "role": "user",
+                                                        "status": "active",
+                                                        "avatar_url": null,
+                                                        "created_at": "2026-02-09 09:36:37",
+                                                        "updated_at": "2026-02-09 09:36:37"
+                                                    }
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
                                     ]
                                 }
@@ -299,11 +263,45 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized",
+                        "description": "Unauthorized (missing/invalid/expired token)",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 401,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 500,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -321,12 +319,12 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Log the user out (Invalidate the token)",
-                "description": "Log the user out (Invalidate the token).",
-                "operationId": "df9bdc6c7a6d9f20b983526b2ec0f698",
+                "summary": "Đăng xuất",
+                "description": "Đăng xuất tài khoản người dùng",
+                "operationId": "logoutUser",
                 "responses": {
                     "200": {
-                        "description": "Successfully logged out",
+                        "description": "Logout successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -335,14 +333,12 @@
                                             "$ref": "#/components/schemas/ApiResponse"
                                         },
                                         {
-                                            "properties": {
-                                                "data": {
-                                                    "type": "object",
-                                                    "example": null,
-                                                    "nullable": true
+                                            "example": {
+                                                "status": 200,
+                                                "body": {
+                                                    "data": null
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
                                     ]
                                 }
@@ -350,11 +346,45 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized",
+                        "description": "Unauthorized (missing/invalid/expired token)",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 401,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 500,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -372,12 +402,12 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Refresh a token",
-                "description": "Refresh a token.",
-                "operationId": "30c20c52f5f72828d8c531fd7c9ea3e7",
+                "summary": "Làm mới token cho người dùng trong session",
+                "description": "Tạo access token mới từ token hiện tại.",
+                "operationId": "refreshToken",
                 "responses": {
                     "200": {
-                        "description": "Token refreshed successfully",
+                        "description": "Refresh token successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -386,27 +416,16 @@
                                             "$ref": "#/components/schemas/ApiResponse"
                                         },
                                         {
-                                            "properties": {
-                                                "data": {
-                                                    "properties": {
-                                                        "access_token": {
-                                                            "type": "string"
-                                                        },
-                                                        "token_type": {
-                                                            "type": "string",
-                                                            "example": "bearer"
-                                                        },
-                                                        "expires_in": {
-                                                            "type": "integer"
-                                                        },
-                                                        "refresh_token": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                            "example": {
+                                                "status": 200,
+                                                "body": {
+                                                    "data": {
+                                                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                                                        "token_type": "bearer",
+                                                        "expires_in": 3600
+                                                    }
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
                                         }
                                     ]
                                 }
@@ -414,11 +433,45 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized",
+                        "description": "Unauthorized (missing/invalid/expired token)",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 401,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 500,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -436,29 +489,29 @@
                 "tags": [
                     "Measurements"
                 ],
-                "summary": "Get weight chart data",
-                "description": "Get weight chart data for the authenticated user.",
-                "operationId": "8b12034d6e0aa3b247e53414beafc0ec",
+                "summary": "Lấy dữ liệu biểu đồ cân nặng",
+                "description": "Lấy dữ liệu biểu đồ thống kê cân nặng của người dùng đã đăng nhập.",
+                "operationId": "weightChart",
                 "parameters": [
                     {
                         "name": "range",
                         "in": "path",
-                        "description": "Time range for the chart (days, weeks, months)",
+                        "description": "Khoảng thời gian hiển thị",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "default": "days",
                             "enum": [
                                 "days",
                                 "weeks",
                                 "months"
-                            ]
+                            ],
+                            "example": "days"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Weight chart data",
+                        "description": "Fetch successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -467,38 +520,69 @@
                                             "$ref": "#/components/schemas/ApiResponse"
                                         },
                                         {
-                                            "properties": {
-                                                "data": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "properties": {
-                                                            "label": {
-                                                                "type": "string",
-                                                                "example": "2026-02-09"
-                                                            },
-                                                            "value": {
-                                                                "type": "number",
-                                                                "format": "float",
-                                                                "example": 70.5
-                                                            },
-                                                            "start_date": {
-                                                                "type": "string",
-                                                                "format": "date",
-                                                                "example": "2026-02-09",
-                                                                "nullable": true
-                                                            },
-                                                            "end_date": {
-                                                                "type": "string",
-                                                                "format": "date",
-                                                                "example": "2026-02-09",
-                                                                "nullable": true
-                                                            }
+                                            "example": {
+                                                "status": 200,
+                                                "body": {
+                                                    "data": [
+                                                        {
+                                                            "label": "06 Feb",
+                                                            "value": 63.2
                                                         },
-                                                        "type": "object"
-                                                    }
+                                                        {
+                                                            "label": "07 Feb",
+                                                            "value": 63
+                                                        },
+                                                        {
+                                                            "label": "08 Feb",
+                                                            "value": 62.8
+                                                        }
+                                                    ]
                                                 }
-                                            },
-                                            "type": "object"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized (missing/invalid/expired token)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 401,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        },
+                                        {
+                                            "example": {
+                                                "status": 500,
+                                                "body": {
+                                                    "errors": []
+                                                }
+                                            }
                                         }
                                     ]
                                 }
@@ -513,27 +597,14 @@
                 ]
             }
         },
-        "/api/measurements/weights/{date}": {
+        "/api/measurements/weights": {
             "post": {
                 "tags": [
                     "Measurements"
                 ],
                 "summary": "Create a new weight-only measurement",
                 "description": "Store a weight-only record.",
-                "operationId": "27701c3249599d682daa57bc4b6520ec",
-                "parameters": [
-                    {
-                        "name": "date",
-                        "in": "path",
-                        "description": "The date of the measurement (YYYY-MM-DD)",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date",
-                            "example": "2026-02-09"
-                        }
-                    }
-                ],
+                "operationId": "6207974263d006b641efae12a60251ac",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -576,27 +647,32 @@
                                         },
                                         {
                                             "properties": {
-                                                "data": {
+                                                "body": {
                                                     "properties": {
-                                                        "id": {
-                                                            "type": "string",
-                                                            "format": "uuid"
-                                                        },
-                                                        "user_id": {
-                                                            "type": "string",
-                                                            "format": "uuid"
-                                                        },
-                                                        "weight": {
-                                                            "type": "number",
-                                                            "format": "float"
-                                                        },
-                                                        "recorded_at": {
-                                                            "type": "string",
-                                                            "format": "date-time"
-                                                        },
-                                                        "attachment_url": {
-                                                            "type": "string",
-                                                            "nullable": true
+                                                        "data": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid"
+                                                                },
+                                                                "user_id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid"
+                                                                },
+                                                                "weight": {
+                                                                    "type": "number",
+                                                                    "format": "float"
+                                                                },
+                                                                "recorded_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time"
+                                                                },
+                                                                "attachment_url": {
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                }
+                                                            },
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "type": "object"
@@ -660,62 +736,67 @@
                                         },
                                         {
                                             "properties": {
-                                                "data": {
+                                                "body": {
                                                     "properties": {
-                                                        "date": {
-                                                            "type": "string",
-                                                            "format": "date",
-                                                            "example": "2026-02-09"
-                                                        },
-                                                        "summary": {
+                                                        "data": {
                                                             "properties": {
-                                                                "avg_weight": {
-                                                                    "type": "number",
-                                                                    "format": "float",
-                                                                    "example": 70.5
-                                                                },
-                                                                "avg_height": {
-                                                                    "type": "number",
-                                                                    "format": "float",
-                                                                    "example": 175
-                                                                },
-                                                                "bmi_value": {
-                                                                    "type": "number",
-                                                                    "format": "float",
-                                                                    "example": 23
-                                                                },
-                                                                "bmi_status": {
+                                                                "date": {
                                                                     "type": "string",
-                                                                    "example": "Normal"
+                                                                    "format": "date",
+                                                                    "example": "2026-02-09"
+                                                                },
+                                                                "summary": {
+                                                                    "properties": {
+                                                                        "avg_weight": {
+                                                                            "type": "number",
+                                                                            "format": "float",
+                                                                            "example": 70.5
+                                                                        },
+                                                                        "avg_height": {
+                                                                            "type": "number",
+                                                                            "format": "float",
+                                                                            "example": 175
+                                                                        },
+                                                                        "bmi_value": {
+                                                                            "type": "number",
+                                                                            "format": "float",
+                                                                            "example": 23
+                                                                        },
+                                                                        "bmi_status": {
+                                                                            "type": "string",
+                                                                            "example": "Normal"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "records": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "integer",
+                                                                                "example": 1
+                                                                            },
+                                                                            "weight": {
+                                                                                "type": "number",
+                                                                                "format": "float",
+                                                                                "example": 70.5
+                                                                            },
+                                                                            "height": {
+                                                                                "type": "number",
+                                                                                "format": "float",
+                                                                                "example": 175
+                                                                            },
+                                                                            "time": {
+                                                                                "type": "string",
+                                                                                "example": "10:00"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    }
                                                                 }
                                                             },
                                                             "type": "object"
-                                                        },
-                                                        "records": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "type": "integer",
-                                                                        "example": 1
-                                                                    },
-                                                                    "weight": {
-                                                                        "type": "number",
-                                                                        "format": "float",
-                                                                        "example": 70.5
-                                                                    },
-                                                                    "height": {
-                                                                        "type": "number",
-                                                                        "format": "float",
-                                                                        "example": 175
-                                                                    },
-                                                                    "time": {
-                                                                        "type": "string",
-                                                                        "example": "10:00"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            }
                                                         }
                                                     },
                                                     "type": "object"
@@ -777,89 +858,94 @@
                                         },
                                         {
                                             "properties": {
-                                                "data": {
+                                                "body": {
                                                     "properties": {
-                                                        "record": {
-                                                            "$ref": "#/components/schemas/Measurement"
-                                                        },
-                                                        "metrics": {
+                                                        "data": {
                                                             "properties": {
-                                                                "weight": {
-                                                                    "properties": {
-                                                                        "value": {
-                                                                            "type": "number",
-                                                                            "format": "float"
-                                                                        },
-                                                                        "unit": {
-                                                                            "type": "string",
-                                                                            "example": "kg"
-                                                                        },
-                                                                        "status": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "thresholds": {
-                                                                            "type": "array",
-                                                                            "items": {
-                                                                                "type": "number"
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
+                                                                "record": {
+                                                                    "$ref": "#/components/schemas/Measurement"
                                                                 },
-                                                                "bmi": {
+                                                                "metrics": {
                                                                     "properties": {
-                                                                        "value": {
-                                                                            "type": "number",
-                                                                            "format": "float"
+                                                                        "weight": {
+                                                                            "properties": {
+                                                                                "value": {
+                                                                                    "type": "number",
+                                                                                    "format": "float"
+                                                                                },
+                                                                                "unit": {
+                                                                                    "type": "string",
+                                                                                    "example": "kg"
+                                                                                },
+                                                                                "status": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "thresholds": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
                                                                         },
-                                                                        "status": {
-                                                                            "type": "string"
+                                                                        "bmi": {
+                                                                            "properties": {
+                                                                                "value": {
+                                                                                    "type": "number",
+                                                                                    "format": "float"
+                                                                                },
+                                                                                "status": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "thresholds": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
                                                                         },
-                                                                        "thresholds": {
-                                                                            "type": "array",
-                                                                            "items": {
-                                                                                "type": "number"
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                "body_fat": {
-                                                                    "properties": {
-                                                                        "value": {
-                                                                            "type": "number",
-                                                                            "format": "float",
-                                                                            "nullable": true
+                                                                        "body_fat": {
+                                                                            "properties": {
+                                                                                "value": {
+                                                                                    "type": "number",
+                                                                                    "format": "float",
+                                                                                    "nullable": true
+                                                                                },
+                                                                                "status": {
+                                                                                    "type": "string",
+                                                                                    "nullable": true
+                                                                                },
+                                                                                "thresholds": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
                                                                         },
-                                                                        "status": {
-                                                                            "type": "string",
-                                                                            "nullable": true
-                                                                        },
-                                                                        "thresholds": {
-                                                                            "type": "array",
-                                                                            "items": {
-                                                                                "type": "number"
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                "fat_free_weight": {
-                                                                    "properties": {
-                                                                        "value": {
-                                                                            "type": "number",
-                                                                            "format": "float",
-                                                                            "nullable": true
-                                                                        },
-                                                                        "status": {
-                                                                            "type": "string",
-                                                                            "nullable": true
-                                                                        },
-                                                                        "thresholds": {
-                                                                            "type": "array",
-                                                                            "items": {
-                                                                                "type": "number"
-                                                                            }
+                                                                        "fat_free_weight": {
+                                                                            "properties": {
+                                                                                "value": {
+                                                                                    "type": "number",
+                                                                                    "format": "float",
+                                                                                    "nullable": true
+                                                                                },
+                                                                                "status": {
+                                                                                    "type": "string",
+                                                                                    "nullable": true
+                                                                                },
+                                                                                "thresholds": {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
                                                                         }
                                                                     },
                                                                     "type": "object"
@@ -907,9 +993,14 @@
                         "type": "integer",
                         "example": 200
                     },
-                    "message": {
-                        "type": "string",
-                        "example": "Success"
+                    "body": {
+                        "properties": {
+                            "data": {
+                                "type": "object",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -922,14 +1013,14 @@
                         "type": "integer",
                         "example": 400
                     },
-                    "message": {
-                        "type": "string",
-                        "example": "Error message"
-                    },
-                    "data": {
-                        "type": "object",
-                        "example": null,
-                        "nullable": true
+                    "body": {
+                        "properties": {
+                            "errors": {
+                                "type": "object",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -959,6 +1050,54 @@
                     "attachment_url": {
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "required": [
+                    "login",
+                    "password"
+                ],
+                "properties": {
+                    "login": {
+                        "description": "Username or Email",
+                        "type": "string",
+                        "example": "test1"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "12345678"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "required": [
+                    "fullname",
+                    "email",
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "fullname": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "john@example.com"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "johndoe"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "Password123"
                     }
                 },
                 "type": "object"

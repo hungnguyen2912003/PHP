@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('measurements', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->timestamp('recorded_at');
             $table->decimal('weight', 8, 2)->nullable();
             $table->decimal('height', 8, 2)->nullable();
-            $table->timestamp('recorded_at');
+            $table->decimal('bmi', 8, 2)->nullable();
+            $table->decimal('body_fat' ,8, 2)->nullable();
+            $table->decimal('fat_free_body_weight', 8, 2)->nullable();
             $table->string('attachment_url')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

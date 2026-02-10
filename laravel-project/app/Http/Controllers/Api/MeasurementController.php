@@ -24,45 +24,80 @@ class MeasurementController extends BaseApiController
      */
     #[OA\Get(
         path: "/api/measurements/weights/chart/{range}",
-        summary: "Get weight chart data",
+        summary: "Lấy dữ liệu biểu đồ cân nặng",
+        description: "Lấy dữ liệu biểu đồ thống kê cân nặng của người dùng đã đăng nhập.",
+        operationId: "weightChart",
         tags: ["Measurements"],
         security: [["bearerAuth" => []]],
         parameters: [
             new OA\Parameter(
                 name: "range",
                 in: "path",
-                description: "Time range for the chart (days, weeks, months)",
                 required: true,
-                schema: new OA\Schema(type: "string", enum: ["days", "weeks", "months"], default: "days")
+                description: "Khoảng thời gian hiển thị",
+                schema: new OA\Schema(type: "string", enum: ["days", "weeks", "months"], example: "days")
             )
         ]
     )]
     #[OA\Response(
         response: 200,
-        description: "Weight chart data",
+        description: "Fetch successfully",
         content: new OA\JsonContent(
             allOf: [
                 new OA\Schema(ref: "#/components/schemas/ApiResponse"),
                 new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
-                                new OA\Property(
-                                    property: "data",
-                                    type: "array",
-                                    items: new OA\Items(
-                                        properties: [
-                                            new OA\Property(property: "label", type: "string", example: "2026-02-09"),
-                                            new OA\Property(property: "value", type: "number", format: "float", example: 70.5),
-                                            new OA\Property(property: "start_date", type: "string", format: "date", nullable: true, example: "2026-02-09"),
-                                            new OA\Property(property: "end_date", type: "string", format: "date", nullable: true, example: "2026-02-09")
-                                        ]
-                                    )
-                                )
+                    example: [
+                        "status" => 200,
+                        "body" => [
+                            "data" => [
+                                [
+                                    "label" => "06 Feb",
+                                    "value" => 63.2
+                                ],
+                                [
+                                    "label" => "07 Feb",
+                                    "value" => 63.0
+                                ],
+                                [
+                                    "label" => "08 Feb",
+                                    "value" => 62.8
+                                ]
                             ]
-                        )
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 401,
+        description: "Unauthorized (missing/invalid/expired token)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 401,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 500,
+                        "body" => [
+                            "errors" => []
+                        ]
                     ]
                 )
             ]
@@ -146,19 +181,11 @@ class MeasurementController extends BaseApiController
      * Store a weight-only record.
      */
     #[OA\Post(
-        path: "/api/measurements/weights/{date}",
+        path: "/api/measurements/weights",
         summary: "Create a new weight-only measurement",
         tags: ["Measurements"],
         security: [["bearerAuth" => []]],
-        parameters: [
-            new OA\Parameter(
-                name: "date",
-                in: "path",
-                required: true,
-                description: "The date of the measurement (YYYY-MM-DD)",
-                schema: new OA\Schema(type: "string", format: "date", example: "2026-02-09")
-            )
-        ]
+        parameters: []
     )]
     #[OA\RequestBody(
         required: true,
@@ -185,7 +212,6 @@ class MeasurementController extends BaseApiController
                         new OA\Property(
                             property: "body",
                             properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
                                 new OA\Property(
                                     property: "data",
                                     properties: [
@@ -208,9 +234,10 @@ class MeasurementController extends BaseApiController
         description: "Validation error",
         content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
     )]
-    public function storeWeight(StoreWeightRequest $request, $date)
+    public function storeWeight(StoreWeightRequest $request)
     {
         $userId = auth()->id();
+        $date = now()->toDateString();
         $recordedAt = $date . ' ' . $request->time . ':00';
 
         $data = [
@@ -264,7 +291,6 @@ class MeasurementController extends BaseApiController
                         new OA\Property(
                             property: "body",
                             properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
                                 new OA\Property(
                                     property: "data",
                                     properties: [
@@ -390,7 +416,6 @@ class MeasurementController extends BaseApiController
                         new OA\Property(
                             property: "body",
                             properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
                                 new OA\Property(
                                     property: "data",
                                     properties: [

@@ -34,7 +34,6 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: "body",
             properties: [
-                new OA\Property(property: "message", type: "string", example: "Success"),
                 new OA\Property(property: "data", type: "object", nullable: true)
             ]
         )
@@ -49,7 +48,6 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: "body",
             properties: [
-                new OA\Property(property: "message", type: "string", example: "Error message"),
                 new OA\Property(property: "errors", type: "object", nullable: true)
             ]
         )
@@ -75,7 +73,6 @@ class BaseApiController extends Controller
         return response()->json([
             'status' => $status,
             'body' => [
-                'message' => $message,
                 'data' => $data,
             ],
         ], $status);
@@ -86,7 +83,6 @@ class BaseApiController extends Controller
         return response()->json([
             'status' => $status,
             'body' => [
-                'message' => $message,
                 'errors' => $errors,
             ],
         ], $status);

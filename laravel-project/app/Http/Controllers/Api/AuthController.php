@@ -24,59 +24,64 @@ class AuthController extends BaseApiController
 
     #[OA\Post(
         path: "/api/auth/register",
-        summary: "Register a new user",
+        summary: "Đăng ký tài khoản",
+        description: "Đăng ký tài khoản người dùng.",
+        operationId: "registerUser",
         tags: ["Auth"]
     )]
     #[OA\RequestBody(
         required: true,
-        content: new OA\JsonContent(
-            required: ["fullname", "email", "username", "password"],
-            properties: [
-                new OA\Property(property: "fullname", type: "string", example: "John Doe"),
-                new OA\Property(property: "email", type: "string", format: "email", example: "test@example.com"),
-                new OA\Property(property: "username", type: "string", example: "test1"),
-                new OA\Property(property: "password", type: "string", format: "password", example: "12345678"),
-                new OA\Property(property: "role", type: "string", enum: ["user", "admin", "staff"], example: "user")
-            ]
-        )
+        content: new OA\JsonContent(ref: "#/components/schemas/RegisterRequest")
     )]
     #[OA\Response(
         response: 201,
         description: "User registered successfully",
         content: new OA\JsonContent(
-            allOf: [
-                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
-                new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
-                                new OA\Property(
-                                    property: "data",
-                                    properties: [
-                                        new OA\Property(property: "id", type: "string", example: "019c4042-12c0-7014-8b0b-33e181251437"),
-                                        new OA\Property(property: "fullname", type: "string", example: "John Doe"),
-                                        new OA\Property(property: "username", type: "string", example: "test1"),
-                                        new OA\Property(property: "email", type: "string", format: "email", example: "test@example.com"),
-                                        new OA\Property(property: "role", type: "string", nullable: true, example: "user"),
-                                        new OA\Property(property: "status", type: "string", nullable: true, example: "active"),
-                                        new OA\Property(property: "avatar_url", type: "string", nullable: true),
-                                        new OA\Property(property: "created_at", type: "string", example: "2026-02-09 09:36:37"),
-                                        new OA\Property(property: "updated_at", type: "string", example: "2026-02-09 09:36:37")
-                                    ]
-                                )
-                            ]
-                        )
+            example: [
+                "status" => 201,
+                "body" => [
+                    "data" => [
+                        "id" => "019c4042-12c0-7014-8b0b-33e181251437",
+                        "fullname" => "John Doe",
+                        "username" => "test1",
+                        "email" => "test@example.com",
+                        "role" => "user",
+                        "status" => "active",
+                        "avatar_url" => null,
+                        "created_at" => "2026-02-09 09:36:37",
+                        "updated_at" => "2026-02-09 09:36:37"
                     ]
-                )
+                ]
             ]
         )
     )]
     #[OA\Response(
         response: 422,
-        description: "Validation error",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+        description: "Validate exception",
+        content: new OA\JsonContent(
+            example: [
+                "status" => 422,
+                "body" => [
+                    "errors" => [
+                        "fullname" => ["The fullname field is required."],
+                        "email" => ["The email field is required"],
+                        "username" => ["The username has already been taken."]
+                    ]
+                ]
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            example: [
+                "status" => 500,
+                "body" => [
+                    "errors" => []
+                ]
+            ]
+        )
     )]
     public function register(RegisterRequest $request)
     {
@@ -90,42 +95,57 @@ class AuthController extends BaseApiController
 
     #[OA\Post(
         path: "/api/auth/login",
-        summary: "Get a JWT via given credentials",
+        summary: "Đăng nhập",
+        description: "Đăng nhập tài khoản người dùng.",
+        operationId: "loginUser",
         tags: ["Auth"]
     )]
     #[OA\RequestBody(
         required: true,
         content: new OA\JsonContent(
-            required: ["login", "password"],
-            properties: [
-                new OA\Property(property: "login", type: "string", example: "test1", description: "Email or username"),
-                new OA\Property(property: "password", type: "string", format: "password", example: "12345678")
+            ref: "#/components/schemas/LoginRequest",
+            example: [
+                "login" => "test1",
+                "password" => "12345678"
             ]
         )
     )]
     #[OA\Response(
         response: 200,
-        description: "Login successful",
+        description: "Login successfully",
         content: new OA\JsonContent(
             allOf: [
                 new OA\Schema(ref: "#/components/schemas/ApiResponse"),
                 new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
-                                new OA\Property(
-                                    property: "data",
-                                    properties: [
-                                        new OA\Property(property: "access_token", type: "string", example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."),
-                                        new OA\Property(property: "token_type", type: "string", example: "bearer"),
-                                        new OA\Property(property: "expires_in", type: "integer", example: 3600),
-                                        new OA\Property(property: "refresh_token", type: "string", example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...")
-                                    ]
-                                )
+                    example: [
+                        "status" => 200,
+                        "body" => [
+                            "data" => [
+                                "access_token" => "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                                "token_type" => "bearer",
+                                "expires_in" => 3600
                             ]
-                        )
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Validation Error (missing or invalid fields)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 422,
+                        "body" => [
+                            "errors" => [
+                                "login" => ["The login field is required."],
+                                "password" => ["The password field is required."]
+                            ]
+                        ]
                     ]
                 )
             ]
@@ -133,8 +153,37 @@ class AuthController extends BaseApiController
     )]
     #[OA\Response(
         response: 401,
-        description: "Unauthorized",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+        description: "Invalid credentials (wrong username or password)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 401,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 500,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
     )]
     public function login(LoginRequest $request)
     {
@@ -145,7 +194,7 @@ class AuthController extends BaseApiController
             'password' => $request->input('password'),
         ];
         if (!$token = auth('api')->attempt($credentials)) {
-            return $this->error('Unauthorized', 401);
+            return $this->error('Invalid credentials', 401);
         }
         return $this->success($this->respondWithToken($token), 200);
     }
@@ -157,32 +206,34 @@ class AuthController extends BaseApiController
      */
     #[OA\Get(
         path: "/api/auth/me",
-        summary: "Get the authenticated User",
+        summary: "Lấy thông tin tài khoản hiện tại",
+        description: "Lấy thông tin cá nhân người dùng đang đăng nhập.",
+        operationId: "profileUser",
         tags: ["Auth"],
         security: [["bearerAuth" => []]]
     )]
     #[OA\Response(
         response: 200,
-        description: "Fetch successful",
+        description: "Fetch successfully",
         content: new OA\JsonContent(
             allOf: [
                 new OA\Schema(ref: "#/components/schemas/ApiResponse"),
                 new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "data",
-                            properties: [
-                                new OA\Property(property: "id", type: "string", example: "019c4042-12c0-7014-8b0b-33e181251437"),
-                                new OA\Property(property: "fullname", type: "string", example: "John Doe"),
-                                new OA\Property(property: "username", type: "string", example: "test1"),
-                                new OA\Property(property: "email", type: "string", example: "test@example.com"),
-                                new OA\Property(property: "role", type: "string", nullable: true, example: "user"),
-                                new OA\Property(property: "status", type: "string", nullable: true, example: "active"),
-                                new OA\Property(property: "avatar_url", type: "string", nullable: true),
-                                new OA\Property(property: "created_at", type: "string", example: "2026-02-09 09:36:37"),
-                                new OA\Property(property: "updated_at", type: "string", example: "2026-02-09 09:36:37")
+                    example: [
+                        "status" => 200,
+                        "body" => [
+                            "data" => [
+                                "id" => "019c4042-12c0-7014-8b0b-33e181251437",
+                                "fullname" => "John Doe",
+                                "username" => "test1",
+                                "email" => "test@example.com",
+                                "role" => "user",
+                                "status" => "active",
+                                "avatar_url" => null,
+                                "created_at" => "2026-02-09 09:36:37",
+                                "updated_at" => "2026-02-09 09:36:37"
                             ]
-                        )
+                        ]
                     ]
                 )
             ]
@@ -190,12 +241,44 @@ class AuthController extends BaseApiController
     )]
     #[OA\Response(
         response: 401,
-        description: "Unauthorized",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+        description: "Unauthorized (missing/invalid/expired token)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 401,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 500,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
     )]
     public function me()
     {
-        return $this->success(new UserResource(auth('api')->user()), 200);
+        $user = auth('api')->user();
+
+
+        return $this->success(new UserResource($user), 200);
     }
 
     /**
@@ -205,25 +288,24 @@ class AuthController extends BaseApiController
      */
     #[OA\Post(
         path: "/api/auth/logout",
-        summary: "Log the user out (Invalidate the token)",
+        summary: "Đăng xuất",
+        description: "Đăng xuất tài khoản người dùng",
+        operationId: "logoutUser",
         tags: ["Auth"],
         security: [["bearerAuth" => []]]
     )]
     #[OA\Response(
         response: 200,
-        description: "Successfully logged out",
+        description: "Logout successfully",
         content: new OA\JsonContent(
             allOf: [
                 new OA\Schema(ref: "#/components/schemas/ApiResponse"),
                 new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
-                                new OA\Property(property: "data", type: "object", nullable: true, example: null)
-                            ]
-                        )
+                    example: [
+                        "status" => 200,
+                        "body" => [
+                            "data" => null
+                        ]
                     ]
                 )
             ]
@@ -231,14 +313,46 @@ class AuthController extends BaseApiController
     )]
     #[OA\Response(
         response: 401,
-        description: "Unauthorized",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+        description: "Unauthorized (missing/invalid/expired token)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 401,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 500,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
     )]
     public function logout()
     {
+        $user = auth('api')->user();
+
+
         auth('api')->logout();
 
-        return $this->success(null, 200);
+        return $this->success(null, 200, 'Logout successfully');
     }
 
     /**
@@ -248,33 +362,28 @@ class AuthController extends BaseApiController
      */
     #[OA\Post(
         path: "/api/auth/refresh",
-        summary: "Refresh a token",
+        summary: "Làm mới token cho người dùng trong session",
+        description: "Tạo access token mới từ token hiện tại.",
+        operationId: "refreshToken",
         tags: ["Auth"],
         security: [["bearerAuth" => []]]
     )]
     #[OA\Response(
         response: 200,
-        description: "Token refreshed successfully",
+        description: "Refresh token successfully",
         content: new OA\JsonContent(
             allOf: [
                 new OA\Schema(ref: "#/components/schemas/ApiResponse"),
                 new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(property: "message", type: "string", example: "Success"),
-                                new OA\Property(
-                                    property: "data",
-                                    properties: [
-                                        new OA\Property(property: "access_token", type: "string"),
-                                        new OA\Property(property: "token_type", type: "string", example: "bearer"),
-                                        new OA\Property(property: "expires_in", type: "integer"),
-                                        new OA\Property(property: "refresh_token", type: "string")
-                                    ]
-                                )
+                    example: [
+                        "status" => 200,
+                        "body" => [
+                            "data" => [
+                                "access_token" => "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                                "token_type" => "bearer",
+                                "expires_in" => 3600
                             ]
-                        )
+                        ]
                     ]
                 )
             ]
@@ -282,12 +391,45 @@ class AuthController extends BaseApiController
     )]
     #[OA\Response(
         response: 401,
-        description: "Unauthorized",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
+        description: "Unauthorized (missing/invalid/expired token)",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 401,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: "default",
+        description: "Server error",
+        content: new OA\JsonContent(
+            allOf: [
+                new OA\Schema(ref: "#/components/schemas/ErrorResponse"),
+                new OA\Schema(
+                    example: [
+                        "status" => 500,
+                        "body" => [
+                            "errors" => []
+                        ]
+                    ]
+                )
+            ]
+        )
     )]
     public function refresh()
     {
-        return $this->success($this->respondWithToken(auth('api')->refresh()), 200);
+        $token = auth('api')->refresh();
+        $user = auth('api')->setToken($token)->user();
+
+
+        return $this->success($this->respondWithToken($token), 200);
     }
 
     /**
@@ -302,8 +444,7 @@ class AuthController extends BaseApiController
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'refresh_token' => $token
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ];
     }
 }

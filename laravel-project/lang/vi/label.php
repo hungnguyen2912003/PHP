@@ -62,4 +62,6 @@ return [
     'to' => 'Đến',
     'weight_history' => 'Lịch sử cân nặng',
     'height_history' => 'Lịch sử chiều cao',
+    'body_fat' => 'Tỷ lệ mỡ cơ thể (%)',
+    'fat_free_body_weight' => 'Trọng lượng cơ thể không mỡ (kg)',
 ];
