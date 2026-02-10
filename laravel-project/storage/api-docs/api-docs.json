@@ -703,14 +703,14 @@
                 ]
             }
         },
-        "/api/measurements/weights/daily-summary/{date}": {
+        "/api/measurements/weights/summary/{date}": {
             "get": {
                 "tags": [
                     "Measurements"
                 ],
                 "summary": "Get daily summary metrics",
                 "description": "Get a summary of metrics (Weight, Height, BMI) for a specific date.",
-                "operationId": "095fc95f35743b26c4586972fe4d3769",
+                "operationId": "fd47c642916d5405b1c5d95fde805445",
                 "parameters": [
                     {
                         "name": "date",
@@ -757,14 +757,10 @@
                                                                             "format": "float",
                                                                             "example": 175
                                                                         },
-                                                                        "bmi_value": {
+                                                                        "avg_bmi": {
                                                                             "type": "number",
                                                                             "format": "float",
                                                                             "example": 23
-                                                                        },
-                                                                        "bmi_status": {
-                                                                            "type": "string",
-                                                                            "example": "Normal"
                                                                         }
                                                                     },
                                                                     "type": "object"
@@ -790,6 +786,11 @@
                                                                             "time": {
                                                                                 "type": "string",
                                                                                 "example": "10:00"
+                                                                            },
+                                                                            "attachment_url": {
+                                                                                "type": "string",
+                                                                                "example": "/storage/1/measurements/image.jpg",
+                                                                                "nullable": true
                                                                             }
                                                                         },
                                                                         "type": "object"
@@ -848,7 +849,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Measurement details with health metrics and UI thresholds",
+                        "description": "Measurement details matching UI requirements",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -862,93 +863,31 @@
                                                     "properties": {
                                                         "data": {
                                                             "properties": {
-                                                                "record": {
-                                                                    "$ref": "#/components/schemas/Measurement"
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid"
                                                                 },
-                                                                "metrics": {
-                                                                    "properties": {
-                                                                        "weight": {
-                                                                            "properties": {
-                                                                                "value": {
-                                                                                    "type": "number",
-                                                                                    "format": "float"
-                                                                                },
-                                                                                "unit": {
-                                                                                    "type": "string",
-                                                                                    "example": "kg"
-                                                                                },
-                                                                                "status": {
-                                                                                    "type": "string"
-                                                                                },
-                                                                                "thresholds": {
-                                                                                    "type": "array",
-                                                                                    "items": {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                }
-                                                                            },
-                                                                            "type": "object"
-                                                                        },
-                                                                        "bmi": {
-                                                                            "properties": {
-                                                                                "value": {
-                                                                                    "type": "number",
-                                                                                    "format": "float"
-                                                                                },
-                                                                                "status": {
-                                                                                    "type": "string"
-                                                                                },
-                                                                                "thresholds": {
-                                                                                    "type": "array",
-                                                                                    "items": {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                }
-                                                                            },
-                                                                            "type": "object"
-                                                                        },
-                                                                        "body_fat": {
-                                                                            "properties": {
-                                                                                "value": {
-                                                                                    "type": "number",
-                                                                                    "format": "float",
-                                                                                    "nullable": true
-                                                                                },
-                                                                                "status": {
-                                                                                    "type": "string",
-                                                                                    "nullable": true
-                                                                                },
-                                                                                "thresholds": {
-                                                                                    "type": "array",
-                                                                                    "items": {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                }
-                                                                            },
-                                                                            "type": "object"
-                                                                        },
-                                                                        "fat_free_weight": {
-                                                                            "properties": {
-                                                                                "value": {
-                                                                                    "type": "number",
-                                                                                    "format": "float",
-                                                                                    "nullable": true
-                                                                                },
-                                                                                "status": {
-                                                                                    "type": "string",
-                                                                                    "nullable": true
-                                                                                },
-                                                                                "thresholds": {
-                                                                                    "type": "array",
-                                                                                    "items": {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                }
-                                                                            },
-                                                                            "type": "object"
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
+                                                                "recorded_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time"
+                                                                },
+                                                                "weight": {
+                                                                    "type": "number",
+                                                                    "format": "float"
+                                                                },
+                                                                "bmi": {
+                                                                    "type": "number",
+                                                                    "format": "float"
+                                                                },
+                                                                "body_fat": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "nullable": true
+                                                                },
+                                                                "fat_free_body_weight": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "nullable": true
                                                                 }
                                                             },
                                                             "type": "object"
