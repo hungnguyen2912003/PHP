@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Measurement;
 use App\Http\Requests\Api\Measurement\StoreWeightRequest;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use OpenApi\Attributes as OA;
-
 class MeasurementController extends BaseApiController
 {
     public function __construct()
@@ -106,7 +103,7 @@ class MeasurementController extends BaseApiController
     public function weightChart($range = null)
     {
         $this->authorize('viewAny', Measurement::class);
-        
+
         $range = $range ?? request('range', 'days');
         $user = Auth::user();
 
@@ -118,7 +115,7 @@ class MeasurementController extends BaseApiController
         switch ($range) {
             case 'days':
                 $start = now()->subDays(6)->startOfDay();
-                $end   = now()->endOfDay();
+                $end = now()->endOfDay();
 
                 $data = $query->whereBetween('recorded_at', [$start, $end])
                     ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
@@ -128,7 +125,7 @@ class MeasurementController extends BaseApiController
                 break;
             case 'weeks':
                 $start = now()->subWeeks(6)->startOfWeek(); // Mon
-                $end   = now()->endOfWeek();                // Sun
+                $end = now()->endOfWeek();                // Sun
 
                 // Tính trung bình 1 ngày
                 $daily = $query->whereBetween('recorded_at', [$start, $end])
@@ -146,7 +143,7 @@ class MeasurementController extends BaseApiController
                 break;
             case 'months':
                 $start = now()->subMonths(6)->startOfMonth();
-                $end   = now()->endOfMonth();
+                $end = now()->endOfMonth();
 
                 // Tính trung bình 1 ngày
                 $daily = $query->whereBetween('recorded_at', [$start, $end])
@@ -164,7 +161,7 @@ class MeasurementController extends BaseApiController
                 break;
             default:
                 $start = now()->subDays(6)->startOfDay();
-                $end   = now()->endOfDay();
+                $end = now()->endOfDay();
 
                 $data = $query->whereBetween('recorded_at', [$start, $end])
                     ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
@@ -352,7 +349,7 @@ class MeasurementController extends BaseApiController
         $avgWeight = (float) $records->avg('weight');
         $avgHeight = (float) $records->avg('height');
         $avgBMI = (float) $records->avg('bmi');
-        
+
         // get records daily
         $items = $records->map(function ($r) {
             $w = (float) $r->weight;
@@ -433,13 +430,67 @@ class MeasurementController extends BaseApiController
     {
         $this->authorize('view', $measurement);
 
+        $height = (float) $measurement->height;
+        $h_m = $height / 100; // cm -> m
+
+        $metrics = [];
+
+        // 1. Weight
+        if (!is_null($measurement->weight)) {
+            $metrics[] = [
+                'key' => 'weight',
+                'name' => 'Weight',
+                'value' => (float) $measurement->weight,
+                'thresholds' => [
+                    round(18.5 * $h_m * $h_m, 2),
+                    round(25 * $h_m * $h_m, 2),
+                    round(30 * $h_m * $h_m, 2)
+                ],
+                'categories' => ['Underweight', 'Normal', 'Overweight', 'Obesity']
+            ];
+        }
+
+        // 2. BMI
+        if (!is_null($measurement->bmi)) {
+            $metrics[] = [
+                'key' => 'bmi',
+                'name' => 'BMI',
+                'value' => (float) $measurement->bmi,
+                'thresholds' => [18.5, 25, 30],
+                'categories' => ['Underweight', 'Normal', 'Overweight', 'Obesity']
+            ];
+        }
+
+        // 3. Body Fat
+        if (!is_null($measurement->body_fat)) {
+            $metrics[] = [
+                'key' => 'body_fat',
+                'name' => 'Body Fat',
+                'value' => (float) $measurement->body_fat,
+                'thresholds' => [6, 13, 17, 25],
+                'categories' => ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity']
+            ];
+        }
+
+        // 4. Fat-free Body Weight
+        if (!is_null($measurement->fat_free_body_weight)) {
+            $metrics[] = [
+                'key' => 'fat_free_body_weight',
+                'name' => 'Fat-free Body Weight',
+                'value' => (float) $measurement->fat_free_body_weight,
+                'thresholds' => [
+                    round(18.5 * $h_m * $h_m, 2),
+                    round(25 * $h_m * $h_m, 2),
+                    round(30 * $h_m * $h_m, 2)
+                ],
+                'categories' => ['Thin', 'Normal', 'Strong', 'Obesity']
+            ];
+        }
+
         return $this->success([
             'id' => $measurement->id,
-            'recorded_at' => $measurement->recorded_at->format('Y-m-d H:i'),
-            'weight' => (float) $measurement->weight,
-            'bmi' => (float) $measurement->bmi,
-            'body_fat' => (float) $measurement->body_fat,
-            'fat_free_body_weight' => (float) $measurement->fat_free_body_weight,
+            'recorded_at' => $measurement->recorded_at->format('l, Y M j'),
+            'metrics' => $metrics
         ]);
     }
 }
