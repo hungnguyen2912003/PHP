@@ -49,8 +49,6 @@ class AuthController extends BaseApiController
                         "fullname" => "John Doe",
                         "username" => "test1",
                         "email" => "test@example.com",
-                        "gender" => "male",
-                        "date_of_birth" => "2000-01-01",
                         "role" => "user",
                         "status" => "active",
                         "avatar_url" => null,

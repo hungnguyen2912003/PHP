@@ -116,13 +116,12 @@ class MeasurementController extends BaseApiController
 
         switch ($range) {
             case 'days':
-                $start = now()->subDays(6)->startOfDay();
-                $end = now()->endOfDay();
-
-                $data = $query->whereBetween('recorded_at', [$start, $end])
+                $data = $query
+                    ->where('recorded_at', '>=', now()->subDays(6)->startOfDay())
+                    ->where('recorded_at', '<=', now()->endOfDay())
                     ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
-                    ->groupBy('label')
-                    ->orderBy('label')
+                    ->groupByRaw('DATE(recorded_at)')
+                    ->orderByRaw('DATE(recorded_at)')
                     ->get();
                 break;
             case 'weeks':
@@ -131,27 +130,16 @@ class MeasurementController extends BaseApiController
 
                 // Tính trung bình 1 ngày
                 $daily = $query->whereBetween('recorded_at', [$start, $end])
-                    ->selectRaw('DATE(recorded_at) as d, AVG(weight) as day_avg')
+                    ->selectRaw('DATE(recorded_at) as d, ROUND(AVG(weight), 1) as day_avg')
                     ->groupBy('d');
 
                 // Tính trung bình theo tuần
                 $data = \DB::query()->fromSub($daily, 'daily')
                     ->selectRaw('YEARWEEK(d, 1) as yw')
-                    ->selectRaw('MIN(d) as start_date, MAX(d) as end_date')
                     ->selectRaw('ROUND(AVG(day_avg), 1) as value')
                     ->groupBy('yw')
                     ->orderBy('yw')
-                    ->get()
-                    ->map(function ($item) {
-                        $date = \Carbon\Carbon::parse($item->start_date);
-                        $week = $date->isoWeek();
-                        $year = $date->isoWeekYear();
-
-                        return [
-                            'label' => "W$week/$year",
-                            'value' => $item->value
-                        ];
-                    });
+                    ->get();
                 break;
             case 'months':
                 $start = now()->subMonths(6)->startOfMonth();
@@ -159,7 +147,7 @@ class MeasurementController extends BaseApiController
 
                 // Tính trung bình 1 ngày
                 $daily = $query->whereBetween('recorded_at', [$start, $end])
-                    ->selectRaw('DATE(recorded_at) as d, AVG(weight) as day_avg')
+                    ->selectRaw('DATE(recorded_at) as d, ROUND(AVG(weight), 1) as day_avg')
                     ->groupBy('d');
 
                 // Tính trung bình theo tháng
@@ -171,13 +159,12 @@ class MeasurementController extends BaseApiController
                     ->get();
                 break;
             default:
-                $start = now()->subDays(6)->startOfDay();
-                $end = now()->endOfDay();
-
-                $data = $query->whereBetween('recorded_at', [$start, $end])
+                $data = $query
+                    ->where('recorded_at', '>=', now()->subDays(6)->startOfDay())
+                    ->where('recorded_at', '<=', now()->endOfDay())
                     ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
-                    ->groupBy('label')
-                    ->orderBy('label')
+                    ->groupByRaw('DATE(recorded_at)')
+                    ->orderByRaw('DATE(recorded_at)')
                     ->get();
                 break;
         }
