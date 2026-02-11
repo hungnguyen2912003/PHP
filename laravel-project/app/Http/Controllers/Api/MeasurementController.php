@@ -133,7 +133,7 @@ class MeasurementController extends BaseApiController
             ->get()
             ->groupBy(fn($m) => $m->recorded_at->startOf($unit)->timestamp)
             ->map(fn($items, $timestamp) => [
-                'timestamp' => (int) $timestamp,
+                'label' => (int) $timestamp,
                 'value' => round((float) $items->avg('weight'), 1),
                 'details' => [
                     'metrics' => [
@@ -270,14 +270,41 @@ class MeasurementController extends BaseApiController
                                         new OA\Property(property: "recorded_at", type: "integer", example: 1738803600),
                                         new OA\Property(
                                             property: "metrics",
-                                            type: "array",
-                                            items: new OA\Items(
-                                                properties: [
-                                                    new OA\Property(property: "key", type: "string", example: "weight"),
-                                                    new OA\Property(property: "value", type: "number", format: "float", example: 70.5),
-                                                    new OA\Property(property: "status", type: "integer", example: 2, nullable: true, description: "1: Low, 2: Normal, 3: High"),
-                                                ]
-                                            )
+                                            properties: [
+                                                new OA\Property(
+                                                    property: "weight",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", example: 62.0),
+                                                        new OA\Property(property: "status", type: "integer", example: 2),
+                                                    ],
+                                                    type: "object"
+                                                ),
+                                                new OA\Property(
+                                                    property: "bmi",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", example: 21.4),
+                                                        new OA\Property(property: "status", type: "integer", example: 2),
+                                                    ],
+                                                    type: "object"
+                                                ),
+                                                new OA\Property(
+                                                    property: "body_fat",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", example: 14.3),
+                                                        new OA\Property(property: "status", type: "integer", example: 2),
+                                                    ],
+                                                    type: "object"
+                                                ),
+                                                new OA\Property(
+                                                    property: "fat_free_body_weight",
+                                                    properties: [
+                                                        new OA\Property(property: "value", type: "number", format: "float", example: 53.1),
+                                                        new OA\Property(property: "status", type: "integer", example: 2),
+                                                    ],
+                                                    type: "object"
+                                                ),
+                                            ],
+                                            type: "object"
                                         )
                                     ]
                                 )
@@ -297,47 +324,24 @@ class MeasurementController extends BaseApiController
     {
         $this->authorize('view', $measurement);
 
-        $metrics = [];
-
-        // 1. Weight
-        if (!is_null($measurement->weight)) {
-            $metrics[] = [
-                'weight' => [
-                    'value' => (float) $measurement->weight,
-                    'status' => $this->getBmiStatus($measurement->bmi),
-                ]
-            ];
-        }
-
-        // 2. BMI
-        if (!is_null($measurement->bmi)) {
-            $metrics[] = [
-                'bmi' => [
-                    'value' => (float) $measurement->bmi,
-                    'status' => $this->getBmiStatus($measurement->bmi),
-                ]
-            ];
-        }
-
-        // 3. Body Fat (by gender)
-        if (!is_null($measurement->body_fat)) {
-            $metrics[] = [
-                'body_fat' => [
-                    'value' => (float) $measurement->body_fat,
-                    'status' => $this->getBodyFatStatus($measurement->body_fat, optional($measurement->user)->gender),
-                ]
-            ];
-        }
-
-        // 4. Fat-free Body Weight
-        if (!is_null($measurement->fat_free_body_weight)) {
-            $metrics[] = [
-                'fat_free_body_weight' => [
-                    'value' => (float) $measurement->fat_free_body_weight,
-                    'status' => $this->getBmiStatus($measurement->bmi),
-                ]
-            ];
-        }
+        $metrics = [
+            'weight' => [
+                'value' => (float) $measurement->weight,
+                'status' => $this->getBmiStatus($measurement->bmi),
+            ],
+            'bmi' => [
+                'value' => (float) $measurement->bmi,
+                'status' => $this->getBmiStatus($measurement->bmi),
+            ],
+            'body_fat' => [
+                'value' => (float) $measurement->body_fat,
+                'status' => $this->getBodyFatStatus($measurement->body_fat, optional($measurement->user)->gender),
+            ],
+            'fat_free_body_weight' => [
+                'value' => (float) $measurement->fat_free_body_weight,
+                'status' => $this->getBmiStatus($measurement->bmi),
+            ],
+        ];
 
         return $this->success([
             'id' => $measurement->id,
