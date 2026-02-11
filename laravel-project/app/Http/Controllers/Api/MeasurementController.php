@@ -7,6 +7,7 @@ use App\Models\Measurement;
 use App\Http\Requests\Api\Measurement\StoreWeightRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Services\HealthStatusService;
 
 class MeasurementController extends BaseApiController
@@ -21,14 +22,24 @@ class MeasurementController extends BaseApiController
         $user = Auth::user();
         $range = $request->query('range', 'days');
 
-        $unit = match($range) {
+        $unit = match ($range) {
             'months' => 'month',
-            'weeks'  => 'week',
-            default  => 'day',
+            'weeks' => 'week',
+            default => 'day',
         };
 
-        $start = now()->sub($unit, 6)->startOf($unit);
-        $end = now()->endOf($unit);
+        $limit = $request->input('limit', 7);
+        $offset = $request->input('offset', 0);
+        $from = $request->input('from');
+        $to = $request->input('to');
+
+        if ($from && $to) {
+            $start = Carbon::parse($from)->startOf($unit);
+            $end = Carbon::parse($to)->endOf($unit);
+        } else {
+            $end = now()->sub($unit, $offset * $limit)->endOf($unit);
+            $start = $end->copy()->sub($unit, $limit - 1)->startOf($unit);
+        }
 
         $height = Measurement::where('user_id', $user->id)->whereNotNull('height')->latest('recorded_at')->value('height');
 
