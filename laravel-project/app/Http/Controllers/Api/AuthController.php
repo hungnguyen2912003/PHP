@@ -96,6 +96,7 @@ class AuthController extends BaseApiController
         $hashedToken = hash('sha256', $plainToken);
 
         $user = $request->validated();
+        $user['role'] = $request->role ?? 'user';
         $user['password'] = Hash::make($user['password']);
         $user['activation_token'] = $hashedToken;
         $user['activation_token_sent_at'] = Carbon::now();

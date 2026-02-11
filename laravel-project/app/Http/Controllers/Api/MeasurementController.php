@@ -102,7 +102,7 @@ class MeasurementController extends BaseApiController
             ]
         )
     )]
-    public function weightChart(\Illuminate\Http\Request $request)
+    public function weightChart(Request $request)
     {
         $this->authorize('viewAny', Measurement::class);
 
@@ -399,10 +399,29 @@ class MeasurementController extends BaseApiController
                                     properties: [
                                         new OA\Property(property: "id", type: "string", format: "uuid"),
                                         new OA\Property(property: "recorded_at", type: "string", format: "date-time"),
-                                        new OA\Property(property: "weight", type: "number", format: "float"),
-                                        new OA\Property(property: "bmi", type: "number", format: "float"),
-                                        new OA\Property(property: "body_fat", type: "number", format: "float", nullable: true),
-                                        new OA\Property(property: "fat_free_body_weight", type: "number", format: "float", nullable: true)
+                                        new OA\Property(
+                                            property: "metrics",
+                                            type: "array",
+                                            items: new OA\Items(
+                                                properties: [
+                                                    new OA\Property(property: "key", type: "string", example: "weight"),
+                                                    new OA\Property(property: "name", type: "string", example: "Weight"),
+                                                    new OA\Property(property: "value", type: "number", format: "float", example: 70.5),
+                                                    new OA\Property(property: "unit", type: "string", example: "kg"),
+                                                    new OA\Property(property: "description", type: "string", example: "One of the important indicators of health"),
+                                                    new OA\Property(
+                                                        property: "thresholds",
+                                                        type: "array",
+                                                        items: new OA\Items(type: "number", format: "float")
+                                                    ),
+                                                    new OA\Property(
+                                                        property: "categories",
+                                                        type: "array",
+                                                        items: new OA\Items(type: "string")
+                                                    )
+                                                ]
+                                            )
+                                        )
                                     ]
                                 )
                             ]
@@ -423,6 +442,7 @@ class MeasurementController extends BaseApiController
 
         $height = (float) $measurement->height;
         $h_m = $height / 100; // cm -> m
+        $hasHeight = $height > 0;
 
         $metrics = [];
 
@@ -430,14 +450,21 @@ class MeasurementController extends BaseApiController
         if (!is_null($measurement->weight)) {
             $metrics[] = [
                 'key' => 'weight',
-                'name' => 'Weight',
+                'name' => __('metrics.weight.name'),
                 'value' => (float) $measurement->weight,
-                'thresholds' => [
+                'unit' => 'kg',
+                'description' => __('metrics.weight.description'),
+                'thresholds' => $hasHeight ? [
                     round(18.5 * $h_m * $h_m, 2),
                     round(25 * $h_m * $h_m, 2),
                     round(30 * $h_m * $h_m, 2)
-                ],
-                'categories' => ['Underweight', 'Normal', 'Overweight', 'Obesity']
+                ] : null,
+                'categories' => [
+                    __('metrics.categories.underweight'),
+                    __('metrics.categories.normal'),
+                    __('metrics.categories.overweight'),
+                    __('metrics.categories.obesity')
+                ]
             ];
         }
 
@@ -445,10 +472,17 @@ class MeasurementController extends BaseApiController
         if (!is_null($measurement->bmi)) {
             $metrics[] = [
                 'key' => 'bmi',
-                'name' => 'BMI',
+                'name' => __('metrics.bmi.name'),
                 'value' => (float) $measurement->bmi,
+                'unit' => '',
+                'description' => __('metrics.bmi.description'),
                 'thresholds' => [18.5, 25, 30],
-                'categories' => ['Underweight', 'Normal', 'Overweight', 'Obesity']
+                'categories' => [
+                    __('metrics.categories.underweight'),
+                    __('metrics.categories.normal'),
+                    __('metrics.categories.overweight'),
+                    __('metrics.categories.obesity')
+                ]
             ];
         }
 
@@ -458,10 +492,22 @@ class MeasurementController extends BaseApiController
 
             if ($gender === 'female') {
                 $bfThresholds = [14, 21, 25, 32];
-                $bfCategories = ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity'];
+                $bfCategories = [
+                    __('metrics.categories.essential_fat'),
+                    __('metrics.categories.athletes'),
+                    __('metrics.categories.fitness'),
+                    __('metrics.categories.acceptable'),
+                    __('metrics.categories.obesity')
+                ];
             } elseif ($gender === 'male') {
                 $bfThresholds = [6, 14, 18, 25];
-                $bfCategories = ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity'];
+                $bfCategories = [
+                    __('metrics.categories.essential_fat'),
+                    __('metrics.categories.athletes'),
+                    __('metrics.categories.fitness'),
+                    __('metrics.categories.acceptable'),
+                    __('metrics.categories.obesity')
+                ];
             } else {
                 $bfThresholds = null;
                 $bfCategories = null;
@@ -469,14 +515,12 @@ class MeasurementController extends BaseApiController
 
             $metrics[] = [
                 'key' => 'body_fat',
-                'name' => 'Body Fat',
+                'name' => __('metrics.body_fat.name'),
                 'value' => (float) $measurement->body_fat,
+                'unit' => '%',
+                'description' => __('metrics.body_fat.description'),
                 'thresholds' => $bfThresholds,
                 'categories' => $bfCategories,
-                'meta' => [
-                    'gender' => $gender,
-                    'requires_gender' => true,
-                ],
             ];
         }
 
@@ -484,20 +528,27 @@ class MeasurementController extends BaseApiController
         if (!is_null($measurement->fat_free_body_weight)) {
             $metrics[] = [
                 'key' => 'fat_free_body_weight',
-                'name' => 'Fat-free Body Weight',
+                'name' => __('metrics.fat_free_body_weight.name'),
                 'value' => (float) $measurement->fat_free_body_weight,
-                'thresholds' => [
+                'unit' => 'kg',
+                'description' => __('metrics.fat_free_body_weight.description'),
+                'thresholds' => $hasHeight ? [
                     round(18.5 * $h_m * $h_m, 2),
                     round(25 * $h_m * $h_m, 2),
                     round(30 * $h_m * $h_m, 2)
-                ],
-                'categories' => ['Thin', 'Normal', 'Strong', 'Obesity']
+                ] : null,
+                'categories' => [
+                    __('metrics.categories.thin'),
+                    __('metrics.categories.normal'),
+                    __('metrics.categories.strong'),
+                    __('metrics.categories.obesity')
+                ]
             ];
         }
 
         return $this->success([
             'id' => $measurement->id,
-            'recorded_at' => $measurement->recorded_at->format('l, Y M j'),
+            'recorded_at' => $measurement->recorded_at->translatedFormat('l, Y M j'),
             'metrics' => $metrics
         ]);
     }
