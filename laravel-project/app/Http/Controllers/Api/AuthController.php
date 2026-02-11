@@ -15,16 +15,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends BaseApiController
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Notice: Middlewares are better defined in routes/api.php in newer Laravel versions
-    }
-
     public function register(RegisterRequest $request)
     {
         //Create activation token

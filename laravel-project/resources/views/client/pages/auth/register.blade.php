@@ -50,7 +50,54 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mb-20">
+                    <label class="label fs-16 mb-2">
+                        {{ __('label.gender') }}
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="form-floating">
+                        <select class="form-select @error('gender') is-invalid @enderror" name="gender" id="gender">
+                            <option value="">{{ __('placeholder.gender') }}</option>
+                            <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>
+                                {{ __('value.gender.male') }}
+                            </option>
+                            <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>
+                                {{ __('value.gender.female') }}
+                            </option>
+                        </select>
+                        <label for="gender">
+                            <i class="ri-genderless-line"></i>
+                            {{ __('placeholder.gender') }}
+                        </label>
+                    </div>
+                    @error('gender')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mb-20">
+                    <label class="label fs-16 mb-2">
+                        {{ __('label.date_of_birth') }}
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="form-floating">
+                        <input class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth"
+                            id="date_of_birth" placeholder="{{ __('placeholder.date_of_birth') }}" type="date"
+                            value="{{ old('date_of_birth') }}" />
+                        <label for="date_of_birth">
+                            <i class="ri-calendar-line"></i>
+                            {{ __('placeholder.date_of_birth') }}
+                        </label>
+                    </div>
+                    @error('date_of_birth')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+        </div>
         <div class="mb-20">
             <label class="label fs-16 mb-2">
                 {{ __('label.email') }}

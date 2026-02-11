@@ -25,7 +25,7 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        $recorded_at_raw = $row[0] ?? null;
+        $recorded_at_raw = $row[0] ?? null; // Column A
         if (!$recorded_at_raw) {
             return null;
         }
@@ -41,7 +41,11 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
                 try {
                     $recorded_at = Carbon::createFromFormat('d/m/Y', $recorded_at_raw);
                 } catch (\Exception $e2) {
-                    $recorded_at = Carbon::parse($recorded_at_raw);
+                    try {
+                        $recorded_at = Carbon::parse($recorded_at_raw);
+                    } catch (\Exception $e3) {
+                        return null;
+                    }
                 }
             }
         }
@@ -49,35 +53,32 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
         // Format to minute precision
         $recorded_at = $recorded_at->startOfMinute();
 
-        // Handle height (Column B)
-        $height = $row[1] ?? 0;
-        if (is_string($height)) {
-            $height = (float) str_replace(',', '.', $height);
-        }
+        // Helper to parse decimal values from Excel row
+        $parseDecimal = function ($value) {
+            if (is_null($value) || $value === '' || $value === '-')
+                return null;
+            if (is_string($value)) {
+                $value = str_replace(',', '.', $value);
+            }
+            return (float) $value;
+        };
 
-        // Handle weight (Column C)
-        $weight = $row[2] ?? 0;
-        if (is_string($weight)) {
-            $weight = (float) str_replace(',', '.', $weight);
-        }
-
-        // Handle bmi (Column D)
-        $bmi = $row[3] ?? null;
-        if (is_string($bmi)) {
-            $bmi = (float) str_replace(',', '.', $bmi);
-        }
-
-        // Handle body_fat (Column E)
-        $body_fat = $row[4] ?? null;
-        if (is_string($body_fat)) {
-            $body_fat = (float) str_replace(',', '.', $body_fat);
-        }
-
-        // Handle fat_free_body_weight (Column F)
-        $fat_free_body_weight = $row[5] ?? null;
-        if (is_string($fat_free_body_weight)) {
-            $fat_free_body_weight = (float) str_replace(',', '.', $fat_free_body_weight);
-        }
+        $weight = $parseDecimal($row[1] ?? null);
+        $height = $parseDecimal($row[2] ?? null);
+        $bmi = $parseDecimal($row[3] ?? null);
+        $body_fat = $parseDecimal($row[4] ?? null);
+        $fat_free_body_weight = $parseDecimal($row[5] ?? null);
+        $muscle_mass = $parseDecimal($row[6] ?? null);
+        $skeletal_muscle_mass = $parseDecimal($row[7] ?? null);
+        $subcutaneous_fat = $parseDecimal($row[8] ?? null);
+        $visceral_fat = $parseDecimal($row[9] ?? null);
+        $body_water = $parseDecimal($row[10] ?? null);
+        $protein = $parseDecimal($row[11] ?? null);
+        $bone_mass = $parseDecimal($row[12] ?? null);
+        $bmr = $parseDecimal($row[13] ?? null);
+        $waist = $parseDecimal($row[14] ?? null);
+        $hip = $parseDecimal($row[15] ?? null);
+        $whr = $parseDecimal($row[16] ?? null);
 
         // Check for existing records for the same user and timestamp
         $query = Measurement::where('user_id', $this->userId)
@@ -94,7 +95,7 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
 
         return Measurement::updateOrCreate(
             [
-                'user_id'     => $this->userId,
+                'user_id' => $this->userId,
                 'recorded_at' => $recorded_at,
             ],
             [
@@ -103,6 +104,17 @@ class MeasurementImport implements ToModel, WithStartRow, SkipsEmptyRows
                 'bmi' => $bmi,
                 'body_fat' => $body_fat,
                 'fat_free_body_weight' => $fat_free_body_weight,
+                'muscle_mass' => $muscle_mass,
+                'skeletal_muscle_mass' => $skeletal_muscle_mass,
+                'subcutaneous_fat' => $subcutaneous_fat,
+                'visceral_fat' => $visceral_fat,
+                'body_water' => $body_water,
+                'protein' => $protein,
+                'bone_mass' => $bone_mass,
+                'bmr' => $bmr,
+                'waist' => $waist,
+                'hip' => $hip,
+                'whr' => $whr,
             ]
         );
     }

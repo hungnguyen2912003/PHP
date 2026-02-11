@@ -89,7 +89,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <small class="text-muted">{{ __('message.hint.password_min') }}</small>
                                 </div>
                             </div>
                         </div>

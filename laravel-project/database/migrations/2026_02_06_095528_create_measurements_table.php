@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,8 +17,19 @@ return new class extends Migration
             $table->decimal('weight', 8, 2)->nullable();
             $table->decimal('height', 8, 2)->nullable();
             $table->decimal('bmi', 8, 2)->nullable();
-            $table->decimal('body_fat' ,8, 2)->nullable();
+            $table->decimal('body_fat', 8, 2)->nullable();
             $table->decimal('fat_free_body_weight', 8, 2)->nullable();
+            $table->decimal('muscle_mass', 8, 2)->nullable();
+            $table->decimal('skeletal_muscle_mass', 8, 2)->nullable();
+            $table->decimal('subcutaneous_fat', 8, 2)->nullable();
+            $table->decimal('visceral_fat', 8, 2)->nullable();
+            $table->decimal('body_water', 8, 2)->nullable();
+            $table->decimal('protein', 8, 2)->nullable();
+            $table->decimal('bone_mass', 8, 2)->nullable();
+            $table->decimal('bmr', 8, 2)->nullable();
+            $table->decimal('waist', 8, 2)->nullable();
+            $table->decimal('hip', 8, 2)->nullable();
+            $table->decimal('whr', 8, 2)->nullable();
             $table->string('attachment_url')->nullable();
             $table->timestamps();
         });

@@ -49,6 +49,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
             'role' => 'user',
             'status' => 'pending',
             'activation_token' => $hashedToken,
