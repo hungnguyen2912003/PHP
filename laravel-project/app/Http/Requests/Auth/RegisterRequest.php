@@ -27,6 +27,8 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'password_confirmation' => 'required|same:password',
+            'gender' => 'required|in:male,female',
+            'date_of_birth' => 'required|date|before:today',
         ];
     }
 
@@ -44,6 +46,11 @@ class RegisterRequest extends FormRequest
             'password.min' => __('validation.password.min'),
             'password_confirmation.required' => __('validation.password_confirmation.required'),
             'password_confirmation.same' => __('validation.password_confirmation.same'),
+            'gender.required' => __('validation.name', ['attribute' => __('label.gender')]),
+            'gender.in' => __('validation.gender.in'),
+            'date_of_birth.required' => __('validation.name', ['attribute' => __('label.date_of_birth')]),
+            'date_of_birth.date' => __('validation.date_of_birth.date'),
+            'date_of_birth.before' => __('validation.date_of_birth.before_or_equal'),
         ];
     }
 }

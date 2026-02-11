@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Resources\Api\UserResource;
 use OpenApi\Attributes as OA;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Client\ActivationMail;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 
 class AuthController extends BaseApiController
@@ -45,6 +49,8 @@ class AuthController extends BaseApiController
                         "fullname" => "John Doe",
                         "username" => "test1",
                         "email" => "test@example.com",
+                        "gender" => "male",
+                        "date_of_birth" => "2000-01-01",
                         "role" => "user",
                         "status" => "active",
                         "avatar_url" => null,
@@ -85,10 +91,19 @@ class AuthController extends BaseApiController
     )]
     public function register(RegisterRequest $request)
     {
+        //Create activation token
+        $plainToken = Str::random(64);
+        $hashedToken = hash('sha256', $plainToken);
+
         $user = $request->validated();
         $user['password'] = Hash::make($user['password']);
+        $user['activation_token'] = $hashedToken;
+        $user['activation_token_sent_at'] = Carbon::now();
 
         $user = User::create($user);
+
+        //Send activation email
+        Mail::to($user->email)->send(new ActivationMail($plainToken, $user, Carbon::now()->addMinutes(30)));
 
         return $this->success(new UserResource($user), 201);
     }

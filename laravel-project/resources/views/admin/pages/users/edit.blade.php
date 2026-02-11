@@ -122,7 +122,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-20">
                                     <label class="label fs-16 mb-2">
-                                        {{ __('label.gender') }}
+                                        {{ __('label.gender') }} <span class="text-danger">*</span>
                                     </label>
                                     <select class="form-select form-control @error('gender') is-invalid @enderror"
                                         name="gender" aria-label="Default select example">
@@ -134,9 +134,6 @@
                                         <option value="female" {{ old('gender', $user->gender) == 'female' ? 'selected' : '' }}>
                                             {{ __('value.gender.female') }}
                                         </option>
-                                        <option value="other" {{ old('gender', $user->gender) == 'other' ? 'selected' : '' }}>
-                                            {{ __('value.gender.other') }}
-                                        </option>
                                     </select>
                                     @error('gender')
                                         <span class="text-danger">{{ $message }}</span>
@@ -146,7 +143,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-20">
                                     <label class="label fs-16 mb-2">
-                                        {{ __('label.date_of_birth') }}
+                                        {{ __('label.date_of_birth') }} <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-floating">
                                         <input class="form-control @error('date_of_birth') is-invalid @enderror"

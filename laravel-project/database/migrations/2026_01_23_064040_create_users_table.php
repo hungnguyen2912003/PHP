@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'staff', 'user'])->default('user');
             $table->string('fullname');
             $table->date('date_of_birth')->nullable();
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('avatar_url')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->string('activation_token')->nullable();
             $table->timestamp('activation_token_sent_at')->nullable();
-            $table->enum('status', ['pending', 'active', 'banned', 'deleted'])->default('pending');
+            $table->enum('status', ['pending', 'active', 'banned'])->default('pending');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->timestamps();

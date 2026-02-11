@@ -37,7 +37,10 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="mb-20">
-                                    <label class="label fs-16 mb-2">{{ __('label.full_name') }}</label>
+                                    <label class="label fs-16 mb-2">
+                                        {{ __('label.full_name') }}
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <div class="form-floating">
                                         <input class="form-control" id="fullname" name="fullname"
                                             placeholder="{{ __('placeholder.full_name') }}" type="text"
@@ -52,7 +55,10 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="mb-20">
-                                    <label class="label fs-16 mb-2">{{ __('label.email') }}</label>
+                                    <label class="label fs-16 mb-2">
+                                        {{ __('label.email') }}
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <div class="form-floating">
                                         <input class="form-control" id="email" name="email"
                                             placeholder="{{ __('placeholder.email') }}" type="email"
@@ -67,11 +73,14 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="mb-20">
-                                    <label class="label fs-16 mb-2">{{ __('label.role') }}</label>
+                                    <label class="label fs-16 mb-2">
+                                        {{ __('label.role') }}
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <div class="form-floating">
                                         <select class="form-select form-control" id="role" name="role">
                                             <option value="">{{ __('placeholder.role') }}</option>
-                                            @foreach(['admin', 'staff', 'user'] as $roleName)
+                                            @foreach(['admin', 'staff'] as $roleName)
                                                 <option value="{{ $roleName }}" {{ old('role') == $roleName ? 'selected' : '' }}>
                                                     {{ __('value.role.' . $roleName) }}
                                                 </option>

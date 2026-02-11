@@ -12,7 +12,9 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: "fullname", type: "string", example: "John Doe"),
         new OA\Property(property: "email", type: "string", format: "email", example: "john@example.com"),
         new OA\Property(property: "username", type: "string", example: "johndoe"),
-        new OA\Property(property: "password", type: "string", format: "password", example: "Password123")
+        new OA\Property(property: "password", type: "string", format: "password", example: "Password123"),
+        new OA\Property(property: "gender", type: "string", enum: ["male", "female"], example: "male"),
+        new OA\Property(property: "date_of_birth", type: "string", format: "date", example: "2000-01-01")
     ]
 )]
 class RegisterRequest extends FormRequest
@@ -36,7 +38,9 @@ class RegisterRequest extends FormRequest
             'fullname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6',
+            'gender' => 'required|in:male,female',
+            'date_of_birth' => 'required|date|before:today'
         ];
     }
 }

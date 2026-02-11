@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use OpenApi\Attributes as OA;
+use Illuminate\Http\Request;
+
 class MeasurementController extends BaseApiController
 {
     public function __construct()
@@ -20,7 +22,7 @@ class MeasurementController extends BaseApiController
      * Get weight chart data for the authenticated user.
      */
     #[OA\Get(
-        path: "/api/measurements/weights/chart/{range}",
+        path: "/api/measurements/weights/chart",
         summary: "Lấy dữ liệu biểu đồ cân nặng",
         description: "Lấy dữ liệu biểu đồ thống kê cân nặng của người dùng đã đăng nhập.",
         operationId: "weightChart",
@@ -29,8 +31,8 @@ class MeasurementController extends BaseApiController
         parameters: [
             new OA\Parameter(
                 name: "range",
-                in: "path",
-                required: true,
+                in: "query",
+                required: false,
                 description: "Khoảng thời gian hiển thị",
                 schema: new OA\Schema(type: "string", enum: ["days", "weeks", "months"], example: "days")
             )
@@ -100,11 +102,11 @@ class MeasurementController extends BaseApiController
             ]
         )
     )]
-    public function weightChart($range = null)
+    public function weightChart(\Illuminate\Http\Request $request)
     {
         $this->authorize('viewAny', Measurement::class);
 
-        $range = $range ?? request('range', 'days');
+        $range = $request->query('range', 'days');
         $user = Auth::user();
 
         $query = Measurement::query();
@@ -263,16 +265,16 @@ class MeasurementController extends BaseApiController
      * Get a summary of metrics (Weight, Height, BMI) for a specific date.
      */
     #[OA\Get(
-        path: "/api/measurements/weights/summary/{date}",
+        path: "/api/measurements/weights/summary",
         summary: "Get daily summary metrics",
         tags: ["Measurements"],
         security: [["bearerAuth" => []]],
         parameters: [
             new OA\Parameter(
                 name: "date",
-                in: "path",
+                in: "query",
                 description: "Date for the summary (YYYY-MM-DD)",
-                required: true,
+                required: false,
                 schema: new OA\Schema(type: "string", format: "date", example: "2026-02-09")
             )
         ]
@@ -295,9 +297,9 @@ class MeasurementController extends BaseApiController
                                         new OA\Property(
                                             property: "summary",
                                             properties: [
-                                                new OA\Property(property: "avg_weight", type: "number", format: "float", example: 70.5),
-                                                new OA\Property(property: "avg_height", type: "number", format: "float", example: 175.0),
-                                                new OA\Property(property: "avg_bmi", type: "number", format: "float", example: 23.0),
+                                                new OA\Property(property: "avg_weight", type: "number", format: "float", example: 70.5, nullable: true),
+                                                new OA\Property(property: "avg_height", type: "number", format: "float", example: 175.0, nullable: true),
+                                                new OA\Property(property: "avg_bmi", type: "number", format: "float", example: 23.0, nullable: true),
                                             ]
                                         ),
                                         new OA\Property(
@@ -322,19 +324,12 @@ class MeasurementController extends BaseApiController
             ]
         )
     )]
-    #[OA\Response(
-        response: 404,
-        description: "No records found",
-        content: new OA\JsonContent(ref: "#/components/schemas/ErrorResponse")
-    )]
-    public function summary($date)
+    public function summary(Request $request)
     {
         $this->authorize('viewAny', Measurement::class);
         $user = Auth::user();
 
-        if (!$date) {
-            $date = now()->toDateString();
-        }
+        $date = $request->query('date', now()->toDateString());
 
         // get records in day
         $records = Measurement::where('user_id', $user->id)
@@ -342,13 +337,9 @@ class MeasurementController extends BaseApiController
             ->orderBy('recorded_at', 'desc')
             ->get(['id', 'weight', 'height', 'recorded_at', 'bmi', 'attachment_url']);
 
-        if ($records->isEmpty()) {
-            return $this->error('No measurement record found for this date', 404);
-        }
-
-        $avgWeight = (float) $records->avg('weight');
-        $avgHeight = (float) $records->avg('height');
-        $avgBMI = (float) $records->avg('bmi');
+        $avgWeight = $records->avg('weight');
+        $avgHeight = $records->avg('height');
+        $avgBMI = $records->avg('bmi');
 
         // get records daily
         $items = $records->map(function ($r) {
@@ -367,9 +358,9 @@ class MeasurementController extends BaseApiController
         return $this->success([
             'date' => $date,
             'summary' => [
-                'avg_weight' => round($avgWeight, 1),
-                'avg_height' => round($avgHeight, 1),
-                'avg_bmi' => round($avgBMI, 1),
+                'avg_weight' => !is_null($avgWeight) ? round((float) $avgWeight, 1) : null,
+                'avg_height' => !is_null($avgHeight) ? round((float) $avgHeight, 1) : null,
+                'avg_bmi' => !is_null($avgBMI) ? round((float) $avgBMI, 1) : null,
             ],
             'records' => $items,
         ]);
@@ -461,14 +452,31 @@ class MeasurementController extends BaseApiController
             ];
         }
 
-        // 3. Body Fat
+        // 3. Body Fat (by gender)
         if (!is_null($measurement->body_fat)) {
+            $gender = optional($measurement->user)->gender; // 'male'|'female'|null|'other'...
+
+            if ($gender === 'female') {
+                $bfThresholds = [14, 21, 25, 32];
+                $bfCategories = ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity'];
+            } elseif ($gender === 'male') {
+                $bfThresholds = [6, 14, 18, 25];
+                $bfCategories = ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity'];
+            } else {
+                $bfThresholds = null;
+                $bfCategories = null;
+            }
+
             $metrics[] = [
                 'key' => 'body_fat',
                 'name' => 'Body Fat',
                 'value' => (float) $measurement->body_fat,
-                'thresholds' => [6, 13, 17, 25],
-                'categories' => ['Essential Fat', 'Athletes', 'Fitness', 'Acceptable', 'Obesity']
+                'thresholds' => $bfThresholds,
+                'categories' => $bfCategories,
+                'meta' => [
+                    'gender' => $gender,
+                    'requires_gender' => true,
+                ],
             ];
         }
 

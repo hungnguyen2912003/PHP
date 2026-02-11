@@ -48,6 +48,8 @@ class AuthController extends Controller
             'fullname' => $request->fullname,
             'email' => $request->email,
             'username' => $request->username,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
             'password' => Hash::make($request->password),
             'role' => 'user',
             'status' => 'pending',
