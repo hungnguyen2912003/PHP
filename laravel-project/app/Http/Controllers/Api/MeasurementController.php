@@ -50,16 +50,24 @@ class MeasurementController extends BaseApiController
                         "body" => [
                             "data" => [
                                 [
-                                    "label" => "06 Feb",
-                                    "value" => 63.2
-                                ],
-                                [
-                                    "label" => "07 Feb",
-                                    "value" => 63.0
-                                ],
-                                [
-                                    "label" => "08 Feb",
-                                    "value" => 62.8
+                                    "timestamp" => 1738803600,
+                                    "value" => 63.2,
+                                    "details" => [
+                                        "metrics" => [
+                                            "avg_weight" => 63.2,
+                                            "height" => 175.0,
+                                            "bmi" => 20.6,
+                                            "bmi_status" => 2
+                                        ],
+                                        "records" => [
+                                            [
+                                                "id" => "uuid-string",
+                                                "weight" => 63.2,
+                                                "timestamp" => 1738803600,
+                                                "attachment_url" => null
+                                            ]
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]
@@ -105,72 +113,47 @@ class MeasurementController extends BaseApiController
     public function weightChart(Request $request)
     {
         $this->authorize('viewAny', Measurement::class);
-
-        $range = $request->query('range', 'days');
         $user = Auth::user();
+        $range = $request->query('range', 'days');
 
-        $query = Measurement::query();
-        if (!$user->isAdmin()) {
-            $query->where('user_id', $user->id);
-        }
+        $unit = match($range) {
+            'months' => 'month',
+            'weeks'  => 'week',
+            default  => 'day',
+        };
 
-        switch ($range) {
-            case 'days':
-                $data = $query
-                    ->where('recorded_at', '>=', now()->subDays(6)->startOfDay())
-                    ->where('recorded_at', '<=', now()->endOfDay())
-                    ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
-                    ->groupByRaw('DATE(recorded_at)')
-                    ->orderByRaw('DATE(recorded_at)')
-                    ->get();
-                break;
-            case 'weeks':
-                $start = now()->subWeeks(6)->startOfWeek(); // Mon
-                $end = now()->endOfWeek();                // Sun
+        $start = now()->sub($unit, 6)->startOf($unit);
+        $end = now()->endOf($unit);
 
-                // Tính trung bình 1 ngày
-                $daily = $query->whereBetween('recorded_at', [$start, $end])
-                    ->selectRaw('DATE(recorded_at) as d, ROUND(AVG(weight), 1) as day_avg')
-                    ->groupBy('d');
+        $height = Measurement::where('user_id', $user->id)->whereNotNull('height')->latest('recorded_at')->value('height');
 
-                // Tính trung bình theo tuần
-                $data = \DB::query()->fromSub($daily, 'daily')
-                    ->selectRaw('YEARWEEK(d, 1) as yw')
-                    ->selectRaw('ROUND(AVG(day_avg), 1) as value')
-                    ->groupBy('yw')
-                    ->orderBy('yw')
-                    ->get();
-                break;
-            case 'months':
-                $start = now()->subMonths(6)->startOfMonth();
-                $end = now()->endOfMonth();
-
-                // Tính trung bình 1 ngày
-                $daily = $query->whereBetween('recorded_at', [$start, $end])
-                    ->selectRaw('DATE(recorded_at) as d, ROUND(AVG(weight), 1) as day_avg')
-                    ->groupBy('d');
-
-                // Tính trung bình theo tháng
-                $data = \DB::query()->fromSub($daily, 'daily')
-                    ->selectRaw('DATE_FORMAT(d, "%Y-%m") as label')
-                    ->selectRaw('ROUND(AVG(day_avg), 1) as value')
-                    ->groupBy('label')
-                    ->orderBy('label')
-                    ->get();
-                break;
-            default:
-                $data = $query
-                    ->where('recorded_at', '>=', now()->subDays(6)->startOfDay())
-                    ->where('recorded_at', '<=', now()->endOfDay())
-                    ->selectRaw('DATE(recorded_at) as label, ROUND(AVG(weight), 1) as value')
-                    ->groupByRaw('DATE(recorded_at)')
-                    ->orderByRaw('DATE(recorded_at)')
-                    ->get();
-                break;
-        }
+        $data = Measurement::where('user_id', $user->id)
+            ->whereBetween('recorded_at', [$start, $end])
+            ->orderBy('recorded_at', 'asc')
+            ->get()
+            ->groupBy(fn($m) => $m->recorded_at->startOf($unit)->timestamp)
+            ->map(fn($items, $timestamp) => [
+                'timestamp' => (int) $timestamp,
+                'value' => round((float) $items->avg('weight'), 1),
+                'details' => [
+                    'metrics' => [
+                        'avg_weight' => round((float) $items->avg('weight'), 1),
+                        'height' => $height ? (float) $height : null,
+                        'bmi' => ($bmi = ($items->avg('weight') > 0 && $height > 0) ? $items->avg('weight') / pow($height / 100, 2) : null) ? round($bmi, 1) : null,
+                        'bmi_status' => $this->getBmiStatus($bmi),
+                    ],
+                    'records' => $items->map(fn($r) => [
+                        'id' => $r->id,
+                        'weight' => (float) $r->weight,
+                        'timestamp' => $r->recorded_at->timestamp,
+                        'attachment_url' => $r->attachment_url,
+                    ])->values()->all(),
+                ],
+            ])->values()->all();
 
         return $this->success($data);
     }
+
 
     /**
      * Store a weight-only record.
@@ -207,16 +190,7 @@ class MeasurementController extends BaseApiController
                         new OA\Property(
                             property: "body",
                             properties: [
-                                new OA\Property(
-                                    property: "data",
-                                    properties: [
-                                        new OA\Property(property: "id", type: "string", format: "uuid"),
-                                        new OA\Property(property: "user_id", type: "string", format: "uuid"),
-                                        new OA\Property(property: "weight", type: "number", format: "float"),
-                                        new OA\Property(property: "recorded_at", type: "string", format: "date-time"),
-                                        new OA\Property(property: "attachment_url", type: "string", nullable: true),
-                                    ]
-                                )
+                                new OA\Property(property: "success", type: "boolean", example: true),
                             ]
                         )
                     ]
@@ -246,7 +220,7 @@ class MeasurementController extends BaseApiController
             $data['attachment_url'] = '/storage/' . $path;
         }
 
-        $measurement = Measurement::updateOrCreate(
+        Measurement::updateOrCreate(
             [
                 'user_id' => $userId,
                 'recorded_at' => $recordedAt,
@@ -254,127 +228,12 @@ class MeasurementController extends BaseApiController
             $data
         );
 
-        return $this->success($measurement, 201);
+        return response()->json([
+            'status' => 201,
+            'success' => true,
+        ], 201);
     }
 
-    /**
-     * Get a summary of metrics (Weight, Height, BMI) for a specific date.
-     */
-    #[OA\Get(
-        path: "/api/measurements/weights/summary",
-        summary: "Get daily summary metrics",
-        tags: ["Measurements"],
-        security: [["bearerAuth" => []]],
-        parameters: [
-            new OA\Parameter(
-                name: "date",
-                in: "query",
-                description: "Date for the summary (YYYY-MM-DD)",
-                required: false,
-                schema: new OA\Schema(type: "string", format: "date", example: "2026-02-09")
-            )
-        ]
-    )]
-    #[OA\Response(
-        response: 200,
-        description: "Daily summary metrics",
-        content: new OA\JsonContent(
-            allOf: [
-                new OA\Schema(ref: "#/components/schemas/ApiResponse"),
-                new OA\Schema(
-                    properties: [
-                        new OA\Property(
-                            property: "body",
-                            properties: [
-                                new OA\Property(
-                                    property: "data",
-                                    properties: [
-                                        new OA\Property(property: "date", type: "string", format: "date", example: "2026-02-09"),
-                                        new OA\Property(
-                                            property: "summary",
-                                            properties: [
-                                                new OA\Property(property: "avg_weight", type: "number", format: "float", example: 70.5, nullable: true),
-                                                new OA\Property(property: "height", type: "number", format: "float", example: 175.0, nullable: true),
-                                                new OA\Property(property: "bmi", type: "number", format: "float", example: 23.0, nullable: true),
-                                                new OA\Property(property: "bmi_status", type: "integer", example: 1, nullable: true, description: "1: Normal, 2: Low, 3: High"),
-                                            ]
-                                        ),
-                                        new OA\Property(
-                                            property: "records",
-                                            type: "array",
-                                            items: new OA\Items(
-                                                properties: [
-                                                    new OA\Property(property: "id", type: "string", format: "uuid"),
-                                                    new OA\Property(property: "weight", type: "number", format: "float", example: 70.5),
-                                                    new OA\Property(property: "time", type: "string", example: "10:00"),
-                                                    new OA\Property(property: "attachment_url", type: "string", nullable: true, example: "/storage/1/measurements/image.jpg")
-                                                ]
-                                            )
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                )
-            ]
-        )
-    )]
-    public function summary(Request $request)
-    {
-        $this->authorize('viewAny', Measurement::class);
-        $user = Auth::user();
-
-        $date = $request->query('date', now()->toDateString());
-
-        // get records in day
-        $records = Measurement::where('user_id', $user->id)
-            ->whereDate('recorded_at', $date)
-            ->orderBy('recorded_at', 'desc')
-            ->get(['id', 'weight', 'height', 'recorded_at', 'bmi', 'attachment_url']);
-
-        $avgWeight = $records->avg('weight');
-
-        // Latest height (overall)
-        $latestHeightRecord = Measurement::where('user_id', $user->id)
-            ->whereNotNull('height')
-            ->orderBy('recorded_at', 'desc')
-            ->first(['height']);
-        
-        $height = $latestHeightRecord?->height;
-        $bmi = null;
-
-        if (!is_null($avgWeight) && !is_null($height) && $height > 0) {
-            $h_m = $height / 100;
-            $bmi = $avgWeight / ($h_m * $h_m);
-        }
-
-        // BMI status logic
-        $bmiStatus = $this->getBmiStatus($bmi);
-
-        // get records daily
-        $items = $records->map(function ($r) {
-            $w = (float) $r->weight;
-
-            return [
-                'id' => $r->id,
-                'weight' => round($w, 1),
-                'time' => $r->recorded_at->format('H:i'),
-                'attachment_url' => $r->attachment_url,
-            ];
-        });
-
-        return $this->success([
-            'date' => $date,
-            'summary' => [
-                'avg_weight' => !is_null($avgWeight) ? round((float) $avgWeight, 1) : null,
-                'height' => !is_null($height) ? round((float) $height, 1) : null,
-                'bmi' => !is_null($bmi) ? round((float) $bmi, 1) : null,
-                'bmi_status' => $bmiStatus,
-            ],
-            'records' => $items,
-        ]);
-    }
 
     /**
      * Get a specific measurement.
@@ -408,7 +267,7 @@ class MeasurementController extends BaseApiController
                                     property: "data",
                                     properties: [
                                         new OA\Property(property: "id", type: "string", format: "uuid"),
-                                        new OA\Property(property: "recorded_at", type: "string", format: "date-time"),
+                                        new OA\Property(property: "recorded_at", type: "integer", example: 1738803600),
                                         new OA\Property(
                                             property: "metrics",
                                             type: "array",
@@ -482,7 +341,7 @@ class MeasurementController extends BaseApiController
 
         return $this->success([
             'id' => $measurement->id,
-            'recorded_at' => $measurement->recorded_at->format('Y-m-d'),
+            'recorded_at' => $measurement->recorded_at->timestamp,
             'metrics' => $metrics
         ]);
     }

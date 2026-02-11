@@ -30,7 +30,6 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:api')->group(function () {
 
     Route::get('measurements/weights/chart', [MeasurementController::class, 'weightChart']);
-    Route::get('measurements/weights/summary', [MeasurementController::class, 'summary']);
     Route::post('measurements/weights', [MeasurementController::class, 'storeWeight']);
     Route::get('measurements/weights/{measurement}', [MeasurementController::class, 'show']);
 });
