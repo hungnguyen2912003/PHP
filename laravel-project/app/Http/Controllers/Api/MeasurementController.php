@@ -141,7 +141,17 @@ class MeasurementController extends BaseApiController
                     ->selectRaw('ROUND(AVG(day_avg), 1) as value')
                     ->groupBy('yw')
                     ->orderBy('yw')
-                    ->get();
+                    ->get()
+                    ->map(function ($item) {
+                        $date = \Carbon\Carbon::parse($item->start_date);
+                        $week = $date->isoWeek();
+                        $year = $date->isoWeekYear();
+
+                        return [
+                            'label' => "W$week/$year",
+                            'value' => $item->value
+                        ];
+                    });
                 break;
             case 'months':
                 $start = now()->subMonths(6)->startOfMonth();
@@ -155,7 +165,6 @@ class MeasurementController extends BaseApiController
                 // Tính trung bình theo tháng
                 $data = \DB::query()->fromSub($daily, 'daily')
                     ->selectRaw('DATE_FORMAT(d, "%Y-%m") as label')
-                    ->selectRaw('MIN(d) as start_date, MAX(d) as end_date')
                     ->selectRaw('ROUND(AVG(day_avg), 1) as value')
                     ->groupBy('label')
                     ->orderBy('label')
@@ -298,8 +307,9 @@ class MeasurementController extends BaseApiController
                                             property: "summary",
                                             properties: [
                                                 new OA\Property(property: "avg_weight", type: "number", format: "float", example: 70.5, nullable: true),
-                                                new OA\Property(property: "avg_height", type: "number", format: "float", example: 175.0, nullable: true),
-                                                new OA\Property(property: "avg_bmi", type: "number", format: "float", example: 23.0, nullable: true),
+                                                new OA\Property(property: "height", type: "number", format: "float", example: 175.0, nullable: true),
+                                                new OA\Property(property: "bmi", type: "number", format: "float", example: 23.0, nullable: true),
+                                                new OA\Property(property: "bmi_status", type: "integer", example: 1, nullable: true, description: "1: Normal, 2: Low, 3: High"),
                                             ]
                                         ),
                                         new OA\Property(
@@ -307,9 +317,8 @@ class MeasurementController extends BaseApiController
                                             type: "array",
                                             items: new OA\Items(
                                                 properties: [
-                                                    new OA\Property(property: "id", type: "integer", example: 1),
+                                                    new OA\Property(property: "id", type: "string", format: "uuid"),
                                                     new OA\Property(property: "weight", type: "number", format: "float", example: 70.5),
-                                                    new OA\Property(property: "height", type: "number", format: "float", example: 175.0),
                                                     new OA\Property(property: "time", type: "string", example: "10:00"),
                                                     new OA\Property(property: "attachment_url", type: "string", nullable: true, example: "/storage/1/measurements/image.jpg")
                                                 ]
@@ -338,20 +347,33 @@ class MeasurementController extends BaseApiController
             ->get(['id', 'weight', 'height', 'recorded_at', 'bmi', 'attachment_url']);
 
         $avgWeight = $records->avg('weight');
-        $avgHeight = $records->avg('height');
-        $avgBMI = $records->avg('bmi');
+
+        // Latest height (overall)
+        $latestHeightRecord = Measurement::where('user_id', $user->id)
+            ->whereNotNull('height')
+            ->orderBy('recorded_at', 'desc')
+            ->first(['height']);
+        
+        $height = $latestHeightRecord?->height;
+        $bmi = null;
+
+        if (!is_null($avgWeight) && !is_null($height) && $height > 0) {
+            $h_m = $height / 100;
+            $bmi = $avgWeight / ($h_m * $h_m);
+        }
+
+        // BMI status logic
+        $bmiStatus = $this->getBmiStatus($bmi);
 
         // get records daily
         $items = $records->map(function ($r) {
             $w = (float) $r->weight;
-            $h = (float) $r->height;
 
             return [
                 'id' => $r->id,
                 'weight' => round($w, 1),
-                'height' => round($h, 1),
-                'time' => Carbon::parse($r->recorded_at)->format('H:i'),
-                'attachment_url' => $r->attachment_url
+                'time' => $r->recorded_at->format('H:i'),
+                'attachment_url' => $r->attachment_url,
             ];
         });
 
@@ -359,8 +381,9 @@ class MeasurementController extends BaseApiController
             'date' => $date,
             'summary' => [
                 'avg_weight' => !is_null($avgWeight) ? round((float) $avgWeight, 1) : null,
-                'avg_height' => !is_null($avgHeight) ? round((float) $avgHeight, 1) : null,
-                'avg_bmi' => !is_null($avgBMI) ? round((float) $avgBMI, 1) : null,
+                'height' => !is_null($height) ? round((float) $height, 1) : null,
+                'bmi' => !is_null($bmi) ? round((float) $bmi, 1) : null,
+                'bmi_status' => $bmiStatus,
             ],
             'records' => $items,
         ]);
@@ -405,20 +428,8 @@ class MeasurementController extends BaseApiController
                                             items: new OA\Items(
                                                 properties: [
                                                     new OA\Property(property: "key", type: "string", example: "weight"),
-                                                    new OA\Property(property: "name", type: "string", example: "Weight"),
                                                     new OA\Property(property: "value", type: "number", format: "float", example: 70.5),
-                                                    new OA\Property(property: "unit", type: "string", example: "kg"),
-                                                    new OA\Property(property: "description", type: "string", example: "One of the important indicators of health"),
-                                                    new OA\Property(
-                                                        property: "thresholds",
-                                                        type: "array",
-                                                        items: new OA\Items(type: "number", format: "float")
-                                                    ),
-                                                    new OA\Property(
-                                                        property: "categories",
-                                                        type: "array",
-                                                        items: new OA\Items(type: "string")
-                                                    )
+                                                    new OA\Property(property: "status", type: "integer", example: 2, nullable: true, description: "1: Low, 2: Normal, 3: High"),
                                                 ]
                                             )
                                         )
@@ -440,30 +451,14 @@ class MeasurementController extends BaseApiController
     {
         $this->authorize('view', $measurement);
 
-        $height = (float) $measurement->height;
-        $h_m = $height / 100; // cm -> m
-        $hasHeight = $height > 0;
-
         $metrics = [];
 
         // 1. Weight
         if (!is_null($measurement->weight)) {
             $metrics[] = [
-                'key' => 'weight',
-                'name' => __('metrics.weight.name'),
-                'value' => (float) $measurement->weight,
-                'unit' => 'kg',
-                'description' => __('metrics.weight.description'),
-                'thresholds' => $hasHeight ? [
-                    round(18.5 * $h_m * $h_m, 2),
-                    round(25 * $h_m * $h_m, 2),
-                    round(30 * $h_m * $h_m, 2)
-                ] : null,
-                'categories' => [
-                    __('metrics.categories.underweight'),
-                    __('metrics.categories.normal'),
-                    __('metrics.categories.overweight'),
-                    __('metrics.categories.obesity')
+                'weight' => [
+                    'value' => (float) $measurement->weight,
+                    'status' => $this->getBmiStatus($measurement->bmi),
                 ]
             ];
         }
@@ -471,85 +466,73 @@ class MeasurementController extends BaseApiController
         // 2. BMI
         if (!is_null($measurement->bmi)) {
             $metrics[] = [
-                'key' => 'bmi',
-                'name' => __('metrics.bmi.name'),
-                'value' => (float) $measurement->bmi,
-                'unit' => '',
-                'description' => __('metrics.bmi.description'),
-                'thresholds' => [18.5, 25, 30],
-                'categories' => [
-                    __('metrics.categories.underweight'),
-                    __('metrics.categories.normal'),
-                    __('metrics.categories.overweight'),
-                    __('metrics.categories.obesity')
+                'bmi' => [
+                    'value' => (float) $measurement->bmi,
+                    'status' => $this->getBmiStatus($measurement->bmi),
                 ]
             ];
         }
 
         // 3. Body Fat (by gender)
         if (!is_null($measurement->body_fat)) {
-            $gender = optional($measurement->user)->gender; // 'male'|'female'|null|'other'...
-
-            if ($gender === 'female') {
-                $bfThresholds = [14, 21, 25, 32];
-                $bfCategories = [
-                    __('metrics.categories.essential_fat'),
-                    __('metrics.categories.athletes'),
-                    __('metrics.categories.fitness'),
-                    __('metrics.categories.acceptable'),
-                    __('metrics.categories.obesity')
-                ];
-            } elseif ($gender === 'male') {
-                $bfThresholds = [6, 14, 18, 25];
-                $bfCategories = [
-                    __('metrics.categories.essential_fat'),
-                    __('metrics.categories.athletes'),
-                    __('metrics.categories.fitness'),
-                    __('metrics.categories.acceptable'),
-                    __('metrics.categories.obesity')
-                ];
-            } else {
-                $bfThresholds = null;
-                $bfCategories = null;
-            }
-
             $metrics[] = [
-                'key' => 'body_fat',
-                'name' => __('metrics.body_fat.name'),
-                'value' => (float) $measurement->body_fat,
-                'unit' => '%',
-                'description' => __('metrics.body_fat.description'),
-                'thresholds' => $bfThresholds,
-                'categories' => $bfCategories,
+                'body_fat' => [
+                    'value' => (float) $measurement->body_fat,
+                    'status' => $this->getBodyFatStatus($measurement->body_fat, optional($measurement->user)->gender),
+                ]
             ];
         }
 
         // 4. Fat-free Body Weight
         if (!is_null($measurement->fat_free_body_weight)) {
             $metrics[] = [
-                'key' => 'fat_free_body_weight',
-                'name' => __('metrics.fat_free_body_weight.name'),
-                'value' => (float) $measurement->fat_free_body_weight,
-                'unit' => 'kg',
-                'description' => __('metrics.fat_free_body_weight.description'),
-                'thresholds' => $hasHeight ? [
-                    round(18.5 * $h_m * $h_m, 2),
-                    round(25 * $h_m * $h_m, 2),
-                    round(30 * $h_m * $h_m, 2)
-                ] : null,
-                'categories' => [
-                    __('metrics.categories.thin'),
-                    __('metrics.categories.normal'),
-                    __('metrics.categories.strong'),
-                    __('metrics.categories.obesity')
+                'fat_free_body_weight' => [
+                    'value' => (float) $measurement->fat_free_body_weight,
+                    'status' => $this->getBmiStatus($measurement->bmi),
                 ]
             ];
         }
 
         return $this->success([
             'id' => $measurement->id,
-            'recorded_at' => $measurement->recorded_at->translatedFormat('l, Y M j'),
+            'recorded_at' => $measurement->recorded_at->format('Y-m-d'),
             'metrics' => $metrics
         ]);
+    }
+
+    /**
+     * Get BMI status code (1: Low, 2: Normal, 3: High)
+     */
+    private function getBmiStatus(?float $bmi): ?int
+    {
+        if (is_null($bmi)) return null;
+
+        if ($bmi < 18.5) {
+            return 1; // Low
+        } elseif ($bmi < 25) {
+            return 2; // Normal
+        } else {
+            return 3; // High
+        }
+    }
+
+    /**
+     * Get Body Fat status code (1: Low, 2: Normal, 3: High)
+     */
+    private function getBodyFatStatus(?float $bodyFat, ?string $gender): ?int
+    {
+        if (is_null($bodyFat)) return null;
+
+        if ($gender === 'female') {
+            if ($bodyFat < 14) return 1; // Low
+            if ($bodyFat < 32) return 2; // Normal
+            return 3; // High
+        } elseif ($gender === 'male') {
+            if ($bodyFat < 6) return 1; // Low
+            if ($bodyFat < 25) return 2; // Normal
+            return 3; // High
+        }
+
+        return null;
     }
 }
