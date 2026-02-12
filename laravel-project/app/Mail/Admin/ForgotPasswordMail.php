@@ -47,7 +47,7 @@ class ForgotPasswordMail extends Mailable
             view: 'mails.forgot-password',
             with: [
                 'reset_url' => route('admin.password.reset', ['token' => $this->token, 'email' => $this->email]),
-                'expires_in' => $this->expires_in,
+                'expires_in' => $this->expires_in->diffForHumans(),
                 'year' => date('Y'),
             ],
         );

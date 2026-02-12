@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
-use App\Mail\ForgotPasswordMail;
+use App\Mail\Admin\ForgotPasswordMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
@@ -31,8 +31,7 @@ class ForgotPasswordController extends Controller
         $user = User::where('email', $request->email)
             ->first();
 
-        if (!$user)
-        {
+        if (!$user) {
             flash()->error(__('message.forgot_password.email_not_found'), [], __('notification.error'));
             return redirect()->back()->withInput();
         }

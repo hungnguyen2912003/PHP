@@ -34,7 +34,7 @@ class DashboardController extends Controller
         // Fetch trend data (last 10 days)
         $days = 10;
         $trendDates = collect(range($days - 1, 0))->map(fn($i) => now()->subDays($i)->format('Y-m-d'));
-        
+
         $registrations = User::where('role', 'user')
             ->where('created_at', '>=', now()->subDays($days))
             ->get()
@@ -56,7 +56,7 @@ class DashboardController extends Controller
             $dayUsers = isset($registrations[$date]) ? $registrations[$date] : collect();
             $count = $dayUsers->count();
             $runningTotal += $count;
-            
+
             $trends['total_users'][] = $runningTotal;
             $trends['new_users'][] = $count;
             $trends['pending_users'][] = $dayUsers->where('status', 'pending')->count();

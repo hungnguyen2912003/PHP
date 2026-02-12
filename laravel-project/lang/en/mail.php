@@ -13,7 +13,7 @@ return [
         'header' => 'PASSWORD RESET REQUEST',
         'greeting' => 'Hello, :name',
         'intro' => 'You are receiving this email because we received a password reset request for your account.',
-        'request_details' => 'You are receiving this email because we received a password reset request for your account. Here are the details of the request',
+        'request_details' => 'Request Details:',
         'username' => 'Username',
         'email' => 'Email',
         'requested_at' => 'Requested At',

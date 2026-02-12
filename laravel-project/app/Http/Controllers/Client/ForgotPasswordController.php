@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
-use App\Mail\ForgotPasswordMail;
+use App\Mail\Client\ForgotPasswordMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
@@ -19,6 +19,7 @@ class ForgotPasswordController extends Controller
     |--------------------------------------------------------------------------
     | Forgot Password
     |--------------------------------------------------------------------------
+    |
     */
     public function showForgotPasswordForm()
     {
@@ -29,8 +30,7 @@ class ForgotPasswordController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user)
-        {
+        if (!$user) {
             flash()->error(__('message.forgot_password.email_not_found'), [], __('notification.error'));
             return redirect()->back()->withInput();
         }

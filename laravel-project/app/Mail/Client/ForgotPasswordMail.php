@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Admin;
+namespace App\Mail\Client;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -46,8 +46,8 @@ class ForgotPasswordMail extends Mailable
         return new Content(
             view: 'mails.forgot-password',
             with: [
-                'reset_url' => route('admin.password.reset', ['token' => $this->token, 'email' => $this->email]),
-                'expires_in' => $this->expires_in,
+                'reset_url' => route('client.password.reset', ['token' => $this->token]),
+                'expires_in' => $this->expires_in->diffForHumans(),
                 'year' => date('Y'),
             ],
         );
