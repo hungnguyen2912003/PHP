@@ -116,4 +116,7 @@ return [
         'delete_admin_denied' => 'Không thể xóa vai trò Admin.',
         'has_users' => 'Vai trò này không thể xóa vì đang được gán cho người dùng.',
     ],
+    'contest_created_successfully' => 'Thêm cuộc thi thành công.',
+    'contest_updated_successfully' => 'Cập nhật cuộc thi thành công.',
+    'contest_deleted_successfully' => 'Xoá cuộc thi thành công.',
 ];

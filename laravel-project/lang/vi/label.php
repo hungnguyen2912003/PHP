@@ -75,4 +75,12 @@ return [
     'waist' => 'Vòng eo (cm)',
     'hip' => 'Vòng mông (cm)',
     'whr' => 'Chỉ số Eo/Mông (WHR)',
+    'contest_information' => 'Thông tin cuộc thi',
+    'contest_name' => 'Tên cuộc thi',
+    'target' => 'Mục tiêu',
+    'start_date' => 'Ngày bắt đầu',
+    'end_date' => 'Ngày kết thúc',
+    'image' => 'Hình ảnh',
+    'type' => 'Loại',
+    'description' => 'Mô tả',
 ];

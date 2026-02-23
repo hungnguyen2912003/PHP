@@ -66,4 +66,12 @@ return [
     'waist' => '腹囲 (cm)',
     'hip' => 'ヒップ (cm)',
     'whr' => 'ウエスト・ヒップ比 (WHR)',
+    'contest_information' => 'コンテスト情報',
+    'contest_name' => 'コンテスト名',
+    'target' => '目標',
+    'start_date' => '開始日',
+    'end_date' => '終了日',
+    'image' => '画像',
+    'type' => 'タイプ',
+    'description' => '説明',
 ];

@@ -25,4 +25,5 @@ return [
     'add_weight' => 'Add Weight',
     'add_height' => 'Add Height',
     'add_role' => 'Add New Role',
+    'add_contest' => 'Add Contest',
 ];

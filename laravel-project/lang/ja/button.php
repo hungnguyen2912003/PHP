@@ -25,4 +25,5 @@ return [
     'add_weight' => '体重の記録',
     'add_height' => '身長の記録',
     'add_role' => '新しい役割を追加',
+    'add_contest' => 'コンテスト追加',
 ];

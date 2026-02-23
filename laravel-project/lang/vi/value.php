@@ -21,9 +21,11 @@ return [
         'active' => 'Hoạt động',
         'pending' => 'Đang chờ',
         'banned' => 'Bị cấm',
-        'deleted' => 'Đã xóa',
+        'inprogress' => 'Đang diễn ra',
+        'completed' => 'Đã hoàn thành',
+        'cancelled' => 'Đã huỷ',
     ],
-    'no_bio' => 'Chưa có tiểu sử',
+    'no_bio' => 'Chưa cập nhật tiểu sử',
     'unknown' => 'Không xác định',
     'not_available' => 'Chưa cập nhật',
 ];

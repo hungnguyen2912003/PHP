@@ -23,4 +23,5 @@ return [
     'notes' => 'Nhập ghi chú (không bắt buộc)',
     'drag_drop_file' => 'Kéo & Thả tệp của bạn hoặc <span class="filepond--label-action">Chọn tệp</span>',
     'role_name' => 'Nhập tên vai trò',
+    'contest_name' => 'Nhập tên cuộc thi',
 ];

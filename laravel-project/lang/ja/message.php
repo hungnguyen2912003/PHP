@@ -116,4 +116,7 @@ return [
         'delete_admin_denied' => '管理者役割は削除できません。',
         'has_users' => 'この役割はユーザーに割り当てられているため削除できません。',
     ],
+    'contest_created_successfully' => 'コンテストが正常に作成されました。',
+    'contest_updated_successfully' => 'コンテストが正常に更新されました。',
+    'contest_deleted_successfully' => 'コンテストが正常に削除されました。',
 ];

@@ -27,4 +27,8 @@ return [
     'update_measurement' => 'Cập nhật chỉ số',
     'measurement_management' => 'Quản lý chỉ số cơ thể',
     'measurement_details' => 'Chi tiết chỉ số cơ thể',
+    'contest_list' => 'Danh sách cuộc thi',
+    'create_contest' => 'Thêm cuộc thi',
+    'edit_contest' => 'Cập nhật cuộc thi',
+    'show_contest' => 'Chi tiết cuộc thi',
 ];

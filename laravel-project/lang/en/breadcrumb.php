@@ -14,4 +14,7 @@ return [
     'measurement_list' => 'Measurement List',
     'measurement_management' => 'Measurement Management',
     'measurement_details' => 'Measurement Details',
+    'contest_list' => 'Contest List',
+    'contest_management' => 'Contest Management',
+    'contest_details' => 'Contest Details',
 ];

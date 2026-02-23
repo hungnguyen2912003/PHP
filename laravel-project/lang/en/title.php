@@ -27,4 +27,8 @@ return [
     'update_measurement' => 'Update Measurement',
     'measurement_management' => 'Measurement Management',
     'measurement_details' => 'Measurement Details',
+    'contest_list' => 'Contest List',
+    'create_contest' => 'Create Contest',
+    'edit_contest' => 'Edit Contest',
+    'show_contest' => 'Contest Details',
 ];

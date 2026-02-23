@@ -26,4 +26,8 @@ return [
     'update_measurement' => '計測更新',
     'measurement_management' => '健康指標管理',
     'measurement_details' => '計測詳細',
+    'contest_list' => 'コンテスト一覧',
+    'create_contest' => 'コンテスト作成',
+    'edit_contest' => 'コンテスト編集',
+    'show_contest' => 'コンテスト詳細',
 ];

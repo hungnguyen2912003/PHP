@@ -21,9 +21,11 @@ return [
         'active' => 'アクティブ',
         'pending' => '保留中',
         'banned' => '禁止',
-        'deleted' => '削除済み',
+        'inprogress' => '進行中',
+        'completed' => '完了',
+        'cancelled' => 'キャンセル',
     ],
-    'no_bio' => '自己紹介なし',
+    'no_bio' => '自己紹介がありません',
     'unknown' => '不明',
     'not_available' => '利用不可',
 ];

@@ -23,4 +23,5 @@ return [
     'notes' => 'メモを入力してください (任意)',
     'drag_drop_file' => 'ファイルをドラッグ＆ドロップするか、<span class="filepond--label-action">参照</span>してください',
     'role_name' => '役割名を入力',
+    'contest_name' => 'コンテスト名を入力',
 ];

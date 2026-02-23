@@ -14,4 +14,7 @@ return [
     'measurement_list' => 'Danh sách chỉ số cơ thể',
     'measurement_management' => 'Quản lý chỉ số cơ thể',
     'measurement_details' => 'Chi tiết chỉ số cơ thể',
+    'contest_list' => 'Danh sách cuộc thi',
+    'contest_management' => 'Quản lý cuộc thi',
+    'contest_details' => 'Chi tiết cuộc thi',
 ];

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contest_details', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('contest_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('contest_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->integer('rank')->nullable();
             $table->integer('total_steps')->default(0);
             $table->integer('reward_point')->default(0);

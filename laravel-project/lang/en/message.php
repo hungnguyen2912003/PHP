@@ -121,4 +121,7 @@ return [
         'delete_admin_denied' => 'The Admin role cannot be deleted.',
         'has_users' => 'This role cannot be deleted because it is assigned to users.',
     ],
+    'contest_created_successfully' => 'Contest created successfully.',
+    'contest_updated_successfully' => 'Contest updated successfully.',
+    'contest_deleted_successfully' => 'Contest deleted successfully.',
 ];

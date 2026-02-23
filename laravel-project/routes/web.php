@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\ResetPasswordController as AdminResetPasswordCont
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\ContestController as AdminContestController;
+use App\Http\Controllers\Admin\ContestDetailController as AdminContestDetailController;
+use App\Http\Controllers\Admin\MeasurementController as AdminMeasurementController;
 
 use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
 use App\Http\Controllers\Client\ProfileController as ClientProfileController;
@@ -21,7 +24,7 @@ use App\Http\Controllers\Client\MeasurementController;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\MeasurementController as AdminMeasurementController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +94,6 @@ Route::middleware(['auth:web'])->name('client.')->group(function () {
 
         Route::delete('/destroy/{id}', [MeasurementController::class, 'destroy'])->name('destroy');
     });
-
 });
 
 /*
@@ -168,7 +170,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [AdminMeasurementController::class, 'destroy'])->name('destroy');
         });
 
+        Route::prefix('contests')->name('contests.')->group(function () {
+            Route::get('/', [AdminContestController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [AdminContestController::class, 'show'])->name('show');
+            Route::get('/create', [AdminContestController::class, 'create'])->name('create');
+            Route::post('/store', [AdminContestController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AdminContestController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminContestController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AdminContestController::class, 'destroy'])->name('destroy');
+        });
 
+        Route::prefix('contest-details')->name('contest-details.')->group(function () {
+            Route::get('/', [AdminContestDetailController::class, 'index'])->name('index');
+            Route::get('/show/{id}', [AdminContestDetailController::class, 'show'])->name('show');
+            Route::get('/create', [AdminContestDetailController::class, 'create'])->name('create');
+            Route::post('/store', [AdminContestDetailController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AdminContestDetailController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminContestDetailController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AdminContestDetailController::class, 'destroy'])->name('destroy');
+        });
     });
 });
 

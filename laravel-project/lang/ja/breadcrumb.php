@@ -14,4 +14,7 @@ return [
     'measurement_list' => '健康指標リスト',
     'measurement_management' => '健康指標管理',
     'measurement_details' => '計測詳細',
+    'contest_list' => 'コンテストリスト',
+    'contest_management' => 'コンテスト管理',
+    'contest_details' => 'コンテスト詳細',
 ];

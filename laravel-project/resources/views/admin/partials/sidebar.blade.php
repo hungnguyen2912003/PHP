@@ -63,6 +63,13 @@
                         <span class="title">{{ __('breadcrumb.measurement_management') }}</span>
                     </a>
                 </li>
+                <li class="menu-item {{ request()->routeIs('admin.contests.*') ? 'open' : '' }}">
+                    <a class="menu-link {{ request()->routeIs('admin.contests.*') ? 'active' : '' }}"
+                        href="{{ route('admin.contests.index') }}">
+                        <span class="material-symbols-outlined menu-icon">trophy</span>
+                        <span class="title">{{ __('breadcrumb.contest_management') }}</span>
+                    </a>
+                </li>
             @endif
             <li class="menu-title small text-uppercase">
                 <span class="menu-title-text">{{ __('section.system') }}</span>

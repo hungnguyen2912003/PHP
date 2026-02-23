@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Contest extends Model
 {
+    use HasUuids;
+
     protected $fillable = [
         'name',
         'type',
@@ -13,7 +16,15 @@ class Contest extends Model
         'description',
         'start_date',
         'end_date',
+        'target',
         'status',
+    ];
+
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+        'type' => 'integer',
+        'target' => 'integer',
     ];
 
     public function details()

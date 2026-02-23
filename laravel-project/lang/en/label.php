@@ -75,4 +75,12 @@ return [
     'waist' => 'Waist (cm)',
     'hip' => 'Hip (cm)',
     'whr' => 'Waist-to-Hip Ratio (WHR)',
+    'contest_information' => 'Contest Information',
+    'contest_name' => 'Contest Name',
+    'target' => 'Target',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'image' => 'Image',
+    'type' => 'Type',
+    'description' => 'Description',
 ];
