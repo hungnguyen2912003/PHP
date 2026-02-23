@@ -35,95 +35,111 @@
                             {{ __('label.contest_information') }}
                         </h3>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.contest_name') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <input class="form-control" id="name" name="name"
-                                            placeholder="{{ __('placeholder.contest_name') }}" type="text"
-                                            value="{{ old('name') }}" required />
-                                        <label for="name">{{ __('placeholder.contest_name') }}</label>
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.contest_name') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="name" name="name"
+                                                    placeholder="{{ __('placeholder.contest_name') }}" type="text"
+                                                    value="{{ old('name') }}" required />
+                                                <label for="name">{{ __('placeholder.contest_name') }}</label>
+                                            </div>
+                                            @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
                                     </div>
-                                    @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.type') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <input class="form-control" id="type" name="type" type="number"
-                                            value="{{ old('type', 0) }}" required />
-                                        <label for="type">{{ __('label.type') }}</label>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.type') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="type" name="type" type="number"
+                                                    value="{{ old('type', 0) }}" required />
+                                                <label for="type">{{ __('label.type') }}</label>
+                                            </div>
+                                            @error('type') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
                                     </div>
-                                    @error('type') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.target') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <input class="form-control" id="target" name="target" type="number"
-                                            value="{{ old('target', 0) }}" required />
-                                        <label for="target">{{ __('label.target') }}</label>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.target') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="target" name="target" type="number"
+                                                    value="{{ old('target', 0) }}" required />
+                                                <label for="target">{{ __('label.target') }}</label>
+                                            </div>
+                                            @error('target') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
                                     </div>
-                                    @error('target') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.start_date') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="start_date" name="start_date" type="datetime-local"
+                                                    value="{{ old('start_date') }}" required />
+                                                <label for="start_date">{{ __('label.start_date') }}</label>
+                                            </div>
+                                            @error('start_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.end_date') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="end_date" name="end_date" type="datetime-local"
+                                                    value="{{ old('end_date') }}" required />
+                                                <label for="end_date">{{ __('label.end_date') }}</label>
+                                            </div>
+                                            @error('end_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.status') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <select class="form-select form-control" id="status" name="status" required>
+                                                    <option value="inprogress" {{ old('status') == 'inprogress' ? 'selected' : '' }}>{{ __('value.status.inprogress') }}</option>
+                                                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>{{ __('value.status.completed') }}</option>
+                                                    <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>{{ __('value.status.cancelled') }}</option>
+                                                </select>
+                                                <label for="status">{{ __('label.status') }}</label>
+                                            </div>
+                                            @error('status') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.start_date') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <input class="form-control" id="start_date" name="start_date" type="datetime-local"
-                                            value="{{ old('start_date') }}" required />
-                                        <label for="start_date">{{ __('label.start_date') }}</label>
-                                    </div>
-                                    @error('start_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.end_date') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <input class="form-control" id="end_date" name="end_date" type="datetime-local"
-                                            value="{{ old('end_date') }}" required />
-                                        <label for="end_date">{{ __('label.end_date') }}</label>
-                                    </div>
-                                    @error('end_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">
-                                        {{ __('label.status') }} <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-floating">
-                                        <select class="form-select form-control" id="status" name="status" required>
-                                            <option value="inprogress" {{ old('status') == 'inprogress' ? 'selected' : '' }}>{{ __('value.status.inprogress') }}</option>
-                                            <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>{{ __('value.status.completed') }}</option>
-                                            <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>{{ __('value.status.cancelled') }}</option>
-                                        </select>
-                                        <label for="status">{{ __('label.status') }}</label>
-                                    </div>
-                                    @error('status') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="mb-20">
+                            <div class="col-lg-3">
+                                <div class="mb-20 text-center">
                                     <label class="label fs-16 mb-2">{{ __('label.image') }}</label>
-                                    <input type="file" class="form-control" name="image" accept="image/*">
-                                    @error('image') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                    <div class="text-center">
+                                        <img src="{{ asset('assets/images/user.png') }}"
+                                            class="rounded mb-3" style="width: 150px; height: 150px; object-fit: cover;"
+                                            alt="contest" id="imagePreview">
+                                        <div>
+                                            <label for="imageUpload" class="btn btn-primary text-white">
+                                                <i class="ri-upload-2-line me-1"></i> {{ __('button.upload_image') }}
+                                            </label>
+                                            <input type="file" id="imageUpload" name="image" class="d-none" accept="image/*" onchange="previewImage(this)">
+                                        </div>
+                                        @error('image')
+                                            <div class="text-danger mt-2">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
@@ -157,4 +173,15 @@
 
 @push('scripts')
     <script src="{{ asset('assets/js/custom/common.js') }}"></script>
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endpush
