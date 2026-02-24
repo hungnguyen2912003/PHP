@@ -54,10 +54,13 @@ class ContestDataTable extends DataTable
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
+            ->editColumn('win_limit', function ($row) {
+                return $row->completed_details_count . '/' . $row->win_limit;
+            })
             ->addColumn('action', function ($row) {
                 return view('admin.pages.contest.columns.action', compact('row'))->render();
             })
-            ->rawColumns(['status', 'image', 'action'])
+            ->rawColumns(['status', 'image', 'action', 'win_limit'])
             ->setRowId('id');
     }
 
@@ -70,6 +73,9 @@ class ContestDataTable extends DataTable
     {
         return $model->newQuery()
             ->withCount('details')
+            ->withCount(['details as completed_details_count' => function ($query) {
+                $query->where('status', \App\Models\ContestDetail::STATUS_COMPLETED);
+            }])
             ->when($this->request->get('from_date'), function ($query, $fromDate) {
                 return $query->whereDate('start_date', '>=', $fromDate);
             })
