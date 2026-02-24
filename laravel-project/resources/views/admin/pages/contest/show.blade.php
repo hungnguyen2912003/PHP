@@ -131,7 +131,13 @@
                                         <label class="label fs-16 mb-2">{{ __('label.status') }}</label>
                                         <div class="form-floating">
                                             @php
-                                                $translatedStatus = __('value.status.' . $contest->status);
+                                                $statusKey = match($contest->status) {
+                                                    \App\Models\Contest::STATUS_INPROGRESS => 'inprogress',
+                                                    \App\Models\Contest::STATUS_COMPLETED => 'completed',
+                                                    \App\Models\Contest::STATUS_CANCELLED => 'cancelled',
+                                                    default => 'unknown',
+                                                };
+                                                $translatedStatus = __('value.status.' . $statusKey);
                                             @endphp
                                             <input class="form-control" type="text" value="{{ $translatedStatus }}" disabled />
                                             <label>{{ __('label.status') }}</label>
