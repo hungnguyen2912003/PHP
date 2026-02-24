@@ -85,4 +85,5 @@ return [
     'description' => 'Mô tả',
     'reward_points' => 'Điểm thưởng',
     'win_limit' => 'Số lượng người thắng',
+    'participants' => 'Số người tham gia',
 ];

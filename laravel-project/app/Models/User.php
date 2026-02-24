@@ -12,6 +12,11 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, HasUuids, Notifiable, HasApiTokens;
+
+    public const STATUS_PENDING = 1;
+    public const STATUS_ACTIVE = 2;
+    public const STATUS_BANNED = 3;
+
     protected $fillable = [
         'fullname',
         'username',
@@ -42,17 +47,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function isPending()
     {
-        return $this->status === 'pending';
+        return $this->status === self::STATUS_PENDING;
     }
 
     public function isActive()
     {
-        return $this->status === 'active';
+        return $this->status === self::STATUS_ACTIVE;
     }
 
     public function isBanned()
     {
-        return $this->status === 'banned';
+        return $this->status === self::STATUS_BANNED;
     }
 
     public function isDeleted()

@@ -37,10 +37,28 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }}</label>
+                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (JA)</label>
                                         <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->name }}" disabled />
-                                            <label>{{ __('placeholder.contest_name') }}</label>
+                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'ja', false) }}" disabled />
+                                            <label>{{ __('placeholder.contest_name') }} (JA)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (EN)</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'en', false) }}" disabled />
+                                            <label>{{ __('placeholder.contest_name') }} (EN)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (ZH)</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'zh', false) }}" disabled />
+                                            <label>{{ __('placeholder.contest_name') }} (ZH)</label>
                                         </div>
                                     </div>
                                 </div>
@@ -137,9 +155,25 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="mb-20">
-                                <label class="label fs-16 mb-2">{{ __('label.description') }}</label>
-                                <textarea class="form-control" rows="4" disabled>{{ $contest->description ?: __('value.not_available') }}</textarea>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (JA)</label>
+                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'ja', false) ?: __('value.not_available') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>
+                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'en', false) ?: __('value.not_available') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (ZH)</label>
+                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'zh', false) ?: __('value.not_available') }}</textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

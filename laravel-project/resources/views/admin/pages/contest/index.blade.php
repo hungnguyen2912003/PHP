@@ -32,16 +32,26 @@
         </div>
         <div class="card bg-white rounded-10 border border-white mb-4">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-                <form class="table-src-form position-relative m-0">
-                    <input class="form-control w-344" placeholder="{{ __('placeholder.search') }}" type="text"
-                        id="customSearch" />
-                    <div
-                        class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
-                        <span class="material-symbols-outlined">
-                            search
-                        </span>
+                <div class="d-flex align-items-center flex-wrap gap-4">
+                    <form class="table-src-form position-relative m-0">
+                        <input class="form-control w-344" placeholder="{{ __('placeholder.search') }}" type="text"
+                            id="customSearch" />
+                        <div
+                            class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="mb-0 text-nowrap fs-14">{{ __('label.from') }}</label>
+                        <input type="date" class="form-control" id="fromDate">
                     </div>
-                </form>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="mb-0 text-nowrap fs-14">{{ __('label.to') }}</label>
+                        <input type="date" class="form-control" id="toDate">
+                    </div>
+                </div>
                 <div class="d-flex gap-3">
                     <a class="text-decoration-none fs-16 text-primary" href="{{ route('admin.contests.create') }}">
                         + {{ __('button.add_contest') }}
@@ -64,6 +74,11 @@
             // Implement Custom Search
             $('#customSearch').on('keyup', function() {
                 window.LaravelDataTables['contests-table'].search(this.value).draw();
+            });
+
+            // Date Filter triggers
+            $('#fromDate, #toDate').on('change', function() {
+                window.LaravelDataTables['contests-table'].draw();
             });
 
             // Function to handle delegated clicks for delete action

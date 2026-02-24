@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('contests', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->json('name');
             $table->tinyInteger('type')->default(0);
             $table->string('image_url')->nullable();
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
             $table->timestamp('start_date');
             $table->timestamp('end_date');
             $table->integer('target')->default(0);
             $table->integer('reward_points')->default(0);
             $table->integer('win_limit')->default(0);
-            $table->enum('status', ['inprogress', 'completed', 'cancelled'])->default('inprogress');
+            $table->tinyInteger('status')->default(1)->comment('1: inprogress, 2: completed, 3: cancelled');
             $table->timestamps();
         });
     }

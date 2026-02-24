@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('device_type')->default(0);
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('1: incompleted, 2: completed, 3: cancelled');
             $table->timestamps();
         });
     }

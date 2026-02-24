@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Spatie\Translatable\HasTranslations;
 
 class Contest extends Model
 {
-    use HasUuids;
+    use HasUuids, HasTranslations;
+
+    public const STATUS_INPROGRESS = 1;
+    public const STATUS_COMPLETED = 2;
+    public const STATUS_CANCELLED = 3;
+
+    public $translatable = ['name', 'description'];
 
     protected $fillable = [
         'name',
@@ -29,6 +36,7 @@ class Contest extends Model
         'target' => 'integer',
         'reward_points' => 'integer',
         'win_limit' => 'integer',
+        'status' => 'integer',
     ];
 
     public function details()

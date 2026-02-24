@@ -40,15 +40,43 @@
                                     <div class="col-lg-4">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
-                                                {{ __('label.contest_name') }} <span class="text-danger">*</span>
+                                                {{ __('label.contest_name') }} (JA) <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="name" name="name"
-                                                    placeholder="{{ __('placeholder.contest_name') }}" type="text"
-                                                    value="{{ old('name') }}" />
-                                                <label for="name">{{ __('placeholder.contest_name') }}</label>
+                                                <input class="form-control" id="name_ja" name="name[ja]"
+                                                    placeholder="{{ __('placeholder.contest_name') }} (JA)" type="text"
+                                                    value="{{ old('name.ja') }}" />
+                                                <label for="name_ja">{{ __('placeholder.contest_name') }} (JA)</label>
                                             </div>
-                                            @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                            @error('name.ja') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.contest_name') }} (EN) <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="name_en" name="name[en]"
+                                                    placeholder="{{ __('placeholder.contest_name') }} (EN)" type="text"
+                                                    value="{{ old('name.en') }}" />
+                                                <label for="name_en">{{ __('placeholder.contest_name') }} (EN)</label>
+                                            </div>
+                                            @error('name.en') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.contest_name') }} (ZH) <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="name_zh" name="name[zh]"
+                                                    placeholder="{{ __('placeholder.contest_name') }} (ZH)" type="text"
+                                                    value="{{ old('name.zh') }}" />
+                                                <label for="name_zh">{{ __('placeholder.contest_name') }} (ZH)</label>
+                                            </div>
+                                            @error('name.zh') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -156,10 +184,28 @@
                             </div>
 
                             <div class="col-lg-12">
-                                <div class="mb-20">
-                                    <label class="label fs-16 mb-2">{{ __('label.description') }}</label>
-                                    <textarea class="form-control" name="description" placeholder="{{ __('placeholder.description') }}" rows="4">{{ old('description') }}</textarea>
-                                    @error('description') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (JA)</label>
+                                            <textarea class="form-control" name="description[ja]" placeholder="{{ __('placeholder.description') }} (JA)" rows="4">{{ old('description.ja') }}</textarea>
+                                            @error('description.ja') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>
+                                            <textarea class="form-control" name="description[en]" placeholder="{{ __('placeholder.description') }} (EN)" rows="4">{{ old('description.en') }}</textarea>
+                                            @error('description.en') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (ZH)</label>
+                                            <textarea class="form-control" name="description[zh]" placeholder="{{ __('placeholder.description') }} (ZH)" rows="4">{{ old('description.zh') }}</textarea>
+                                            @error('description.zh') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

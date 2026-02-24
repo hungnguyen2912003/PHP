@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->string('activation_token')->nullable();
             $table->timestamp('activation_token_sent_at')->nullable();
-            $table->enum('status', ['pending', 'active', 'banned'])->default('pending');
+            $table->tinyInteger('status')->default(1)->comment('1: pending, 2: active, 3: banned');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->timestamps();

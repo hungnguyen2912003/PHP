@@ -22,15 +22,24 @@ class ContestDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('name', function ($row) {
+                return $row->name; // Spatie Translatable handles the automatic casting to the current locale
+            })
             ->editColumn('status', function ($row) {
                 // Return a badge based on status
                 $badges = [
-                    'inprogress' => 'bg-warning',
-                    'completed' => 'bg-success',
-                    'cancelled' => 'bg-danger',
+                    \App\Models\Contest::STATUS_INPROGRESS => 'bg-warning',
+                    \App\Models\Contest::STATUS_COMPLETED => 'bg-success',
+                    \App\Models\Contest::STATUS_CANCELLED => 'bg-danger',
                 ];
                 $class = $badges[$row->status] ?? 'bg-secondary';
-                $translatedStatus = __('value.status.' . $row->status);
+                $statusKey = match($row->status) {
+                    \App\Models\Contest::STATUS_INPROGRESS => 'inprogress',
+                    \App\Models\Contest::STATUS_COMPLETED => 'completed',
+                    \App\Models\Contest::STATUS_CANCELLED => 'cancelled',
+                    default => 'unknown',
+                };
+                $translatedStatus = __('value.status.' . $statusKey);
                 return '<span class="badge ' . $class . '">' . $translatedStatus . '</span>';
             })
             ->editColumn('start_date', function ($row) {
@@ -59,7 +68,14 @@ class ContestDataTable extends DataTable
      */
     public function query(Contest $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->withCount('details')
+            ->when($this->request->get('from_date'), function ($query, $fromDate) {
+                return $query->whereDate('start_date', '>=', $fromDate);
+            })
+            ->when($this->request->get('to_date'), function ($query, $toDate) {
+                return $query->whereDate('start_date', '<=', $toDate);
+            });
     }
 
     /**
@@ -70,7 +86,10 @@ class ContestDataTable extends DataTable
         return $this->builder()
                     ->setTableId('contests-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax()
+                    ->minifiedAjax('', null, [
+                        'from_date' => '$("#fromDate").val()',
+                        'to_date' => '$("#toDate").val()',
+                    ])
                     ->pageLength(10)
                     ->orders([])
                     ->parameters([
@@ -92,20 +111,22 @@ class ContestDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('name')->title(__('label.contest_name')),
-            Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle'),
-            Column::make('target')->title(__('label.target'))->type('string'),
-            Column::make('reward_points')->title(__('label.reward_points'))->type('string'),
-            Column::make('win_limit')->title(__('label.win_limit'))->type('string'),
-            Column::make('start_date')->title(__('label.start_date'))->type('string'),
-            Column::make('end_date')->title(__('label.end_date'))->type('string'),
-            Column::make('status')->title(__('label.status')),
+            Column::make('name')->title(__('label.contest_name'))->addClass('text-nowrap'),
+            Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle text-nowrap'),
+            Column::make('target')->title(__('label.target'))->type('string')->addClass('text-nowrap'),
+            Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-nowrap'),
+            Column::make('win_limit')->title(__('label.win_limit'))->type('string')->addClass('text-nowrap'),
+            Column::make('details_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
+            Column::make('start_date')->title(__('label.start_date'))->type('string')->addClass('text-nowrap'),
+            Column::make('end_date')->title(__('label.end_date'))->type('string')->addClass('text-nowrap'),
+            Column::make('status')->title(__('label.status'))->addClass('text-nowrap'),
             Column::make('created_at')->title(__('label.created_at'))->visible(false),
             Column::computed('action')
                   ->title(__('label.action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(100)
+                  ->addClass('text-nowrap')
         ];
     }
 

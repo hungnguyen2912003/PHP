@@ -52,7 +52,7 @@ class AuthController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'role' => 'user',
-            'status' => 'pending',
+            'status' => User::STATUS_PENDING,
             'activation_token' => $hashedToken,
             'activation_token_sent_at' => Carbon::now(),
         ]);
@@ -158,7 +158,7 @@ class AuthController extends Controller
             return redirect()->route('client.login');
         }
 
-        if ($user->status !== 'pending') {
+        if ($user->status !== User::STATUS_PENDING) {
             flash()->error(__('message.user.activation.already_active'), [], __('notification.error'));
             return redirect()->route('client.login');
         }
@@ -176,7 +176,7 @@ class AuthController extends Controller
         }
 
         $user->update([
-            'status' => 'active',
+            'status' => User::STATUS_ACTIVE,
             'activation_token' => null,
             'activation_token_sent_at' => null,
             'email_verified_at' => now(),

@@ -5,6 +5,7 @@ return [
         'en' => 'Tiếng Anh',
         'ja' => 'Tiếng Nhật',
         'vi' => 'Tiếng Việt',
+        'zh' => 'Tiếng Trung',
     ],
     'role' => [
         'admin' => 'Quản trị viên',

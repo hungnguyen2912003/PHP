@@ -24,10 +24,10 @@ class DashboardController extends Controller
                 ->whereYear('created_at', now()->year)
                 ->count(),
             'pending_users' => User::where('role', 'user')
-                ->where('status', 'pending')
+                ->where('status', User::STATUS_PENDING)
                 ->count(),
             'banned_users' => User::where('role', 'user')
-                ->where('status', 'banned')
+                ->where('status', User::STATUS_BANNED)
                 ->count(),
         ];
 
@@ -59,8 +59,8 @@ class DashboardController extends Controller
 
             $trends['total_users'][] = $runningTotal;
             $trends['new_users'][] = $count;
-            $trends['pending_users'][] = $dayUsers->where('status', 'pending')->count();
-            $trends['banned_users'][] = $dayUsers->where('status', 'banned')->count();
+            $trends['pending_users'][] = $dayUsers->where('status', User::STATUS_PENDING)->count();
+            $trends['banned_users'][] = $dayUsers->where('status', User::STATUS_BANNED)->count();
         }
 
         return view('admin.pages.dashboard.index', compact('user', 'stats', 'trends'));

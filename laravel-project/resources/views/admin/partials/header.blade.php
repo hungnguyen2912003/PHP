@@ -70,6 +70,7 @@
                                             'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
                                             'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
                                             'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
+                                            'zh' => ['name' => __('value.lang.zh'), 'flag' => 'china.png'],
                                         ];
                                         $currentLocale = App::getLocale();
                                     @endphp
@@ -80,7 +81,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
                                                         <img alt="{{ $data['name'] }}" class="wh-30 rounded-circle"
-                                                            src="{{ asset('assets/images/' . $data['flag']) }}" />
+                                                            src="{{ asset('assets/images/' . $data['flag']) }}?v={{ file_exists(public_path('assets/images/' . $data['flag'])) ? filemtime(public_path('assets/images/' . $data['flag'])) : 1 }}" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-10">
                                                         <span class="text-secondary fw-medium fs-15">

@@ -39,7 +39,7 @@ class ContestController extends Controller
             $data['image_url'] = '/storage/' . $request->file('image')->store('contests', 'public');
         }
 
-        $data['status'] = 'inprogress';
+        $data['status'] = Contest::STATUS_INPROGRESS;
 
         Contest::create($data);
 

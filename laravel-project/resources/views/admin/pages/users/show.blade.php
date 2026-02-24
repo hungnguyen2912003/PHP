@@ -168,11 +168,11 @@
                         <li class="mb-10 fs-16">
                             {{ __('label.status') }}:
                             <span class="text-secondary">
-                                @if ($user->status == 'active')
+                                @if ($user->status == \App\Models\User::STATUS_ACTIVE)
                                     <span class="badge bg-success">{{ __('value.status.active') }}</span>
-                                @elseif ($user->status == 'pending')
+                                @elseif ($user->status == \App\Models\User::STATUS_PENDING)
                                     <span class="badge bg-warning">{{ __('value.status.pending') }}</span>
-                                @elseif ($user->status == 'banned')
+                                @elseif ($user->status == \App\Models\User::STATUS_BANNED)
                                     <span class="badge bg-danger">{{ __('value.status.banned') }}</span>
                                 @else
                                     <span class="badge bg-secondary">{{ __('value.status.deleted') }}</span>

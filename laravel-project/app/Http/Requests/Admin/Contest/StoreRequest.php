@@ -17,10 +17,16 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|array',
+            'name.ja' => 'required|string|max:255',
+            'name.en' => 'required|string|max:255',
+            'name.zh' => 'required|string|max:255',
             'type' => 'required|integer',
             'image_url' => 'nullable|string',
-            'description' => 'nullable|string',
+            'description' => 'nullable|array',
+            'description.ja' => 'nullable|string',
+            'description.en' => 'nullable|string',
+            'description.zh' => 'nullable|string',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after_or_equal:start_date',
             'target' => 'required|integer|min:1',

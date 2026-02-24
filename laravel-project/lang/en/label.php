@@ -85,4 +85,5 @@ return [
     'description' => 'Description',
     'reward_points' => 'Reward Points',
     'win_limit' => 'Win Limit',
+    'participants' => 'Participants',
 ];

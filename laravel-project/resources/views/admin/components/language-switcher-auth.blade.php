@@ -5,6 +5,7 @@
                 'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
                 'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
                 'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
+                'zh' => ['name' => __('value.lang.zh'), 'flag' => 'china.png'],
             ];
             $currentLocale = App::getLocale();
             // Re-evaluate current name based on new keys
@@ -12,6 +13,7 @@
                 'en' => ['name' => __('value.lang.en'), 'flag' => 'usa.png'],
                 'ja' => ['name' => __('value.lang.ja'), 'flag' => 'japan.png'],
                 'vi' => ['name' => __('value.lang.vi'), 'flag' => 'vietnam.png'],
+                'zh' => ['name' => __('value.lang.zh'), 'flag' => 'china.png'],
             ];
             $currentFlag = $locales[$currentLocale]['flag'] ?? 'usa.png';
             $currentName = $locales[$currentLocale]['name'] ?? 'English';
@@ -26,7 +28,7 @@
                 type="button"
             >
                 <img
-                    src="{{ asset('assets/images/' . $currentFlag) }}"
+                    src="{{ asset('assets/images/' . $currentFlag) }}?v={{ file_exists(public_path('assets/images/' . $currentFlag)) ? filemtime(public_path('assets/images/' . $currentFlag)) : 1 }}"
                     alt="{{ $currentName }}"
                 />
                 <span>{{ $currentName }}</span>
@@ -46,7 +48,7 @@
                             class="lang-item {{ $currentLocale === $key ? 'is-active' : '' }}"
                         >
                             <img
-                                src="{{ asset('assets/images/' . $data['flag']) }}"
+                                src="{{ asset('assets/images/' . $data['flag']) }}?v={{ file_exists(public_path('assets/images/' . $data['flag'])) ? filemtime(public_path('assets/images/' . $data['flag'])) : 1 }}"
                                 alt="{{ $data['name'] }}"
                             />
                             <span class="lang-name">{{ $data['name'] }}</span>

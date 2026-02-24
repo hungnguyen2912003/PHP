@@ -199,7 +199,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 */
 
 Route::get('language/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'vi', 'ja'])) {
+    if (!in_array($locale, ['en', 'vi', 'ja', 'zh'])) {
         abort(400);
     }
 

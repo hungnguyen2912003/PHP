@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-sm-4 gap-2">
-                            @if($user->status === 'pending')
+                            @if($user->status === \App\Models\User::STATUS_PENDING)
                                 <form action="{{ route('client.resend-activation') }}" method="POST" class="d-inline"
                                     id="resendActivationForm">
                                     @csrf
@@ -186,11 +186,11 @@
                         <li class="mb-10 fs-16">
                             <label class="form-label text-secondary">{{ __('label.status') }}:</label>
                             <span class="text-secondary">
-                                @if ($user->status == 'active')
+                                @if ($user->status == \App\Models\User::STATUS_ACTIVE)
                                     <span class="badge bg-success">{{ __('value.status.active') }}</span>
-                                @elseif ($user->status == 'pending')
+                                @elseif ($user->status == \App\Models\User::STATUS_PENDING)
                                     <span class="badge bg-warning">{{ __('value.status.pending') }}</span>
-                                @elseif ($user->status == 'banned')
+                                @elseif ($user->status == \App\Models\User::STATUS_BANNED)
                                     <span class="badge bg-danger">{{ __('value.status.banned') }}</span>
                                 @else
                                     <span class="badge bg-secondary">{{ __('value.status.deleted') }}</span>

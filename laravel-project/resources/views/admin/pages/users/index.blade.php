@@ -117,19 +117,19 @@
                             </li>
                             <li>
                                 <button class="dropdown-item text-secondary filter-option" data-filter="status"
-                                    data-value="active">
+                                    data-value="{{ \App\Models\User::STATUS_ACTIVE }}">
                                     {{ __('value.status.active') }}
                                 </button>
                             </li>
                             <li>
                                 <button class="dropdown-item text-secondary filter-option" data-filter="status"
-                                    data-value="pending">
+                                    data-value="{{ \App\Models\User::STATUS_PENDING }}">
                                     {{ __('value.status.pending') }}
                                 </button>
                             </li>
                             <li>
                                 <button class="dropdown-item text-secondary filter-option" data-filter="status"
-                                    data-value="banned">
+                                    data-value="{{ \App\Models\User::STATUS_BANNED }}">
                                     {{ __('value.status.banned') }}
                                 </button>
                             </li>

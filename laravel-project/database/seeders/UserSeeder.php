@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('12345678'),
             'role' => 'admin',
-            'status' => 'active',
+            'status' => User::STATUS_ACTIVE,
         ]);
 
         User::firstOrCreate([
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'username' => 'user',
             'password' => Hash::make('12345678'),
             'role' => 'user',
-            'status' => 'active',
+            'status' => User::STATUS_ACTIVE,
         ]);
     }
 }

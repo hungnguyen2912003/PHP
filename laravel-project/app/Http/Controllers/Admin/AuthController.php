@@ -115,7 +115,7 @@ class AuthController extends Controller
             return redirect()->route('admin.login');
         }
 
-        if ($user->status !== 'pending') {
+        if ($user->status !== User::STATUS_PENDING) {
             flash()->error(__('message.user.activation.already_active'), [], __('notification.error'));
             return redirect()->route('admin.login');
         }
@@ -161,7 +161,7 @@ class AuthController extends Controller
 
         $user->update([
             'password' => Hash::make($request->password),
-            'status' => 'active',
+            'status' => User::STATUS_ACTIVE,
             'activation_token' => null,
             'activation_token_sent_at' => null,
             'email_verified_at' => now(),
@@ -182,7 +182,7 @@ class AuthController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user->status !== 'pending') {
+        if ($user->status !== User::STATUS_PENDING) {
             flash()->error(__('message.user.resend_activation_failed'), [], __('notification.error'));
             return back();
         }

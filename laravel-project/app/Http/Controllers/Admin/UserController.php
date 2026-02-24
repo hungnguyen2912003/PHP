@@ -52,7 +52,7 @@ class UserController extends Controller
                     'username' => $username,
                     'password' => Hash::make('123456'),
                     'role' => $validated['role'],
-                    'status' => 'pending',
+                    'status' => User::STATUS_PENDING,
                     'activation_token' => $hashedToken,
                     'activation_token_sent_at' => Carbon::now(),
                 ]);
