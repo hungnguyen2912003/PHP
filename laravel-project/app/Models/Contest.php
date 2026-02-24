@@ -17,6 +17,8 @@ class Contest extends Model
         'start_date',
         'end_date',
         'target',
+        'reward_points',
+        'win_limit',
         'status',
     ];
 
@@ -25,6 +27,8 @@ class Contest extends Model
         'end_date' => 'datetime',
         'type' => 'integer',
         'target' => 'integer',
+        'reward_points' => 'integer',
+        'win_limit' => 'integer',
     ];
 
     public function details()

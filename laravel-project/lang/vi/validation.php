@@ -131,4 +131,14 @@ return [
             'max' => 'Kích thước tệp phải nhỏ hơn 2MB.',
         ],
     ],
+    'start_date' => [
+        'required' => 'Ngày bắt đầu là bắt buộc.',
+        'date' => 'Ngày bắt đầu phải là một ngày hợp lệ.',
+        'after_or_equal' => 'Ngày bắt đầu phải là hôm nay hoặc trong tương lai.',
+    ],
+    'end_date' => [
+        'required' => 'Ngày kết thúc là bắt buộc.',
+        'date' => 'Ngày kết thúc phải là một ngày hợp lệ.',
+        'after_or_equal' => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.',
+    ],
 ];

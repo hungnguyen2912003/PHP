@@ -28,4 +28,10 @@ return [
     'no_bio' => 'Chưa cập nhật tiểu sử',
     'unknown' => 'Không xác định',
     'not_available' => 'Chưa cập nhật',
+    'contest_type' => [
+        'walking' => 'Đi bộ',
+        'running' => 'Chạy bộ',
+        'cycling' => 'Đạp xe',
+        'swimming' => 'Bơi lội',
+    ],
 ];

@@ -133,4 +133,14 @@ return [
             'max' => 'File size must be less than 2MB.',
         ],
     ],
+    'start_date' => [
+        'required' => 'Start date is required.',
+        'date' => 'Start date must be a valid date.',
+        'after_or_equal' => 'Start date must be today or in the future.',
+    ],
+    'end_date' => [
+        'required' => 'End date is required.',
+        'date' => 'End date must be a valid date.',
+        'after_or_equal' => 'End date must be greater than or equal to start date.',
+    ],
 ];

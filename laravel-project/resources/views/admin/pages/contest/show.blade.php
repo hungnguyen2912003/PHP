@@ -33,54 +33,114 @@
                         {{ __('label.contest_information') }}
                     </h3>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <strong>{{ __('label.contest_name') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->name }}</p>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <strong>{{ __('label.type') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->type }}</p>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <strong>{{ __('label.target') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->target }}</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <strong>{{ __('label.start_date') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->start_date ? $contest->start_date->format('Y-m-d H:i') : '' }}</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <strong>{{ __('label.end_date') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->end_date ? $contest->end_date->format('Y-m-d H:i') : '' }}</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <strong>{{ __('label.status') }}:</strong>
-                            <p class="text-secondary mb-0">
-                                @php
-                                    $badges = [
-                                        'inprogress' => 'bg-info',
-                                        'completed' => 'bg-success',
-                                        'cancelled' => 'bg-danger',
-                                    ];
-                                    $class = $badges[$contest->status] ?? 'bg-secondary';
-                                    $translatedStatus = __('value.status.' . $contest->status);
-                                @endphp
-                                <span class="badge {{ $class }}">{{ $translatedStatus }}</span>
-                            </p>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <strong>{{ __('label.image') }}:</strong>
-                            @if($contest->image_url)
-                                <div class="mt-2">
-                                    <img src="{{ asset($contest->image_url) }}" alt="Contest Image" width="200" class="img-thumbnail rounded">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->name }}" disabled />
+                                            <label>{{ __('placeholder.contest_name') }}</label>
+                                        </div>
+                                    </div>
                                 </div>
-                            @else
-                                <p class="text-secondary mb-0">{{ __('value.not_available') }}</p>
-                            @endif
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.type') }}</label>
+                                        <div class="form-floating">
+                                            @php
+                                                $types = [
+                                                    1 => __('value.contest_type.walking'),
+                                                    2 => __('value.contest_type.running'),
+                                                    3 => __('value.contest_type.cycling'),
+                                                    4 => __('value.contest_type.swimming'),
+                                                ];
+                                            @endphp
+                                            <input class="form-control" type="text" value="{{ $types[$contest->type] ?? $contest->type }}" disabled />
+                                            <label>{{ __('label.type') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.target') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->target }}" disabled />
+                                            <label>{{ __('placeholder.target') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.reward_points') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->reward_points }}" disabled />
+                                            <label>{{ __('placeholder.reward_points') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.win_limit') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->win_limit }}" disabled />
+                                            <label>{{ __('placeholder.win_limit') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.start_date') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->start_date ? $contest->start_date->format('Y-m-d') : '' }}" disabled />
+                                            <label>{{ __('label.start_date') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.end_date') }}</label>
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" value="{{ $contest->end_date ? $contest->end_date->format('Y-m-d') : '' }}" disabled />
+                                            <label>{{ __('label.end_date') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">{{ __('label.status') }}</label>
+                                        <div class="form-floating">
+                                            @php
+                                                $translatedStatus = __('value.status.' . $contest->status);
+                                            @endphp
+                                            <input class="form-control" type="text" value="{{ $translatedStatus }}" disabled />
+                                            <label>{{ __('label.status') }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <strong>{{ __('label.description') }}:</strong>
-                            <p class="text-secondary mb-0">{{ $contest->description ?: __('value.not_available') }}</p>
+
+                        <div class="col-lg-3">
+                            <div class="mb-20">
+                                <label class="label fs-16 mb-2">{{ __('label.image') }}</label>
+                                <div class="border rounded-3 p-3 h-100 d-flex flex-column align-items-center justify-content-center" style="background-color: #e9ecef;">
+                                    @if($contest->image_url)
+                                        <img src="{{ asset($contest->image_url) }}" alt="Contest Image" class="img-fluid rounded" style="max-height: 200px; object-fit: contain;">
+                                    @else
+                                        <p class="text-secondary mb-0">{{ __('value.not_available') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-20">
+                                <label class="label fs-16 mb-2">{{ __('label.description') }}</label>
+                                <textarea class="form-control" rows="4" disabled>{{ $contest->description ?: __('value.not_available') }}</textarea>
+                            </div>
                         </div>
 
                         <div class="col-12 mt-4 text-center">

@@ -24,4 +24,8 @@ return [
     'drag_drop_file' => 'Drag & Drop your file or <span class="filepond--label-action">Browse</span>',
     'role_name' => 'Enter role name',
     'contest_name' => 'Enter contest name',
+    'description' => 'Enter description',
+    'target' => 'Enter target',
+    'reward_points' => 'Enter reward points',
+    'win_limit' => 'Enter win limit (max winners)',
 ];

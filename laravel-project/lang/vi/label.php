@@ -83,4 +83,6 @@ return [
     'image' => 'Hình ảnh',
     'type' => 'Loại',
     'description' => 'Mô tả',
+    'reward_points' => 'Điểm thưởng',
+    'win_limit' => 'Số lượng người thắng',
 ];

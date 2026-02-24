@@ -83,4 +83,6 @@ return [
     'image' => 'Image',
     'type' => 'Type',
     'description' => 'Description',
+    'reward_points' => 'Reward Points',
+    'win_limit' => 'Win Limit',
 ];

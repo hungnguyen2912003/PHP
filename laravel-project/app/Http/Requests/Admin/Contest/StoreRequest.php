@@ -19,12 +19,14 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'type' => 'required|integer',
-            'image' => 'nullable|image|max:2048',
+            'image_url' => 'nullable|string',
             'description' => 'nullable|string',
-            'start_date' => 'required|date',
+            'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'target' => 'required|integer|min:0',
-            'status' => 'required|in:inprogress,completed,cancelled',
+            'target' => 'required|integer|min:1',
+            'reward_points' => 'required|integer|min:1',
+            'win_limit' => 'required|integer|min:1',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

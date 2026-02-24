@@ -45,7 +45,7 @@
                                             <div class="form-floating">
                                                 <input class="form-control" id="name" name="name"
                                                     placeholder="{{ __('placeholder.contest_name') }}" type="text"
-                                                    value="{{ old('name') }}" required />
+                                                    value="{{ old('name') }}" />
                                                 <label for="name">{{ __('placeholder.contest_name') }}</label>
                                             </div>
                                             @error('name') <div class="text-danger mt-1">{{ $message }}</div> @enderror
@@ -57,8 +57,12 @@
                                                 {{ __('label.type') }} <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="type" name="type" type="number"
-                                                    value="{{ old('type', 0) }}" required />
+                                                <select class="form-select form-control" id="type" name="type">
+                                                    <option value="1" {{ old('type') == '1' ? 'selected' : '' }}>{{ __('value.contest_type.walking') }}</option>
+                                                    <option value="2" {{ old('type') == '2' ? 'selected' : '' }}>{{ __('value.contest_type.running') }}</option>
+                                                    <option value="3" {{ old('type') == '3' ? 'selected' : '' }}>{{ __('value.contest_type.cycling') }}</option>
+                                                    <option value="4" {{ old('type') == '4' ? 'selected' : '' }}>{{ __('value.contest_type.swimming') }}</option>
+                                                </select>
                                                 <label for="type">{{ __('label.type') }}</label>
                                             </div>
                                             @error('type') <div class="text-danger mt-1">{{ $message }}</div> @enderror
@@ -71,74 +75,82 @@
                                             </label>
                                             <div class="form-floating">
                                                 <input class="form-control" id="target" name="target" type="number"
-                                                    value="{{ old('target', 0) }}" required />
-                                                <label for="target">{{ __('label.target') }}</label>
+                                                    placeholder="{{ __('placeholder.target') }}"
+                                                    value="{{ old('target') }}" />
+                                                <label for="target">{{ __('placeholder.target') }}</label>
                                             </div>
                                             @error('target') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.reward_points') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="reward_points" name="reward_points" type="number"
+                                                    placeholder="{{ __('placeholder.reward_points') }}"
+                                                    value="{{ old('reward_points') }}" />
+                                                <label for="reward_points">{{ __('placeholder.reward_points') }}</label>
+                                            </div>
+                                            @error('reward_points') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.win_limit') }} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="win_limit" name="win_limit" type="number"
+                                                    placeholder="{{ __('placeholder.win_limit') }}"
+                                                    value="{{ old('win_limit') }}" />
+                                                <label for="win_limit">{{ __('placeholder.win_limit') }}</label>
+                                            </div>
+                                            @error('win_limit') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.start_date') }} <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="start_date" name="start_date" type="datetime-local"
-                                                    value="{{ old('start_date') }}" required />
+                                                <input class="form-control" id="start_date" name="start_date" type="date"
+                                                    value="{{ old('start_date', now()->format('Y-m-d')) }}" />
                                                 <label for="start_date">{{ __('label.start_date') }}</label>
                                             </div>
                                             @error('start_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.end_date') }} <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="end_date" name="end_date" type="datetime-local"
-                                                    value="{{ old('end_date') }}" required />
+                                                <input class="form-control" id="end_date" name="end_date" type="date"
+                                                    value="{{ old('end_date') }}" />
                                                 <label for="end_date">{{ __('label.end_date') }}</label>
                                             </div>
                                             @error('end_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">
-                                                {{ __('label.status') }} <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-floating">
-                                                <select class="form-select form-control" id="status" name="status" required>
-                                                    <option value="inprogress" {{ old('status') == 'inprogress' ? 'selected' : '' }}>{{ __('value.status.inprogress') }}</option>
-                                                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>{{ __('value.status.completed') }}</option>
-                                                    <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>{{ __('value.status.cancelled') }}</option>
-                                                </select>
-                                                <label for="status">{{ __('label.status') }}</label>
-                                            </div>
-                                            @error('status') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="mb-20 text-center">
+                                <div class="mb-20">
                                     <label class="label fs-16 mb-2">{{ __('label.image') }}</label>
-                                    <div class="text-center">
-                                        <img src="{{ asset('assets/images/user.png') }}"
-                                            class="rounded mb-3" style="width: 150px; height: 150px; object-fit: cover;"
-                                            alt="contest" id="imagePreview">
-                                        <div>
-                                            <label for="imageUpload" class="btn btn-primary text-white">
-                                                <i class="ri-upload-2-line me-1"></i> {{ __('button.upload_image') }}
-                                            </label>
-                                            <input type="file" id="imageUpload" name="image" class="d-none" accept="image/*" onchange="previewImage(this)">
+                                    <div class="border rounded-3 p-3 h-100 d-flex align-items-center">
+                                        <div class="w-100">
+                                            <input type="file" class="edit-image-filepond" id="image" name="image">
+                                            @error('image')
+                                                <div class="text-danger mt-2">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('image')
-                                            <div class="text-danger mt-2">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +158,7 @@
                             <div class="col-lg-12">
                                 <div class="mb-20">
                                     <label class="label fs-16 mb-2">{{ __('label.description') }}</label>
-                                    <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" name="description" placeholder="{{ __('placeholder.description') }}" rows="4">{{ old('description') }}</textarea>
                                     @error('description') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                 </div>
                             </div>
@@ -172,16 +184,22 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/custom/common.js') }}"></script>
     <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#imagePreview').attr('src', e.target.result);
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof FilePond !== 'undefined') {
+                if (typeof FilePondPluginImagePreview !== 'undefined') {
+                    FilePond.registerPlugin(FilePondPluginImagePreview);
                 }
-                reader.readAsDataURL(input.files[0]);
+                const inputElement = document.querySelector('.edit-image-filepond');
+                if (inputElement) {
+                    FilePond.create(inputElement, {
+                        storeAsFile: true,
+                        allowMultiple: false,
+                        acceptedFileTypes: ['image/*'],
+                        labelIdle: '{!! __("placeholder.drag_drop_file") !!}'
+                    });
+                }
             }
-        }
+        });
     </script>
 @endpush

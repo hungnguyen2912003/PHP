@@ -28,4 +28,10 @@ return [
     'no_bio' => 'No biography available',
     'unknown' => 'Unknown',
     'not_available' => 'Not Available',
+    'contest_type' => [
+        'walking' => 'Walking',
+        'running' => 'Running',
+        'cycling' => 'Cycling',
+        'swimming' => 'Swimming',
+    ],
 ];

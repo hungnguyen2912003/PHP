@@ -20,6 +20,8 @@ return new class extends Migration
             $table->timestamp('start_date');
             $table->timestamp('end_date');
             $table->integer('target')->default(0);
+            $table->integer('reward_points')->default(0);
+            $table->integer('win_limit')->default(0);
             $table->enum('status', ['inprogress', 'completed', 'cancelled'])->default('inprogress');
             $table->timestamps();
         });

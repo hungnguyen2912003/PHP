@@ -39,6 +39,8 @@ class ContestController extends Controller
             $data['image_url'] = '/storage/' . $request->file('image')->store('contests', 'public');
         }
 
+        $data['status'] = 'inprogress';
+
         Contest::create($data);
 
         return redirect()->route('admin.contests.index')->with('success', __('message.contest_created_successfully'));
@@ -47,24 +49,27 @@ class ContestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Contest $contest)
+    public function show(string $id)
     {
+        $contest = Contest::findOrFail($id);
         return view('admin.pages.contest.show', compact('contest'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contest $contest)
+    public function edit(string $id)
     {
+        $contest = Contest::findOrFail($id);
         return view('admin.pages.contest.edit', compact('contest'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Contest $contest)
+    public function update(UpdateRequest $request, string $id)
     {
+        $contest = Contest::findOrFail($id);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -72,6 +77,11 @@ class ContestController extends Controller
                 Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
             }
             $data['image_url'] = '/storage/' . $request->file('image')->store('contests', 'public');
+        } elseif ($request->input('remove_image') == '1') {
+            if ($contest->image_url && Storage::disk('public')->exists(str_replace('/storage/', '', $contest->image_url))) {
+                Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
+            }
+            $data['image_url'] = null;
         }
 
         $contest->update($data);
@@ -82,8 +92,10 @@ class ContestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contest $contest)
+    public function destroy(string $id)
     {
+        $contest = Contest::findOrFail($id);
+
         if ($contest->image_url && Storage::disk('public')->exists(str_replace('/storage/', '', $contest->image_url))) {
             Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
         }

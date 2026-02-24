@@ -24,4 +24,8 @@ return [
     'drag_drop_file' => 'Kéo & Thả tệp của bạn hoặc <span class="filepond--label-action">Chọn tệp</span>',
     'role_name' => 'Nhập tên vai trò',
     'contest_name' => 'Nhập tên cuộc thi',
+    'description' => 'Nhập mô tả',
+    'target' => 'Nhập mục tiêu',
+    'reward_points' => 'Nhập số điểm thưởng',
+    'win_limit' => 'Nhập giới hạn người thắng',
 ];

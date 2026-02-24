@@ -25,7 +25,7 @@ class ContestDataTable extends DataTable
             ->editColumn('status', function ($row) {
                 // Return a badge based on status
                 $badges = [
-                    'inprogress' => 'bg-info',
+                    'inprogress' => 'bg-warning',
                     'completed' => 'bg-success',
                     'cancelled' => 'bg-danger',
                 ];
@@ -34,14 +34,14 @@ class ContestDataTable extends DataTable
                 return '<span class="badge ' . $class . '">' . $translatedStatus . '</span>';
             })
             ->editColumn('start_date', function ($row) {
-                return $row->start_date ? $row->start_date->format('Y-m-d H:i') : '';
+                return $row->start_date ? $row->start_date->format('Y-m-d') : __('value.not_available');
             })
             ->editColumn('end_date', function ($row) {
-                return $row->end_date ? $row->end_date->format('Y-m-d H:i') : '';
+                return $row->end_date ? $row->end_date->format('Y-m-d') : __('value.not_available');
             })
             ->addColumn('image', function ($row) {
                 if ($row->image_url) {
-                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="width: 50px; height: 50px; object-fit: cover;" class="rounded">';
+                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="height: 50px; object-fit: cover;" class="rounded">';
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
@@ -72,7 +72,7 @@ class ContestDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->pageLength(10)
-                    ->orderBy(5, 'desc') // order by created_at by default
+                    ->orders([])
                     ->parameters([
                         'dom' => 'Brt<"d-flex justify-content-between align-items-center p-20"ip>',
                         'buttons' => [],
@@ -94,9 +94,11 @@ class ContestDataTable extends DataTable
         return [
             Column::make('name')->title(__('label.contest_name')),
             Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle'),
-            Column::make('target')->title(__('label.target')),
-            Column::make('start_date')->title(__('label.start_date')),
-            Column::make('end_date')->title(__('label.end_date')),
+            Column::make('target')->title(__('label.target'))->type('string'),
+            Column::make('reward_points')->title(__('label.reward_points'))->type('string'),
+            Column::make('win_limit')->title(__('label.win_limit'))->type('string'),
+            Column::make('start_date')->title(__('label.start_date'))->type('string'),
+            Column::make('end_date')->title(__('label.end_date'))->type('string'),
             Column::make('status')->title(__('label.status')),
             Column::make('created_at')->title(__('label.created_at'))->visible(false),
             Column::computed('action')
@@ -104,7 +106,6 @@ class ContestDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(100)
-                  ->addClass('text-center'),
         ];
     }
 

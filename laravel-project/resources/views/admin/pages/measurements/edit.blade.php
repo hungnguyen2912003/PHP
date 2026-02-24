@@ -321,7 +321,7 @@
                                 },
                             }
                          @endif
-                                                                                             ],
+                    ],
                     server: {
                         load: (source, load, error, progress, abort, headers) => {
                             fetch(source).then(response => response.blob()).then(load);
