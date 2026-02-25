@@ -161,33 +161,35 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/resend-activation/{id}', [AdminAuthController::class, 'resendActivation'])->name('resend-activation');
         });
 
-        Route::prefix('measurements')->name('measurements.')->group(function () {
-            Route::get('/', [AdminMeasurementController::class, 'index'])->name('index');
-            Route::get('/user/{id}', [AdminMeasurementController::class, 'user'])->name('user');
-            Route::post('/import/{id}', [AdminMeasurementController::class, 'import'])->name('import');
-            Route::get('/edit/{id}', [AdminMeasurementController::class, 'edit'])->name('edit');
-            Route::put('/edit/{id}', [AdminMeasurementController::class, 'update'])->name('update');
-            Route::delete('/destroy/{id}', [AdminMeasurementController::class, 'destroy'])->name('destroy');
-        });
+        Route::middleware('role:Staff')->group(function () {
+            Route::prefix('measurements')->name('measurements.')->group(function () {
+                Route::get('/', [AdminMeasurementController::class, 'index'])->name('index');
+                Route::get('/user/{id}', [AdminMeasurementController::class, 'user'])->name('user');
+                Route::post('/import/{id}', [AdminMeasurementController::class, 'import'])->name('import');
+                Route::get('/edit/{id}', [AdminMeasurementController::class, 'edit'])->name('edit');
+                Route::put('/edit/{id}', [AdminMeasurementController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [AdminMeasurementController::class, 'destroy'])->name('destroy');
+            });
 
-        Route::prefix('contests')->name('contests.')->group(function () {
-            Route::get('/', [AdminContestController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [AdminContestController::class, 'show'])->name('show');
-            Route::get('/create', [AdminContestController::class, 'create'])->name('create');
-            Route::post('/store', [AdminContestController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [AdminContestController::class, 'edit'])->name('edit');
-            Route::put('/edit/{id}', [AdminContestController::class, 'update'])->name('update');
-            Route::delete('/destroy/{id}', [AdminContestController::class, 'destroy'])->name('destroy');
-        });
+            Route::prefix('contests')->name('contests.')->group(function () {
+                Route::get('/', [AdminContestController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [AdminContestController::class, 'show'])->name('show');
+                Route::get('/create', [AdminContestController::class, 'create'])->name('create');
+                Route::post('/store', [AdminContestController::class, 'store'])->name('store');
+                Route::get('/edit/{id}', [AdminContestController::class, 'edit'])->name('edit');
+                Route::put('/edit/{id}', [AdminContestController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [AdminContestController::class, 'destroy'])->name('destroy');
+            });
 
-        Route::prefix('contest-details')->name('contest-details.')->group(function () {
-            Route::get('/', [AdminContestDetailController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [AdminContestDetailController::class, 'show'])->name('show');
-            Route::get('/create', [AdminContestDetailController::class, 'create'])->name('create');
-            Route::post('/store', [AdminContestDetailController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [AdminContestDetailController::class, 'edit'])->name('edit');
-            Route::put('/edit/{id}', [AdminContestDetailController::class, 'update'])->name('update');
-            Route::delete('/destroy/{id}', [AdminContestDetailController::class, 'destroy'])->name('destroy');
+            Route::prefix('contest-details')->name('contest-details.')->group(function () {
+                Route::get('/', [AdminContestDetailController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [AdminContestDetailController::class, 'show'])->name('show');
+                Route::get('/create', [AdminContestDetailController::class, 'create'])->name('create');
+                Route::post('/store', [AdminContestDetailController::class, 'store'])->name('store');
+                Route::get('/edit/{id}', [AdminContestDetailController::class, 'edit'])->name('edit');
+                Route::put('/edit/{id}', [AdminContestDetailController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [AdminContestDetailController::class, 'destroy'])->name('destroy');
+            });
         });
     });
 });

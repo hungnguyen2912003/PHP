@@ -92,4 +92,8 @@ return [
     'start_at' => '开始时间',
     'end_at' => '结束时间',
     'device_type' => '设备类型',
+    'user_management' => '用户管理',
+    'all_user' => '所有用户',
+    'measurement_management' => '测量管理',
+    'contest_management' => '比赛管理',
 ];

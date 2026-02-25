@@ -38,36 +38,43 @@
                     <span class="title">{{ __('breadcrumb.dashboard') }}</span>
                 </a>
             </li>
-            @php
-                $user = Auth::guard('admin')->user();
-                $isAdmin = $user && strtolower($user->role) === 'admin';
-                $isStaff = $user && strtolower($user->role) === 'staff';
-            @endphp
 
-            @if($isAdmin || $isStaff)
-                <li class="menu-title small text-uppercase"><span class="menu-title-text">{{ __('section.apps') }}</span>
-                </li>
-                @if($isAdmin)
-                    <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'open' : '' }}">
-                        <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
-                            href="{{ route('admin.users.index') }}">
-                            <span class="material-symbols-outlined menu-icon">account_circle</span>
-                            <span class="title">{{ __('breadcrumb.user_management') }}</span>
-                        </a>
-                    </li>
-                @endif
-                <li class="menu-item {{ request()->routeIs('admin.measurements.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.measurements.*') ? 'active' : '' }}"
-                        href="{{ route('admin.measurements.index') }}">
-                        <span class="material-symbols-outlined menu-icon">monitoring</span>
-                        <span class="title">{{ __('breadcrumb.measurement_management') }}</span>
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">APPLICATIONS</span>
+            </li>
+
+            @if(auth('admin')->user()->isAdmin())
+                <li class="menu-item {{ Request::routeIs('admin.users.*') ? 'open' : '' }}">
+                    <a href="{{ route('admin.users.index') }}" class="menu-link {{ Request::routeIs('admin.users.*') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            person
+                        </span>
+                        <span class="title">
+                            {{ __('label.user_management') }}
+                        </span>                        
                     </a>
                 </li>
-                <li class="menu-item {{ request()->routeIs('admin.contests.*') ? 'open' : '' }}">
-                    <a class="menu-link {{ request()->routeIs('admin.contests.*') ? 'active' : '' }}"
-                        href="{{ route('admin.contests.index') }}">
-                        <span class="material-symbols-outlined menu-icon">trophy</span>
-                        <span class="title">{{ __('breadcrumb.contest_management') }}</span>
+            @endif
+
+            @if(auth('admin')->user()->isStaff())
+                <li class="menu-item {{ Request::routeIs('admin.measurements.*') ? 'open' : '' }}">
+                    <a href="{{ route('admin.measurements.index') }}" class="menu-link {{ Request::routeIs('admin.measurements.*') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            bar_chart
+                        </span>
+                        <span class="title">
+                            {{ __('label.measurement_management') }}
+                        </span>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::routeIs('admin.contests.*') || Request::routeIs('admin.contest-details.*') ? 'open' : '' }}">
+                    <a href="{{ route('admin.contests.index') }}" class="menu-link {{ Request::routeIs('admin.contests.*') || Request::routeIs('admin.contest-details.*') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            trophy
+                        </span>
+                        <span class="title">
+                            {{ __('label.contest_management') }}
+                        </span>
                     </a>
                 </li>
             @endif

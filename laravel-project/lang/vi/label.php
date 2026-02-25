@@ -91,5 +91,9 @@ return [
     'total_steps' => 'Mục tiêu đã thực hiện',
     'start_at' => 'Bắt đầu lúc',
     'end_at' => 'Kết thúc lúc',
-    'device_type' => 'Thiết bị',
+    'device_type' => 'Thiết bị sử dụng',
+    'user_management' => 'Quản lý Người dùng',
+    'all_user' => 'Tất cả Người dùng',
+    'measurement_management' => 'Quản lý Chỉ số',
+    'contest_management' => 'Quản lý Cuộc thi',
 ];

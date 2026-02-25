@@ -86,4 +86,8 @@ return [
     'start_at' => '開始日時',
     'end_at' => '終了日時',
     'device_type' => 'デバイスタイプ',
+    'user_management' => 'ユーザー管理',
+    'all_user' => 'すべてのユーザー',
+    'measurement_management' => '測定管理',
+    'contest_management' => 'コンテスト管理',
 ];

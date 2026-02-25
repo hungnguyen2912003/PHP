@@ -97,5 +97,9 @@ return [
     'total_steps' => 'Total Steps',
     'start_at' => 'Start At',
     'end_at' => 'End At',
-    'device_type' => 'Device Type',
+    'device_type' => 'Device Used',
+    'user_management' => 'User Management',
+    'all_user' => 'All Users',
+    'measurement_management' => 'Measurement Management',
+    'contest_management' => 'Contest Management',
 ];

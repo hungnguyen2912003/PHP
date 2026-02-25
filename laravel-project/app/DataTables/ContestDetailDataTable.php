@@ -63,7 +63,7 @@ class ContestDetailDataTable extends DataTable
             ->setTableId('contest-detail-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy([]) // Assuming sort by rank by default if applicable, or just let users sort
+            ->orderBy([])
             ->selectStyleSingle()
             ->parameters([
                 'dom' => 'Brt<"d-flex justify-content-between align-items-center p-20"ip>',
