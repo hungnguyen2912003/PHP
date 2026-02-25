@@ -23,43 +23,16 @@
                 </h5>
                 <p class="text-muted small mb-0">Participants still in progress.</p>
             </div>
-            <div class="card-body p-0 pt-3">
+            <div class="card-body p-4 pt-2">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle" id="temporary-ranking-table">
                         <thead class="bg-light">
                             <tr>
-                                <th class="ps-4">#</th>
+                                <th class="ps-3">#</th>
                                 <th>Participant</th>
-                                <th class="text-end pe-4">Total Steps</th>
+                                <th class="text-end pe-3">Total Steps</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse($temporaryRank as $index => $row)
-                            <tr>
-                                <td class="ps-4 fw-bold text-primary">{{ $index + 1 }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm me-3 d-flex align-items-center justify-content-center">
-                                            <span class="avatar-text rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                {{ strtoupper(substr($row->user->fullname ?? $row->user->username ?? 'U', 0, 1)) }}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-dark">{{ $row->user->fullname ?? $row->user->username }}</h6>
-                                            <small class="text-muted">{{ $row->user->email }}</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-end pe-4 fw-bold">{{ number_format($row->total_steps) }}</td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center py-4 text-muted">
-                                    No participants available.
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -76,43 +49,16 @@
                 </h5>
                 <p class="text-muted small mb-0">Participants who have completed the target (Top {{ $contest->win_limit }}).</p>
             </div>
-            <div class="card-body p-0 pt-3">
+            <div class="card-body p-4 pt-2">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle" id="final-ranking-table">
                         <thead class="bg-light">
                             <tr>
-                                <th class="ps-4">#</th>
+                                <th class="ps-3">#</th>
                                 <th>Participant</th>
-                                <th class="text-end pe-4">Total Steps</th>
+                                <th class="text-end pe-3">Total Steps</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse($finalRank as $index => $row)
-                            <tr>
-                                <td class="ps-4 fw-bold text-success">{{ $index + 1 }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm me-3 d-flex align-items-center justify-content-center">
-                                            <span class="avatar-text rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                {{ strtoupper(substr($row->user->fullname ?? $row->user->username ?? 'U', 0, 1)) }}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-dark">{{ $row->user->fullname ?? $row->user->username }}</h6>
-                                            <small class="text-muted">{{ $row->user->email }}</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-end pe-4 fw-bold">{{ number_format($row->total_steps) }}</td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center py-4 text-muted">
-                                    No winners yet.
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -120,3 +66,46 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        const d_locale = '{{ app()->getLocale() }}';
+        const d_url = '{{ asset('lang') }}/' + d_locale + '/datatable.json';
+
+        // Temporary Ranking Table
+        $('#temporary-ranking-table').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: false,
+            info: false,
+            ajax: '{!! route('admin.contests.ranking-data', ['id' => $contest->id, 'type' => 'temporary']) !!}',
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false, width: '50px', className: 'text-center fw-bold text-primary ps-3' },
+                { data: 'user_info', name: 'user.full_name', orderable: false },
+                { data: 'total_steps', name: 'total_steps', searchable: false, width: '120px', className: 'text-end pe-3' }
+            ],
+            language: { url: d_url },
+            dom: 'Brt', // Removed 'p' (pagination) and 'i' (info)
+            order: [[2, 'desc']] // Sort by total_steps by default
+        });
+
+        // Final Ranking Table
+        $('#final-ranking-table').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: false,
+            info: false,
+            ajax: '{!! route('admin.contests.ranking-data', ['id' => $contest->id, 'type' => 'final']) !!}',
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false, width: '50px', className: 'text-center fw-bold text-success ps-3' },
+                { data: 'user_info', name: 'user.full_name', orderable: false },
+                { data: 'total_steps', name: 'total_steps', searchable: false, width: '120px', className: 'text-end pe-3' }
+            ],
+            language: { url: d_url },
+            dom: 'Brt', // Removed 'p' (pagination) and 'i' (info)
+            order: [] // Ordering handled in controller for final (by end_at)
+        });
+    });
+</script>
+@endpush

@@ -36,16 +36,22 @@ class ContestDetailDataTable extends DataTable
                 return number_format($row->total_steps);
             })
             ->editColumn('start_at', function ($row) {
-                return $row->start_at ? $row->start_at->format('Y-m-d') : '-';
+                return $row->start_at ? $row->start_at->format('Y-m-d H:i') : '-';
             })
             ->editColumn('end_at', function ($row) {
-                return $row->end_at ? $row->end_at->format('Y-m-d') : '-';
+                return $row->end_at ? $row->end_at->format('Y-m-d H:i') : '-';
             })
             ->editColumn('device_type', function ($row) {
                 return match($row->device_type) {
-                    1 => 'Watch',
-                    2, 3 => 'Other',
-                    default => $row->device_type ?? '-'
+                    1 => 'Apple Watch',
+                    2 => 'Garmin',
+                    3 => 'Fitbit',
+                    4 => 'Samsung Galaxy Watch',
+                    5 => 'Coros',
+                    6 => 'Strava app',
+                    7 => 'Suunto',
+                    8 => 'Google Fit',
+                    default => $row->device_type ?? 'Other'
                 };
             })
             ->editColumn('status', function ($row) {
@@ -84,9 +90,9 @@ class ContestDetailDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
             Column::make('user_name')->title(__('label.full_name'))->searchable(true)->name('user.fullname')->orderable(false),
-            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center'),
-            Column::make('start_at')->title(__('label.start_at'))->searchable(false)->orderable(true)->addClass('text-center'),
-            Column::make('end_at')->title(__('label.end_at'))->searchable(false)->orderable(true)->addClass('text-center'),
+            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center')->type('number'),
+            Column::make('start_at')->title(__('label.start_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
+            Column::make('end_at')->title(__('label.end_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
             Column::make('device_type')->title(__('label.device_type'))->searchable(false)->orderable(true)->addClass('text-center'),
             Column::make('status')->title(__('label.status'))->addClass('text-center'),
         ];

@@ -70,21 +70,54 @@ class ContestController extends Controller
     public function ranking(string $id)
     {
         $contest = Contest::findOrFail($id);
+        return view('admin.pages.contest.ranking', compact('contest'));
+    }
 
-        $temporaryRank = ContestDetail::with('user')
-            ->where('contest_id', $id)
-            ->where('status', ContestDetail::STATUS_INCOMPLETED)
-            ->orderByDesc('total_steps')
-            ->get();
+    /**
+     * Return JSON data for the ranking DataTables.
+     */
+    public function rankingData(string $id, Request $request)
+    {
+        $contest = Contest::findOrFail($id);
+        $type = $request->query('type');
+        
+        $query = ContestDetail::with('user')
+            ->where('contest_id', $id);
 
-        $finalRank = ContestDetail::with('user')
-            ->where('contest_id', $id)
-            ->where('status', ContestDetail::STATUS_COMPLETED)
-            ->orderBy('end_at', 'asc')
-            ->limit($contest->win_limit)
-            ->get();
+        if ($type === 'temporary') {
+            $query->where('status', ContestDetail::STATUS_INCOMPLETED)
+                  ->orderByDesc('total_steps');
+        } elseif ($type === 'final') {
+            $query->where('status', ContestDetail::STATUS_COMPLETED)
+                  ->orderBy('end_at', 'asc')
+                  ->limit($contest->win_limit);
+        }
 
-        return view('admin.pages.contest.ranking', compact('contest', 'temporaryRank', 'finalRank'));
+        return datatables()->eloquent($query)
+            ->addIndexColumn()
+            ->addColumn('user_info', function ($row) {
+                $fullname = $row->user->fullname ?? $row->user->username ?? 'User';
+                $initial = strtoupper(substr($fullname, 0, 1));
+                $bgClass = $row->status == ContestDetail::STATUS_COMPLETED ? 'bg-success' : 'bg-primary';
+                
+                return '
+                    <div class="user-info d-flex align-items-center">
+                        <div class="img position-relative me-3 text-center d-flex align-items-center justify-content-center">
+                            <span class="avatar-text rounded-circle ' . $bgClass . ' text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                ' . $initial . '
+                            </span>
+                        </div>
+                        <div class="info">
+                            <span class="d-block text-dark fw-bold mb-0" style="font-size: 14px;">' . $fullname . '</span>
+                            <span class="d-block text-muted font-12">' . $row->user->email . '</span>
+                        </div>
+                    </div>';
+            })
+            ->editColumn('total_steps', function ($row) {
+                return '<span class="fw-bold">' . number_format($row->total_steps) . '</span>';
+            })
+            ->rawColumns(['user_info', 'total_steps'])
+            ->make(true);
     }
 
 

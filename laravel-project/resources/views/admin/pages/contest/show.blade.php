@@ -56,9 +56,14 @@
                     </div>
 
                     <!-- Reward Points -->
-                    <h2 class="text-primary fw-bold mb-3">
+                    <h2 class="text-primary fw-bold mb-2">
                         {{ $contest->reward_points }} {{ __('label.reward_points') }}
                     </h2>
+
+                    <!-- Target -->
+                    <h5 class="text-secondary fw-semibold mb-3">
+                        {{ __('label.target') }}: {{ number_format($contest->target) }}
+                    </h5>
 
                     <!-- Stats Row -->
                     <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
