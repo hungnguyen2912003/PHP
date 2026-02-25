@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class ContestDetail extends Model
 {
+    use HasUuids;
     public const STATUS_INCOMPLETED = 1;
     public const STATUS_COMPLETED = 2;
     public const STATUS_CANCELLED = 3;
@@ -13,9 +15,7 @@ class ContestDetail extends Model
     protected $fillable = [
         'contest_id',
         'user_id',
-        'rank',
         'total_steps',
-        'reward_point',
         'device_type',
         'start_at',
         'end_at',

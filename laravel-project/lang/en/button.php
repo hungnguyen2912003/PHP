@@ -27,4 +27,5 @@ return [
     'add_role' => 'Add New Role',
     'add_contest' => 'Add Contest',
     'view_more' => 'View more',
+    'ranking' => 'Ranking',
 ];

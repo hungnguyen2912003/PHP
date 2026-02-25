@@ -90,4 +90,6 @@ return [
     'all_user' => 'すべてのユーザー',
     'measurement_management' => '測定管理',
     'contest_management' => 'コンテスト管理',
+    'temporary_rank' => '暫定ランキング',
+    'final_rank' => '最終ランキング',
 ];

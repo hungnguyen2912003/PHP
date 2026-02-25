@@ -173,6 +173,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::prefix('contests')->name('contests.')->group(function () {
                 Route::get('/', [AdminContestController::class, 'index'])->name('index');
+                Route::get('/ranking/{id}', [AdminContestController::class, 'ranking'])->name('ranking');
+                Route::get('/ranking-data/{id}', [AdminContestController::class, 'rankingData'])->name('ranking-data');
                 Route::get('/show/{id}', [AdminContestController::class, 'show'])->name('show');
                 Route::get('/create', [AdminContestController::class, 'create'])->name('create');
                 Route::post('/store', [AdminContestController::class, 'store'])->name('store');

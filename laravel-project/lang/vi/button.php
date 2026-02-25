@@ -24,7 +24,8 @@ return [
     'go_back' => 'Quay lại',
     'add_weight' => 'Thêm cân nặng',
     'add_height' => 'Thêm chiều cao',
-    'add_role' => 'Thêm vai trò mới',
+    'add_role' => 'Thêm chức vụ',
     'add_contest' => 'Thêm cuộc thi',
     'view_more' => 'Xem thêm',
+    'ranking' => 'Bảng xếp hạng',
 ];

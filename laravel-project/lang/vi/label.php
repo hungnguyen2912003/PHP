@@ -96,4 +96,6 @@ return [
     'all_user' => 'Tất cả Người dùng',
     'measurement_management' => 'Quản lý Chỉ số',
     'contest_management' => 'Quản lý Cuộc thi',
+    'temporary_rank' => 'Bảng rank tạm thời',
+    'final_rank' => 'Bảng rank final',
 ];

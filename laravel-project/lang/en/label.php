@@ -102,4 +102,6 @@ return [
     'all_user' => 'All Users',
     'measurement_management' => 'Measurement Management',
     'contest_management' => 'Contest Management',
+    'temporary_rank' => 'Temporary Rank',
+    'final_rank' => 'Final Rank',
 ];

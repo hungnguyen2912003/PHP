@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Contest\StoreRequest;
 use App\Http\Requests\Admin\Contest\UpdateRequest;
 use App\Models\Contest;
+use App\Models\ContestDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,6 +63,30 @@ class ContestController extends Controller
         $dataTable = new ContestDetailDataTable($id);
         return $dataTable->render('admin.pages.contest.show', compact('contest'));
     }
+
+    /**
+     * Show the ranking page for the specified contest.
+     */
+    public function ranking(string $id)
+    {
+        $contest = Contest::findOrFail($id);
+
+        $temporaryRank = ContestDetail::with('user')
+            ->where('contest_id', $id)
+            ->where('status', ContestDetail::STATUS_INCOMPLETED)
+            ->orderByDesc('total_steps')
+            ->get();
+
+        $finalRank = ContestDetail::with('user')
+            ->where('contest_id', $id)
+            ->where('status', ContestDetail::STATUS_COMPLETED)
+            ->orderBy('end_at', 'asc')
+            ->limit($contest->win_limit)
+            ->get();
+
+        return view('admin.pages.contest.ranking', compact('contest', 'temporaryRank', 'finalRank'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

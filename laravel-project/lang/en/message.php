@@ -124,4 +124,10 @@ return [
     'contest_created_successfully' => 'Contest created successfully.',
     'contest_updated_successfully' => 'Contest updated successfully.',
     'contest_deleted_successfully' => 'Contest deleted successfully.',
+    'steps_imported_successfully' => 'Steps imported successfully.',
+    'no_active_contests_found' => 'No active contests found.',
+    'contest_not_active' => 'This contest is not currently active.',
+    'user_not_joined_contest' => 'You have not joined this contest.',
+    'invalid_import_dates' => 'The imported dates must fall within the contest start and end dates.',
+    'contest_detail_not_updatable' => 'This contest record cannot be updated because it is already completed or cancelled.',
 ];

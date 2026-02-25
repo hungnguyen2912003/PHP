@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MeasurementController;
+use App\Http\Controllers\Api\ContestController;
 
 
 /*
@@ -32,4 +33,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('measurements/weights/chart', [MeasurementController::class, 'weightChart']);
     Route::post('measurements/weights', [MeasurementController::class, 'storeWeight']);
     Route::get('measurements/weights/{measurement}', [MeasurementController::class, 'show']);
+
+    Route::get('contests', [ContestController::class, 'index']);
+    Route::post('contests/{contest}', [ContestController::class, 'importSteps']);
 });

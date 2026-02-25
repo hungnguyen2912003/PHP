@@ -27,4 +27,5 @@ return [
     'add_role' => '新しい役割を追加',
     'add_contest' => 'コンテスト追加',
     'view_more' => 'もっと見る',
+    'ranking' => 'ランキング',
 ];

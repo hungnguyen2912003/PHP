@@ -60,7 +60,7 @@
                 <li class="menu-item {{ Request::routeIs('admin.measurements.*') ? 'open' : '' }}">
                     <a href="{{ route('admin.measurements.index') }}" class="menu-link {{ Request::routeIs('admin.measurements.*') ? 'active' : '' }}">
                         <span class="material-symbols-outlined menu-icon">
-                            bar_chart
+                            medical_information
                         </span>
                         <span class="title">
                             {{ __('label.measurement_management') }}

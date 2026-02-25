@@ -24,7 +24,8 @@ return [
     'go_back' => '返回上一页',
     'add_weight' => '添加体重',
     'add_height' => '添加身高',
-    'add_role' => '添加新角色',
-    'add_contest' => '添加比赛',
+    'add_role' => '新增角色',
+    'add_contest' => '新增比赛',
     'view_more' => '查看更多',
+    'ranking' => '排行榜',
 ];

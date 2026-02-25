@@ -119,4 +119,10 @@ return [
     'contest_created_successfully' => 'Thêm cuộc thi thành công.',
     'contest_updated_successfully' => 'Cập nhật cuộc thi thành công.',
     'contest_deleted_successfully' => 'Xoá cuộc thi thành công.',
+    'steps_imported_successfully' => 'Nhập dữ liệu bước chân thành công.',
+    'no_active_contests_found' => 'Không tìm thấy cuộc thi nào đang hoạt động.',
+    'contest_not_active' => 'Cuộc thi này không trong thời gian hoạt động.',
+    'user_not_joined_contest' => 'Bạn chưa tham gia cuộc thi này.',
+    'invalid_import_dates' => 'Thời gian bắt đầu và kết thúc của dữ liệu phải nằm trong khoảng thời gian diễn ra cuộc thi.',
+    'contest_detail_not_updatable' => 'Không thể cập nhật vì bản ghi này đã hoàn thành hoặc bị huỷ.',
 ];

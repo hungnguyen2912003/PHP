@@ -96,4 +96,6 @@ return [
     'all_user' => '所有用户',
     'measurement_management' => '测量管理',
     'contest_management' => '比赛管理',
+    'temporary_rank' => '临时排名',
+    'final_rank' => '最终排名',
 ];

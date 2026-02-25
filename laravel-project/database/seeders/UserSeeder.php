@@ -25,6 +25,16 @@ class UserSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
+            'email' => 'staff@example.com',
+        ], [
+            'fullname' => 'Staff',
+            'username' => 'staff',
+            'password' => Hash::make('12345678'),
+            'role' => 'staff',
+            'status' => User::STATUS_ACTIVE,
+        ]);
+
+        User::firstOrCreate([
             'email' => 'user@example.com',
         ], [
             'fullname' => 'User',
@@ -33,5 +43,17 @@ class UserSeeder extends Seeder
             'role' => 'user',
             'status' => User::STATUS_ACTIVE,
         ]);
+
+        for ($i = 1; $i <= 10; $i++) {
+            User::firstOrCreate([
+                'email' => "user{$i}@example.com",
+            ], [
+                'fullname' => "User {$i}",
+                'username' => "user{$i}",
+                'password' => Hash::make('12345678'),
+                'role' => 'user',
+                'status' => User::STATUS_ACTIVE,
+            ]);
+        }
     }
 }
