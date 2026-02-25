@@ -23,6 +23,7 @@ return [
         'pending' => '待处理',
         'banned' => '已封禁',
         'inprogress' => '进行中',
+        'incompleted' => '未完成',
         'completed' => '已完成',
         'cancelled' => '已取消',
     ],

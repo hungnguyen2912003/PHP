@@ -22,6 +22,7 @@ return [
         'pending' => '保留中',
         'banned' => '禁止',
         'inprogress' => '進行中',
+        'incompleted' => '未完了',
         'completed' => '完了',
         'cancelled' => 'キャンセル',
     ],

@@ -23,6 +23,7 @@ return [
         'pending' => 'Đang chờ',
         'banned' => 'Bị cấm',
         'inprogress' => 'Đang diễn ra',
+        'incompleted' => 'Chưa hoàn thành',
         'completed' => 'Đã hoàn thành',
         'cancelled' => 'Đã huỷ',
     ],

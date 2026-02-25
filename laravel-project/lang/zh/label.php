@@ -86,4 +86,10 @@ return [
     'reward_points' => '奖励积分',
     'win_limit' => '获胜限制',
     'participants' => '参赛者',
+    'won' => '获胜',
+    'joined' => '加入',
+    'total_steps' => '总步数',
+    'start_at' => '开始时间',
+    'end_at' => '结束时间',
+    'device_type' => '设备类型',
 ];

@@ -23,6 +23,7 @@ return [
         'pending' => 'Pending',
         'banned' => 'Banned',
         'inprogress' => 'In Progress',
+        'incompleted' => 'Incompleted',
         'completed' => 'Completed',
         'cancelled' => 'Cancelled',
     ],

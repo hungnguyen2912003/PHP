@@ -26,4 +26,5 @@ return [
     'add_height' => '添加身高',
     'add_role' => '添加新角色',
     'add_contest' => '添加比赛',
+    'view_more' => '查看更多',
 ];

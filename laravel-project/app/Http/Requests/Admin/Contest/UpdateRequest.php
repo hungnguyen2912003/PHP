@@ -32,7 +32,7 @@ class UpdateRequest extends FormRequest
             'target' => 'required|integer|min:1',
             'reward_points' => 'required|integer|min:0',
             'win_limit' => 'required|integer|min:0',
-            'status' => 'required|in:inprogress,completed,cancelled',
+            'status' => 'required|in:' . \App\Models\Contest::STATUS_INPROGRESS . ',' . \App\Models\Contest::STATUS_COMPLETED . ',' . \App\Models\Contest::STATUS_CANCELLED,
             'remove_image' => 'nullable|in:0,1',
         ];
     }

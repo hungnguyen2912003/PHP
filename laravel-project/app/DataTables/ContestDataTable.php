@@ -50,7 +50,7 @@ class ContestDataTable extends DataTable
             })
             ->addColumn('image', function ($row) {
                 if ($row->image_url) {
-                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="height: 50px; object-fit: cover;" class="rounded">';
+                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="height: 50px;">';
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })

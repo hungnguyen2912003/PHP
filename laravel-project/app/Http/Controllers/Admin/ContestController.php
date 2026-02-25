@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\ContestDataTable;
+use App\DataTables\ContestDetailDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Contest\StoreRequest;
 use App\Http\Requests\Admin\Contest\UpdateRequest;
@@ -51,8 +52,15 @@ class ContestController extends Controller
      */
     public function show(string $id)
     {
-        $contest = Contest::findOrFail($id);
-        return view('admin.pages.contest.show', compact('contest'));
+        $contest = Contest::withCount([
+            'details',
+            'details as completed_details_count' => function ($query) {
+                $query->where('status', \App\Models\ContestDetail::STATUS_COMPLETED);
+            }
+        ])->findOrFail($id);
+        
+        $dataTable = new ContestDetailDataTable($id);
+        return $dataTable->render('admin.pages.contest.show', compact('contest'));
     }
 
     /**

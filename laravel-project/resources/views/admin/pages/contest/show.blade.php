@@ -26,174 +26,101 @@
             </nav>
         </div>
 
+        <div class="social-profile">
+            <div class="card border-0 bg-white rounded-10 mb-4 position-relative">
+                <div class="position-relative overflow-hidden rounded-10" style="height: 400px;">
+                    <!-- Background blurred layer -->
+                    <div class="position-absolute w-100 h-100" 
+                         style="background: url('{{ asset($contest->image_url) }}') center/cover no-repeat; 
+                                filter: blur(30px); 
+                                transform: scale(1.1); 
+                                opacity: 0.6;">
+                    </div>
+                    <!-- Foreground sharp layer -->
+                    <div class="position-relative w-100 h-100 d-flex align-items-center justify-content-center">
+                        <img alt="contest-cover" 
+                             class="h-100 w-100" 
+                             src="{{ asset($contest->image_url) }}" 
+                             style="object-fit: contain; position: relative; z-index: 1;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-xxl-12 col-xxxl-12">
+                <div class="card bg-white border border-white rounded-10 p-20 mb-4 text-center shadow-sm">
+                    <!-- Trophy Icon Overlay -->
+                    <div class="mb-3">
+                        <i class="ri-trophy-fill text-warning" style="font-size: 80px;"></i>
+                    </div>
+
+                    <!-- Reward Points -->
+                    <h2 class="text-primary fw-bold mb-3">
+                        {{ $contest->reward_points }} {{ __('label.reward_points') }}
+                    </h2>
+
+                    <!-- Stats Row -->
+                    <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
+                        <div class="text-secondary fs-18">
+                            <span class="text-body fw-bold fs-22">{{ $contest->completed_details_count }}/{{ $contest->win_limit }}</span>
+                            <span class="ms-1">{{ strtolower(__('label.won')) }}</span>
+                        </div>
+                        <div class="text-secondary fs-18">
+                            <span class="text-body fw-bold fs-22">{{ $contest->details_count }}</span>
+                            <span class="ms-1">{{ strtolower(__('label.joined')) }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Date Range -->
+                    <div class="text-secondary d-flex align-items-center justify-content-center border-top pt-3 mb-4">
+                        <i class="ri-calendar-line me-2"></i>
+                        <span>
+                            {{ $contest->start_date ? $contest->start_date->format('Y M d') : '' }} - 
+                            {{ $contest->end_date ? $contest->end_date->format('Y M d') : '' }}
+                        </span>
+                    </div>
+
+                    <!-- Description Area -->
+                    <div class="text-start">
+                        <p class="text-body fs-16 mb-2 lh-base" id="contestDescription">
+                            {{ $contest->getTranslation('description', app()->getLocale(), false) ?: __('value.not_available') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Participants Table Section -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="card bg-white border border-white rounded-10 p-20 mb-4 shadow-sm">
                     <h3 class="mb-20">
-                        {{ __('label.contest_information') }}
+                        {{ __('label.participants') }}
                     </h3>
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (JA)</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'ja', false) }}" disabled />
-                                            <label>{{ __('placeholder.contest_name') }} (JA)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (EN)</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'en', false) }}" disabled />
-                                            <label>{{ __('placeholder.contest_name') }} (EN)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.contest_name') }} (ZH)</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->getTranslation('name', 'zh', false) }}" disabled />
-                                            <label>{{ __('placeholder.contest_name') }} (ZH)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.type') }}</label>
-                                        <div class="form-floating">
-                                            @php
-                                                $types = [
-                                                    1 => __('value.contest_type.walking'),
-                                                    2 => __('value.contest_type.running'),
-                                                    3 => __('value.contest_type.cycling'),
-                                                    4 => __('value.contest_type.swimming'),
-                                                ];
-                                            @endphp
-                                            <input class="form-control" type="text" value="{{ $types[$contest->type] ?? $contest->type }}" disabled />
-                                            <label>{{ __('label.type') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.target') }}</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->target }}" disabled />
-                                            <label>{{ __('placeholder.target') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.reward_points') }}</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->reward_points }}" disabled />
-                                            <label>{{ __('placeholder.reward_points') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.win_limit') }}</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->win_limit }}" disabled />
-                                            <label>{{ __('placeholder.win_limit') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.start_date') }}</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->start_date ? $contest->start_date->format('Y-m-d') : '' }}" disabled />
-                                            <label>{{ __('label.start_date') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.end_date') }}</label>
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" value="{{ $contest->end_date ? $contest->end_date->format('Y-m-d') : '' }}" disabled />
-                                            <label>{{ __('label.end_date') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.status') }}</label>
-                                        <div class="form-floating">
-                                            @php
-                                                $statusKey = match($contest->status) {
-                                                    \App\Models\Contest::STATUS_INPROGRESS => 'inprogress',
-                                                    \App\Models\Contest::STATUS_COMPLETED => 'completed',
-                                                    \App\Models\Contest::STATUS_CANCELLED => 'cancelled',
-                                                    default => 'unknown',
-                                                };
-                                                $translatedStatus = __('value.status.' . $statusKey);
-                                            @endphp
-                                            <input class="form-control" type="text" value="{{ $translatedStatus }}" disabled />
-                                            <label>{{ __('label.status') }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="mb-20">
-                                <label class="label fs-16 mb-2">{{ __('label.image') }}</label>
-                                <div class="border rounded-3 p-3 h-100 d-flex flex-column align-items-center justify-content-center" style="background-color: #e9ecef;">
-                                    @if($contest->image_url)
-                                        <img src="{{ asset($contest->image_url) }}" alt="Contest Image" class="img-fluid rounded" style="max-height: 200px; object-fit: contain;">
-                                    @else
-                                        <p class="text-secondary mb-0">{{ __('value.not_available') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (JA)</label>
-                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'ja', false) ?: __('value.not_available') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>
-                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'en', false) ?: __('value.not_available') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">{{ __('label.description') }} (ZH)</label>
-                                        <textarea class="form-control" rows="4" disabled>{{ $contest->getTranslation('description', 'zh', false) ?: __('value.not_available') }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 mt-4 text-center">
-                            <a href="{{ route('admin.contests.edit', $contest->id) }}" class="btn btn-primary fw-normal text-white">
-                                {{ __('button.edit') }}
-                            </a>
-                            <a href="{{ route('admin.contests.index') }}" class="btn btn-secondary fw-normal text-white ms-2">
-                                {{ __('button.back') }}
-                            </a>
+                    <div class="default-table-area">
+                        <div class="table-responsive">
+                            {{ $dataTable->table(['class' => 'table align-middle']) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Action Buttons -->
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <a href="{{ route('admin.contests.edit', $contest->id) }}" class="btn btn-primary px-4 fw-normal text-white">
+                    {{ __('button.edit') }}
+                </a>
+                <a href="{{ route('admin.contests.index') }}" class="btn btn-secondary px-4 fw-normal text-white ms-2">
+                    {{ __('button.back') }}
+                </a>
+            </div>
+        </div>
     </div>
 @endsection
+
+@push('scripts')
+    {{ $dataTable->scripts() }}
+@endpush

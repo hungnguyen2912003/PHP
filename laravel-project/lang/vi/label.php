@@ -86,4 +86,10 @@ return [
     'reward_points' => 'Điểm thưởng',
     'win_limit' => 'Số lượng người thắng',
     'participants' => 'Số người tham gia',
+    'won' => 'đã thắng',
+    'joined' => 'đã tham gia',
+    'total_steps' => 'Mục tiêu đã thực hiện',
+    'start_at' => 'Bắt đầu lúc',
+    'end_at' => 'Kết thúc lúc',
+    'device_type' => 'Thiết bị',
 ];

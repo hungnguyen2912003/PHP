@@ -26,4 +26,5 @@ return [
     'add_height' => 'Thêm chiều cao',
     'add_role' => 'Thêm vai trò mới',
     'add_contest' => 'Thêm cuộc thi',
+    'view_more' => 'Xem thêm',
 ];
