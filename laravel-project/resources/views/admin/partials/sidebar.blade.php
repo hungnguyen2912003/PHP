@@ -81,8 +81,8 @@
             <li class="menu-title small text-uppercase">
                 <span class="menu-title-text">{{ __('section.system') }}</span>
             </li>
-            <li class="menu-item">
-                <a class="menu-link" href="{{ route('admin.profile.index') }}">
+            <li class="menu-item {{ request()->routeIs('admin.profile.*') ? 'open' : '' }}">
+                <a class="menu-link {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}" href="{{ route('admin.profile.index') }}">
                     <span class="material-symbols-outlined menu-icon">
                         account_circle
                     </span>
@@ -91,8 +91,8 @@
                     </span>
                 </a>
             </li>
-            <li class="menu-item">
-                <a class="menu-link menu-toggle active" href="javascript:void(0);">
+            <li class="menu-item {{ request()->routeIs('admin.settings.*') ? 'open' : '' }}">
+                <a class="menu-link menu-toggle {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" href="javascript:void(0);">
                     <span class="material-symbols-outlined menu-icon">
                         settings
                     </span>
@@ -102,12 +102,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a class="menu-link" href="{{ route('admin.settings.account') }}">
+                        <a class="menu-link {{ request()->routeIs('admin.settings.account') ? 'active' : '' }}" href="{{ route('admin.settings.account') }}">
                             {{ __('breadcrumb.settings.account') }}
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="{{ route('admin.settings.change-password') }}">
+                        <a class="menu-link {{ request()->routeIs('admin.settings.change-password') ? 'active' : '' }}" href="{{ route('admin.settings.change-password') }}">
                             {{ __('breadcrumb.settings.change_password') }}
                         </a>
                     </li>
