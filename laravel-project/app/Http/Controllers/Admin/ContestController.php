@@ -96,28 +96,20 @@ class ContestController extends Controller
         return datatables()->eloquent($query)
             ->addIndexColumn()
             ->addColumn('user_info', function ($row) {
-                $fullname = $row->user->fullname ?? $row->user->username ?? 'User';
-                $initial = strtoupper(substr($fullname, 0, 1));
-                $bgClass = $row->status == ContestDetail::STATUS_COMPLETED ? 'bg-success' : 'bg-primary';
-                
-                return '
-                    <div class="user-info d-flex align-items-center">
-                        <div class="img position-relative me-3 text-center d-flex align-items-center justify-content-center">
-                            <span class="avatar-text rounded-circle ' . $bgClass . ' text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                ' . $initial . '
-                            </span>
-                        </div>
-                        <div class="info">
-                            <span class="d-block text-dark fw-bold mb-0" style="font-size: 14px;">' . $fullname . '</span>
-                            <span class="d-block text-muted font-12">' . $row->user->email . '</span>
-                        </div>
-                    </div>';
+                return view('admin.pages.contest.columns.user_info', compact('row'))->render();
+            })
+            ->editColumn('start_at', function ($row) {
+                return $row->start_at ? $row->start_at->format('Y-m-d H:i') : '-';
+            })
+            ->editColumn('end_at', function ($row) {
+                return $row->end_at ? $row->end_at->format('Y-m-d H:i') : '-';
             })
             ->editColumn('total_steps', function ($row) {
-                return '<span class="fw-bold">' . number_format($row->total_steps) . '</span>';
+                return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
             })
             ->rawColumns(['user_info', 'total_steps'])
             ->make(true);
+
     }
 
 

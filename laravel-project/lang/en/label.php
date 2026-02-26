@@ -104,4 +104,6 @@ return [
     'contest_management' => 'Contest Management',
     'temporary_rank' => 'Temporary Rank',
     'final_rank' => 'Final Rank',
+    'temporary_rank_desc' => 'Participants still in progress.',
+    'final_rank_desc' => 'Participants who have completed the target (Top :limit).',
 ];

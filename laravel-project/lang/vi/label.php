@@ -96,6 +96,8 @@ return [
     'all_user' => 'Tất cả Người dùng',
     'measurement_management' => 'Quản lý Chỉ số',
     'contest_management' => 'Quản lý Cuộc thi',
-    'temporary_rank' => 'Bảng rank tạm thời',
-    'final_rank' => 'Bảng rank final',
+    'temporary_rank' => 'Bảng xếp hạng tạm thời',
+    'final_rank' => 'Bảng xếp hạng chung cuộc',
+    'temporary_rank_desc' => 'Người tham gia đang trong quá trình.',
+    'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu (Top :limit).',
 ];

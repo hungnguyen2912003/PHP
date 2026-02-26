@@ -81,8 +81,8 @@
                     <div class="text-secondary d-flex align-items-center justify-content-center border-top pt-3 mb-4">
                         <i class="ri-calendar-line me-2"></i>
                         <span>
-                            {{ $contest->start_date ? $contest->start_date->format('Y M d') : '' }} - 
-                            {{ $contest->end_date ? $contest->end_date->format('Y M d') : '' }}
+                            {{ $contest->start_date ? $contest->start_date->translatedFormat('Y M d') : '' }} - 
+                            {{ $contest->end_date ? $contest->end_date->translatedFormat('Y M d') : '' }}
                         </span>
                     </div>
 
