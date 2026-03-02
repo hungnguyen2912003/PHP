@@ -56,7 +56,7 @@ class ContestController extends Controller
         $contest = Contest::withCount([
             'details',
             'details as completed_details_count' => function ($query) {
-                $query->where('status', \App\Models\ContestDetail::STATUS_COMPLETED);
+                $query->where('status', ContestDetail::STATUS_COMPLETED);
             }
         ])->findOrFail($id);
         
