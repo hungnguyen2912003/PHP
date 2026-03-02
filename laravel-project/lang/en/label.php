@@ -106,4 +106,8 @@ return [
     'final_rank' => 'Final Rank',
     'temporary_rank_desc' => 'Participants still in progress.',
     'final_rank_desc' => 'Participants who have completed the target (Top :limit).',
+    'duration' => 'Duration',
+    'reward' => 'Reward',
+    'finalize_at' => 'Finalize At',
+    'finalize_at_hint' => 'Set a date/time to automatically finalize ranking and send result emails.',
 ];

@@ -28,4 +28,6 @@ return [
     'add_contest' => 'コンテスト追加',
     'view_more' => 'もっと見る',
     'ranking' => 'ランキング',
+    'finalize_ranking' => 'ランキング確定',
+    'export' => 'エクスポート',
 ];

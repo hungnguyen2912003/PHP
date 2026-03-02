@@ -24,11 +24,13 @@ class ContestResource extends JsonResource
             'target' => $this->target,
             'reward_points' => $this->reward_points,
             'win_limit' => $this->win_limit,
-            'start_date' => $this->start_date?->toDateString(),
-            'end_date' => $this->end_date?->toDateString(),
+            'start_date' => $this->start_date?->timestamp,
+            'end_date' => $this->end_date?->timestamp,
             'status' => $this->status,
-            'created_at' => $this->created_at?->toDateTimeString(),
-            'updated_at' => $this->updated_at?->toDateTimeString(),
+            'total_participants' => $this->total_participants ?? 0,
+            'total_winners' => $this->total_winners ?? 0,
+            'created_at' => $this->created_at?->timestamp,
+            'updated_at' => $this->updated_at?->timestamp,
         ];
     }
 

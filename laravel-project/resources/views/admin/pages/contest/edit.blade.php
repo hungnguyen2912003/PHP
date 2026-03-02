@@ -411,6 +411,29 @@
                                     <div class="col-lg-12">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
+                                                {{ __('label.finalize_at') }}
+                                            </label>
+                                            <div class="form-floating">
+                                                <input
+                                                    class="form-control"
+                                                    id="finalize_at"
+                                                    name="finalize_at"
+                                                    type="datetime-local"
+                                                    value="{{ old('finalize_at', $contest->finalize_at ? $contest->finalize_at->format('Y-m-d\TH:i') : '') }}"
+                                                />
+                                                <label for="finalize_at">
+                                                    {{ __('label.finalize_at') }}
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">{{ __('label.finalize_at_hint') }}</small>
+                                            @error('finalize_at')
+                                                <div class="text-danger mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
                                                 {{ __('label.status') }}
                                                 <span class="text-danger">*</span>
                                             </label>

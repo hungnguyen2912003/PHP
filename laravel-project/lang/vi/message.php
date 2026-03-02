@@ -125,4 +125,8 @@ return [
     'user_not_joined_contest' => 'Bạn chưa tham gia cuộc thi này.',
     'invalid_import_dates' => 'Thời gian bắt đầu và kết thúc của dữ liệu phải nằm trong khoảng thời gian diễn ra cuộc thi.',
     'contest_detail_not_updatable' => 'Không thể cập nhật vì bản ghi này đã hoàn thành hoặc bị huỷ.',
+    'contest_finalized_successfully' => 'Chốt xếp hạng cuộc thi thành công.',
+    'contest_already_finalized' => 'Cuộc thi này đã được chốt xếp hạng.',
+    'confirm_finalize_ranking' => 'Bạn có chắc chắn muốn chốt xếp hạng? Hành động này không thể hoàn tác.',
+    'confirm_finalize_title' => 'Chốt xếp hạng',
 ];

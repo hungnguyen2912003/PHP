@@ -91,4 +91,8 @@ return [
     'contest_created_successfully' => '比赛创建成功。',
     'contest_updated_successfully' => '比赛更新成功。',
     'contest_deleted_successfully' => '比赛删除成功。',
+    'contest_finalized_successfully' => '比赛排名已成功确认。',
+    'contest_already_finalized' => '该比赛已经确认排名。',
+    'confirm_finalize_ranking' => '确定要确认排名吗？此操作无法撤销。',
+    'confirm_finalize_title' => '确认排名',
 ];

@@ -119,4 +119,8 @@ return [
     'contest_created_successfully' => 'コンテストが正常に作成されました。',
     'contest_updated_successfully' => 'コンテストが正常に更新されました。',
     'contest_deleted_successfully' => 'コンテストが正常に削除されました。',
+    'contest_finalized_successfully' => 'コンテストのランキングが確定されました。',
+    'contest_already_finalized' => 'このコンテストはすでに確定されています。',
+    'confirm_finalize_ranking' => 'ランキングを確定してもよろしいですか？この操作は取り消しできません。',
+    'confirm_finalize_title' => 'ランキング確定',
 ];

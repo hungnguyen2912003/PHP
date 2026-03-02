@@ -28,4 +28,6 @@ return [
     'add_contest' => '新增比赛',
     'view_more' => '查看更多',
     'ranking' => '排行榜',
+    'finalize_ranking' => '确认排名',
+    'export' => '导出',
 ];

@@ -100,4 +100,8 @@ return [
     'final_rank' => 'Bảng xếp hạng chung cuộc',
     'temporary_rank_desc' => 'Người tham gia đang trong quá trình.',
     'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu (Top :limit).',
+    'duration' => 'Thời lượng',
+    'reward' => 'Thưởng',
+    'finalize_at' => 'Thời gian tính thưởng',
+    'finalize_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
 ];

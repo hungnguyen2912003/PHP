@@ -100,4 +100,8 @@ return [
     'final_rank' => '最终排名',
     'temporary_rank_desc' => '进行中的参与者。',
     'final_rank_desc' => '已完成目标的参与者（前 :limit 名）。',
+    'duration' => '时长',
+    'reward' => '奖励',
+    'finalize_at' => '结算时间',
+    'finalize_at_hint' => '设置自动结算排名并发送结果邮件的时间。',
 ];

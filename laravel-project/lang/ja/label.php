@@ -94,4 +94,8 @@ return [
     'final_rank' => '最終ランキング',
     'temporary_rank_desc' => '進行中の参加者。',
     'final_rank_desc' => '目標を達成した参加者（トップ :limit）。',
+    'duration' => '所要時間',
+    'reward' => '報酬',
+    'finalize_at' => '確定日時',
+    'finalize_at_hint' => 'ランキングを自動的に確定し、結果メールを送信する日時を設定します。',
 ];

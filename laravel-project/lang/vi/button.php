@@ -28,4 +28,6 @@ return [
     'add_contest' => 'Thêm cuộc thi',
     'view_more' => 'Xem thêm',
     'ranking' => 'Bảng xếp hạng',
+    'finalize_ranking' => 'Chốt xếp hạng',
+    'export' => 'Xuất',
 ];

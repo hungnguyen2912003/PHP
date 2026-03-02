@@ -17,7 +17,12 @@ class ContestController extends BaseApiController
      */
     public function index(Request $request)
     {
-        $contests = Contest::all();
+        $contests = Contest::withCount([
+                'details as total_participants',
+                'details as total_winners' => function ($query) {
+                    $query->where('status', ContestDetail::STATUS_COMPLETED);
+                },
+            ])->get();
 
         return $this->success(ContestResource::collection($contests));
     }
@@ -40,10 +45,7 @@ class ContestController extends BaseApiController
         }
 
         // Validate that imported start_at and end_at are within the contest's allowed date range
-        $importStart = \Carbon\Carbon::parse($startAt);
-        $importEnd = \Carbon\Carbon::parse($endAt);
-
-        if ($importStart < $contest->start_date || $importEnd > $contest->end_date) {
+        if ($contest->start_date->greaterThan($startAt) || $contest->end_date->lessThan($endAt)) {
             return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
         }
 

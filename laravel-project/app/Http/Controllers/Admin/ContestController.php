@@ -7,9 +7,11 @@ use App\DataTables\ContestDetailDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Contest\StoreRequest;
 use App\Http\Requests\Admin\Contest\UpdateRequest;
+use App\Jobs\FinalizeContestJob;
 use App\Models\Contest;
 use App\Models\ContestDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ContestController extends Controller
@@ -82,36 +84,172 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
         $type = $request->query('type');
-        
+
         $query = ContestDetail::with('user')
             ->where('contest_id', $id);
 
         if ($type === 'temporary') {
-            $query->where('status', ContestDetail::STATUS_INCOMPLETED)
-                  ->orderByDesc('total_steps');
+            $query->orderByDesc('total_steps');
         } elseif ($type === 'final') {
-            $query->where('status', ContestDetail::STATUS_COMPLETED)
-                  ->orderBy('end_at', 'asc')
+            // Only show final rank data after contest is finalized
+            if ($contest->status !== Contest::STATUS_COMPLETED) {
+                return datatables()->eloquent($query->whereRaw('1 = 0'))
+                    ->addIndexColumn()
+                    ->addColumn('user_info', fn() => '')
+                    ->addColumn('duration', fn() => '')
+                    ->addColumn('reward', fn() => 0)
+                    ->make(true);
+            }
+            $query->where('total_steps', '>=', $contest->target)
+                  ->orderByRaw('TIMESTAMPDIFF(SECOND, start_at, end_at) ASC')
+                  ->orderBy('start_at', 'asc')
                   ->limit($contest->win_limit);
         }
 
-        return datatables()->eloquent($query)
+        $datatable = datatables()->eloquent($query)
             ->addIndexColumn()
             ->addColumn('user_info', function ($row) {
                 return view('admin.pages.contest.columns.user_info', compact('row'))->render();
             })
             ->editColumn('start_at', function ($row) {
-                return $row->start_at ? $row->start_at->format('Y-m-d H:i') : '-';
+                return $row->start_at ? $row->start_at->format('Y-m-d H:i:s') : '-';
             })
             ->editColumn('end_at', function ($row) {
-                return $row->end_at ? $row->end_at->format('Y-m-d H:i') : '-';
+                return $row->end_at ? $row->end_at->format('Y-m-d H:i:s') : '-';
             })
             ->editColumn('total_steps', function ($row) {
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
             })
-            ->rawColumns(['user_info', 'total_steps'])
-            ->make(true);
+            ->rawColumns(['user_info', 'total_steps']);
 
+        if ($type === 'final') {
+            $datatable->addColumn('duration', function ($row) {
+                if (!$row->start_at || !$row->end_at) return '-';
+                $seconds = abs($row->start_at->diffInSeconds($row->end_at));
+                $h = intdiv($seconds, 3600);
+                $m = intdiv($seconds % 3600, 60);
+                $s = $seconds % 60;
+                return sprintf('%02d:%02d:%02d', $h, $m, $s);
+            });
+
+            // Calculate reward points per rank
+            $datatable->addColumn('reward', function ($row) use ($contest) {
+                // This will be calculated after collection, placeholder
+                return 0;
+            });
+
+            // We need to calculate rewards based on rank position
+            // Override with a different approach
+            $response = $datatable->make(true);
+            $content = json_decode($response->getContent(), true);
+
+            if (!empty($content['data'])) {
+                $rewardPoints = $contest->reward_points;
+                foreach ($content['data'] as $index => &$item) {
+                    $rank = $index + 1;
+                    $item['reward'] = $this->calculateReward($rank, $rewardPoints);
+                }
+            }
+
+            return response()->json($content);
+        }
+
+        return $datatable->make(true);
+    }
+
+    /**
+     * Calculate reward points based on rank position.
+     * Top 1: 100%, Top 2: 80%, Top 3: 70%, Top 4+: 60%
+     */
+    private function calculateReward(int $rank, int $rewardPoints): int
+    {
+        return match (true) {
+            $rank === 1 => $rewardPoints,
+            $rank === 2 => (int) round($rewardPoints * 0.8),
+            $rank === 3 => (int) round($rewardPoints * 0.7),
+            default => (int) round($rewardPoints * 0.6),
+        };
+    }
+
+    /**
+     * Finalize the contest ranking.
+     */
+    public function finalize(string $id)
+    {
+        $contest = Contest::findOrFail($id);
+
+        if ($contest->status === Contest::STATUS_COMPLETED) {
+            return response()->json([
+                'success' => false,
+                'message' => __('message.contest_already_finalized'),
+            ], 422);
+        }
+
+        // Dispatch job to finalize, calculate rewards, and send emails
+        FinalizeContestJob::dispatch($contest);
+
+        return response()->json([
+            'success' => true,
+            'message' => __('message.contest_finalized_successfully'),
+        ]);
+    }
+
+    /**
+     * Export the final ranking to CSV.
+     */
+    public function exportRanking(string $id)
+    {
+        $contest = Contest::findOrFail($id);
+
+        $details = ContestDetail::with('user')
+            ->where('contest_id', $id)
+            ->where('total_steps', '>=', $contest->target)
+            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_at, end_at) ASC')
+            ->orderBy('start_at', 'asc')
+            ->limit($contest->win_limit)
+            ->get();
+
+        $filename = 'ranking_' . str_replace(' ', '_', $contest->name) . '_' . now()->format('Ymd_His') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $callback = function () use ($details, $contest) {
+            $file = fopen('php://output', 'w');
+            // UTF-8 BOM for Excel compatibility
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+            fputcsv($file, ['Rank', 'Name', 'Email', 'Start At', 'End At', 'Duration', 'Total Steps', 'Reward Points']);
+
+            foreach ($details as $index => $detail) {
+                $rank = $index + 1;
+                $duration = '-';
+                if ($detail->start_at && $detail->end_at) {
+                    $seconds = abs($detail->start_at->diffInSeconds($detail->end_at));
+                    $h = intdiv($seconds, 3600);
+                    $m = intdiv($seconds % 3600, 60);
+                    $s = $seconds % 60;
+                    $duration = sprintf('%02d:%02d:%02d', $h, $m, $s);
+                }
+
+                fputcsv($file, [
+                    $rank,
+                    $detail->user?->fullname ?? '-',
+                    $detail->user?->email ?? '-',
+                    $detail->start_at ? $detail->start_at->format('Y-m-d H:i') : '-',
+                    $detail->end_at ? $detail->end_at->format('Y-m-d H:i') : '-',
+                    $duration,
+                    number_format($detail->total_steps),
+                    $this->calculateReward($rank, $contest->reward_points),
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
 

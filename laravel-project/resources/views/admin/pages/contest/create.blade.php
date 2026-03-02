@@ -207,6 +207,20 @@
                                             @error('end_date') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">
+                                                {{ __('label.finalize_at') }}
+                                            </label>
+                                            <div class="form-floating">
+                                                <input class="form-control" id="finalize_at" name="finalize_at" type="datetime-local"
+                                                    value="{{ old('finalize_at') }}" />
+                                                <label for="finalize_at">{{ __('label.finalize_at') }}</label>
+                                            </div>
+                                            <small class="text-muted">{{ __('label.finalize_at_hint') }}</small>
+                                            @error('finalize_at') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

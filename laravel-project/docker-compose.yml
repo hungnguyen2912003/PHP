@@ -24,7 +24,7 @@ services:
         restart: unless-stopped
         tty: true
         ports:
-            - "8080:80"
+            - '8080:80'
         volumes:
             - ./:/var/www:delegated
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
@@ -33,13 +33,43 @@ services:
         depends_on:
             - app
 
+    scheduler:
+        image: laravel-app
+        container_name: laravel-scheduler
+        restart: unless-stopped
+        working_dir: /var/www
+        command: sh -c "php artisan schedule:work"
+        volumes:
+            - ./:/var/www:delegated
+            - vendor_data:/var/www/vendor
+        networks:
+            - app-network
+        depends_on:
+            - app
+            - db
+
+    queue:
+        image: laravel-app
+        container_name: laravel-queue
+        restart: unless-stopped
+        working_dir: /var/www
+        command: sh -c "php artisan queue:work --sleep=3 --tries=3 --max-time=3600"
+        volumes:
+            - ./:/var/www:delegated
+            - vendor_data:/var/www/vendor
+        networks:
+            - app-network
+        depends_on:
+            - app
+            - db
+
     db:
         image: mysql:8.0
         container_name: laravel-db
         restart: unless-stopped
         tty: true
         ports:
-            - "3306:3306"
+            - '3306:3306'
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}

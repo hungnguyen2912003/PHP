@@ -130,4 +130,8 @@ return [
     'user_not_joined_contest' => 'You have not joined this contest.',
     'invalid_import_dates' => 'The imported dates must fall within the contest start and end dates.',
     'contest_detail_not_updatable' => 'This contest record cannot be updated because it is already completed or cancelled.',
+    'contest_finalized_successfully' => 'Contest ranking has been finalized successfully.',
+    'contest_already_finalized' => 'This contest has already been finalized.',
+    'confirm_finalize_ranking' => 'Are you sure you want to finalize the ranking? This action cannot be undone.',
+    'confirm_finalize_title' => 'Finalize Ranking',
 ];

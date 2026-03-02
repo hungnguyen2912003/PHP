@@ -28,4 +28,6 @@ return [
     'add_contest' => 'Add Contest',
     'view_more' => 'View more',
     'ranking' => 'Ranking',
+    'finalize_ranking' => 'Finalize Ranking',
+    'export' => 'Export',
 ];
