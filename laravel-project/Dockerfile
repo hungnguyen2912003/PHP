@@ -11,7 +11,9 @@ RUN apk add --no-cache \
     icu-dev \
     oniguruma-dev \
     linux-headers \
-    libzip-dev
+    libzip-dev \
+    nodejs \
+    npm
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl opcache zip
@@ -27,6 +29,12 @@ COPY composer.json composer.lock ./
 
 # Install dependencies (no scripts yet because code isn't copied)
 RUN composer install --no-dev --no-scripts --no-autoloader
+
+# Copy package.json for npm caching
+COPY package.json package-lock.json* ./
+
+# Install Node dependencies
+RUN npm install
 
 # Copy application code
 COPY . .

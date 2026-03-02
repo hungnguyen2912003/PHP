@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\Contest\ImportStepsRequest;
+use App\Http\Resources\Api\ContestResource;
 use App\Models\Contest;
 use App\Models\ContestDetail;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ContestController extends BaseApiController
     {
         $contests = Contest::all();
 
-        return $this->success($contests);
+        return $this->success(ContestResource::collection($contests));
     }
 
     /**
@@ -27,7 +28,7 @@ class ContestController extends BaseApiController
     public function importSteps(ImportStepsRequest $request, Contest $contest)
     {
         $user = auth()->user();
-        
+
         $totalSteps = $request->input('total_steps');
         $deviceType = $request->input('device_type', 1);
         $startAt = $request->input('start_at');
@@ -35,7 +36,7 @@ class ContestController extends BaseApiController
 
         // Allow updates only if the contest is currently in progress
         if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
-             return $this->error(__('message.contest_not_active'), 400, __('message.contest_not_active'));
+            return $this->error(__('message.contest_not_active'), 400, __('message.contest_not_active'));
         }
 
         // Validate that imported start_at and end_at are within the contest's allowed date range
@@ -43,7 +44,7 @@ class ContestController extends BaseApiController
         $importEnd = \Carbon\Carbon::parse($endAt);
 
         if ($importStart < $contest->start_date || $importEnd > $contest->end_date) {
-             return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
+            return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
         }
 
         // Find or create the contest detail record (auto-join)
@@ -51,10 +52,10 @@ class ContestController extends BaseApiController
             'user_id' => $user->id,
             'contest_id' => $contest->id,
         ]);
-        
+
         // Prevent update if already completed or cancelled
         if ($detail->status === ContestDetail::STATUS_COMPLETED || $detail->status === ContestDetail::STATUS_CANCELLED) {
-             return $this->error(__('message.contest_detail_not_updatable'), 400, __('message.contest_detail_not_updatable'));
+            return $this->error(__('message.contest_detail_not_updatable'), 400, __('message.contest_detail_not_updatable'));
         }
 
         DB::beginTransaction();
@@ -64,14 +65,14 @@ class ContestController extends BaseApiController
             $detail->device_type = $deviceType;
             $detail->start_at = $startAt;
             $detail->end_at = $endAt;
-            
+
             // Check if target reached
             if ($detail->total_steps >= $contest->target) {
                 $detail->status = ContestDetail::STATUS_COMPLETED;
             }
 
             $detail->save();
-            
+
             DB::commit();
 
             return response()->json([

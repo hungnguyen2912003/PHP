@@ -1,4 +1,14 @@
 {
     "php.version": "8.4",
-    "chatgpt.openOnStartup": true
+    "chatgpt.openOnStartup": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[blade]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[php]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.requireConfig": true,
+    "prettier.useEditorConfig": false
 }

@@ -1,5 +1,13 @@
 {
-    "plugins": ["prettier-plugin-blade"],
+    "plugins": ["./node_modules/prettier-plugin-blade/plugin.js"],
+    "overrides": [
+        {
+            "files": ["*.blade.php"],
+            "options": {
+                "parser": "blade"
+            }
+        }
+    ],
     "tabWidth": 4,
     "singleQuote": true,
     "printWidth": 100
