@@ -267,6 +267,7 @@
                                                 name="description[en]"
                                                 placeholder="{{ __('placeholder.description') }} (EN)"
                                                 rows="4"
+                                                style="resize: none"
                                             >
 {{ old('description.en', $contest->getTranslation('description', 'en', false)) }}</textarea
                                             >
@@ -285,6 +286,7 @@
                                                 name="description[ja]"
                                                 placeholder="{{ __('placeholder.description') }} (JA)"
                                                 rows="4"
+                                                style="resize: none"
                                             >
 {{ old('description.ja', $contest->getTranslation('description', 'ja', false)) }}</textarea
                                             >
@@ -303,6 +305,7 @@
                                                 name="description[zh]"
                                                 placeholder="{{ __('placeholder.description') }} (ZH)"
                                                 rows="4"
+                                                style="resize: none"
                                             >
 {{ old('description.zh', $contest->getTranslation('description', 'zh', false)) }}</textarea
                                             >
@@ -321,6 +324,7 @@
                                                 name="description[vn]"
                                                 placeholder="{{ __('placeholder.description') }} (VN)"
                                                 rows="4"
+                                                style="resize: none"
                                             >
 {{ old('description.vn', $contest->getTranslation('description', 'vn', false)) }}</textarea
                                             >
@@ -481,32 +485,34 @@
     <script src="{{ asset('assets/js/custom/common.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            if (typeof FilePond !== 'undefined') {
+            const inputElement = document.querySelector('.edit-image-filepond');
+            if (inputElement) {
                 if (typeof FilePondPluginImagePreview !== 'undefined') {
                     FilePond.registerPlugin(FilePondPluginImagePreview);
                 }
-                const inputElement = document.querySelector('.edit-image-filepond');
-                if (inputElement) {
-                    const pond = FilePond.create(inputElement, {
+                const pond = FilePond.create(inputElement, {
                     allowImagePreview: true,
                     storeAsFile: true,
                     labelIdle: `{!! __('placeholder.drag_drop_file') !!}`,
                     acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
                     files: [
                         @if ($contest->image_url)
-                                                {
+                            {
                                 source: '{{ asset($contest->image_url) }}',
-                                options: {
-                                    type: 'local',
-                                },
+                                options: { type: 'local' },
                             }
-                         @endif
+                        @endif
                     ],
                     server: {
                         load: (source, load, error, progress, abort, headers) => {
-                            fetch(source).then(response => response.blob()).then(load);
-                        }
-                    }
+                            fetch(source)
+                                .then(response => response.blob())
+                                .then(blob => {
+                                    const filename = source.split('/').pop().split('?')[0];
+                                    load(new File([blob], filename, { type: blob.type }));
+                                });
+                        },
+                    },
                 });
 
                 pond.on('removefile', (error, file) => {
@@ -516,8 +522,14 @@
                 pond.on('addfile', (error, file) => {
                     document.getElementById('remove_image').value = '0';
                 });
+
+                document.getElementById('common-form').addEventListener('submit', function () {
+                    const files = pond.getFiles();
+                    if (files.length && files[0].origin === FilePond.FileOrigin.LOCAL) {
+                        this.querySelectorAll('input[name="image"]').forEach(el => el.disabled = true);
+                    }
+                });
             }
-        }
         });
     </script>
 @endpush

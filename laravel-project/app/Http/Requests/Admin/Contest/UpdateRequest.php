@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
             'description.en' => 'nullable|string',
             'description.zh' => 'nullable|string',
             'description.vn' => 'nullable|string',
-            'start_date' => 'required|date|after_or_equal:today',
+            'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'target' => 'required|integer|min:1',
             'reward_points' => 'required|integer|min:0',

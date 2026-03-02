@@ -48,7 +48,7 @@ class MeasurementController extends Controller
 
             $file = $request->file('attachment');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs($measurement->user_id . '/measurements', $fileName, 'public');
+            $path = $file->storeAs('measurements/' . $measurement->id, $fileName, 'public');
             $data['attachment_url'] = 'storage/' . $path;
         } elseif ($request->input('remove_attachment') == '1') {
             if ($measurement->attachment_url) {

@@ -36,14 +36,16 @@ class ContestController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image_url'] = '/storage/' . $request->file('image')->store('contests', 'public');
-        }
-
         $data['status'] = Contest::STATUS_INPROGRESS;
 
-        Contest::create($data);
+        $contest = Contest::create($data);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('contests/' . $contest->id, $fileName, 'public');
+            $contest->update(['image_url' => '/storage/' . $path]);
+        }
 
         return redirect()->route('admin.contests.index')->with('success', __('message.contest_created_successfully'));
     }
@@ -131,13 +133,20 @@ class ContestController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            if ($contest->image_url && Storage::disk('public')->exists(str_replace('/storage/', '', $contest->image_url))) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
+            // Delete old image if exists
+            if ($contest->image_url) {
+                $oldPath = str_replace('/storage/', '', $contest->image_url);
+                Storage::disk('public')->delete($oldPath);
             }
-            $data['image_url'] = '/storage/' . $request->file('image')->store('contests', 'public');
+
+            $file = $request->file('image');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('contests/' . $contest->id, $fileName, 'public');
+            $data['image_url'] = '/storage/' . $path;
         } elseif ($request->input('remove_image') == '1') {
-            if ($contest->image_url && Storage::disk('public')->exists(str_replace('/storage/', '', $contest->image_url))) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
+            if ($contest->image_url) {
+                $oldPath = str_replace('/storage/', '', $contest->image_url);
+                Storage::disk('public')->delete($oldPath);
             }
             $data['image_url'] = null;
         }
@@ -154,8 +163,9 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
 
-        if ($contest->image_url && Storage::disk('public')->exists(str_replace('/storage/', '', $contest->image_url))) {
-            Storage::disk('public')->delete(str_replace('/storage/', '', $contest->image_url));
+        if ($contest->image_url) {
+            $oldPath = str_replace('/storage/', '', $contest->image_url);
+            Storage::disk('public')->delete($oldPath);
         }
 
         $contest->delete();
