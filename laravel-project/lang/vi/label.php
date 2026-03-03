@@ -85,6 +85,8 @@ return [
     'description' => 'Mô tả',
     'reward_points' => 'Điểm thưởng',
     'win_limit' => 'Số lượng người thắng',
+    'winners' => 'Người nhanh nhất',
+    'completed_count' => 'Đã hoàn thành',
     'participants' => 'Số người tham gia',
     'won' => 'đã thắng',
     'joined' => 'đã tham gia',

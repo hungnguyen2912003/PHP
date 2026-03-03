@@ -80,6 +80,8 @@ return [
     'image' => '画像',
     'type' => 'タイプ',
     'description' => '説明',
+    'winners' => '最速達成者',
+    'completed_count' => '完了者数',
     'won' => '達成',
     'joined' => '参加',
     'total_steps' => '合計ステップ',

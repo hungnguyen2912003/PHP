@@ -50,17 +50,17 @@ class ContestDataTable extends DataTable
             })
             ->addColumn('image', function ($row) {
                 if ($row->image_url) {
-                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="height: 50px;">';
+                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="width: 100px;">';
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
-            ->editColumn('win_limit', function ($row) {
-                return $row->completed_details_count . '/' . $row->win_limit;
+            ->addColumn('completed_count', function ($row) {
+                return $row->completed_details_count;
             })
             ->addColumn('action', function ($row) {
                 return view('admin.pages.contest.columns.action', compact('row'))->render();
             })
-            ->rawColumns(['status', 'image', 'action', 'win_limit'])
+            ->rawColumns(['status', 'image', 'action', 'completed_count'])
             ->setRowId('id');
     }
 
@@ -121,7 +121,8 @@ class ContestDataTable extends DataTable
             Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle text-nowrap'),
             Column::make('target')->title(__('label.target'))->type('string')->addClass('text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-nowrap'),
-            Column::make('win_limit')->title(__('label.win_limit'))->type('string')->addClass('text-nowrap'),
+            Column::make('win_limit')->title(__('label.winners'))->type('string')->addClass('text-center text-nowrap'),
+            Column::computed('completed_count')->title(__('label.completed_count'))->searchable(false)->orderable(false)->addClass('text-center text-nowrap'),
             Column::make('details_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
             Column::make('start_date')->title(__('label.start_date'))->type('string')->addClass('text-nowrap'),
             Column::make('end_date')->title(__('label.end_date'))->type('string')->addClass('text-nowrap'),

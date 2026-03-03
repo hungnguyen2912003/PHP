@@ -91,6 +91,8 @@ return [
     'description' => 'Description',
     'reward_points' => 'Reward Points',
     'win_limit' => 'Win Limit',
+    'winners' => 'Winners',
+    'completed_count' => 'Completed',
     'participants' => 'Participants',
     'won' => 'won',
     'joined' => 'joined',

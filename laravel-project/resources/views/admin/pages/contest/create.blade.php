@@ -284,14 +284,6 @@
 @endsection
 
 @push('scripts')
-    <style>
-        .form-floating > label {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: calc(100% - 24px);
-        }
-    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof FilePond !== 'undefined') {

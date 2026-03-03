@@ -85,6 +85,8 @@ return [
     'description' => '描述',
     'reward_points' => '奖励积分',
     'win_limit' => '获胜限制',
+    'winners' => '最快获胜者',
+    'completed_count' => '已完成',
     'participants' => '参赛者',
     'won' => '获胜',
     'joined' => '加入',

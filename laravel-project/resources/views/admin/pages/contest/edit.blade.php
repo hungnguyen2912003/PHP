@@ -507,14 +507,6 @@
 @endsection
 
 @push('scripts')
-    <style>
-        .form-floating > label {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: calc(100% - 24px);
-        }
-    </style>
     <script src="{{ asset('assets/js/custom/common.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
