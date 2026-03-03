@@ -40,7 +40,7 @@
                                     <div class="col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
-                                                {{ __('label.contest_name') }} (EN)
+                                                {{ __('label.contest_name') }} (EN) <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-floating">
                                                 <input class="form-control" id="name_en" name="name[en]"
@@ -94,7 +94,7 @@
                                             @error('name.vn') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.type') }} <span class="text-danger">*</span>
@@ -119,7 +119,7 @@
                                             @error('type') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.target') }} <span class="text-danger">*</span>
@@ -133,8 +133,7 @@
                                             @error('target') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.reward_points') }} <span class="text-danger">*</span>
@@ -149,7 +148,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
                                                 {{ __('label.win_limit') }} <span class="text-danger">*</span>
@@ -163,10 +162,48 @@
                                             @error('win_limit') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>
+                                            <textarea class="form-control" name="description[en]"
+                                                placeholder="{{ __('placeholder.description') }} (EN)"
+                                                rows="4" style="resize: none">{{ old('description.en') }}</textarea>
+                                            @error('description.en') <div class="text-danger mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (JA)</label>
+                                            <textarea class="form-control" name="description[ja]"
+                                                placeholder="{{ __('placeholder.description') }} (JA)"
+                                                rows="4" style="resize: none">{{ old('description.ja') }}</textarea>
+                                            @error('description.ja') <div class="text-danger mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (ZH)</label>
+                                            <textarea class="form-control" name="description[zh]"
+                                                placeholder="{{ __('placeholder.description') }} (ZH)"
+                                                rows="4" style="resize: none">{{ old('description.zh') }}</textarea>
+                                            @error('description.zh') <div class="text-danger mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-20">
+                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (VN)</label>
+                                            <textarea class="form-control" name="description[vn]"
+                                                placeholder="{{ __('placeholder.description') }} (VN)"
+                                                rows="4" style="resize: none">{{ old('description.vn') }}</textarea>
+                                            @error('description.vn') <div class="text-danger mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-3">
                                 <div class="mb-20">
                                     <label class="label fs-16 mb-2">{{ __('label.image') }}</label>
@@ -210,64 +247,20 @@
                                     <div class="col-lg-12">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
-                                                {{ __('label.finalize_at') }}
+                                                {{ __('label.calculate_at') }}
                                             </label>
                                             <div class="form-floating">
-                                                <input class="form-control" id="finalize_at" name="finalize_at" type="datetime-local"
-                                                    value="{{ old('finalize_at') }}" />
-                                                <label for="finalize_at">{{ __('label.finalize_at') }}</label>
+                                                <input class="form-control" id="calculate_at" name="calculate_at" type="datetime-local"
+                                                    value="{{ old('calculate_at') }}" />
+                                                <label for="calculate_at">{{ __('label.calculate_at') }}</label>
                                             </div>
-                                            <small class="text-muted">{{ __('label.finalize_at_hint') }}</small>
-                                            @error('finalize_at') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+                                            <small class="text-muted">{{ __('label.calculate_at_hint') }}</small>
+                                            @error('calculate_at') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>
-                                            <textarea class="form-control" name="description[en]"
-                                                placeholder="{{ __('placeholder.description') }} (EN)"
-                                                rows="4">{{ old('description.en') }}</textarea>
-                                            @error('description.en') <div class="text-danger mt-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (JA)</label>
-                                            <textarea class="form-control" name="description[ja]"
-                                                placeholder="{{ __('placeholder.description') }} (JA)"
-                                                rows="4">{{ old('description.ja') }}</textarea>
-                                            @error('description.ja') <div class="text-danger mt-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (ZH)</label>
-                                            <textarea class="form-control" name="description[zh]"
-                                                placeholder="{{ __('placeholder.description') }} (ZH)"
-                                                rows="4">{{ old('description.zh') }}</textarea>
-                                            @error('description.zh') <div class="text-danger mt-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">{{ __('label.description') }} (VN)</label>
-                                            <textarea class="form-control" name="description[vn]"
-                                                placeholder="{{ __('placeholder.description') }} (VN)"
-                                                rows="4">{{ old('description.vn') }}</textarea>
-                                            @error('description.vn') <div class="text-danger mt-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="col-lg-12">
                                     <div class="d-flex gap-2 justify-content-center">
                                         <button class="btn btn-primary fw-normal text-white" type="submit" id="submitBtn"
@@ -291,6 +284,14 @@
 @endsection
 
 @push('scripts')
+    <style>
+        .form-floating > label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: calc(100% - 24px);
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof FilePond !== 'undefined') {

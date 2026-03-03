@@ -10,11 +10,11 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-// Auto-finalize contests when finalize_at has passed
+// Auto-finalize contests when calculate_at has passed
 Schedule::call(function () {
     Contest::where('status', Contest::STATUS_INPROGRESS)
-        ->whereNotNull('finalize_at')
-        ->where('finalize_at', '<=', now())
+        ->whereNotNull('calculate_at')
+        ->where('calculate_at', '<=', now())
         ->each(function ($contest) {
             FinalizeContestJob::dispatch($contest);
         });

@@ -10,7 +10,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb align-items-center mb-0 lh-1">
                     <li class="breadcrumb-item">
-                        <a class="d-flex align-items-center text-decoration-none" href="{{ route('admin.dashboard') }}">
+                        <a
+                            class="d-flex align-items-center text-decoration-none"
+                            href="{{ route('admin.dashboard') }}"
+                        >
                             <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                             <span class="text-body fs-14 hover">
                                 {{ __('breadcrumb.dashboard') }}
@@ -34,26 +37,32 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
                 <div class="d-flex align-items-center flex-wrap gap-4">
                     <form class="table-src-form position-relative m-0">
-                        <input class="form-control w-344" placeholder="{{ __('placeholder.search') }}" type="text"
-                            id="customSearch" />
+                        <input
+                            class="form-control w-344"
+                            placeholder="{{ __('placeholder.search') }}"
+                            type="text"
+                            id="customSearch"
+                        />
                         <div
-                            class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
-                            <span class="material-symbols-outlined">
-                                search
-                            </span>
+                            class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0"
+                        >
+                            <span class="material-symbols-outlined">search</span>
                         </div>
                     </form>
                     <div class="d-flex align-items-center gap-2">
                         <label class="mb-0 text-nowrap fs-14">{{ __('label.from') }}</label>
-                        <input type="date" class="form-control" id="fromDate">
+                        <input type="date" class="form-control" id="fromDate" />
                     </div>
                     <div class="d-flex align-items-center gap-2">
                         <label class="mb-0 text-nowrap fs-14">{{ __('label.to') }}</label>
-                        <input type="date" class="form-control" id="toDate">
+                        <input type="date" class="form-control" id="toDate" />
                     </div>
                 </div>
                 <div class="d-flex gap-3">
-                    <a class="text-decoration-none fs-16 text-primary" href="{{ route('admin.contests.create') }}">
+                    <a
+                        class="text-decoration-none fs-16 text-primary"
+                        href="{{ route('admin.contests.create') }}"
+                    >
                         + {{ __('button.add_contest') }}
                     </a>
                 </div>
@@ -72,12 +81,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Implement Custom Search
-            $('#customSearch').on('keyup', function() {
+            $('#customSearch').on('keyup', function () {
                 window.LaravelDataTables['contests-table'].search(this.value).draw();
             });
 
             // Date Filter triggers
-            $('#fromDate, #toDate').on('change', function() {
+            $('#fromDate, #toDate').on('change', function () {
                 window.LaravelDataTables['contests-table'].draw();
             });
 
@@ -96,7 +105,7 @@
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
                         confirmButtonText: {!! json_encode(__('modal.confirm.delete.btn')) !!},
-                        cancelButtonText: {!! json_encode(__('modal.confirm.delete.cancel')) !!}
+                        cancelButtonText: {!! json_encode(__('modal.confirm.delete.cancel')) !!},
                     }).then((result) => {
                         if (result.isConfirmed) {
                             form.submit();

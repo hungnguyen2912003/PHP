@@ -26,14 +26,14 @@ class Contest extends Model
         'target',
         'reward_points',
         'win_limit',
-        'finalize_at',
+        'calculate_at',
         'status',
     ];
 
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
-        'finalize_at' => 'datetime',
+        'calculate_at' => 'datetime',
         'type' => 'integer',
         'target' => 'integer',
         'reward_points' => 'integer',

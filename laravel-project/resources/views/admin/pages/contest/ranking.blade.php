@@ -96,8 +96,9 @@
                                         <th>{{ __('label.start_at') }}</th>
                                         <th>{{ __('label.end_at') }}</th>
                                         <th class="text-center">{{ __('label.duration') }}</th>
-                                        <th class="text-end">{{ __('label.total_steps') }}</th>
-                                        <th class="text-end pe-3">{{ __('label.reward') }}</th>
+                                        <th class="text-end pe-3">
+                                            {{ __('label.total_steps') }}
+                                        </th>
                                     </tr>
                                 </thead>
                             </table>
@@ -106,20 +107,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Action Buttons -->
         <div class="d-flex gap-2 justify-content-center mb-4">
-            @if ($contest->status !== \App\Models\Contest::STATUS_COMPLETED)
-                <button
-                    type="button"
-                    class="btn btn-success fw-normal text-white"
-                    id="btnFinalizeRanking"
-                >
-                    <i class="ri-trophy-line me-1"></i>
-                    {{ __('button.finalize_ranking') }}
-                </button>
-            @endif
-
             <a
                 href="{{ route('admin.contests.export-ranking', $contest->id) }}"
                 class="btn btn-outline-primary fw-normal"
@@ -230,57 +219,13 @@
                         name: 'total_steps',
                         searchable: false,
                         orderable: false,
-                        width: '10%',
-                        className: 'text-end text-nowrap',
-                    },
-                    {
-                        data: 'reward',
-                        name: 'reward',
-                        searchable: false,
-                        orderable: false,
-                        width: '10%',
+                        width: '20%',
                         className: 'text-end pe-3 text-nowrap',
                     },
                 ],
                 language: { url: d_url },
                 dom: 'Brt',
                 order: [[]],
-            });
-
-            // Finalize Ranking Button
-            $('#btnFinalizeRanking').on('click', function () {
-                Swal.fire({
-                    title: '{{ __('message.confirm_finalize_title') }}',
-                    text: '{{ __('message.confirm_finalize_ranking') }}',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#198754',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: '{{ __('button.finalize_ranking') }}',
-                    cancelButtonText: '{{ __('button.cancel') }}',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '{{ route('admin.contests.finalize', $contest->id) }}',
-                            type: 'POST',
-                            data: { _token: '{{ csrf_token() }}' },
-                            success: function (response) {
-                                Swal.fire({
-                                    title: response.message,
-                                    icon: 'success',
-                                    timer: 2000,
-                                    showConfirmButton: false,
-                                });
-                                finalTable.ajax.reload();
-                                $('#btnFinalizeRanking').remove();
-                            },
-                            error: function (xhr) {
-                                const msg = xhr.responseJSON?.message || 'Error';
-                                Swal.fire({ title: msg, icon: 'error' });
-                            },
-                        });
-                    }
-                });
             });
         });
     </script>

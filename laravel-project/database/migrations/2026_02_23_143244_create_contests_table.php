@@ -19,6 +19,7 @@ return new class extends Migration
             $table->json('description')->nullable();
             $table->timestamp('start_date');
             $table->timestamp('end_date');
+            $table->timestamp('calculate_at');
             $table->integer('target')->default(0);
             $table->integer('reward_points')->default(0);
             $table->integer('win_limit')->default(0);

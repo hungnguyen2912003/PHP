@@ -102,6 +102,6 @@ return [
     'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu (Top :limit).',
     'duration' => 'Thời lượng',
     'reward' => 'Thưởng',
-    'finalize_at' => 'Thời gian tính thưởng',
-    'finalize_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
+    'calculate_at' => 'Thời gian tính thưởng',
+    'calculate_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
 ];

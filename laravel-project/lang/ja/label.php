@@ -96,6 +96,6 @@ return [
     'final_rank_desc' => '目標を達成した参加者（トップ :limit）。',
     'duration' => '所要時間',
     'reward' => '報酬',
-    'finalize_at' => '確定日時',
-    'finalize_at_hint' => 'ランキングを自動的に確定し、結果メールを送信する日時を設定します。',
+    'calculate_at' => '計算日時',
+    'calculate_at_hint' => 'ランキングを自動的に計算し、結果メールを送信する日時を設定します。',
 ];

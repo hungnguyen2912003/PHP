@@ -411,22 +411,24 @@
                                     <div class="col-lg-12">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
-                                                {{ __('label.finalize_at') }}
+                                                {{ __('label.calculate_at') }}
                                             </label>
                                             <div class="form-floating">
                                                 <input
                                                     class="form-control"
-                                                    id="finalize_at"
-                                                    name="finalize_at"
+                                                    id="calculate_at"
+                                                    name="calculate_at"
                                                     type="datetime-local"
-                                                    value="{{ old('finalize_at', $contest->finalize_at ? $contest->finalize_at->format('Y-m-d\TH:i') : '') }}"
+                                                    value="{{ old('calculate_at', $contest->calculate_at ? $contest->calculate_at->format('Y-m-d\TH:i') : '') }}"
                                                 />
-                                                <label for="finalize_at">
-                                                    {{ __('label.finalize_at') }}
+                                                <label for="calculate_at">
+                                                    {{ __('label.calculate_at') }}
                                                 </label>
                                             </div>
-                                            <small class="text-muted">{{ __('label.finalize_at_hint') }}</small>
-                                            @error('finalize_at')
+                                            <small class="text-muted">
+                                                {{ __('label.calculate_at_hint') }}
+                                            </small>
+                                            @error('calculate_at')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -505,6 +507,14 @@
 @endsection
 
 @push('scripts')
+    <style>
+        .form-floating > label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: calc(100% - 24px);
+        }
+    </style>
     <script src="{{ asset('assets/js/custom/common.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
