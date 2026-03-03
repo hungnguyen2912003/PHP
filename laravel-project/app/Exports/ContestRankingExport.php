@@ -9,22 +9,30 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, WithEvents, WithColumnWidths, WithStyles
+class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, WithEvents, WithColumnWidths
 {
-    protected Contest $contest;
-    protected int $contestInfoRows = 0;
+    private const LAST_COLUMN = 'H';
 
-    public function __construct(Contest $contest)
-    {
-        $this->contest = $contest;
-    }
+    private const CONTEST_TYPES = [
+        1 => 'value.contest_type.walking',
+        2 => 'value.contest_type.running',
+        3 => 'value.contest_type.cycling',
+        4 => 'value.contest_type.swimming',
+    ];
+
+    private const STATUS_MAP = [
+        Contest::STATUS_INPROGRESS => 'value.status.inprogress',
+        Contest::STATUS_COMPLETED  => 'value.status.completed',
+        Contest::STATUS_CANCELLED  => 'value.status.cancelled',
+    ];
+
+    public function __construct(protected Contest $contest) {}
 
     public function title(): string
     {
@@ -47,172 +55,117 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
 
     public function collection()
     {
-        $details = ContestDetail::with('user')
-            ->where('contest_id', $this->contest->id)
+        $contest = $this->contest;
+
+        return ContestDetail::with('user')
+            ->where('contest_id', $contest->id)
             ->orderByDesc('total_steps')
-            ->get();
+            ->get()
+            ->map(function ($detail, $index) use ($contest) {
+                $rank = $index + 1;
+                $eligible = $detail->total_steps >= $contest->target && $rank <= $contest->win_limit;
 
-        return $details->map(function ($detail, $index) {
-            $duration = '-';
-            if ($detail->start_at && $detail->end_at) {
-                $seconds = abs($detail->start_at->diffInSeconds($detail->end_at));
-                $h = intdiv($seconds, 3600);
-                $m = intdiv($seconds % 3600, 60);
-                $s = $seconds % 60;
-                $duration = sprintf('%02d:%02d:%02d', $h, $m, $s);
-            }
-
-            $rank = $index + 1;
-            $rewardPoints = $this->calculateReward($rank, $detail, $this->contest);
-
-            return [
-                $rank,
-                $detail->user?->fullname ?? '-',
-                $detail->user?->email ?? '-',
-                $detail->start_at ? $detail->start_at->format('Y-m-d H:i:s') : '-',
-                $detail->end_at ? $detail->end_at->format('Y-m-d H:i:s') : '-',
-                $duration,
-                $detail->total_steps,
-                $rewardPoints,
-            ];
-        });
-    }
-
-    /**
-     * Calculate reward points based on rank position.
-     * Only participants who reached the target and are within win_limit get rewards.
-     * Top 1: 100%, Top 2: 80%, Top 3: 70%, Top 4+: 60%
-     */
-    private function calculateReward(int $rank, ContestDetail $detail, Contest $contest): int
-    {
-        if ($detail->total_steps < $contest->target || $rank > $contest->win_limit) {
-            return 0;
-        }
-
-        return match (true) {
-            $rank === 1 => $contest->reward_points,
-            $rank === 2 => (int) round($contest->reward_points * 0.8),
-            $rank === 3 => (int) round($contest->reward_points * 0.7),
-            default => (int) round($contest->reward_points * 0.6),
-        };
-    }
-
-    private function getContestTypeName(int $type): string
-    {
-        return match ($type) {
-            1 => __('value.contest_type.walking'),
-            2 => __('value.contest_type.running'),
-            3 => __('value.contest_type.cycling'),
-            4 => __('value.contest_type.swimming'),
-            default => __('value.unknown'),
-        };
-    }
-
-    private function getStatusName(int $status): string
-    {
-        return match ($status) {
-            Contest::STATUS_INPROGRESS => __('value.status.inprogress'),
-            Contest::STATUS_COMPLETED => __('value.status.completed'),
-            Contest::STATUS_CANCELLED => __('value.status.cancelled'),
-            default => __('value.unknown'),
-        };
+                return [
+                    $rank,
+                    $detail->user?->fullname ?? '-',
+                    $detail->user?->email ?? '-',
+                    $detail->start_at?->format('Y-m-d H:i:s') ?? '-',
+                    $detail->end_at?->format('Y-m-d H:i:s') ?? '-',
+                    Contest::formatDuration($detail->start_at, $detail->end_at),
+                    $detail->total_steps ?? 0,
+                    $eligible ? $contest->calculateReward($rank) : 0,
+                ];
+            });
     }
 
     public function columnWidths(): array
     {
         return [
-            'A' => 8,
-            'B' => 25,
-            'C' => 30,
-            'D' => 22,
-            'E' => 22,
-            'F' => 15,
-            'G' => 15,
-            'H' => 18,
+            'A' => 8,  'B' => 25, 'C' => 30, 'D' => 22,
+            'E' => 22, 'F' => 15, 'G' => 15, 'H' => 18,
         ];
-    }
-
-    public function styles(Worksheet $sheet): array
-    {
-        return [];
     }
 
     public function registerEvents(): array
     {
-        $contest = $this->contest;
-
         return [
-            AfterSheet::class => function (AfterSheet $event) use ($contest) {
+            AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
+                $contest = $this->contest;
+                $col = self::LAST_COLUMN;
 
-                // Contest information rows
                 $contestInfo = [
-                    [__('label.contest_name'), $contest->name],
-                    [__('label.type'), $this->getContestTypeName($contest->type)],
-                    [__('label.target'), $contest->target],
+                    [__('label.contest_name'),  $contest->name],
+                    [__('label.type'),          __(self::CONTEST_TYPES[$contest->type] ?? 'value.unknown')],
+                    [__('label.target'),        $contest->target],
                     [__('label.reward_points'), $contest->reward_points],
-                    [__('label.win_limit'), $contest->win_limit],
-                    [__('label.start_date'), $contest->start_date?->format('Y-m-d')],
-                    [__('label.end_date'), $contest->end_date?->format('Y-m-d')],
-                    [__('label.status'), $this->getStatusName($contest->status)],
+                    [__('label.win_limit'),     $contest->win_limit],
+                    [__('label.start_date'),    $contest->start_date?->format('Y-m-d')],
+                    [__('label.end_date'),      $contest->end_date?->format('Y-m-d')],
+                    [__('label.status'),        __(self::STATUS_MAP[$contest->status] ?? 'value.unknown')],
                 ];
 
                 $infoRowCount = count($contestInfo);
-                // +2 for: title row + blank row after info
-                $totalShift = $infoRowCount + 2;
+                $totalShift = $infoRowCount + 2; // title row + blank row
+                $sheet->insertNewRowBefore(1, $totalShift);
 
-                // Shift existing data (headings + data rows) down
-                $highestRow = $sheet->getHighestRow();
-                $highestCol = $sheet->getHighestColumn();
+                // Contest info title
+                $this->styleContestTitle($sheet, $col);
 
-                // Move rows from bottom to top to avoid overwriting
-                for ($row = $highestRow; $row >= 1; $row--) {
-                    for ($col = 'A'; $col <= $highestCol; $col++) {
-                        $value = $sheet->getCell($col . $row)->getValue();
-                        $sheet->setCellValue($col . ($row + $totalShift), $value);
-                        $sheet->setCellValue($col . $row, null);
-                    }
-                }
+                // Contest info rows
+                $this->writeContestInfo($sheet, $contestInfo);
 
-                // Write contest info title
-                $sheet->setCellValue('A1', __('label.contest_information'));
-                $sheet->mergeCells('A1:H1');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle('A1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('4472C4');
-                $sheet->getStyle('A1')->getFont()->getColor()->setRGB('FFFFFF');
-
-                // Write contest info rows
-                for ($i = 0; $i < $infoRowCount; $i++) {
-                    $rowNum = $i + 2;
-                    $sheet->setCellValue('A' . $rowNum, $contestInfo[$i][0]);
-                    $sheet->setCellValue('B' . $rowNum, $contestInfo[$i][1]);
-                    $sheet->getStyle('A' . $rowNum)->getFont()->setBold(true);
-                    $sheet->getStyle('A' . $rowNum . ':B' . $rowNum)->getBorders()->getAllBorders()
-                        ->setBorderStyle(Border::BORDER_THIN);
-                }
-
-                // Style the ranking header row
+                // Ranking table styles
                 $headerRow = $totalShift + 1;
-                $sheet->getStyle("A{$headerRow}:H{$headerRow}")->getFont()->setBold(true);
-                $sheet->getStyle("A{$headerRow}:H{$headerRow}")->getFill()
-                    ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('D9E2F3');
-                $sheet->getStyle("A{$headerRow}:H{$headerRow}")->getAlignment()
-                    ->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle("A{$headerRow}:H{$headerRow}")->getBorders()->getAllBorders()
-                    ->setBorderStyle(Border::BORDER_THIN);
-
-                // Style data rows with borders
                 $lastDataRow = $sheet->getHighestRow();
-                if ($lastDataRow > $headerRow) {
-                    $sheet->getStyle("A" . ($headerRow + 1) . ":H{$lastDataRow}")->getBorders()->getAllBorders()
-                        ->setBorderStyle(Border::BORDER_THIN);
-                    $sheet->getStyle("A" . ($headerRow + 1) . ":A{$lastDataRow}")->getAlignment()
-                        ->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                    $sheet->getStyle("G" . ($headerRow + 1) . ":H{$lastDataRow}")->getAlignment()
-                        ->setHorizontal(Alignment::HORIZONTAL_RIGHT);
-                }
+                $this->styleRankingTable($sheet, $headerRow, $lastDataRow, $col);
             },
         ];
+    }
+
+    private function styleContestTitle(Worksheet $sheet, string $col): void
+    {
+        $sheet->setCellValue('A1', __('label.contest_information'));
+        $sheet->mergeCells("A1:{$col}1");
+        $style = $sheet->getStyle('A1');
+        $style->getFont()->setBold(true)->setSize(14)->getColor()->setRGB('FFFFFF');
+        $style->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('4472C4');
+    }
+
+    private function writeContestInfo(Worksheet $sheet, array $rows): void
+    {
+        foreach ($rows as $i => [$label, $value]) {
+            $row = $i + 2;
+            $sheet->setCellValue("A{$row}", $label);
+            $sheet->setCellValue("B{$row}", $value);
+            $sheet->getStyle("A{$row}")->getFont()->setBold(true);
+            $sheet->getStyle("A{$row}:B{$row}")->getBorders()->getAllBorders()
+                ->setBorderStyle(Border::BORDER_THIN);
+        }
+    }
+
+    private function styleRankingTable(Worksheet $sheet, int $headerRow, int $lastRow, string $col): void
+    {
+        $headerRange = "A{$headerRow}:{$col}{$headerRow}";
+        $sheet->getStyle($headerRange)->getFont()->setBold(true);
+        $sheet->getStyle($headerRange)->getFill()
+            ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('D9E2F3');
+        $sheet->getStyle($headerRange)->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle($headerRange)->getBorders()->getAllBorders()
+            ->setBorderStyle(Border::BORDER_THIN);
+
+        if ($lastRow <= $headerRow) {
+            return;
+        }
+
+        $dataStart = $headerRow + 1;
+        $sheet->getStyle("A{$dataStart}:{$col}{$lastRow}")->getBorders()->getAllBorders()
+            ->setBorderStyle(Border::BORDER_THIN);
+        $sheet->getStyle("A{$dataStart}:A{$lastRow}")->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("G{$dataStart}:{$col}{$lastRow}")->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_RIGHT);
     }
 }

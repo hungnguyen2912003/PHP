@@ -28,7 +28,7 @@ class ContestResource extends JsonResource
             'end_date' => $this->end_date?->timestamp,
             'status' => $this->status,
             'total_participants' => $this->total_participants ?? 0,
-            'total_winners' => $this->total_winners ?? 0,
+            'total_winners' => min($this->total_winners ?? 0, $this->win_limit),
             'created_at' => $this->created_at?->timestamp,
             'updated_at' => $this->updated_at?->timestamp,
         ];
