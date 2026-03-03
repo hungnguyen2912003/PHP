@@ -22,25 +22,15 @@ class FinalRankingDataTable extends DataTable
 
     public function query(ContestDetail $model): QueryBuilder
     {
-        $query = $model->newQuery()
-            ->with('user')
-            ->where('contest_id', $this->contest->id);
-
-        // Only show final rank data after contest is finalized
         if ($this->contest->status !== Contest::STATUS_COMPLETED) {
-            return $query->whereRaw('1 = 0');
+            return $model->newQuery()->where('contest_id', $this->contest->id)->whereRaw('1 = 0');
         }
 
-        return $query->where('total_steps', '>=', $this->contest->target)
-            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_at, end_at) ASC')
-            ->orderBy('start_at', 'asc')
-            ->limit($this->contest->win_limit);
+        return $this->contest->getRankedWinners();
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $rewardPoints = $this->contest->reward_points;
-
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('user_info', function ($row) {
@@ -56,32 +46,13 @@ class FinalRankingDataTable extends DataTable
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
             })
             ->addColumn('duration', function ($row) {
-                if (!$row->start_at || !$row->end_at) return '-';
-                $seconds = abs($row->start_at->diffInSeconds($row->end_at));
-                $h = intdiv($seconds, 3600);
-                $m = intdiv($seconds % 3600, 60);
-                $s = $seconds % 60;
-                return sprintf('%02d:%02d:%02d', $h, $m, $s);
+                return Contest::formatDuration($row->start_at, $row->end_at);
             })
-            ->addColumn('reward_points', function () use ($rewardPoints) {
-                return $this->calculateReward(++$this->rankCounter, $rewardPoints);
+            ->addColumn('reward_points', function () {
+                return $this->contest->calculateReward(++$this->rankCounter);
             })
             ->rawColumns(['user_info', 'total_steps'])
             ->setRowId('id');
-    }
-
-    /**
-     * Calculate reward points based on rank position.
-     * Top 1: 100%, Top 2: 80%, Top 3: 70%, Top 4+: 60%
-     */
-    private function calculateReward(int $rank, int $rewardPoints): int
-    {
-        return match (true) {
-            $rank === 1 => $rewardPoints,
-            $rank === 2 => (int) round($rewardPoints * 0.8),
-            $rank === 3 => (int) round($rewardPoints * 0.7),
-            default => (int) round($rewardPoints * 0.6),
-        };
     }
 
     public function html(): HtmlBuilder

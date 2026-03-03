@@ -111,13 +111,20 @@
             </div>
         </div>
         <!-- Action Buttons -->
-        <div class="d-flex gap-2 justify-content-center mb-4">
+        <div class="d-flex gap-3 justify-content-center mb-4">
             <a
                 href="{{ route('admin.contests.export-ranking', $contest->id) }}"
-                class="btn btn-outline-primary fw-normal"
+                class="btn btn-primary px-4 py-3 rounded-pill shadow-sm text-white"
             >
                 <i class="ri-download-line me-1"></i>
                 {{ __('button.export') }}
+            </a>
+            <a
+                href="{{ route('admin.contests.index') }}"
+                class="btn btn-secondary px-4 py-3 rounded-pill shadow-sm"
+            >
+                <i class="ri-arrow-left-line me-1"></i>
+                {{ __('button.back') }}
             </a>
         </div>
     </div>
