@@ -96,8 +96,11 @@
                                         <th>{{ __('label.start_at') }}</th>
                                         <th>{{ __('label.end_at') }}</th>
                                         <th class="text-center">{{ __('label.duration') }}</th>
-                                        <th class="text-end pe-3">
+                                        <th class="text-end">
                                             {{ __('label.total_steps') }}
+                                        </th>
+                                        <th class="text-end pe-3">
+                                            {{ __('label.reward_points') }}
                                         </th>
                                     </tr>
                                 </thead>
@@ -219,7 +222,15 @@
                         name: 'total_steps',
                         searchable: false,
                         orderable: false,
-                        width: '20%',
+                        width: '15%',
+                        className: 'text-end text-nowrap',
+                    },
+                    {
+                        data: 'reward_points',
+                        name: 'reward_points',
+                        searchable: false,
+                        orderable: false,
+                        width: '12%',
                         className: 'text-end pe-3 text-nowrap',
                     },
                 ],

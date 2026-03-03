@@ -97,6 +97,7 @@ class ContestController extends Controller
                     ->addIndexColumn()
                     ->addColumn('user_info', fn() => '')
                     ->addColumn('duration', fn() => '')
+                    ->addColumn('reward_points', fn() => 0)
                     ->make(true);
             }
             $query->where('total_steps', '>=', $contest->target)
@@ -130,9 +131,37 @@ class ContestController extends Controller
                 $s = $seconds % 60;
                 return sprintf('%02d:%02d:%02d', $h, $m, $s);
             });
+
+            // Calculate reward points based on rank
+            $response = $datatable->make(true);
+            $content = json_decode($response->getContent(), true);
+
+            if (!empty($content['data'])) {
+                $rewardPoints = $contest->reward_points;
+                foreach ($content['data'] as $index => &$item) {
+                    $rank = $index + 1;
+                    $item['reward_points'] = $this->calculateReward($rank, $rewardPoints);
+                }
+            }
+
+            return response()->json($content);
         }
 
         return $datatable->make(true);
+    }
+
+    /**
+     * Calculate reward points based on rank position.
+     * Top 1: 100%, Top 2: 80%, Top 3: 70%, Top 4+: 60%
+     */
+    private function calculateReward(int $rank, int $rewardPoints): int
+    {
+        return match (true) {
+            $rank === 1 => $rewardPoints,
+            $rank === 2 => (int) round($rewardPoints * 0.8),
+            $rank === 3 => (int) round($rewardPoints * 0.7),
+            default => (int) round($rewardPoints * 0.6),
+        };
     }
 
     /**
