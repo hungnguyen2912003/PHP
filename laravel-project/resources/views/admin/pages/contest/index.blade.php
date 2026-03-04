@@ -34,33 +34,34 @@
             </nav>
         </div>
         <div class="card bg-white rounded-10 border border-white mb-4">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-                <div class="d-flex align-items-center flex-wrap gap-4">
-                    <form class="table-src-form position-relative m-0">
-                        <input
-                            class="form-control w-344"
-                            placeholder="{{ __('placeholder.search') }}"
-                            type="text"
-                            id="customSearch"
-                        />
-                        <div
-                            class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0"
-                        >
-                            <span class="material-symbols-outlined">search</span>
-                        </div>
-                    </form>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="mb-0 text-nowrap fs-14">{{ __('label.from') }}</label>
-                        <input type="date" class="form-control" id="fromDate" />
+            <div class="d-flex align-items-center gap-3 p-20">
+                <form
+                    class="table-src-form position-relative m-0 flex-shrink-1"
+                    style="min-width: 120px; max-width: 344px; flex: 1 1 200px"
+                >
+                    <input
+                        class="form-control w-100"
+                        placeholder="{{ __('placeholder.search') }}"
+                        type="text"
+                        id="customSearch"
+                    />
+                    <div
+                        class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0"
+                    >
+                        <span class="material-symbols-outlined">search</span>
                     </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="mb-0 text-nowrap fs-14">{{ __('label.to') }}</label>
-                        <input type="date" class="form-control" id="toDate" />
-                    </div>
+                </form>
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 text-nowrap fs-14">{{ __('label.from') }}</label>
+                    <input type="date" class="form-control" id="fromDate" />
                 </div>
-                <div class="d-flex gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 text-nowrap fs-14">{{ __('label.to') }}</label>
+                    <input type="date" class="form-control" id="toDate" />
+                </div>
+                <div class="ms-auto flex-shrink-0">
                     <a
-                        class="text-decoration-none fs-16 text-primary"
+                        class="text-decoration-none fs-16 text-primary text-nowrap"
                         href="{{ route('admin.contests.create') }}"
                     >
                         + {{ __('button.add_contest') }}

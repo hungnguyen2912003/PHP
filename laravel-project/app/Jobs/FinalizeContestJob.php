@@ -22,12 +22,12 @@ class FinalizeContestJob implements ShouldQueue
 
     public function handle(): void
     {
-        if ($this->contest->status === Contest::STATUS_COMPLETED) {
+        if ($this->contest->status === Contest::STATUS_FINALIZED) {
             return;
         }
 
         // 1. Finalize the contest
-        $this->contest->update(['status' => Contest::STATUS_COMPLETED]);
+        $this->contest->update(['status' => Contest::STATUS_FINALIZED]);
 
         // 2. Get ranked participants
         $rankedDetails = $this->contest->getRankedWinners()->get();

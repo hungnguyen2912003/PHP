@@ -20,10 +20,9 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     private const LAST_COLUMN = 'H';
 
     private const CONTEST_TYPES = [
-        1 => 'value.contest_type.walking',
-        2 => 'value.contest_type.running',
-        3 => 'value.contest_type.cycling',
-        4 => 'value.contest_type.swimming',
+        1 => 'value.contest_type.walk',
+        2 => 'value.contest_type.run',
+        3 => 'value.contest_type.sprint',
     ];
 
     private const STATUS_MAP = [

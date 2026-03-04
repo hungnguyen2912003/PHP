@@ -12,7 +12,7 @@ class Contest extends Model
 
     public const STATUS_INPROGRESS = 1;
     public const STATUS_COMPLETED = 2;
-    public const STATUS_CANCELLED = 3;
+    public const STATUS_FINALIZED = 3;
 
     public $translatable = ['name', 'description'];
 

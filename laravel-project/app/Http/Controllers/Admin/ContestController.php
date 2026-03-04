@@ -42,6 +42,12 @@ class ContestController extends Controller
         $data = $request->validated();
         $data['status'] = Contest::STATUS_INPROGRESS;
 
+        foreach (['name', 'description'] as $field) {
+            if (isset($data[$field]) && is_array($data[$field])) {
+                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
+            }
+        }
+
         $contest = Contest::create($data);
 
         if ($request->hasFile('image')) {
@@ -121,6 +127,12 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
         $data = $request->validated();
+
+        foreach (['name', 'description'] as $field) {
+            if (isset($data[$field]) && is_array($data[$field])) {
+                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
+            }
+        }
 
         if ($request->hasFile('image')) {
             // Delete old image if exists

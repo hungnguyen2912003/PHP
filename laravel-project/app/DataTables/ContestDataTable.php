@@ -30,13 +30,13 @@ class ContestDataTable extends DataTable
                 $badges = [
                     \App\Models\Contest::STATUS_INPROGRESS => 'bg-warning',
                     \App\Models\Contest::STATUS_COMPLETED => 'bg-success',
-                    \App\Models\Contest::STATUS_CANCELLED => 'bg-danger',
+                    \App\Models\Contest::STATUS_FINALIZED => 'bg-info',
                 ];
                 $class = $badges[$row->status] ?? 'bg-secondary';
                 $statusKey = match($row->status) {
                     \App\Models\Contest::STATUS_INPROGRESS => 'inprogress',
                     \App\Models\Contest::STATUS_COMPLETED => 'completed',
-                    \App\Models\Contest::STATUS_CANCELLED => 'cancelled',
+                    \App\Models\Contest::STATUS_FINALIZED => 'finalized',
                     default => 'unknown',
                 };
                 $translatedStatus = __('value.status.' . $statusKey);

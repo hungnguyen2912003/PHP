@@ -215,19 +215,19 @@
                                                                 <b>
                                                                     {{ __('mail.contest_result.description') }}:
                                                                 </b>
-                                                                {{ $contest->description ?: '-' }}
+                                                                {{ $contest->description ?: 'Not available' }}
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.start_date') }}:
                                                                 </b>
-                                                                {{ $contest->start_date ? $contest->start_date->format('Y-m-d') : '-' }}
+                                                                {{ $contest->start_date ? $contest->start_date->format('Y-m-d') : 'Not available' }}
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.end_date') }}:
                                                                 </b>
-                                                                {{ $contest->end_date ? $contest->end_date->format('Y-m-d') : '-' }}
+                                                                {{ $contest->end_date ? $contest->end_date->format('Y-m-d') : 'Not available' }}
                                                             </div>
                                                         </div>
                                                     </td>
@@ -310,19 +310,19 @@
                                                                 <b>
                                                                     {{ __('mail.contest_result.start_at') }}:
                                                                 </b>
-                                                                {{ $startAt ? $startAt->format('Y-m-d H:i:s') : '-' }}
+                                                                {{ $startAt ? $startAt->format('Y-m-d H:i:s') : 'Not available' }}
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.end_at') }}:
                                                                 </b>
-                                                                {{ $endAt ? $endAt->format('Y-m-d H:i:s') : '-' }}
+                                                                {{ $endAt ? $endAt->format('Y-m-d H:i:s') : 'Not available' }}
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.duration') }}:
                                                                 </b>
-                                                                {{ $duration }}
+                                                                {{ $duration ?: 'Not available' }}
                                                             </div>
                                                         </div>
                                                     </td>

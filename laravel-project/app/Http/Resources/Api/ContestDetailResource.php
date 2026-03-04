@@ -32,7 +32,6 @@ class ContestDetailResource extends JsonResource
             'total_winners' => min($contest->total_winners ?? 0, $contest->win_limit),
 
             // User participation
-            'is_joined' => !is_null($userDetail),
             'user_detail' => $userDetail ? [
                 'total_steps' => $userDetail->total_steps ?? 0,
                 'progress' => $contest->target > 0

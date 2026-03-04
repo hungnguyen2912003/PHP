@@ -26,14 +26,14 @@ return [
         'incompleted' => '未完成',
         'completed' => '已完成',
         'cancelled' => '已取消',
+        'finalized' => '已结算',
     ],
     'no_bio' => '无可用的个人简介',
     'unknown' => '未知',
     'not_available' => '不可用',
     'contest_type' => [
-        'walking' => '步行',
-        'running' => '跑步',
-        'cycling' => '骑行',
-        'swimming' => '游泳',
+        'walk' => '步行',
+        'run' => '跑步',
+        'sprint' => '冲刺',
     ],
 ];

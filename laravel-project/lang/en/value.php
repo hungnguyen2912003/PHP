@@ -26,14 +26,14 @@ return [
         'incompleted' => 'Incompleted',
         'completed' => 'Completed',
         'cancelled' => 'Cancelled',
+        'finalized' => 'Finalized',
     ],
     'no_bio' => 'No biography available',
     'unknown' => 'Unknown',
     'not_available' => 'Not Available',
     'contest_type' => [
-        'walking' => 'Walking',
-        'running' => 'Running',
-        'cycling' => 'Cycling',
-        'swimming' => 'Swimming',
+        'walk' => 'Walk',
+        'run' => 'Run',
+        'sprint' => 'Sprint',
     ],
 ];

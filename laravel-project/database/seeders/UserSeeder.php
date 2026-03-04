@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'status' => User::STATUS_ACTIVE,
         ]);
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             User::firstOrCreate([
                 'email' => "user{$i}@example.com",
             ], [

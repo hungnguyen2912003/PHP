@@ -26,14 +26,14 @@ return [
         'incompleted' => 'Chưa hoàn thành',
         'completed' => 'Đã hoàn thành',
         'cancelled' => 'Đã huỷ',
+        'finalized' => 'Đã chốt điểm',
     ],
     'no_bio' => 'Chưa cập nhật tiểu sử',
     'unknown' => 'Không xác định',
     'not_available' => 'Chưa cập nhật',
     'contest_type' => [
-        'walking' => 'Đi bộ',
-        'running' => 'Chạy bộ',
-        'cycling' => 'Đạp xe',
-        'swimming' => 'Bơi lội',
+        'walk' => 'Đi bộ',
+        'run' => 'Chạy bộ',
+        'sprint' => 'Chạy nước rút',
     ],
 ];
