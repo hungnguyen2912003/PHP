@@ -46,6 +46,9 @@ class User extends Authenticatable implements JWTSubject
         'activation_token_sent_at' => 'datetime',
         'last_login_at' => 'datetime',
         'date_of_birth' => 'date',
+        'role' => 'integer',
+        'status' => 'integer',
+        'gender' => 'integer',
     ];
 
 

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => ':attribute là bắt buộc.',
     'login' => [
         'required' => 'Trường đăng nhập là bắt buộc.',
         'min' => 'Đăng nhập phải có ít nhất :min ký tự.',
@@ -140,5 +141,28 @@ return [
         'required' => 'Ngày kết thúc là bắt buộc.',
         'date' => 'Ngày kết thúc phải là một ngày hợp lệ.',
         'after_or_equal' => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.',
+    ],
+    'type' => [
+        'required' => 'Loại cuộc thi là bắt buộc.',
+        'integer' => 'Loại cuộc thi không hợp lệ.',
+    ],
+    'target' => [
+        'required' => 'Mục tiêu là bắt buộc.',
+        'integer' => 'Mục tiêu phải là số nguyên.',
+        'min' => 'Mục tiêu phải ít nhất là :min.',
+    ],
+    'reward_points' => [
+        'required' => 'Điểm thưởng là bắt buộc.',
+        'integer' => 'Điểm thưởng phải là số nguyên.',
+        'min' => 'Điểm thưởng phải ít nhất là :min.',
+    ],
+    'image' => [
+        'image' => 'Tệp tải lên phải là hình ảnh.',
+        'mimes' => 'Định dạng hình ảnh phải là: jpeg, png, jpg.',
+        'max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
+    ],
+    'calculate_at' => [
+        'date' => 'Thời gian tính thưởng không hợp lệ.',
+        'after' => 'Thời gian tính thưởng phải sau ngày kết thúc.',
     ],
 ];

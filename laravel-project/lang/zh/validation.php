@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => ':attribute是必须的。',
     'login' => [
         'required' => '登录是必须的。',
         'min' => '登录名必须至少 :min 个字符。',
@@ -127,5 +128,28 @@ return [
         'required' => '结束日期是必须的。',
         'date' => '结束日期必须是有效日期。',
         'after_or_equal' => '结束日期必须大于或等于开始日期。',
+    ],
+    'type' => [
+        'required' => '类型是必须的。',
+        'integer' => '格式无效。',
+    ],
+    'target' => [
+        'required' => '目标是必须的。',
+        'integer' => '目标必须是整数。',
+        'min' => '目标必须至少为 :min。',
+    ],
+    'reward_points' => [
+        'required' => '奖励积分是必须的。',
+        'integer' => '奖励积分必须是整数。',
+        'min' => '奖励积分必须至少为 :min。',
+    ],
+    'image' => [
+        'image' => '文件必须是图片。',
+        'mimes' => '图片必须是类型为：jpeg、png、jpg 的文件。',
+        'max' => '图片大小必须小于 2MB。',
+    ],
+    'calculate_at' => [
+        'date' => '计算时间必须是有效日期。',
+        'after' => '计算时间必须晚于结束日期。',
     ],
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => 'The :attribute field is required.',
     'login' => [
         'required' => 'Login is required.',
         'min' => 'Login must be at least :min characters.',
@@ -142,5 +143,28 @@ return [
         'required' => 'End date is required.',
         'date' => 'End date must be a valid date.',
         'after_or_equal' => 'End date must be greater than or equal to start date.',
+    ],
+    'type' => [
+        'required' => 'Type is required.',
+        'integer' => 'Type is invalid.',
+    ],
+    'target' => [
+        'required' => 'Target is required.',
+        'integer' => 'Target must be an integer.',
+        'min' => 'Target must be at least :min.',
+    ],
+    'reward_points' => [
+        'required' => 'Reward points are required.',
+        'integer' => 'Reward points must be an integer.',
+        'min' => 'Reward points must be at least :min.',
+    ],
+    'image' => [
+        'image' => 'Image must be an image file.',
+        'mimes' => 'Image must be a file of type: jpeg, png, jpg.',
+        'max' => 'Image size must be less than 2MB.',
+    ],
+    'calculate_at' => [
+        'date' => 'Calculate at must be a valid date.',
+        'after' => 'Calculate at must be a date after the end date.',
     ],
 ];

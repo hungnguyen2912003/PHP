@@ -33,7 +33,6 @@ class StoreRequest extends FormRequest
             'end_date' => 'required|date|after_or_equal:start_date',
             'calculate_at' => 'nullable|date|after:end_date',
             'target' => 'required|integer|min:1',
-            'target_unit' => 'nullable|in:steps,km,m',
             'reward_points' => 'required|integer|min:1',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
@@ -42,22 +41,21 @@ class StoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name.ja' => 'Contest Name (JA)',
-            'name.en' => 'Contest Name (EN)',
-            'name.zh' => 'Contest Name (ZH)',
-            'name.vi' => 'Contest Name (VI)',
-            'type' => 'Type',
-            'target' => 'Target',
-            'target_unit' => 'Target Unit',
-            'reward_points' => 'Reward Points',
-            'start_date' => 'Start Date',
-            'end_date' => 'End Date',
-            'calculate_at' => 'Calculate At',
-            'description.ja' => 'Description (JA)',
-            'description.en' => 'Description (EN)',
-            'description.zh' => 'Description (ZH)',
-            'description.vi' => 'Description (VI)',
-            'image' => 'Image',
+            'name.ja' => __('label.contest_name') . ' (' . __('label.lang_ja') . ')',
+            'name.en' => __('label.contest_name') . ' (' . __('label.lang_en') . ')',
+            'name.zh' => __('label.contest_name') . ' (' . __('label.lang_zh') . ')',
+            'name.vi' => __('label.contest_name') . ' (' . __('label.lang_vi') . ')',
+            'type' => __('label.type'),
+            'target' => __('label.target'),
+            'reward_points' => __('label.reward_points'),
+            'start_date' => __('label.start_date'),
+            'end_date' => __('label.end_date'),
+            'calculate_at' => __('label.calculate_at'),
+            'description.ja' => __('label.description') . ' (' . __('label.lang_ja') . ')',
+            'description.en' => __('label.description') . ' (' . __('label.lang_en') . ')',
+            'description.zh' => __('label.description') . ' (' . __('label.lang_zh') . ')',
+            'description.vi' => __('label.description') . ' (' . __('label.lang_vi') . ')',
+            'image' => __('label.image'),
         ];
     }
 }
