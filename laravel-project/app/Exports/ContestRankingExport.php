@@ -58,20 +58,20 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
 
         return ContestDetail::with('user')
             ->where('contest_id', $contest->id)
-            ->orderByDesc('total_steps')
+            ->orderByDesc('final_steps')
             ->get()
             ->map(function ($detail, $index) use ($contest) {
                 $rank = $index + 1;
-                $eligible = $detail->total_steps >= $contest->target && $rank <= $contest->win_limit;
+                $eligible = $detail->final_steps >= $contest->target;
 
                 return [
                     $rank,
                     $detail->user?->fullname ?? '-',
                     $detail->user?->email ?? '-',
-                    $detail->start_at?->format('Y-m-d H:i:s') ?? '-',
-                    $detail->end_at?->format('Y-m-d H:i:s') ?? '-',
-                    Contest::formatDuration($detail->start_at, $detail->end_at),
-                    $detail->total_steps ?? 0,
+                    $detail->joined_at?->format('Y-m-d H:i:s') ?? '-',
+                    '-',
+                    '-',
+                    $detail->final_steps ?? 0,
                     $eligible ? $contest->calculateReward($rank) : 0,
                 ];
             });
@@ -98,7 +98,6 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
                     [__('label.type'),          __(self::CONTEST_TYPES[$contest->type] ?? 'value.unknown')],
                     [__('label.target'),        $contest->target],
                     [__('label.reward_points'), $contest->reward_points],
-                    [__('label.win_limit'),     $contest->win_limit],
                     [__('label.start_date'),    $contest->start_date?->format('Y-m-d')],
                     [__('label.end_date'),      $contest->end_date?->format('Y-m-d')],
                     [__('label.status'),        __(self::STATUS_MAP[$contest->status] ?? 'value.unknown')],

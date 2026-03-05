@@ -61,7 +61,7 @@
                                                     name="name[en]"
                                                     placeholder="{{ __('placeholder.contest_name') }} (EN)"
                                                     type="text"
-                                                    value="{{ old('name.en', $contest->getTranslation('name', 'en', false)) }}"
+                                                    value="{{ old('name.en', $contest->name_en) }}"
                                                 />
                                                 <label for="name_en">
                                                     {{ __('placeholder.contest_name') }} (EN)
@@ -84,7 +84,7 @@
                                                     name="name[ja]"
                                                     placeholder="{{ __('placeholder.contest_name') }} (JA)"
                                                     type="text"
-                                                    value="{{ old('name.ja', $contest->getTranslation('name', 'ja', false)) }}"
+                                                    value="{{ old('name.ja', $contest->name_ja) }}"
                                                 />
                                                 <label for="name_ja">
                                                     {{ __('placeholder.contest_name') }} (JA)
@@ -107,7 +107,7 @@
                                                     name="name[zh]"
                                                     placeholder="{{ __('placeholder.contest_name') }} (ZH)"
                                                     type="text"
-                                                    value="{{ old('name.zh', $contest->getTranslation('name', 'zh', false)) }}"
+                                                    value="{{ old('name.zh', $contest->name_zh) }}"
                                                 />
                                                 <label for="name_zh">
                                                     {{ __('placeholder.contest_name') }} (ZH)
@@ -130,7 +130,7 @@
                                                     name="name[vi]"
                                                     placeholder="{{ __('placeholder.contest_name') }} (VI)"
                                                     type="text"
-                                                    value="{{ old('name.vi', $contest->getTranslation('name', 'vi', false)) }}"
+                                                    value="{{ old('name.vi', $contest->name_vi) }}"
                                                 />
                                                 <label for="name_vi">
                                                     {{ __('placeholder.contest_name') }} (VI)
@@ -267,30 +267,6 @@
                                     <div class="col-sm-6">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">
-                                                {{ __('label.win_limit') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-floating">
-                                                <input
-                                                    class="form-control"
-                                                    id="win_limit"
-                                                    name="win_limit"
-                                                    type="number"
-                                                    placeholder="{{ __('placeholder.win_limit') }}"
-                                                    value="{{ old('win_limit', $contest->win_limit) }}"
-                                                />
-                                                <label for="win_limit">
-                                                    {{ __('placeholder.win_limit') }}
-                                                </label>
-                                            </div>
-                                            @error('win_limit')
-                                                <div class="text-danger mt-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">
                                                 {{ __('label.description') }} (EN)
                                             </label>
                                             <textarea
@@ -300,7 +276,7 @@
                                                 rows="4"
                                                 style="resize: none"
                                             >
-{{ old('description.en', $contest->getTranslation('description', 'en', false)) }}</textarea
+{{ old('description.en', $contest->desc_en) }}</textarea
                                             >
                                             @error('description.en')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -319,7 +295,7 @@
                                                 rows="4"
                                                 style="resize: none"
                                             >
-{{ old('description.ja', $contest->getTranslation('description', 'ja', false)) }}</textarea
+{{ old('description.ja', $contest->desc_ja) }}</textarea
                                             >
                                             @error('description.ja')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -338,7 +314,7 @@
                                                 rows="4"
                                                 style="resize: none"
                                             >
-{{ old('description.zh', $contest->getTranslation('description', 'zh', false)) }}</textarea
+{{ old('description.zh', $contest->desc_zh) }}</textarea
                                             >
                                             @error('description.zh')
                                                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -357,7 +333,7 @@
                                                 rows="4"
                                                 style="resize: none"
                                             >
-{{ old('description.vi', $contest->getTranslation('description', 'vi', false)) }}</textarea
+{{ old('description.vi', $contest->desc_vi) }}</textarea
                                             >
                                             @error('description.vi')
                                                 <div class="text-danger mt-1">{{ $message }}</div>

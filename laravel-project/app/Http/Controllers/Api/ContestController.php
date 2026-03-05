@@ -96,7 +96,7 @@ class ContestController extends BaseApiController
 
         $participants = ContestDetail::with('user')
             ->where('contest_id', $contest->id)
-            ->orderByDesc('total_steps')
+            ->orderByDesc('final_steps')
             ->get();
 
         // Build ranking list
@@ -108,10 +108,8 @@ class ContestController extends BaseApiController
                 'user_id' => $detail->user_id,
                 'fullname' => $detail->user->fullname ?? $detail->user->username ?? 'User',
                 'avatar_url' => $detail->user->avatar_url,
-                'device_type' => $detail->device_type,
-                'total_steps' => $detail->total_steps ?? 0,
-                'start_at' => $detail->start_at?->timestamp,
-                'end_at' => $detail->end_at?->timestamp,
+                'final_steps' => $detail->final_steps ?? 0,
+                'joined_at' => $detail->joined_at?->timestamp,
             ];
         });
 
@@ -132,17 +130,16 @@ class ContestController extends BaseApiController
         $user = auth()->user();
 
         $totalSteps = $request->input('total_steps');
-        $deviceType = $request->input('device_type', 1);
-        $startAt = $request->input('start_at');
-        $endAt = $request->input('end_at');
+        $startTime = $request->input('start_time');
+        $stopTime = $request->input('stop_time');
 
         // Allow updates only if the contest is currently in progress
         if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
             return $this->error(__('message.contest_not_active'), 400, __('message.contest_not_active'));
         }
 
-        // Validate that imported start_at and end_at are within the contest's allowed date range
-        if ($contest->start_date->greaterThan($startAt) || $contest->end_date->lessThan($endAt)) {
+        // Validate that imported times are within the contest's allowed date range
+        if ($contest->start_date->greaterThan($startTime) || $contest->end_date->lessThan($stopTime)) {
             return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
         }
 
@@ -150,6 +147,8 @@ class ContestController extends BaseApiController
         $detail = ContestDetail::firstOrCreate([
             'user_id' => $user->id,
             'contest_id' => $contest->id,
+        ], [
+            'joined_at' => now(),
         ]);
 
         // Prevent update if already completed or cancelled
@@ -159,14 +158,18 @@ class ContestController extends BaseApiController
 
         DB::beginTransaction();
         try {
-            // Overwrite steps and data with the latest imported values
-            $detail->total_steps = $totalSteps;
-            $detail->device_type = $deviceType;
-            $detail->start_at = $startAt;
-            $detail->end_at = $endAt;
+            // Create a contest session record
+            $detail->sessions()->create([
+                'start_time' => $startTime,
+                'stop_time' => $stopTime,
+                'total_steps' => $totalSteps,
+            ]);
+
+            // Update final_steps on contest detail
+            $detail->final_steps = $detail->sessions()->sum('total_steps');
 
             // Check if target reached
-            if ($detail->total_steps >= $contest->target) {
+            if ($detail->final_steps >= $contest->target) {
                 $detail->status = ContestDetail::STATUS_COMPLETED;
             }
 

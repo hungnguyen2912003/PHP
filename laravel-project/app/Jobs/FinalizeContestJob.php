@@ -36,7 +36,6 @@ class FinalizeContestJob implements ShouldQueue
         foreach ($rankedDetails as $index => $detail) {
             $rank = $index + 1;
             $reward = $this->contest->calculateReward($rank);
-            $duration = Contest::formatDuration($detail->start_at, $detail->end_at);
 
             if ($detail->user && $detail->user->email) {
                 try {
@@ -45,10 +44,8 @@ class FinalizeContestJob implements ShouldQueue
                         contest: $this->contest,
                         rank: $rank,
                         reward: $reward,
-                        duration: $duration,
-                        startAt: $detail->start_at,
-                        endAt: $detail->end_at,
-                        totalSteps: $detail->total_steps,
+                        joinedAt: $detail->joined_at,
+                        finalSteps: $detail->final_steps,
                     ));
                 } catch (\Exception $e) {
                     Log::error("Failed to send contest result email to [{$detail->user->email}]: {$e->getMessage()}");

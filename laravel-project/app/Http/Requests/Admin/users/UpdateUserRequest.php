@@ -27,10 +27,10 @@ class UpdateUserRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
-            'gender' => 'nullable|in:male,female',
+            'gender' => 'nullable|integer|in:1,2',
             'date_of_birth' => 'nullable|date|before:today',
-            'role' => 'required|in:admin,staff,user',
-            'status' => 'required|in:active,pending,banned',
+            'role' => 'required|integer|in:1,2,3',
+            'status' => 'required|integer|in:1,2,3',
             'password' => 'nullable|min:6',
         ];
     }

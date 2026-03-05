@@ -32,27 +32,17 @@ class ContestDetailDataTable extends DataTable
             ->addColumn('user_name', function ($row) {
                 return $row->user->fullname ?? 'N/A';
             })
-            ->editColumn('total_steps', function ($row) {
-                return number_format($row->total_steps);
+            ->editColumn('final_steps', function ($row) {
+                return number_format($row->final_steps);
             })
-            ->editColumn('start_at', function ($row) {
-                return $row->start_at ? $row->start_at->format('Y-m-d H:i') : '-';
+            ->editColumn('joined_at', function ($row) {
+                return $row->joined_at ? $row->joined_at->format('Y-m-d H:i') : __('value.not_available');
             })
-            ->editColumn('end_at', function ($row) {
-                return $row->end_at ? $row->end_at->format('Y-m-d H:i') : '-';
+            ->editColumn('final_rank', function ($row) {
+                return $row->final_rank ?? __('value.not_available');
             })
-            ->editColumn('device_type', function ($row) {
-                return match($row->device_type) {
-                    1 => 'Apple Watch',
-                    2 => 'Garmin',
-                    3 => 'Fitbit',
-                    4 => 'Samsung Galaxy Watch',
-                    5 => 'Coros',
-                    6 => 'Strava app',
-                    7 => 'Suunto',
-                    8 => 'Google Fit',
-                    default => $row->device_type ?? 'Other'
-                };
+            ->editColumn('reward_points', function ($row) {
+                return $row->reward_points ? number_format($row->reward_points) : __('value.not_available');
             })
             ->editColumn('status', function ($row) {
                 $statusData = match($row->status) {
@@ -90,10 +80,10 @@ class ContestDetailDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
             Column::make('user_name')->title(__('label.full_name'))->searchable(true)->name('user.fullname')->orderable(false),
-            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center')->type('number'),
-            Column::make('start_at')->title(__('label.start_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
-            Column::make('end_at')->title(__('label.end_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
-            Column::make('device_type')->title(__('label.device_type'))->searchable(false)->orderable(true)->addClass('text-center'),
+            Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center')->type('number'),
+            Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
+            Column::make('final_rank')->title(__('label.rank'))->searchable(false)->orderable(true)->addClass('text-center'),
+            Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(true)->addClass('text-center'),
             Column::make('status')->title(__('label.status'))->addClass('text-center'),
         ];
     }

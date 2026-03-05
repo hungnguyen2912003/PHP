@@ -15,11 +15,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('contest_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->integer('total_steps')->default(0);
-            $table->tinyInteger('device_type')->default(0);
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('end_at')->nullable();
-            $table->tinyInteger('status')->default(1)->comment('1: incompleted, 2: completed, 3: cancelled');
+            $table->timestamp('joined_at')->useCurrent();
+            $table->integer('final_steps')->default(0);
+            $table->integer('final_rank')->nullable();
+            $table->integer('reward_points')->default(0);
+            $table->tinyInteger('status')->unsigned()->default(1)->comment('1: in_progress, 2: finished');
             $table->timestamps();
         });
     }

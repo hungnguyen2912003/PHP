@@ -35,7 +35,6 @@ class StoreRequest extends FormRequest
             'target' => 'required|integer|min:1',
             'target_unit' => 'nullable|in:steps,km,m',
             'reward_points' => 'required|integer|min:1',
-            'win_limit' => 'required|integer|min:1',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
@@ -51,7 +50,6 @@ class StoreRequest extends FormRequest
             'target' => 'Target',
             'target_unit' => 'Target Unit',
             'reward_points' => 'Reward Points',
-            'win_limit' => 'Win Limit',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'calculate_at' => 'Calculate At',

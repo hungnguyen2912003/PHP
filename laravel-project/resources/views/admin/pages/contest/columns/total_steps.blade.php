@@ -1,1 +1,1 @@
-<span class="fw-bold">{{ number_format($row->total_steps) }}</span>
+<span class="fw-bold">{{ number_format($row->final_steps) }}</span>

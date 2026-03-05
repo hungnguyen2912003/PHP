@@ -117,11 +117,10 @@ class ContestDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('name')->title(__('label.contest_name'))->addClass('text-nowrap'),
+            Column::make('name')->name('name_en')->title(__('label.contest_name'))->addClass('text-nowrap'),
             Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle text-nowrap'),
             Column::make('target')->title(__('label.target'))->type('string')->addClass('text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-nowrap'),
-            Column::make('win_limit')->title(__('label.winners'))->type('string')->addClass('text-center text-nowrap'),
             Column::computed('completed_count')->title(__('label.completed_count'))->searchable(false)->orderable(false)->addClass('text-center text-nowrap'),
             Column::make('details_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
             Column::make('start_date')->title(__('label.start_date'))->type('string')->addClass('text-nowrap'),

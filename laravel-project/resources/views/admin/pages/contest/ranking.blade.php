@@ -82,7 +82,7 @@
                                 {{ __('label.final_rank') }}
                             </h5>
                             <p class="text-muted small mb-0">
-                                {{ __('label.final_rank_desc', ['limit' => $contest->win_limit]) }}
+                                {{ __('label.final_rank_desc') }}
                             </p>
                         </div>
                     </div>

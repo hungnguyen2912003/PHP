@@ -15,17 +15,19 @@ class ContestDetail extends Model
     protected $fillable = [
         'contest_id',
         'user_id',
-        'total_steps',
-        'device_type',
-        'start_at',
-        'end_at',
+        'joined_at',
+        'final_steps',
+        'final_rank',
+        'reward_points',
         'status',
     ];
 
     protected $casts = [
-        'start_at' => 'datetime',
-        'end_at' => 'datetime',
-        'status' => 'integer',
+        'joined_at'     => 'datetime',
+        'final_steps'   => 'integer',
+        'final_rank'    => 'integer',
+        'reward_points' => 'integer',
+        'status'        => 'integer',
     ];
 
     public function contest()
@@ -36,5 +38,15 @@ class ContestDetail extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(ContestSession::class);
+    }
+
+    public function latestSession()
+    {
+        return $this->hasOne(ContestSession::class)->latestOfMany();
     }
 }

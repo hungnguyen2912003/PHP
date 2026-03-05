@@ -17,6 +17,10 @@ class User extends Authenticatable implements JWTSubject
     public const STATUS_ACTIVE = 2;
     public const STATUS_BANNED = 3;
 
+    public const ROLE_ADMIN = 1;
+    public const ROLE_STAFF = 2;
+    public const ROLE_USER = 3;
+
     protected $fillable = [
         'fullname',
         'username',
@@ -55,29 +59,19 @@ class User extends Authenticatable implements JWTSubject
         return $this->status === self::STATUS_ACTIVE;
     }
 
-    public function isBanned()
-    {
-        return $this->status === self::STATUS_BANNED;
-    }
-
-    public function isDeleted()
-    {
-        return $this->status === 'deleted';
-    }
-
     public function isAdmin()
     {
-        return $this->role === 'admin';
+        return $this->role === self::ROLE_ADMIN;
     }
 
     public function isStaff()
     {
-        return $this->role === 'staff';
+        return $this->role === self::ROLE_STAFF;
     }
 
     public function isUser()
     {
-        return $this->role === 'user';
+        return $this->role === self::ROLE_USER;
     }
 
     public function measurements()
@@ -88,6 +82,16 @@ class User extends Authenticatable implements JWTSubject
     public function latestMeasurement()
     {
         return $this->hasOne(Measurement::class)->latestOfMany('recorded_at');
+    }
+
+    public function stepLogs()
+    {
+        return $this->hasMany(StepLog::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(ContestDetail::class);
     }
 
     /**

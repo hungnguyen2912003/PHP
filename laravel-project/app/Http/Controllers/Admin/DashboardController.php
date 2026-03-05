@@ -18,15 +18,15 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $stats = [
-            'total_users' => User::where('role', 'user')->count(),
-            'new_users_month' => User::where('role', 'user')
+            'total_users' => User::where('role', User::ROLE_USER)->count(),
+            'new_users_month' => User::where('role', User::ROLE_USER)
                 ->whereMonth('created_at', now()->month)
                 ->whereYear('created_at', now()->year)
                 ->count(),
-            'pending_users' => User::where('role', 'user')
+            'pending_users' => User::where('role', User::ROLE_USER)
                 ->where('status', User::STATUS_PENDING)
                 ->count(),
-            'banned_users' => User::where('role', 'user')
+            'banned_users' => User::where('role', User::ROLE_USER)
                 ->where('status', User::STATUS_BANNED)
                 ->count(),
         ];
@@ -35,12 +35,12 @@ class DashboardController extends Controller
         $days = 10;
         $trendDates = collect(range($days - 1, 0))->map(fn($i) => now()->subDays($i)->format('Y-m-d'));
 
-        $registrations = User::where('role', 'user')
+        $registrations = User::where('role', User::ROLE_USER)
             ->where('created_at', '>=', now()->subDays($days))
             ->get()
             ->groupBy(fn($u) => $u->created_at->format('Y-m-d'));
 
-        $totalUsersBefore = User::where('role', 'user')
+        $totalUsersBefore = User::where('role', User::ROLE_USER)
             ->where('created_at', '<', now()->subDays($days))
             ->count();
 

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('role', ['admin', 'staff', 'user'])->default('user');
+            $table->tinyInteger('role')->unsigned()->default(3)->comment('1: admin, 2: staff, 3: user');
             $table->string('fullname');
             $table->date('date_of_birth')->nullable();
-            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->tinyInteger('gender')->unsigned()->nullable()->comment('1: male, 2: female');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('avatar_url')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->string('activation_token')->nullable();
             $table->timestamp('activation_token_sent_at')->nullable();
-            $table->tinyInteger('status')->default(1)->comment('1: pending, 2: active, 3: banned');
+            $table->tinyInteger('status')->unsigned()->default(1)->comment('1: pending, 2: active, 3: banned');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->timestamps();

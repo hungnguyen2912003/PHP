@@ -51,7 +51,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
-            'role' => 'user',
+            'role' => User::ROLE_USER,
             'status' => User::STATUS_PENDING,
             'activation_token' => $hashedToken,
             'activation_token_sent_at' => Carbon::now(),

@@ -4,42 +4,76 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Spatie\Translatable\HasTranslations;
 
 class Contest extends Model
 {
-    use HasUuids, HasTranslations;
+    use HasUuids;
 
     public const STATUS_INPROGRESS = 1;
     public const STATUS_COMPLETED = 2;
     public const STATUS_FINALIZED = 3;
 
-    public $translatable = ['name', 'description'];
-
     protected $fillable = [
-        'name',
+        'name_ja',
+        'name_en',
+        'name_vi',
+        'name_zh',
+        'desc_ja',
+        'desc_en',
+        'desc_vi',
+        'desc_zh',
         'type',
         'image_url',
-        'description',
         'start_date',
         'end_date',
         'target',
         'reward_points',
-        'win_limit',
         'calculate_at',
         'status',
     ];
 
     protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-        'calculate_at' => 'datetime',
-        'type' => 'integer',
-        'target' => 'integer',
+        'start_date'    => 'datetime',
+        'end_date'      => 'datetime',
+        'calculate_at'  => 'datetime',
+        'type'          => 'integer',
+        'target'        => 'integer',
         'reward_points' => 'integer',
-        'win_limit' => 'integer',
-        'status' => 'integer',
+        'status'        => 'integer',
     ];
+
+    /**
+     * Accessor: get localized name based on current locale.
+     */
+    public function getNameAttribute(): ?string
+    {
+        return $this->getLocalizedField('name');
+    }
+
+    /**
+     * Accessor: get localized description based on current locale.
+     */
+    public function getDescriptionAttribute(): ?string
+    {
+        return $this->getLocalizedField('desc');
+    }
+
+    /**
+     * Get value for a field based on current locale with fallback to 'en'.
+     */
+    public function getLocalizedField(string $prefix, ?string $locale = null): ?string
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        $value = $this->attributes["{$prefix}_{$locale}"] ?? null;
+
+        // Fallback to English
+        if (empty($value) && $locale !== 'en') {
+            $value = $this->attributes["{$prefix}_en"] ?? null;
+        }
+
+        return $value;
+    }
 
     public function details()
     {
@@ -53,10 +87,9 @@ class Contest extends Model
     {
         return ContestDetail::with('user')
             ->where('contest_id', $this->id)
-            ->where('total_steps', '>=', $this->target)
-            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_at, end_at) ASC')
-            ->orderBy('start_at', 'asc')
-            ->limit($this->win_limit);
+            ->where('final_steps', '>=', $this->target)
+            ->orderBy('final_steps', 'desc')
+            ->orderBy('joined_at', 'asc');
     }
 
     /**

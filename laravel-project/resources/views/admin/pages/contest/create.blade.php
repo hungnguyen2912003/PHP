@@ -160,20 +160,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-20">
-                                            <label class="label fs-16 mb-2">
-                                                {{ __('label.win_limit') }} <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-floating">
-                                                <input class="form-control" id="win_limit" name="win_limit" type="number"
-                                                    placeholder="{{ __('placeholder.win_limit') }}"
-                                                    value="{{ old('win_limit') }}" />
-                                                <label for="win_limit">{{ __('placeholder.win_limit') }}</label>
-                                            </div>
-                                            @error('win_limit') <div class="text-danger mt-1">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-sm-6 col-lg-3">
                                         <div class="mb-20">
                                             <label class="label fs-16 mb-2">{{ __('label.description') }} (EN)</label>

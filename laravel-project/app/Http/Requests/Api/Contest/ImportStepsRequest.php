@@ -23,9 +23,8 @@ class ImportStepsRequest extends FormRequest
     {
         return [
             'total_steps' => ['required', 'integer', 'min:0'],
-            'device_type' => ['nullable', 'integer'],
-            'start_at' => ['required', 'date_format:Y-m-d H:i'],
-            'end_at' => ['required', 'date_format:Y-m-d H:i', 'after_or_equal:start_at'],
+            'start_time' => ['required', 'date_format:Y-m-d H:i'],
+            'stop_time' => ['required', 'date_format:Y-m-d H:i', 'after_or_equal:start_time'],
         ];
     }
 }

@@ -19,7 +19,7 @@ class UpdateAccountRequest extends FormRequest
         return [
             'fullname' => 'required|string|max:255',
             'date_of_birth' => 'nullable|date|before_or_equal:today',
-            'gender' => 'nullable|in:male,female,other',
+            'gender' => 'nullable|integer|in:1,2',
             'phone' => [
                 'nullable',
                 'regex:/^(03|05|07|08|09)[0-9]{8}$/',
