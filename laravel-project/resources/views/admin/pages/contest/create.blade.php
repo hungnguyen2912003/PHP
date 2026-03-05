@@ -343,32 +343,6 @@
                                         <div class="col-sm-4">
                                             <div class="mb-20">
                                                 <label class="label fs-16 mb-2">
-                                                    {{ __('label.reward_points') }}
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="form-floating">
-                                                    <input
-                                                        class="form-control"
-                                                        id="reward_points"
-                                                        name="reward_points"
-                                                        type="number"
-                                                        placeholder="{{ __('placeholder.reward_points') }}"
-                                                        value="{{ old('reward_points') }}"
-                                                    />
-                                                    <label for="reward_points">
-                                                        {{ __('placeholder.reward_points') }}
-                                                    </label>
-                                                </div>
-                                                @error('reward_points')
-                                                    <div class="text-danger mt-1">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="mb-20">
-                                                <label class="label fs-16 mb-2">
                                                     {{ __('label.target') }}
                                                     <span class="text-danger">*</span>
                                                 </label>
@@ -392,7 +366,32 @@
                                                 @enderror
                                             </div>
                                         </div>
-
+                                        <div class="col-sm-4">
+                                            <div class="mb-20">
+                                                <label class="label fs-16 mb-2">
+                                                    {{ __('label.reward_points') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-floating">
+                                                    <input
+                                                        class="form-control"
+                                                        id="reward_points"
+                                                        name="reward_points"
+                                                        type="number"
+                                                        placeholder="{{ __('placeholder.reward_points') }}"
+                                                        value="{{ old('reward_points') }}"
+                                                    />
+                                                    <label for="reward_points">
+                                                        {{ __('placeholder.reward_points') }}
+                                                    </label>
+                                                </div>
+                                                @error('reward_points')
+                                                    <div class="text-danger mt-1">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         {{-- Row 2: Start Date, End Date, Calculate At --}}
                                         <div class="col-sm-4">
                                             <div class="mb-20">

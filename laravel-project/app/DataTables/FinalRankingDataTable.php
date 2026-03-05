@@ -70,8 +70,8 @@ class FinalRankingDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->width('10%')->addClass('text-center fw-bold text-success ps-3'),
-            Column::make('user_info')->title(__('label.participants'))->name('user.full_name')->orderable(false)->width('30%'),
+            Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->width('10%')->addClass('text-center fw-bold text-success ps-3 text-nowrap'),
+            Column::make('user_info')->title(__('label.participants'))->name('user.full_name')->orderable(false)->width('30%')->addClass('text-nowrap'),
             Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(false)->width('20%')->addClass('text-center text-nowrap'),
             Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('25%')->addClass('text-end text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(false)->width('15%')->addClass('text-end pe-3 text-nowrap'),

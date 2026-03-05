@@ -21,31 +21,26 @@ class ContestController extends BaseApiController
         $user = auth()->user();
         $tab = $request->query('tab', 'current');
 
-        $query = Contest::withCount([
-            'details as total_participants',
-            'details as total_winners' => function ($query) {
-                $query->where('status', ContestDetail::STATUS_COMPLETED);
-            },
-        ]);
+        $query = Contest::withCount(['details as total_participants']);
 
         // Return collection of contest IDs the user has joined
-        $joinedContestIds = ContestDetail::where('user_id', $user->id)->pluck('contest_id');
+        $joined = ContestDetail::where('user_id', $user->id)->select('contest_id');
 
         switch ($tab) {
             case 'current':
-                $query->whereIn('id', $joinedContestIds)
+                $query->whereIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
             case 'recommend':
-                $query->whereNotIn('id', $joinedContestIds)
+                $query->whereNotIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
             case 'history':
-                $query->whereIn('id', $joinedContestIds)
+                $query->whereIn('id', $joined)
                     ->where(function ($q) {
                         $q->where('status', Contest::STATUS_COMPLETED)
                           ->orWhere('end_date', '<', now());
@@ -66,16 +61,48 @@ class ContestController extends BaseApiController
     /**
      * Get contest detail with user's participation data.
      */
-    public function show(Contest $contest)
+    public function show(Request $request, Contest $contest)
     {
         $user = auth()->user();
 
-        $contest->loadCount([
-            'details as total_participants',
-            'details as total_winners' => function ($query) {
-                $query->where('status', ContestDetail::STATUS_COMPLETED);
-            },
-        ]);
+        if($request->input('join') == 1) {
+            DB::beginTransaction();
+            try {
+                // Check if user has already joined the contest
+                $detail = ContestDetail::where('user_id', $user->id)
+                    ->where('contest_id', $contest->id)
+                    ->first();
+                
+                if ($detail) {
+                    return $this->error(__('message.contest_already_joined'), 400);
+                }
+
+                // Check if contest is in progress
+                if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
+                    return $this->error(__('message.contest_not_active'), 400);
+                }
+                
+                $detail = ContestDetail::create([
+                    'user_id' => $user->id,
+                    'contest_id' => $contest->id,
+                    'joined_at' => now(),
+                    'status' => ContestDetail::STATUS_INPROGRESS,
+                ]);
+
+                ContestSession::create([
+                    'contest_detail_id' => $detail->id,
+                    'start_time' => now(),
+                    'total_steps' => 0,
+                ]);
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return $this->error($e->getMessage(), 500);
+            }
+        }
+
+        $contest->loadCount(['details as total_participants']);
 
         // Load user's participation detail
         $contest->setRelation('user_detail',

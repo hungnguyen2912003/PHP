@@ -20,8 +20,10 @@ class ContestResultMail extends Mailable
         public Contest $contest,
         public int $rank,
         public int $reward,
-        public ?Carbon $joinedAt,
-        public int $finalSteps,
+        public string $duration,
+        public ?Carbon $startAt,
+        public ?Carbon $endAt,
+        public int $totalSteps,
     ) {
     }
 

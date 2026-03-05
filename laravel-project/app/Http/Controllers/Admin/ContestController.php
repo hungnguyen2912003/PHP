@@ -42,15 +42,9 @@ class ContestController extends Controller
         $data = $request->validated();
         $data['status'] = Contest::STATUS_INPROGRESS;
 
-        // Map localized arrays to individual columns
-        $localeMap = ['en' => 'en', 'ja' => 'ja', 'zh' => 'zh', 'vi' => 'vi'];
-
-        foreach (['name' => 'name', 'description' => 'desc'] as $input => $prefix) {
-            if (isset($data[$input]) && is_array($data[$input])) {
-                foreach ($localeMap as $formKey => $colSuffix) {
-                    $data["{$prefix}_{$colSuffix}"] = $data[$input][$formKey] ?? null;
-                }
-                unset($data[$input]);
+        foreach (['name', 'description'] as $field) {
+            if (isset($data[$field]) && is_array($data[$field])) {
+                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
             }
         }
 
@@ -121,7 +115,7 @@ class ContestController extends Controller
     public function exportRanking(string $id)
     {
         $contest = Contest::findOrFail($id);
-        $filename = 'ranking_' . str_replace(' ', '_', $contest->name_en) . '_' . now()->format('Ymd_His') . '.xlsx';
+        $filename = 'ranking_' . str_replace(' ', '_', $contest->name) . '_' . now()->format('Ymd_His') . '.xlsx';
 
         return Excel::download(new ContestRankingExport($contest), $filename);
     }
@@ -134,15 +128,9 @@ class ContestController extends Controller
         $contest = Contest::findOrFail($id);
         $data = $request->validated();
 
-        // Map localized arrays to individual columns
-        $localeMap = ['en' => 'en', 'ja' => 'ja', 'zh' => 'zh', 'vi' => 'vi'];
-
-        foreach (['name' => 'name', 'description' => 'desc'] as $input => $prefix) {
-            if (isset($data[$input]) && is_array($data[$input])) {
-                foreach ($localeMap as $formKey => $colSuffix) {
-                    $data["{$prefix}_{$colSuffix}"] = $data[$input][$formKey] ?? null;
-                }
-                unset($data[$input]);
+        foreach (['name', 'description'] as $field) {
+            if (isset($data[$field]) && is_array($data[$field])) {
+                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
             }
         }
 

@@ -79,12 +79,12 @@ class ContestDetailDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->addClass('text-start text-nowrap'),
-            Column::make('user_name')->title(__('label.full_name'))->searchable(true)->name('user.fullname')->orderable(false),
-            Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center')->type('number'),
-            Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(true)->addClass('text-center')->type('datetime-local'),
-            Column::make('final_rank')->title(__('label.rank'))->searchable(false)->orderable(true)->addClass('text-center'),
-            Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(true)->addClass('text-center'),
-            Column::make('status')->title(__('label.status'))->addClass('text-center'),
+            Column::make('user_name')->title(__('label.full_name'))->searchable(true)->name('user.fullname')->orderable(false)->addClass('text-nowrap'),
+            Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap')->type('number'),
+            Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap')->type('datetime-local'),
+            Column::make('final_rank')->title(__('label.rank'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
+            Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
+            Column::make('status')->title(__('label.status'))->addClass('text-center text-nowrap'),
         ];
     }
 }

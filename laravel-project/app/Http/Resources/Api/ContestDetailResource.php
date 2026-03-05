@@ -18,23 +18,22 @@ class ContestDetailResource extends JsonResource
         $userDetail = $contest->user_detail;
 
         return [
-            'id' => $contest->id,
-            'name' => $contest->getLocalizedField('name', $locale),
-            'description' => $contest->getLocalizedField('desc', $locale),
-            'image_url' => $contest->image_url,
-            'status' => $contest->status,
-            'start_date' => $contest->start_date?->timestamp,
-            'end_date' => $contest->end_date?->timestamp,
-            'target' => $contest->target,
-            'reward_points' => $contest->reward_points,
-            'total_participants' => $contest->total_participants ?? 0,
-            'total_winners' => $contest->total_winners ?? 0,
-
-            // User participation
-            'user_detail' => $userDetail ? [
+            'id' => $this->id,
+            'name' => $this->getLocalizedField('name', $locale),
+            'description' => $this->getLocalizedField('desc', $locale),
+            'type' => $this->type,
+            'image_url' => $this->image_url,
+            'target' => $this->target,
+            'reward_points' => $this->reward_points,
+            'start_date' => $this->start_date?->timestamp,
+            'end_date' => $this->end_date?->timestamp,
+            'total_participants' => $this->total_participants ?? 0,
+            'status' => $this->status,
+            'is_joined' => $userDetail !== null,
+            'user_progress' => $userDetail ? [
                 'final_steps' => $userDetail->final_steps ?? 0,
-                'progress' => $contest->target > 0
-                    ? min(round(($userDetail->final_steps ?? 0) / $contest->target * 100), 100)
+                'progress' => $this->target > 0
+                    ? min(round(($userDetail->final_steps ?? 0) / $this->target * 100), 100)
                     : 0,
                 'joined_at' => $userDetail->joined_at?->timestamp,
                 'status' => $userDetail->status,

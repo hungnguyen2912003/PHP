@@ -53,11 +53,11 @@
                             <table class="table align-middle w-100" id="temporary-ranking-table">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('label.stt') }}</th>
-                                        <th>{{ __('label.participants') }}</th>
-                                        <th>{{ __('label.start_at') }}</th>
-                                        <th>{{ __('label.end_at') }}</th>
-                                        <th class="text-end pe-3">
+                                        <th class="text-nowrap">{{ __('label.stt') }}</th>
+                                        <th class="text-nowrap">{{ __('label.participants') }}</th>
+                                        <th class="text-nowrap">{{ __('label.start_at') }}</th>
+                                        <th class="text-nowrap">{{ __('label.end_at') }}</th>
+                                        <th class="text-end pe-3 text-nowrap">
                                             {{ __('label.total_steps') }}
                                         </th>
                                     </tr>
@@ -91,15 +91,17 @@
                             <table class="table align-middle w-100" id="final-ranking-table">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('label.stt') }}</th>
-                                        <th>{{ __('label.participants') }}</th>
-                                        <th>{{ __('label.start_at') }}</th>
-                                        <th>{{ __('label.end_at') }}</th>
-                                        <th class="text-center">{{ __('label.duration') }}</th>
-                                        <th class="text-end">
+                                        <th class="text-nowrap">{{ __('label.stt') }}</th>
+                                        <th class="text-nowrap">{{ __('label.participants') }}</th>
+                                        <th class="text-nowrap">{{ __('label.start_at') }}</th>
+                                        <th class="text-nowrap">{{ __('label.end_at') }}</th>
+                                        <th class="text-center text-nowrap">
+                                            {{ __('label.duration') }}
+                                        </th>
+                                        <th class="text-end text-nowrap">
                                             {{ __('label.total_steps') }}
                                         </th>
-                                        <th class="text-end pe-3">
+                                        <th class="text-end pe-3 text-nowrap">
                                             {{ __('label.reward_points') }}
                                         </th>
                                     </tr>

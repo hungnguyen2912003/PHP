@@ -111,4 +111,6 @@ return [
     'reward' => 'Thưởng',
     'calculate_at' => 'Thời gian tính thưởng',
     'calculate_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
+    'joined_at' => 'Tham gia lúc',
+    'rank' => 'Xếp hạng',
 ];

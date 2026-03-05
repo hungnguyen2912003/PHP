@@ -84,12 +84,6 @@
                     <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
                         <div class="text-secondary fs-18">
                             <span class="text-body fw-bold fs-22">
-                                {{ $contest->completed_details_count }}
-                            </span>
-                            <span class="ms-1">{{ strtolower(__('label.completed')) }}</span>
-                        </div>
-                        <div class="text-secondary fs-18">
-                            <span class="text-body fw-bold fs-22">
                                 {{ $contest->details_count }}
                             </span>
                             <span class="ms-1">{{ strtolower(__('label.joined')) }}</span>
@@ -127,7 +121,23 @@
                     </h3>
                     <div class="default-table-area">
                         <div class="table-responsive">
-                            {{ $dataTable->table(['class' => 'table align-middle']) }}
+                            <table class="table align-middle text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">{{ __('label.stt') }}</th>
+                                        <th class="text-nowrap">{{ __('label.full_name') }}</th>
+                                        <th class="text-nowrap">{{ __('label.total_steps') }}</th>
+                                        <th class="text-nowrap">{{ __('label.joined_at') }}</th>
+                                        <th class="text-nowrap">{{ __('label.rank') }}</th>
+                                        <th class="text-nowrap">
+                                            {{ __('label.reward_points') }}
+                                        </th>
+                                        <th class="text-nowrap">{{ __('label.status') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            {{ $dataTable->table(['class' => 'd-none']) }}
                         </div>
                     </div>
                 </div>

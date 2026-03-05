@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'fullname' => 'Admin',
             'username' => 'admin',
             'password' => Hash::make('12345678'),
-            'role' => User::ROLE_ADMIN,
+            'role' => 'admin',
             'status' => User::STATUS_ACTIVE,
         ]);
 
@@ -30,18 +30,28 @@ class UserSeeder extends Seeder
             'fullname' => 'Staff',
             'username' => 'staff',
             'password' => Hash::make('12345678'),
-            'role' => User::ROLE_STAFF,
+            'role' => 'staff',
             'status' => User::STATUS_ACTIVE,
         ]);
 
-        for ($i = 1; $i <= 20; $i++) {
+        User::firstOrCreate([
+            'email' => 'user@example.com',
+        ], [
+            'fullname' => 'User',
+            'username' => 'user',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+            'status' => User::STATUS_ACTIVE,
+        ]);
+
+        for ($i = 1; $i <= 30; $i++) {
             User::firstOrCreate([
                 'email' => "user{$i}@example.com",
             ], [
                 'fullname' => "User {$i}",
                 'username' => "user{$i}",
                 'password' => Hash::make('12345678'),
-                'role' => User::ROLE_USER,
+                'role' => 'user',
                 'status' => User::STATUS_ACTIVE,
             ]);
         }

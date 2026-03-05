@@ -117,4 +117,6 @@ return [
     'reward' => 'Reward',
     'calculate_at' => 'Calculate At',
     'calculate_at_hint' => 'Set a date/time to automatically calculate ranking and send result emails.',
+    'joined_at' => 'Joined At',
+    'rank' => 'Rank',
 ];
