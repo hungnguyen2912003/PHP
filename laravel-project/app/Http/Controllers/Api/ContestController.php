@@ -59,50 +59,33 @@ class ContestController extends BaseApiController
     /**
      * Get contest detail with user's participation data.
      */
-    public function show(Request $request, Contest $contest)
+    public function show(Contest $contest)
     {
         $user = auth()->user();
 
-        if($request->input('join') == 1) {
-            DB::beginTransaction();
-            try {
-                // Check if user has already joined the contest
-                $userContest = UserContest::where('user_id', $user->id)
-                    ->where('contest_id', $contest->id)
-                    ->first();
-                
-                if ($userContest) {
-                    return $this->error(__('message.contest_already_joined'), 400);
-                }
+        // Load counts
+        $contest->loadCount([
+            'participants as total_participants',
+            'participants as total_completed' => function ($q) {
+                $q->where('total_steps', '>=', DB::raw('(SELECT target FROM contests WHERE id = user_contests.contest_id)'));
+            },
+        ]);
 
-                // Check if contest is in progress
-                if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
-                    return $this->error(__('message.contest_not_active'), 400);
-                }
-                
-                $userContest = UserContest::create([
-                    'user_id' => $user->id,
-                    'contest_id' => $contest->id,
-                    'joined_at' => now(),
-                    'latest_start_time' => now(),
-                    'total_steps' => 0,
-                ]);
+        // Load current user's participation
+        $userContest = UserContest::where('contest_id', $contest->id)
+            ->where('user_id', $user->id)
+            ->first();
 
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return $this->error($e->getMessage(), 500);
-            }
-        }
+        $contest->setAttribute('is_joined', $userContest !== null);
+        $contest->setAttribute('user_total_steps', $userContest?->total_steps ?? 0);
+        $contest->setAttribute('user_joined_at', $userContest?->joined_at);
+        $contest->setAttribute('user_completed_at', $userContest?->completed_at);
 
-        $contest->loadCount(['participants as total_participants']);
-
-        // Load user's participation detail
-        $contest->setRelation('user_contest',
-            UserContest::where('contest_id', $contest->id)
-                ->where('user_id', $user->id)
-                ->first()
-        );
+        // Step progress percentage
+        $progress = ($contest->target > 0 && $userContest)
+            ? min(round(($userContest->total_steps / $contest->target) * 100), 100)
+            : 0;
+        $contest->setAttribute('step_progress', $progress);
 
         return $this->success(new ContestResource($contest));
     }
