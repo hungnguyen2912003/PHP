@@ -84,7 +84,7 @@
                     <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
                         <div class="text-secondary fs-18">
                             <span class="text-body fw-bold fs-22">
-                                {{ $contest->details_count }}
+                                {{ $contest->participants_count }}
                             </span>
                             <span class="ms-1">{{ strtolower(__('label.joined')) }}</span>
                         </div>

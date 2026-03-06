@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->tinyInteger('source')->comment('1: apple_watch, 2: garmin, 3: fitbit');
             $table->integer('steps');
-            $table->timestamp('measured_at');
+            $table->timestamp('recorded_at');
             $table->timestamps();
         });
     }

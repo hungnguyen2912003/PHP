@@ -13,11 +13,11 @@ class StepLog extends Model
         'user_id',
         'source',
         'steps',
-        'measured_at',
+        'recorded_at',
     ];
 
     protected $casts = [
-        'measured_at' => 'datetime',
+        'recorded_at' => 'datetime',
         'source'      => 'integer',
         'steps'       => 'integer',
     ];

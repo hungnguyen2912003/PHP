@@ -92,9 +92,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(StepLog::class);
     }
 
-    public function details()
+    public function contests()
     {
-        return $this->hasMany(ContestDetail::class);
+        return $this->hasMany(UserContest::class);
     }
 
     /**

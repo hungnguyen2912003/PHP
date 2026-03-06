@@ -75,9 +75,9 @@ class Contest extends Model
         return $value;
     }
 
-    public function details()
+    public function participants()
     {
-        return $this->hasMany(ContestDetail::class);
+        return $this->hasMany(UserContest::class);
     }
 
     /**
@@ -85,10 +85,10 @@ class Contest extends Model
      */
     public function getRankedWinners()
     {
-        return ContestDetail::with('user')
+        return UserContest::with('user')
             ->where('contest_id', $this->id)
-            ->where('final_steps', '>=', $this->target)
-            ->orderBy('final_steps', 'desc')
+            ->where('total_steps', '>=', $this->target)
+            ->orderBy('total_steps', 'desc')
             ->orderBy('joined_at', 'asc');
     }
 

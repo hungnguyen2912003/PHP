@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Contest;
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
@@ -28,7 +28,7 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     private const STATUS_MAP = [
         Contest::STATUS_INPROGRESS => 'value.status.inprogress',
         Contest::STATUS_COMPLETED  => 'value.status.completed',
-        Contest::STATUS_CANCELLED  => 'value.status.cancelled',
+        Contest::STATUS_FINALIZED  => 'value.status.finalized',
     ];
 
     public function __construct(protected Contest $contest) {}
@@ -56,22 +56,22 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     {
         $contest = $this->contest;
 
-        return ContestDetail::with('user')
+        return UserContest::with('user')
             ->where('contest_id', $contest->id)
-            ->orderByDesc('final_steps')
+            ->orderByDesc('total_steps')
             ->get()
-            ->map(function ($detail, $index) use ($contest) {
+            ->map(function ($userContest, $index) use ($contest) {
                 $rank = $index + 1;
-                $eligible = $detail->final_steps >= $contest->target;
+                $eligible = $userContest->total_steps >= $contest->target;
 
                 return [
                     $rank,
-                    $detail->user?->fullname ?? '-',
-                    $detail->user?->email ?? '-',
-                    $detail->joined_at?->format('Y-m-d H:i:s') ?? '-',
-                    '-',
-                    '-',
-                    $detail->final_steps ?? 0,
+                    $userContest->user?->fullname ?? '-',
+                    $userContest->user?->email ?? '-',
+                    $userContest->joined_at?->format('Y-m-d H:i:s') ?? '-',
+                    $userContest->completed_at?->format('Y-m-d H:i:s') ?? '-',
+                    Contest::formatDuration($userContest->latest_start_time, $userContest->latest_end_time),
+                    $userContest->total_steps ?? 0,
                     $eligible ? $contest->calculateReward($rank) : 0,
                 ];
             });

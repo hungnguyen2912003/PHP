@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Illuminate\Http\Request;
 
 class ContestDetailController extends Controller
@@ -35,7 +35,7 @@ class ContestDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ContestDetail $contestDetail)
+    public function show(UserContest $userContest)
     {
         //
     }
@@ -43,7 +43,7 @@ class ContestDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ContestDetail $contestDetail)
+    public function edit(UserContest $userContest)
     {
         //
     }
@@ -51,7 +51,7 @@ class ContestDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ContestDetail $contestDetail)
+    public function update(Request $request, UserContest $userContest)
     {
         //
     }
@@ -59,7 +59,7 @@ class ContestDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContestDetail $contestDetail)
+    public function destroy(UserContest $userContest)
     {
         //
     }

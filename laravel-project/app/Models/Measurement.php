@@ -30,7 +30,6 @@ class Measurement extends Model
         'whr',
         'recorded_at',
         'attachment_url',
-        'notes',
     ];
 
     protected $casts = [

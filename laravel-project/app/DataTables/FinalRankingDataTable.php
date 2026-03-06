@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Contest;
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -20,7 +20,7 @@ class FinalRankingDataTable extends DataTable
         $this->contest = $contest;
     }
 
-    public function query(ContestDetail $model): QueryBuilder
+    public function query(UserContest $model): QueryBuilder
     {
         if ($this->contest->status !== Contest::STATUS_COMPLETED) {
             return $model->newQuery()->where('contest_id', $this->contest->id)->whereRaw('1 = 0');
@@ -39,13 +39,13 @@ class FinalRankingDataTable extends DataTable
             ->editColumn('joined_at', function ($row) {
                 return $row->joined_at ? $row->joined_at->format('Y-m-d H:i:s') : __('value.not_available');
             })
-            ->editColumn('final_steps', function ($row) {
+            ->editColumn('total_steps', function ($row) {
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
             })
             ->addColumn('reward_points', function () {
                 return $this->contest->calculateReward(++$this->rankCounter);
             })
-            ->rawColumns(['user_info', 'final_steps'])
+            ->rawColumns(['user_info', 'total_steps'])
             ->setRowId('id');
     }
 
@@ -73,7 +73,7 @@ class FinalRankingDataTable extends DataTable
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->width('10%')->addClass('text-center fw-bold text-success ps-3 text-nowrap'),
             Column::make('user_info')->title(__('label.participants'))->name('user.full_name')->orderable(false)->width('30%')->addClass('text-nowrap'),
             Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(false)->width('20%')->addClass('text-center text-nowrap'),
-            Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('25%')->addClass('text-end text-nowrap'),
+            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('25%')->addClass('text-end text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(false)->width('15%')->addClass('text-end pe-3 text-nowrap'),
         ];
     }

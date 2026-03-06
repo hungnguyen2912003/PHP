@@ -55,7 +55,7 @@ class ContestDataTable extends DataTable
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
             ->addColumn('completed_count', function ($row) {
-                return $row->completed_details_count;
+                return $row->completed_participants_count;
             })
             ->addColumn('action', function ($row) {
                 return view('admin.pages.contest.columns.action', compact('row'))->render();
@@ -72,9 +72,9 @@ class ContestDataTable extends DataTable
     public function query(Contest $model): QueryBuilder
     {
         return $model->newQuery()
-            ->withCount('details')
-            ->withCount(['details as completed_details_count' => function ($query) {
-                $query->where('status', \App\Models\ContestDetail::STATUS_COMPLETED);
+            ->withCount('participants')
+            ->withCount(['participants as completed_participants_count' => function ($query) {
+                $query->whereNotNull('completed_at');
             }])
             ->when($this->request->get('from_date'), function ($query, $fromDate) {
                 return $query->whereDate('start_date', '>=', $fromDate);
@@ -122,7 +122,7 @@ class ContestDataTable extends DataTable
             Column::make('target')->title(__('label.target'))->type('string')->addClass('text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-nowrap'),
             Column::computed('completed_count')->title(__('label.completed_count'))->searchable(false)->orderable(false)->addClass('text-center text-nowrap'),
-            Column::make('details_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
+            Column::make('participants_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
             Column::make('start_date')->title(__('label.start_date'))->type('string')->addClass('text-nowrap'),
             Column::make('end_date')->title(__('label.end_date'))->type('string')->addClass('text-nowrap'),
             Column::make('status')->title(__('label.status'))->addClass('text-nowrap'),

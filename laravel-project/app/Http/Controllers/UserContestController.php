@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContestSession;
+use App\Models\UserContest;
 use Illuminate\Http\Request;
 
-class ContestSessionController extends Controller
+class UserContestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ContestSessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ContestSession $contestSession)
+    public function show(UserContest $userContest)
     {
         //
     }
@@ -42,7 +42,7 @@ class ContestSessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ContestSession $contestSession)
+    public function edit(UserContest $userContest)
     {
         //
     }
@@ -50,7 +50,7 @@ class ContestSessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ContestSession $contestSession)
+    public function update(Request $request, UserContest $userContest)
     {
         //
     }
@@ -58,7 +58,7 @@ class ContestSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContestSession $contestSession)
+    public function destroy(UserContest $userContest)
     {
         //
     }

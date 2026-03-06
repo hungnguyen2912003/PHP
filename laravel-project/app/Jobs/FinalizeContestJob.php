@@ -44,8 +44,10 @@ class FinalizeContestJob implements ShouldQueue
                         contest: $this->contest,
                         rank: $rank,
                         reward: $reward,
-                        joinedAt: $detail->joined_at,
-                        finalSteps: $detail->final_steps,
+                        duration: Contest::formatDuration($detail->latest_start_time, $detail->latest_end_time),
+                        startAt: $detail->latest_start_time,
+                        endAt: $detail->latest_end_time,
+                        totalSteps: $detail->total_steps,
                     ));
                 } catch (\Exception $e) {
                     Log::error("Failed to send contest result email to [{$detail->user->email}]: {$e->getMessage()}");

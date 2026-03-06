@@ -11,7 +11,7 @@ use App\Http\Requests\Admin\Contest\StoreRequest;
 use App\Http\Requests\Admin\Contest\UpdateRequest;
 use App\Exports\ContestRankingExport;
 use App\Models\Contest;
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -66,9 +66,9 @@ class ContestController extends Controller
     public function show(string $id)
     {
         $contest = Contest::withCount([
-            'details',
-            'details as completed_details_count' => function ($query) {
-                $query->where('status', ContestDetail::STATUS_COMPLETED);
+            'participants',
+            'participants as completed_participants_count' => function ($query) {
+                $query->whereNotNull('completed_at');
             }
         ])->findOrFail($id);
         

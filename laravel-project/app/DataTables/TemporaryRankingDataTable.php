@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -18,12 +18,12 @@ class TemporaryRankingDataTable extends DataTable
         $this->contestId = $contestId;
     }
 
-    public function query(ContestDetail $model): QueryBuilder
+    public function query(UserContest $model): QueryBuilder
     {
         return $model->newQuery()
             ->with('user')
             ->where('contest_id', $this->contestId)
-            ->orderByDesc('final_steps');
+            ->orderByDesc('total_steps');
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -36,10 +36,10 @@ class TemporaryRankingDataTable extends DataTable
             ->editColumn('joined_at', function ($row) {
                 return $row->joined_at ? $row->joined_at->format('Y-m-d H:i:s') : __('value.not_available');
             })
-            ->editColumn('final_steps', function ($row) {
+            ->editColumn('total_steps', function ($row) {
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
             })
-            ->rawColumns(['user_info', 'final_steps'])
+            ->rawColumns(['user_info', 'total_steps'])
             ->setRowId('id');
     }
 
@@ -67,7 +67,7 @@ class TemporaryRankingDataTable extends DataTable
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->width('10%')->addClass('text-center fw-bold text-primary ps-3 text-nowrap'),
             Column::make('user_info')->title(__('label.participants'))->name('user.full_name')->orderable(false)->width('30%')->addClass('text-nowrap'),
             Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(false)->width('25%')->addClass('text-center text-nowrap'),
-            Column::make('final_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('35%')->addClass('text-end pe-3 text-nowrap'),
+            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('35%')->addClass('text-end pe-3 text-nowrap'),
         ];
     }
 }

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\Contest\ImportStepsRequest;
-use App\Http\Resources\Api\ContestDetailResource;
 use App\Http\Resources\Api\ContestResource;
 use App\Models\Contest;
-use App\Models\ContestDetail;
+use App\Models\UserContest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,10 +20,10 @@ class ContestController extends BaseApiController
         $user = auth()->user();
         $tab = $request->query('tab', 'current');
 
-        $query = Contest::withCount(['details as total_participants']);
+        $query = Contest::withCount(['participants as total_participants']);
 
         // Return collection of contest IDs the user has joined
-        $joined = ContestDetail::where('user_id', $user->id)->select('contest_id');
+        $joined = UserContest::where('user_id', $user->id)->select('contest_id');
 
         switch ($tab) {
             case 'current':
@@ -69,11 +68,11 @@ class ContestController extends BaseApiController
             DB::beginTransaction();
             try {
                 // Check if user has already joined the contest
-                $detail = ContestDetail::where('user_id', $user->id)
+                $userContest = UserContest::where('user_id', $user->id)
                     ->where('contest_id', $contest->id)
                     ->first();
                 
-                if ($detail) {
+                if ($userContest) {
                     return $this->error(__('message.contest_already_joined'), 400);
                 }
 
@@ -82,16 +81,11 @@ class ContestController extends BaseApiController
                     return $this->error(__('message.contest_not_active'), 400);
                 }
                 
-                $detail = ContestDetail::create([
+                $userContest = UserContest::create([
                     'user_id' => $user->id,
                     'contest_id' => $contest->id,
                     'joined_at' => now(),
-                    'status' => ContestDetail::STATUS_INPROGRESS,
-                ]);
-
-                ContestSession::create([
-                    'contest_detail_id' => $detail->id,
-                    'start_time' => now(),
+                    'latest_start_time' => now(),
                     'total_steps' => 0,
                 ]);
 
@@ -102,16 +96,16 @@ class ContestController extends BaseApiController
             }
         }
 
-        $contest->loadCount(['details as total_participants']);
+        $contest->loadCount(['participants as total_participants']);
 
         // Load user's participation detail
-        $contest->setRelation('user_detail',
-            ContestDetail::where('contest_id', $contest->id)
+        $contest->setRelation('user_contest',
+            UserContest::where('contest_id', $contest->id)
                 ->where('user_id', $user->id)
                 ->first()
         );
 
-        return $this->success(new ContestDetailResource($contest));
+        return $this->success(new ContestResource($contest));
     }
 
     /**
@@ -121,22 +115,22 @@ class ContestController extends BaseApiController
     {
         $user = auth()->user();
 
-        $participants = ContestDetail::with('user')
+        $participants = UserContest::with('user')
             ->where('contest_id', $contest->id)
-            ->orderByDesc('final_steps')
+            ->orderByDesc('total_steps')
             ->get();
 
         // Build ranking list
-        $rankings = $participants->values()->map(function ($detail, $index) {
+        $rankings = $participants->values()->map(function ($userContest, $index) {
             $rank = $index + 1;
 
             return [
                 'rank' => $rank,
-                'user_id' => $detail->user_id,
-                'fullname' => $detail->user->fullname ?? $detail->user->username ?? 'User',
-                'avatar_url' => $detail->user->avatar_url,
-                'final_steps' => $detail->final_steps ?? 0,
-                'joined_at' => $detail->joined_at?->timestamp,
+                'user_id' => $userContest->user_id,
+                'fullname' => $userContest->user->fullname ?? $userContest->user->username ?? 'User',
+                'avatar_url' => $userContest->user->avatar_url,
+                'total_steps' => $userContest->total_steps ?? 0,
+                'joined_at' => $userContest->joined_at?->timestamp,
             ];
         });
 
@@ -170,37 +164,32 @@ class ContestController extends BaseApiController
             return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
         }
 
-        // Find or create the contest detail record (auto-join)
-        $detail = ContestDetail::firstOrCreate([
+        // Find or create the user contest record (auto-join)
+        $userContest = UserContest::firstOrCreate([
             'user_id' => $user->id,
             'contest_id' => $contest->id,
         ], [
             'joined_at' => now(),
         ]);
 
-        // Prevent update if already completed or cancelled
-        if ($detail->status === ContestDetail::STATUS_COMPLETED || $detail->status === ContestDetail::STATUS_CANCELLED) {
+        // Prevent update if already completed
+        if ($userContest->completed_at !== null) {
             return $this->error(__('message.contest_detail_not_updatable'), 400, __('message.contest_detail_not_updatable'));
         }
 
         DB::beginTransaction();
         try {
-            // Create a contest session record
-            $detail->sessions()->create([
-                'start_time' => $startTime,
-                'stop_time' => $stopTime,
-                'total_steps' => $totalSteps,
-            ]);
-
-            // Update final_steps on contest detail
-            $detail->final_steps = $detail->sessions()->sum('total_steps');
+            // Update total_steps and time tracking
+            $userContest->total_steps += $totalSteps;
+            $userContest->latest_start_time = $startTime;
+            $userContest->latest_end_time = $stopTime;
 
             // Check if target reached
-            if ($detail->final_steps >= $contest->target) {
-                $detail->status = ContestDetail::STATUS_COMPLETED;
+            if ($userContest->total_steps >= $contest->target) {
+                $userContest->completed_at = now();
             }
 
-            $detail->save();
+            $userContest->save();
 
             DB::commit();
 
