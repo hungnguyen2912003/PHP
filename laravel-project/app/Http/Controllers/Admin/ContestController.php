@@ -42,9 +42,15 @@ class ContestController extends Controller
         $data = $request->validated();
         $data['status'] = Contest::STATUS_INPROGRESS;
 
-        foreach (['name', 'description'] as $field) {
+        // Flatten localized fields: name.en => name_en, description.en => desc_en
+        foreach (['name' => 'name', 'description' => 'desc'] as $field => $prefix) {
             if (isset($data[$field]) && is_array($data[$field])) {
-                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
+                foreach ($data[$field] as $locale => $value) {
+                    if ($value !== null && $value !== '') {
+                        $data["{$prefix}_{$locale}"] = $value;
+                    }
+                }
+                unset($data[$field]);
             }
         }
 
@@ -128,9 +134,13 @@ class ContestController extends Controller
         $contest = Contest::findOrFail($id);
         $data = $request->validated();
 
-        foreach (['name', 'description'] as $field) {
+        // Flatten localized fields: name.en => name_en, description.en => desc_en
+        foreach (['name' => 'name', 'description' => 'desc'] as $field => $prefix) {
             if (isset($data[$field]) && is_array($data[$field])) {
-                $data[$field] = array_filter($data[$field], fn ($v) => $v !== null && $v !== '');
+                foreach ($data[$field] as $locale => $value) {
+                    $data["{$prefix}_{$locale}"] = ($value !== null && $value !== '') ? $value : null;
+                }
+                unset($data[$field]);
             }
         }
 

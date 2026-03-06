@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
-use App\Http\Requests\Api\Contest\ImportStepsRequest;
 use App\Http\Resources\Api\ContestResource;
 use App\Models\Contest;
 use App\Models\UserContest;
@@ -141,66 +140,5 @@ class ContestController extends BaseApiController
             'my_rank' => $myRank,
             'rankings' => $rankings,
         ]);
-    }
-
-    /**
-     * Import steps for the authenticated user and update a specific contest.
-     */
-    public function importSteps(ImportStepsRequest $request, Contest $contest)
-    {
-        $user = auth()->user();
-
-        $totalSteps = $request->input('total_steps');
-        $startTime = $request->input('start_time');
-        $stopTime = $request->input('stop_time');
-
-        // Allow updates only if the contest is currently in progress
-        if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
-            return $this->error(__('message.contest_not_active'), 400, __('message.contest_not_active'));
-        }
-
-        // Validate that imported times are within the contest's allowed date range
-        if ($contest->start_date->greaterThan($startTime) || $contest->end_date->lessThan($stopTime)) {
-            return $this->error(__('message.invalid_import_dates'), 400, __('message.invalid_import_dates'));
-        }
-
-        // Find or create the user contest record (auto-join)
-        $userContest = UserContest::firstOrCreate([
-            'user_id' => $user->id,
-            'contest_id' => $contest->id,
-        ], [
-            'joined_at' => now(),
-        ]);
-
-        // Prevent update if already completed
-        if ($userContest->completed_at !== null) {
-            return $this->error(__('message.contest_detail_not_updatable'), 400, __('message.contest_detail_not_updatable'));
-        }
-
-        DB::beginTransaction();
-        try {
-            // Update total_steps and time tracking
-            $userContest->total_steps += $totalSteps;
-            $userContest->latest_start_time = $startTime;
-            $userContest->latest_end_time = $stopTime;
-
-            // Check if target reached
-            if ($userContest->total_steps >= $contest->target) {
-                $userContest->completed_at = now();
-            }
-
-            $userContest->save();
-
-            DB::commit();
-
-            return response()->json([
-                'status' => 201,
-                'success' => true,
-            ], 201);
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error($e->getMessage(), 500);
-        }
     }
 }
