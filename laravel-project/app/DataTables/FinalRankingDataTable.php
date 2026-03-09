@@ -36,8 +36,17 @@ class FinalRankingDataTable extends DataTable
             ->addColumn('user_info', function ($row) {
                 return view('admin.pages.contest.columns.user_info', compact('row'))->render();
             })
-            ->editColumn('joined_at', function ($row) {
-                return $row->joined_at ? $row->joined_at->format('Y-m-d H:i:s') : __('value.not_available');
+            ->addColumn('start_at', function ($row) {
+                return $row->start_time ? $row->start_time->format('Y-m-d H:i:s') : '--';
+            })
+            ->addColumn('end_at', function ($row) {
+                return $row->end_time ? $row->end_time->format('Y-m-d H:i:s') : '--';
+            })
+            ->addColumn('duration', function ($row) {
+                if ($row->start_time && $row->end_time) {
+                    return $row->start_time->diffForHumans($row->end_time, true);
+                }
+                return '--';
             })
             ->editColumn('total_steps', function ($row) {
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();
@@ -72,8 +81,10 @@ class FinalRankingDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('label.stt'))->searchable(false)->orderable(false)->width('10%')->addClass('text-center fw-bold text-success ps-3 text-nowrap'),
             Column::make('user_info')->title(__('label.participants'))->name('user.full_name')->orderable(false)->width('30%')->addClass('text-nowrap'),
-            Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(false)->width('20%')->addClass('text-center text-nowrap'),
-            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('25%')->addClass('text-end text-nowrap'),
+            Column::make('start_at')->title(__('label.start_at'))->searchable(false)->orderable(false)->width('15%')->addClass('text-center text-nowrap'),
+            Column::make('end_at')->title(__('label.end_at'))->searchable(false)->orderable(false)->width('15%')->addClass('text-center text-nowrap'),
+            Column::make('duration')->title(__('label.duration'))->searchable(false)->orderable(false)->width('15%')->addClass('text-center text-nowrap'),
+            Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(false)->width('15%')->addClass('text-end text-nowrap'),
             Column::make('reward_points')->title(__('label.reward_points'))->searchable(false)->orderable(false)->width('15%')->addClass('text-end pe-3 text-nowrap'),
         ];
     }
