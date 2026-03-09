@@ -15,7 +15,7 @@ class ContestResource extends JsonResource
     {
         $locale = $request->header('Accept-Language', $request->query('lang', 'en'));
 
-        $data = [
+        return [
             'id' => $this->id,
             'name' => $this->getLocalizedField('name', $locale),
             'description' => $this->getLocalizedField('desc', $locale),
@@ -26,21 +26,7 @@ class ContestResource extends JsonResource
             'start_date' => $this->start_date?->timestamp,
             'end_date' => $this->end_date?->timestamp,
             'total_participants' => $this->total_participants ?? 0,
-            'status' => $this->status,
+            'status' => $this->status
         ];
-
-        // Detail fields (only present in show)
-        if ($this->resource->getAttribute('is_joined') !== null) {
-            $data['total_completed'] = $this->total_completed ?? 0;
-            $data['my_progress'] = [
-                'is_joined' => $this->resource->getAttribute('is_joined'),
-                'total_steps' => $this->resource->getAttribute('user_total_steps'),
-                'step_progress' => $this->resource->getAttribute('step_progress'),
-                'joined_at' => $this->resource->getAttribute('user_joined_at')?->timestamp,
-                'completed_at' => $this->resource->getAttribute('user_completed_at')?->timestamp,
-            ];
-        }
-
-        return $data;
     }
 }
