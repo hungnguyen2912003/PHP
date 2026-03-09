@@ -14,10 +14,9 @@ class ImportDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'logs' => 'required|array|min:1',
-            'logs.*.steps' => 'required|integer|min:0',
-            'logs.*.source' => 'required|integer|in:1,2,3',
-            'logs.*.recorded_at' => 'required|date_format:Y-m-d H:i',
+            'steps' => 'required|integer|min:0',
+            'device_source' => 'required|integer|in:1,2,3',
+            'recorded_at' => 'required|date_format:Y-m-d H:i',
         ];
     }
 }

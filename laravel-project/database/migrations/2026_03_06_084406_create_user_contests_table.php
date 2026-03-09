@@ -19,9 +19,8 @@ return new class extends Migration
             $table->timestamp('latest_start_time')->nullable();
             $table->timestamp('latest_end_time')->nullable();
             $table->integer('total_steps')->default(0);
-            $table->integer('final_rank')->nullable();
-            $table->integer('tentative_rank')->nullable();
-            $table->integer('final_score')->nullable();
+            $table->integer('rank')->nullable();
+            $table->integer('score')->nullable();
             $table->boolean('is_calculated')->default(false);
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();

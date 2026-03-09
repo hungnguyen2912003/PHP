@@ -29,8 +29,6 @@ class UserResource extends JsonResource
             'bio' => $this->bio,
             'email_verified_at' => $this->email_verified_at?->toDateTimeString(),
             'last_login_at' => $this->last_login_at?->toDateTimeString(),
-            'created_at' => $this->created_at?->toDateTimeString(),
-            'updated_at' => $this->updated_at?->toDateTimeString(),
         ];
     }
 }

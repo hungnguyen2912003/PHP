@@ -87,9 +87,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Measurement::class)->latestOfMany('recorded_at');
     }
 
-    public function stepLogs()
+    public function userSteps()
     {
-        return $this->hasMany(StepLog::class);
+        return $this->hasMany(UserStep::class);
     }
 
     public function contests()

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MeasurementController;
 use App\Http\Controllers\Api\ContestController;
-use App\Http\Controllers\Api\StepLogController;
+use App\Http\Controllers\Api\UserStepController;
 
 
 /*
@@ -39,5 +39,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('contests/{contest}', [ContestController::class, 'show']);
     Route::get('contests/{contest}/rankings', [ContestController::class, 'ranking']);
 
-    Route::post('steps/import', [StepLogController::class, 'importData']);
+    Route::post('steps/import', [UserStepController::class, 'importData']);
 });

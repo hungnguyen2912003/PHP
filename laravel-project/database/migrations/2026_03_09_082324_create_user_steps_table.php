@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('step_logs', function (Blueprint $table) {
+        Schema::create('user_steps', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->tinyInteger('source')->comment('1: apple_watch, 2: garmin, 3: fitbit');
-            $table->integer('steps');
+            $table->tinyInteger('device_source')->comment('1: apple_watch, 2: garmin, 3: fitbit');
+            $table->integer('steps')->default(0);
             $table->timestamp('recorded_at');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('step_logs');
+        Schema::dropIfExists('user_steps');
     }
 };

@@ -17,8 +17,8 @@ class UserContest extends Model
         'latest_start_time',
         'latest_end_time',
         'total_steps',
-        'final_rank',
-        'final_score',
+        'rank',
+        'score',
         'is_calculated',
         'completed_at',
     ];
@@ -29,8 +29,8 @@ class UserContest extends Model
         'latest_end_time'   => 'datetime',
         'completed_at'      => 'datetime',
         'total_steps'       => 'integer',
-        'final_rank'        => 'integer',
-        'final_score'       => 'integer',
+        'rank'              => 'integer',
+        'score'             => 'integer',
         'is_calculated'     => 'boolean',
     ];
 

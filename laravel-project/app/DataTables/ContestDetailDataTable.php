@@ -38,11 +38,11 @@ class ContestDetailDataTable extends DataTable
             ->editColumn('joined_at', function ($row) {
                 return $row->joined_at ? $row->joined_at->format('Y-m-d H:i') : __('value.not_available');
             })
-            ->editColumn('final_rank', function ($row) {
-                return $row->final_rank ?? __('value.not_available');
+            ->editColumn('rank', function ($row) {
+                return $row->rank ?? __('value.not_available');
             })
-            ->editColumn('final_score', function ($row) {
-                return $row->final_score ? number_format($row->final_score) : __('value.not_available');
+            ->editColumn('score', function ($row) {
+                return $row->score ? number_format($row->score) : __('value.not_available');
             })
             ->editColumn('completed_at', function ($row) {
                 if ($row->completed_at) {
@@ -80,8 +80,8 @@ class ContestDetailDataTable extends DataTable
             Column::make('user_name')->title(__('label.full_name'))->searchable(true)->name('user.fullname')->orderable(false)->addClass('text-nowrap'),
             Column::make('total_steps')->title(__('label.total_steps'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap')->type('number'),
             Column::make('joined_at')->title(__('label.joined_at'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap')->type('datetime-local'),
-            Column::make('final_rank')->title(__('label.rank'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
-            Column::make('final_score')->title(__('label.reward_points'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
+            Column::make('rank')->title(__('label.rank'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
+            Column::make('score')->title(__('label.reward_points'))->searchable(false)->orderable(true)->addClass('text-center text-nowrap'),
             Column::make('completed_at')->title(__('label.status'))->addClass('text-center text-nowrap'),
         ];
     }
