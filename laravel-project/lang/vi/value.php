@@ -8,10 +8,9 @@ return [
         'zh' => 'Tiếng Trung',
     ],
     'role' => [
-        'admin' => 'Quản trị viên',
-        'staff' => 'Nhân viên',
-        'user' => 'Người dùng',
-        'no_role' => 'Không có vai trò',
+        1 => 'Quản trị viên',
+        2 => 'Nhân viên',
+        3 => 'Người dùng',
     ],
     'gender' => [
         'male' => 'Nam',

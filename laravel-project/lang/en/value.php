@@ -8,10 +8,9 @@ return [
         'zh' => 'Chinese',
     ],
     'role' => [
-        'admin' => 'Administrator',
-        'staff' => 'Staff',
-        'user' => 'User',
-        'no_role' => 'No Role',
+        1 => 'Administrator',
+        2 => 'Staff',
+        3 => 'User',
     ],
     'gender' => [
         'male' => 'Male',

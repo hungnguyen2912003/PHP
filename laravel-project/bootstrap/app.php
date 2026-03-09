@@ -55,9 +55,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => 401,
-                    'body' => [
-                        'errors' => null,
-                    ],
+                    'success' => false,
                 ], 401);
             }
         });
@@ -66,9 +64,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => 401,
-                    'body' => [
-                        'errors' => null,
-                    ],
+                    'success' => false,
                 ], 401);
             }
         });
@@ -77,9 +73,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => 401,
-                    'body' => [
-                        'errors' => null,
-                    ],
+                    'success' => false,
                 ], 401);
             }
         });
@@ -88,21 +82,23 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => 401,
-                    'body' => [
-                        'errors' => null,
-                    ],
+                    'success' => false,
                 ], 401);
             }
         });
 
         $exceptions->render(function (ValidationException $e, Request $request) {
             if ($request->is('api/*')) {
-                return response()->json([
+                $response = [
                     'status' => 422,
-                    'body' => [
-                        'errors' => $e->errors()
-                    ],
-                ], 422);
+                    'success' => false,
+                ];
+                
+                if (!empty($e->errors())) {
+                    $response['errors'] = $e->errors();
+                }
+
+                return response()->json($response, 422);
             }
         });
 
@@ -110,9 +106,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => 404,
-                    'body' => [
-                        'errors' => null,
-                    ],
+                    'success' => false,
                 ], 404);
             }
             return response()->view('error.pages.404', [], 404);
@@ -122,9 +116,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return response()->json([
                     'status' => $e->getStatusCode(),
-                    'body' => [
-                        'errors' => null
-                    ],
+                    'success' => false,
                 ], $e->getStatusCode());
             }
 
@@ -135,12 +127,16 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function (\Throwable $e, Request $request) {
             if ($request->is('api/*')) {
-                return response()->json([
+                $response = [
                     'status' => 500,
-                    'body' => [
-                        'errors' => config('app.debug') ? $e->getMessage() : null,
-                    ],
-                ], 500);
+                    'success' => false,
+                ];
+
+                if (config('app.debug') && !empty($e->getMessage())) {
+                    $response['errors'] = $e->getMessage();
+                }
+
+                return response()->json($response, 500);
             }
 
             if ($e instanceof ValidationException || $e instanceof NotFoundHttpException || $e instanceof AuthenticationException) {

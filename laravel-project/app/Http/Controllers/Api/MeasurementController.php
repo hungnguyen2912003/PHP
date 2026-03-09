@@ -67,7 +67,7 @@ class MeasurementController extends BaseApiController
                 ],
             ])->values()->all();
 
-        return $this->success($data);
+        return $this->success(200, $data);
     }
 
 
@@ -99,10 +99,7 @@ class MeasurementController extends BaseApiController
             $data
         );
 
-        return response()->json([
-            'status' => 201,
-            'success' => true,
-        ], 201);
+        return $this->success(201);
     }
 
 
@@ -174,7 +171,7 @@ class MeasurementController extends BaseApiController
             ],
         ];
 
-        return $this->success([
+        return $this->success(200, [
             'id' => $measurement->id,
             'recorded_at' => $measurement->recorded_at->timestamp,
             'metrics' => $metrics

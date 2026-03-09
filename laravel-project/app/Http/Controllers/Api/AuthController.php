@@ -32,7 +32,7 @@ class AuthController extends BaseApiController
         //Send activation email
         Mail::to($user->email)->send(new ActivationMail($plainToken, $user, Carbon::now()->addMinutes(30)));
 
-        return $this->success(new UserResource($user), 201);
+        return $this->success(201, new UserResource($user));
     }
 
     public function login(LoginRequest $request)
@@ -44,9 +44,9 @@ class AuthController extends BaseApiController
             'password' => $request->input('password'),
         ];
         if (!$token = auth('api')->attempt($credentials)) {
-            return $this->error('Invalid credentials', 401);
+            return $this->error(401, 'Invalid credentials');
         }
-        return $this->success($this->respondWithToken($token), 200);
+        return $this->success(200, $this->respondWithToken($token));
     }
 
     /**
@@ -74,7 +74,7 @@ class AuthController extends BaseApiController
 
         auth('api')->logout();
 
-        return $this->success(null, 200, 'Logout successfully');
+        return $this->success(200);
     }
 
     /**
@@ -88,7 +88,7 @@ class AuthController extends BaseApiController
         $user = auth('api')->setToken($token)->user();
 
 
-        return $this->success($this->respondWithToken($token), 200);
+        return $this->success(200, $this->respondWithToken($token));
     }
 
     /**

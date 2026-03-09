@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class EnsureRole
 {
+    use \App\Traits\ApiResponse;
+
     /**
      * Map role names (from routes) to integer constants.
      */
@@ -22,11 +24,7 @@ class EnsureRole
         $user = auth('api')->user();
 
         if (! $user || ! $user->role) {
-            return response()->json([
-                'status' => 403,
-                'message' => 'Forbidden',
-                'data' => null
-            ], 403);
+            return $this->error(403);
         }
 
         // Convert role names from route to integer values
@@ -35,11 +33,7 @@ class EnsureRole
         }, $roles);
 
         if (! in_array($user->role, $allowedRoles, true)) {
-            return response()->json([
-                'status' => 403,
-                'message' => 'Forbidden',
-                'data' => null
-            ], 403);
+            return $this->error(403);
         }
 
         return $next($request);

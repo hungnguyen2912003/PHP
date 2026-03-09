@@ -13,9 +13,8 @@ class UserContest extends Model
     protected $fillable = [
         'user_id',
         'contest_id',
-        'joined_at',
-        'latest_start_time',
-        'latest_end_time',
+        'start_time',
+        'end_time',
         'total_steps',
         'rank',
         'score',
@@ -24,14 +23,13 @@ class UserContest extends Model
     ];
 
     protected $casts = [
-        'joined_at'         => 'datetime',
-        'latest_start_time' => 'datetime',
-        'latest_end_time'   => 'datetime',
-        'completed_at'      => 'datetime',
-        'total_steps'       => 'integer',
-        'rank'              => 'integer',
-        'score'             => 'integer',
-        'is_calculated'     => 'boolean',
+        'start_time'    => 'datetime',
+        'end_time'      => 'datetime',
+        'completed_at'  => 'datetime',
+        'total_steps'   => 'integer',
+        'rank'          => 'integer',
+        'score'         => 'integer',
+        'is_calculated' => 'boolean',
     ];
 
     public function user(): BelongsTo

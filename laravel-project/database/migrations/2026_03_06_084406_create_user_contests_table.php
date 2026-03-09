@@ -15,9 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('contest_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('joined_at')->nullable();
-            $table->timestamp('latest_start_time')->nullable();
-            $table->timestamp('latest_end_time')->nullable();
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
             $table->integer('total_steps')->default(0);
             $table->integer('rank')->nullable();
             $table->integer('score')->nullable();
@@ -26,6 +25,7 @@ return new class extends Migration
             $table->timestamps();
             $table->index('user_id');
             $table->index('contest_id');
+            $table->unique(['user_id', 'contest_id']);
         });
     }
 

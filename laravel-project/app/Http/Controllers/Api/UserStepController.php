@@ -4,31 +4,37 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\UserStep\ImportDataRequest;
-use App\Http\Resources\Api\StepResource;
+use App\Http\Resources\Api\UserStepResource;
 use App\Models\UserStep;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserStepController extends BaseApiController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     public function importData(ImportDataRequest $request)
     {
-        $data = $request->validated();
+        $user = auth()->user();
 
-        $userStep = UserStep::create([
-            'user_id' => Auth::id(),
-            'steps' => $data['steps'],
-            'device_source' => $data['device_source'],
-            'recorded_at' => $data['recorded_at'],
-        ]);
+        DB::beginTransaction();
+        try {
+            foreach ($request->logs as $log) {
+                UserStep::updateOrCreate(
+                    [
+                        'user_id' => $user->id,
+                        'device_source' => $request->device_source,
+                        'recorded_at' => $log['recorded_at'],
+                    ],
+                    [
+                        'steps' => $log['steps'],
+                    ]
+                );
+            }
 
-        return $this->successResponse(new StepResource($userStep));
+            DB::commit();
+
+            return $this->success(201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->error(400, $e->getMessage());
+        }
     }
 }

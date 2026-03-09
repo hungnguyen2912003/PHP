@@ -37,6 +37,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('contests', [ContestController::class, 'index']);
     Route::get('contests/{contest}', [ContestController::class, 'show']);
+    Route::post('contests/{contest}/start', [ContestController::class, 'start']);
+    Route::post('contests/{contest}/stop', [ContestController::class, 'stop']);
     Route::get('contests/{contest}/rankings', [ContestController::class, 'ranking']);
 
     Route::post('steps/import', [UserStepController::class, 'importData']);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Resources\Api\ContestResource;
 use App\Models\Contest;
 use App\Models\UserContest;
+use App\Models\UserStep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,19 +26,19 @@ class ContestController extends BaseApiController
         $joined = UserContest::where('user_id', $user->id)->select('contest_id');
 
         switch ($tab) {
-            case 'current':
+            case '1':
                 $query->whereIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
-            case 'recommend':
+            case '2':
                 $query->whereNotIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
-            case 'history':
+            case '3':
                 $query->whereIn('id', $joined)
                     ->where(function ($q) {
                         $q->where('status', Contest::STATUS_COMPLETED)
@@ -53,49 +54,23 @@ class ContestController extends BaseApiController
 
         $contests = $query->orderByDesc('created_at')->get();
 
-        return $this->success(ContestResource::collection($contests));
+        return $this->success(200, ContestResource::collection($contests));
     }
 
     /**
      * Get contest detail with user's participation data.
      */
-    public function show(Request $request, Contest $contest)
+    public function show(Contest $contest)
     {
         $user = auth()->user();
 
-        if($request->input('join') == 1) {
-            DB::beginTransaction();
-            try {
-                // Check if user has already joined the contest
-                $userContest = UserContest::where('user_id', $user->id)
-                    ->where('contest_id', $contest->id)
-                    ->first();
-                
-                if ($userContest) {
-                    return $this->error(__('message.contest_already_joined'), 400);
-                }
-
-                // Check if contest is in progress
-                if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
-                    return $this->error(__('message.contest_not_active'), 400);
-                }
-                
-                $userContest = UserContest::create([
-                    'user_id' => $user->id,
-                    'contest_id' => $contest->id,
-                    'joined_at' => now(),
-                    'latest_start_time' => now(),
-                    'total_steps' => 0,
-                ]);
-
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return $this->error($e->getMessage(), 500);
+        $contest->loadCount([
+            'participants as total_participants',
+            'participants as total_completed' => function ($query) {
+                $query->whereNotNull('completed_at');
             }
-        }
-
-        $contest->loadCount(['participants as total_participants']);
+        ]);
+        
 
         // Load user's participation detail
         $contest->setRelation('user_contest',
@@ -104,7 +79,108 @@ class ContestController extends BaseApiController
                 ->first()
         );
 
-        return $this->success(new ContestResource($contest));
+        return $this->success(200, new ContestResource($contest));
+    }
+
+    /**
+     * User action start contest
+     */
+    public function start(Request $request, Contest $contest)
+    {
+        $user = auth()->user();
+
+        // Check if contest is in progress
+        if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
+            return $this->error(400, __('message.contest_not_active'));
+        }
+
+        try {
+            DB::beginTransaction();
+            
+            $userContest = UserContest::where('user_id', $user->id)
+                ->where('contest_id', $contest->id)
+                ->lockForUpdate()
+                ->first();
+
+            if ($userContest) {
+                // Already started and not stopped → not allow to start again
+                if ($userContest->start_time && 
+                    (!$userContest->end_time || $userContest->start_time > $userContest->end_time)) {
+                    DB::rollBack();
+                    return $this->error(400, __('message.contest_already_started'));
+                }
+
+                // Already stopped → allow to start again, update start_time
+                $userContest->update([
+                    'start_time' => now(),
+                ]);
+            } else {
+                // Not joined yet → create new
+                $userContest = UserContest::create([
+                    'user_id' => $user->id,
+                    'contest_id' => $contest->id,
+                    'total_steps' => 0,
+                    'start_time' => now(),
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->error(500, $e->getMessage());
+        }
+
+        return $this->success(200);
+    }
+
+    /**
+     * User action stop contest
+     */
+    public function stop(Contest $contest)
+    {
+        $user = auth()->user();
+
+        try {
+            DB::beginTransaction();
+            
+            $userContest = UserContest::where('user_id', $user->id)
+                ->where('contest_id', $contest->id)
+                ->lockForUpdate()
+                ->first();
+            
+            // Not joined contest
+            if (!$userContest) {
+                DB::rollBack();
+                return $this->error(400, __('message.contest_not_joined'));
+            }
+
+            // Not started or already stopped → not allow to stop again
+            if (!$userContest->start_time || 
+                ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
+                DB::rollBack();
+                return $this->error(400, __('message.contest_not_started'));
+            }
+
+            $endTime = now();
+
+            // Sum steps from user_steps table in the period start_time → end_time
+            $stepsInPeriod = UserStep::where('user_id', $user->id)
+                ->where('recorded_at', '>=', $userContest->start_time)
+                ->where('recorded_at', '<=', $endTime)
+                ->sum('steps');
+
+            $userContest->update([
+                'end_time' => $endTime,
+                'total_steps' => $userContest->total_steps + $stepsInPeriod,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->error(500, $e->getMessage());
+        }
+
+        return $this->success(200);
     }
 
     /**
@@ -136,7 +212,7 @@ class ContestController extends BaseApiController
         // Find current user's rank
         $myRank = $rankings->firstWhere('user_id', $user->id);
 
-        return $this->success([
+        return $this->success(200, [
             'my_rank' => $myRank,
             'rankings' => $rankings,
         ]);
