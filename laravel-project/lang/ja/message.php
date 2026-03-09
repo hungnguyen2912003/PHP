@@ -123,4 +123,7 @@ return [
     'contest_already_finalized' => 'このコンテストはすでに確定されています。',
     'confirm_finalize_ranking' => 'ランキングを確定してもよろしいですか？この操作は取り消しできません。',
     'confirm_finalize_title' => 'ランキング確定',
+    'contest_already_started' => 'すでにこのコンテストを開始しています。',
+    'contest_not_joined' => 'このコンテストに参加していません。',
+    'contest_not_started' => 'まだこのコンテストを開始していません。',
 ];

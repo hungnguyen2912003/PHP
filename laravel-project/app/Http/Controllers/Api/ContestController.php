@@ -164,14 +164,14 @@ class ContestController extends BaseApiController
             $endTime = now();
 
             // Sum steps from user_steps table in the period start_time → end_time
-            $stepsInPeriod = UserStep::where('user_id', $user->id)
+            $steplogs = UserStep::where('user_id', $user->id)
                 ->where('recorded_at', '>=', $userContest->start_time)
                 ->where('recorded_at', '<=', $endTime)
                 ->sum('steps');
 
             $userContest->update([
                 'end_time' => $endTime,
-                'total_steps' => $userContest->total_steps + $stepsInPeriod,
+                'total_steps' => $userContest->total_steps + $steplogs,
             ]);
 
             DB::commit();
@@ -204,8 +204,7 @@ class ContestController extends BaseApiController
                 'user_id' => $userContest->user_id,
                 'fullname' => $userContest->user->fullname ?? $userContest->user->username ?? 'User',
                 'avatar_url' => $userContest->user->avatar_url,
-                'total_steps' => $userContest->total_steps ?? 0,
-                'joined_at' => $userContest->joined_at?->timestamp,
+                'total_steps' => $userContest->total_steps ?? 0
             ];
         });
 

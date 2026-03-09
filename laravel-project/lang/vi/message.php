@@ -129,4 +129,7 @@ return [
     'contest_already_finalized' => 'Cuộc thi này đã được chốt xếp hạng.',
     'confirm_finalize_ranking' => 'Bạn có chắc chắn muốn chốt xếp hạng? Hành động này không thể hoàn tác.',
     'confirm_finalize_title' => 'Chốt xếp hạng',
+    'contest_already_started' => 'Bạn đã bắt đầu cuộc thi này rồi.',
+    'contest_not_joined' => 'Bạn chưa tham gia cuộc thi này.',
+    'contest_not_started' => 'Bạn chưa bắt đầu cuộc thi này.',
 ];

@@ -42,7 +42,15 @@ trait ApiResponse
         ];
 
         if ($errors !== null) {
-            $response['errors'] = $errors;
+            if (is_string($errors)) {
+                $response['errors'] = [
+                    'message' => [
+                        $errors
+                    ]
+                ];
+            } else {
+                $response['errors'] = $errors;
+            }
         }
 
         return response()->json($response, $status);
