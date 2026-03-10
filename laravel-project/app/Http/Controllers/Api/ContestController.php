@@ -67,7 +67,7 @@ class ContestController extends BaseApiController
         $contest->loadCount([
             'participants as total_participants',
             'participants as total_completed' => function ($query) {
-                $query->whereNotNull('completed_at');
+                $query->where('status', 1);
             }
         ]);
         
@@ -134,6 +134,57 @@ class ContestController extends BaseApiController
     }
 
     /**
+     * Show steps in time
+     */
+    public function tracking(Contest $contest)
+    {
+        $user = auth()->user();
+
+        try {
+            DB::beginTransaction();
+            
+            $userContest = UserContest::where('user_id', $user->id)
+                ->where('contest_id', $contest->id)
+                ->lockForUpdate()
+                ->first();
+            
+            // Not joined contest
+            if (!$userContest) {
+                DB::rollBack();
+                return $this->error(400, __('message.contest_not_joined'));
+            }
+
+            // Not started or already stopped → not allow to stop again
+            if (!$userContest->start_time || 
+                ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
+                DB::rollBack();
+                return $this->error(400, __('message.contest_not_started'));
+            }
+
+            // Sum steps from user_steps table in the period start_time → present
+            $steplogs = UserStep::where('user_id', $user->id)
+                ->where('recorded_at', '>=', $userContest->start_time)
+                ->where('recorded_at', '<=', now())
+                ->sum('steps');
+
+            // Duration now - start_time
+            $duration = now()->diffInMinutes($userContest->start_time);
+
+            $userContest->update([
+                'total_steps' => $steplogs,
+                'duration' => $duration,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->error(500, $e->getMessage());
+        }
+
+        return $this->success(200);
+    }
+
+    /**
      * User action stop contest
      */
     public function stop(Contest $contest)
@@ -169,9 +220,15 @@ class ContestController extends BaseApiController
                 ->where('recorded_at', '<=', $endTime)
                 ->sum('steps');
 
+            $totalSteps = $userContest->total_steps + $steplogs;
+
+            // Check if user completed the contest
+            $isCompleted = $totalSteps >= $contest->target;
+
             $userContest->update([
                 'end_time' => $endTime,
-                'total_steps' => $userContest->total_steps + $steplogs,
+                'total_steps' => $totalSteps,
+                'status' => $isCompleted ? 1 : 0,
             ]);
 
             DB::commit();

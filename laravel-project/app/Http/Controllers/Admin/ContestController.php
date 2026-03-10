@@ -74,7 +74,7 @@ class ContestController extends Controller
         $contest = Contest::withCount([
             'participants',
             'participants as completed_participants_count' => function ($query) {
-                $query->whereNotNull('completed_at');
+                $query->where('status', 1);
             }
         ])->findOrFail($id);
         

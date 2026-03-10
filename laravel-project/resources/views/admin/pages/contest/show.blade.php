@@ -121,23 +121,7 @@
                     </h3>
                     <div class="default-table-area">
                         <div class="table-responsive">
-                            <table class="table align-middle text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th class="text-nowrap">{{ __('label.stt') }}</th>
-                                        <th class="text-nowrap">{{ __('label.full_name') }}</th>
-                                        <th class="text-nowrap">{{ __('label.total_steps') }}</th>
-                                        <th class="text-nowrap">{{ __('label.joined_at') }}</th>
-                                        <th class="text-nowrap">{{ __('label.rank') }}</th>
-                                        <th class="text-nowrap">
-                                            {{ __('label.reward_points') }}
-                                        </th>
-                                        <th class="text-nowrap">{{ __('label.status') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            {{ $dataTable->table(['class' => 'd-none']) }}
+                            {{ $dataTable->table(['class' => 'table align-middle text-nowrap w-100']) }}
                         </div>
                     </div>
                 </div>

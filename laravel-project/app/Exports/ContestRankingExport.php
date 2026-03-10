@@ -69,7 +69,7 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
                     $userContest->user?->fullname ?? '-',
                     $userContest->user?->email ?? '-',
                     $userContest->joined_at?->format('Y-m-d H:i:s') ?? '-',
-                    $userContest->completed_at?->format('Y-m-d H:i:s') ?? '-',
+                    $userContest->end_time?->format('Y-m-d H:i:s') ?? '-',
                     Contest::formatDuration($userContest->latest_start_time, $userContest->latest_end_time),
                     $userContest->total_steps ?? 0,
                     $eligible ? $contest->calculateReward($rank) : 0,

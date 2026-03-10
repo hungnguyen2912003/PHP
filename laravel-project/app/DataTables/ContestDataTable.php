@@ -74,7 +74,7 @@ class ContestDataTable extends DataTable
         return $model->newQuery()
             ->withCount('participants')
             ->withCount(['participants as completed_participants_count' => function ($query) {
-                $query->whereNotNull('completed_at');
+                $query->where('status', 1);
             }])
             ->when($this->request->get('from_date'), function ($query, $fromDate) {
                 return $query->whereDate('start_date', '>=', $fromDate);

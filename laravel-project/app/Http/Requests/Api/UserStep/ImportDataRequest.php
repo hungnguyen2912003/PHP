@@ -25,7 +25,7 @@ class ImportDataRequest extends FormRequest
             'device_source'      => ['required', 'integer', 'in:1,2,3'],
             'logs'               => ['required', 'array', 'min:1'],
             'logs.*.steps'       => ['required', 'integer', 'min:0'],
-            'logs.*.recorded_at' => ['required'],
+            'logs.*.recorded_at' => ['required', 'date', 'before_or_equal:now'],
         ];
     }
 }

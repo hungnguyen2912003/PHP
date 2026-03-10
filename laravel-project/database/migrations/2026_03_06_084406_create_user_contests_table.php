@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('rank')->nullable();
             $table->integer('score')->nullable();
             $table->boolean('is_calculated')->default(false);
-            $table->timestamp('completed_at')->nullable();
+            $table->tinyInteger('status')->default(0)->comment('0: in_process; 1: completed');
             $table->timestamps();
             $table->index('user_id');
             $table->index('contest_id');

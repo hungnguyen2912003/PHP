@@ -19,17 +19,17 @@ class UserContest extends Model
         'rank',
         'score',
         'is_calculated',
-        'completed_at',
+        'status',
     ];
 
     protected $casts = [
         'start_time'    => 'datetime',
         'end_time'      => 'datetime',
-        'completed_at'  => 'datetime',
         'total_steps'   => 'integer',
         'rank'          => 'integer',
         'score'         => 'integer',
         'is_calculated' => 'boolean',
+        'status'        => 'integer',
     ];
 
     public function user(): BelongsTo

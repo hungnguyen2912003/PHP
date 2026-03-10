@@ -35,7 +35,7 @@ class ContestResource extends JsonResource
                     'end_time' => $this->user_contest->end_time?->timestamp,
                     'total_steps' => $this->user_contest->total_steps,
                     'is_calculated' => $this->user_contest->is_calculated,
-                    'completed_at' => $this->user_contest->completed_at?->timestamp
+                    'status' => $this->user_contest->status
                 ];
             }),
         ];
