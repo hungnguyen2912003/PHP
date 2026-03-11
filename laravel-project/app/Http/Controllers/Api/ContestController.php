@@ -88,15 +88,15 @@ class ContestController extends BaseApiController
     public function start(Request $request, Contest $contest)
     {
         $user = auth()->user();
+        $now = now();
 
         // Check if contest is in progress
-        if ($contest->status !== Contest::STATUS_INPROGRESS || now() < $contest->start_date || now() > $contest->end_date) {
+        if ($contest->status !== Contest::STATUS_INPROGRESS || $now < $contest->start_date || $now > $contest->end_date) {
             return $this->error(400, __('message.contest_not_active'));
         }
-
+        
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            
             $userContest = UserContest::where('user_id', $user->id)
                 ->where('contest_id', $contest->id)
                 ->lockForUpdate()
@@ -112,15 +112,14 @@ class ContestController extends BaseApiController
 
                 // Already stopped → allow to start again, update start_time
                 $userContest->update([
-                    'start_time' => now(),
+                    'start_time' => $now,
                 ]);
             } else {
                 // Not joined yet → create new
-                $userContest = UserContest::create([
+                UserContest::create([
                     'user_id' => $user->id,
                     'contest_id' => $contest->id,
-                    'total_steps' => 0,
-                    'start_time' => now(),
+                    'start_time' => $now,
                 ]);
             }
 
@@ -140,48 +139,25 @@ class ContestController extends BaseApiController
     {
         $user = auth()->user();
 
-        try {
-            DB::beginTransaction();
-            
-            $userContest = UserContest::where('user_id', $user->id)
-                ->where('contest_id', $contest->id)
-                ->lockForUpdate()
-                ->first();
-            
-            // Not joined contest
-            if (!$userContest) {
-                DB::rollBack();
-                return $this->error(400, __('message.contest_not_joined'));
-            }
+        $userContest = UserContest::where('user_id', $user->id)
+            ->where('contest_id', $contest->id)
+            ->first();
 
-            // Not started or already stopped → not allow to stop again
-            if (!$userContest->start_time || 
-                ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
-                DB::rollBack();
-                return $this->error(400, __('message.contest_not_started'));
-            }
-
-            // Sum steps from user_steps table in the period start_time → present
-            $steplogs = UserStep::where('user_id', $user->id)
-                ->where('recorded_at', '>=', $userContest->start_time)
-                ->where('recorded_at', '<=', now())
-                ->sum('steps');
-
-            // Duration now - start_time
-            $duration = now()->diffInMinutes($userContest->start_time);
-
-            $userContest->update([
-                'total_steps' => $steplogs,
-                'duration' => $duration,
-            ]);
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error(500, $e->getMessage());
+        // Not joined contest
+        if (!$userContest) {
+            return $this->error(400, __('message.contest_not_joined'));
         }
 
-        return $this->success(200);
+        // Not started or already stopped
+        if (!$userContest->start_time || 
+            ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
+            return $this->error(400, __('message.contest_not_started'));
+        }
+
+        return $this->success(200, [
+            'total_steps' => $userContest->total_steps ?? 0,
+            'duration'    => now()->diffInSeconds($userContest->start_time),
+        ]);
     }
 
     /**
@@ -190,10 +166,15 @@ class ContestController extends BaseApiController
     public function stop(Contest $contest)
     {
         $user = auth()->user();
+        $now = now();
 
+        // Check if contest is in progress
+        if ($contest->status !== Contest::STATUS_INPROGRESS || $now < $contest->start_date || $now > $contest->end_date) {
+            return $this->error(400, __('message.contest_not_active'));
+        }
+
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            
             $userContest = UserContest::where('user_id', $user->id)
                 ->where('contest_id', $contest->id)
                 ->lockForUpdate()
@@ -212,23 +193,12 @@ class ContestController extends BaseApiController
                 return $this->error(400, __('message.contest_not_started'));
             }
 
-            $endTime = now();
-
-            // Sum steps from user_steps table in the period start_time → end_time
-            $steplogs = UserStep::where('user_id', $user->id)
-                ->where('recorded_at', '>=', $userContest->start_time)
-                ->where('recorded_at', '<=', $endTime)
-                ->sum('steps');
-
-            $totalSteps = $userContest->total_steps + $steplogs;
-
             // Check if user completed the contest
-            $isCompleted = $totalSteps >= $contest->target;
+            $isCompleted = $userContest->total_steps >= $contest->target;
 
             $userContest->update([
-                'end_time' => $endTime,
-                'total_steps' => $totalSteps,
-                'status' => $isCompleted ? 1 : 0,
+                'end_time' => $now,
+                'status' => $isCompleted ? UserContest::STATUS_COMPLETED : UserContest::STATUS_INPROGRESS,
             ]);
 
             DB::commit();
