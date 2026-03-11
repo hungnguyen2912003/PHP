@@ -23,7 +23,9 @@ class TemporaryRankingDataTable extends DataTable
         return $model->newQuery()
             ->with('user')
             ->where('contest_id', $this->contestId)
-            ->orderByDesc('total_steps');
+            ->where('total_steps', '>=', $this->target)
+            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, COALESCE(end_time, NOW())) ASC')
+            ->orderBy('start_time', 'asc');
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable

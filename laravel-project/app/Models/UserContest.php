@@ -10,6 +10,9 @@ class UserContest extends Model
 {
     use HasUuids;
 
+    public const STATUS_INPROGRESS = 0;
+    public const STATUS_COMPLETED = 1;
+
     protected $fillable = [
         'user_id',
         'contest_id',

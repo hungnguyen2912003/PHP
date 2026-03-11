@@ -156,7 +156,7 @@ class ContestController extends BaseApiController
 
         return $this->success(200, [
             'total_steps' => $userContest->total_steps ?? 0,
-            'duration'    => now()->diffInSeconds($userContest->start_time),
+            'duration'    => now()->getTimestamp() - $userContest->start_time->getTimestamp(),
         ]);
     }
 
@@ -219,7 +219,9 @@ class ContestController extends BaseApiController
 
         $participants = UserContest::with('user')
             ->where('contest_id', $contest->id)
-            ->orderByDesc('total_steps')
+            ->where('total_steps', '>=', $this->target)
+            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, COALESCE(end_time, NOW())) ASC')
+            ->orderBy('start_time', 'asc')
             ->get();
 
         // Build ranking list
@@ -231,6 +233,9 @@ class ContestController extends BaseApiController
                 'user_id' => $userContest->user_id,
                 'fullname' => $userContest->user->fullname ?? $userContest->user->username ?? 'User',
                 'avatar_url' => $userContest->user->avatar_url,
+                'duration' => $userContest->end_time && $userContest->start_time 
+                    ? $userContest->end_time->getTimestamp() - $userContest->start_time->getTimestamp() 
+                    : ($userContest->start_time ? now()->getTimestamp() - $userContest->start_time->getTimestamp() : 0),
                 'total_steps' => $userContest->total_steps ?? 0
             ];
         });

@@ -88,8 +88,9 @@ class Contest extends Model
         return UserContest::with('user')
             ->where('contest_id', $this->id)
             ->where('total_steps', '>=', $this->target)
-            ->orderBy('total_steps', 'desc')
-            ->orderBy('joined_at', 'asc');
+            ->orderBy('end_time', 'asc')
+            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, end_time) ASC')
+            ->orderBy('start_time', 'asc');
     }
 
     /**

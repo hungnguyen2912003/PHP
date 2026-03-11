@@ -106,7 +106,7 @@ return [
     'temporary_rank' => 'Bảng xếp hạng tạm thời',
     'final_rank' => 'Bảng xếp hạng chung cuộc',
     'temporary_rank_desc' => 'Người tham gia đang trong quá trình.',
-    'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu (Top :limit).',
+    'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu.',
     'duration' => 'Thời lượng',
     'reward' => 'Thưởng',
     'calculate_at' => 'Thời gian tính thưởng',

@@ -11,7 +11,6 @@ use App\Http\Requests\Admin\Contest\StoreRequest;
 use App\Http\Requests\Admin\Contest\UpdateRequest;
 use App\Exports\ContestRankingExport;
 use App\Models\Contest;
-use App\Models\UserContest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;

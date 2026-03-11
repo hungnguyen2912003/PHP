@@ -100,7 +100,7 @@ return [
     'temporary_rank' => '暫定ランキング',
     'final_rank' => '最終ランキング',
     'temporary_rank_desc' => '進行中の参加者。',
-    'final_rank_desc' => '目標を達成した参加者（トップ :limit）。',
+    'final_rank_desc' => '目標を達成した参加者。',
     'duration' => '所要時間',
     'reward' => '報酬',
     'calculate_at' => '計算日時',
