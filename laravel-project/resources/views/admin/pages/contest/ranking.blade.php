@@ -57,6 +57,9 @@
                                         <th class="text-nowrap">{{ __('label.participants') }}</th>
                                         <th class="text-nowrap">{{ __('label.start_at') }}</th>
                                         <th class="text-nowrap">{{ __('label.end_at') }}</th>
+                                        <th class="text-center text-nowrap">
+                                            {{ __('label.duration') }}
+                                        </th>
                                         <th class="text-end pe-3 text-nowrap">
                                             {{ __('label.total_steps') }}
                                         </th>
@@ -95,9 +98,7 @@
                                         <th class="text-nowrap">{{ __('label.participants') }}</th>
                                         <th class="text-nowrap">{{ __('label.start_at') }}</th>
                                         <th class="text-nowrap">{{ __('label.end_at') }}</th>
-                                        <th class="text-center text-nowrap">
-                                            {{ __('label.duration') }}
-                                        </th>
+                                        <th class="text-nowrap">{{ __('label.duration') }}</th>
                                         <th class="text-end text-nowrap">
                                             {{ __('label.total_steps') }}
                                         </th>
@@ -166,6 +167,14 @@
                     {
                         data: 'end_at',
                         name: 'end_at',
+                        searchable: false,
+                        orderable: false,
+                        width: '20%',
+                        className: 'text-center text-nowrap',
+                    },
+                    {
+                        data: 'duration',
+                        name: 'duration',
                         searchable: false,
                         orderable: false,
                         width: '20%',

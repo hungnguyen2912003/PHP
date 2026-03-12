@@ -102,7 +102,7 @@ class ContestController extends Controller
             return (new FinalRankingDataTable($contest))->ajax();
         }
 
-        return (new TemporaryRankingDataTable($id))->ajax();
+        return (new TemporaryRankingDataTable($contest))->ajax();
     }
 
     /**

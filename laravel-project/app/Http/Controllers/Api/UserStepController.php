@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\UserStep\ImportDataRequest;
 use App\Models\UserStep;
+use Illuminate\Support\Facades\Cache;
 use App\Models\UserContest;
+
 use Illuminate\Support\Facades\DB;
 
 class UserStepController extends BaseApiController
@@ -38,12 +40,21 @@ class UserStepController extends BaseApiController
                 ->get();
 
             foreach ($contests as $contest) {
+                $totalSteps = UserStep::where('user_id', $user->id)
+                    ->where('recorded_at', '>=', $contest->start_time)
+                    ->where('recorded_at', '<=', now())
+                    ->sum('steps');
+
                 $contest->update([
-                    'total_steps' => UserStep::where('user_id', $user->id)
-                        ->where('recorded_at', '>=', $contest->start_time)
-                        ->where('recorded_at', '<=', now())
-                        ->sum('steps'),
+                    'total_steps' => $totalSteps,
                 ]);
+
+                // Cache total_steps
+                Cache::put(
+                    "user_contest_steps:{$user->id}:{$contest->contest_id}",
+                    (int) $totalSteps,
+                    now()->addHours(24)
+                );
             }
 
             DB::commit();

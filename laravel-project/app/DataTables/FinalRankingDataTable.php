@@ -22,11 +22,7 @@ class FinalRankingDataTable extends DataTable
 
     public function query(UserContest $model): QueryBuilder
     {
-        if ($this->contest->status !== Contest::STATUS_COMPLETED) {
-            return $model->newQuery()->where('contest_id', $this->contest->id)->whereRaw('1 = 0');
-        }
-
-        return $this->contest->getRankedWinners();
+        return $this->contest->getFinalRankedWinners();
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -37,16 +33,17 @@ class FinalRankingDataTable extends DataTable
                 return view('admin.pages.contest.columns.user_info', compact('row'))->render();
             })
             ->addColumn('start_at', function ($row) {
-                return $row->start_time ? $row->start_time->format('Y-m-d H:i:s') : '--';
+                return $row->start_time ? $row->start_time->format('Y-m-d H:i:s') : __('value.not_available');
             })
             ->addColumn('end_at', function ($row) {
-                return $row->end_time ? $row->end_time->format('Y-m-d H:i:s') : '--';
+                return $row->end_time ? $row->end_time->format('Y-m-d H:i:s') : __('value.not_available');
             })
             ->addColumn('duration', function ($row) {
                 if ($row->start_time && $row->end_time) {
-                    return $row->start_time->diffForHumans($row->end_time, true);
+                    $seconds = $row->start_time->diffInSeconds($row->end_time);
+                    return sprintf('%02d:%02d:%02d', floor($seconds / 3600), floor(($seconds % 3600) / 60), $seconds % 60);
                 }
-                return '--';
+                return __('value.not_available');
             })
             ->editColumn('total_steps', function ($row) {
                 return view('admin.pages.contest.columns.total_steps', compact('row'))->render();

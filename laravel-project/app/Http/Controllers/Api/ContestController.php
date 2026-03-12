@@ -6,8 +6,8 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Resources\Api\ContestResource;
 use App\Models\Contest;
 use App\Models\UserContest;
-use App\Models\UserStep;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class ContestController extends BaseApiController
@@ -154,9 +154,14 @@ class ContestController extends BaseApiController
             return $this->error(400, __('message.contest_not_started'));
         }
 
+        $totalSteps = (int) Cache::get(
+            "user_contest_steps:{$user->id}:{$contest->id}",
+            $userContest->total_steps ?? 0
+        );
+
         return $this->success(200, [
-            'total_steps' => $userContest->total_steps ?? 0,
-            'duration'    => now()->getTimestamp() - $userContest->start_time->getTimestamp(),
+            'total_steps'    => $totalSteps,
+            'remaining_time' => max(0, $contest->end_date->getTimestamp() - now()->getTimestamp()),
         ]);
     }
 
@@ -195,9 +200,11 @@ class ContestController extends BaseApiController
 
             // Check if user completed the contest
             $isCompleted = $userContest->total_steps >= $contest->target;
+            $duration = $now->getTimestamp() - $userContest->start_time->getTimestamp();
 
             $userContest->update([
                 'end_time' => $now,
+                'duration' => $duration,
                 'status' => $isCompleted ? UserContest::STATUS_COMPLETED : UserContest::STATUS_INPROGRESS,
             ]);
 

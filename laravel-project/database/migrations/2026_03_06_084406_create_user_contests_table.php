@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('contest_id')->constrained()->cascadeOnDelete();
             $table->timestamp('start_time')->nullable();
             $table->timestamp('end_time')->nullable();
+            $table->integer('duration')->nullable();
             $table->integer('total_steps')->default(0);
             $table->integer('rank')->nullable();
             $table->integer('score')->nullable();
