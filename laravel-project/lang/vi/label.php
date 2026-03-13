@@ -113,4 +113,5 @@ return [
     'calculate_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
     'joined_at' => 'Tham gia lúc',
     'rank' => 'Xếp hạng',
+    'user_name' => 'Tên người dùng',
 ];

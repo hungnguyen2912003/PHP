@@ -230,53 +230,6 @@ class ContestController extends BaseApiController
     {
         $user = auth()->user();
         $perPage = (int) $request->query('limit', 10);
-
-        // Build ranked query: order by steps desc, then duration asc
-        $query = UserContest::where('contest_id', $contest->id)
-            ->with('user')
-            ->orderByDesc('total_steps')
-            ->orderBy('duration', 'asc')
-            ->orderBy('start_time', 'asc');
-
-        $paginator = $query->paginate($perPage)->withQueryString();
-
-        // Calculate rank offset based on current page
-        $rankOffset = ($paginator->currentPage() - 1) * $paginator->perPage();
-        $paginator->getCollection()->transform(function ($item, $index) use ($rankOffset) {
-            $item->rank = $rankOffset + $index + 1;
-            return $item;
-        });
-
-        // Get current user's ranking
-        $currentUserRanking = null;
-        $userContest = UserContest::where('contest_id', $contest->id)
-            ->where('user_id', $user->id)
-            ->with('user')
-            ->first();
-
-        if ($userContest) {
-            // Count users ranked above the current user
-            $rankAbove = UserContest::where('contest_id', $contest->id)
-                ->where(function ($q) use ($userContest) {
-                    $q->where('total_steps', '>', $userContest->total_steps)
-                      ->orWhere(function ($q2) use ($userContest) {
-                          $q2->where('total_steps', $userContest->total_steps)
-                             ->where('duration', '<', $userContest->duration);
-                      })
-                      ->orWhere(function ($q2) use ($userContest) {
-                          $q2->where('total_steps', $userContest->total_steps)
-                             ->where('duration', $userContest->duration)
-                             ->where('start_time', '<', $userContest->start_time);
-                      });
-                })
-                ->count();
-
-            $userContest->rank = $rankAbove + 1;
-            $currentUserRanking = new RankingResource($userContest);
-        }
-
-        return RankingResource::collection($paginator)
-            ->additional(['current_user_ranking' => $currentUserRanking]);
     }
 }
 

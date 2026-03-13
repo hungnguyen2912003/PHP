@@ -113,7 +113,7 @@ class Contest extends Model
      */
     public static function formatDuration($startAt, $endAt): string
     {
-        if (!$startAt || !$endAt) return '-';
+        if (!$startAt || !$endAt) return __('value.not_available');
         $seconds = abs($startAt->diffInSeconds($endAt));
         $h = intdiv($seconds, 3600);
         $m = intdiv($seconds % 3600, 60);

@@ -17,7 +17,7 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, WithEvents, WithColumnWidths
 {
-    private const LAST_COLUMN = 'H';
+    private const LAST_COLUMN = 'I';
 
     private const CONTEST_TYPES = [
         1 => 'value.contest_type.walk',
@@ -42,12 +42,13 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     {
         return [
             __('label.stt'),
-            __('label.participants'),
+            __('label.user_name'),
             'Email',
             __('label.start_at'),
             __('label.end_at'),
             __('label.duration'),
             __('label.total_steps'),
+            __('label.rank'),
             __('label.reward_points'),
         ];
     }
@@ -66,12 +67,13 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
 
                 return [
                     $rank,
-                    $userContest->user?->fullname ?? '-',
-                    $userContest->user?->email ?? '-',
-                    $userContest->start_time?->format('Y-m-d H:i:s') ?? '-',
-                    $userContest->end_time?->format('Y-m-d H:i:s') ?? '-',
+                    $userContest->user?->fullname ?? __('value.not_available'),
+                    $userContest->user?->email ?? __('value.not_available'),
+                    $userContest->start_time?->format('Y-m-d H:i:s') ?? __('value.not_available'),
+                    $userContest->end_time?->format('Y-m-d H:i:s') ?? __('value.not_available'),
                     Contest::formatDuration($userContest->start_time, $userContest->end_time),
                     $userContest->total_steps ?? 0,
+                    $rank,
                     $eligible ? $contest->calculateReward($rank) : 0,
                 ];
             });
@@ -81,7 +83,7 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     {
         return [
             'A' => 8,  'B' => 25, 'C' => 30, 'D' => 22,
-            'E' => 22, 'F' => 15, 'G' => 15, 'H' => 18,
+            'E' => 22, 'F' => 15, 'G' => 15, 'H' => 10, 'I' => 18,
         ];
     }
 

@@ -119,4 +119,5 @@ return [
     'calculate_at_hint' => 'Set a date/time to automatically calculate ranking and send result emails.',
     'joined_at' => 'Joined At',
     'rank' => 'Rank',
+    'user_name' => 'User Name',
 ];
