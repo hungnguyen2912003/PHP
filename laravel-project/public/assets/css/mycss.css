@@ -418,6 +418,7 @@ body[data-theme='dark'] .chart-filter-item.active {
     padding: 8px 14px;
     vertical-align: middle;
     border-color: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 #reward-settings-table tbody tr:last-child td {
@@ -495,6 +496,7 @@ body[data-theme='dark'] #reward-settings-table tbody tr {
 body[data-theme='dark'] #reward-settings-table tbody td {
     background-color: transparent !important;
     border-color: #1e293b;
+    border-bottom-color: #334155;
 }
 
 body[data-theme='dark'] #reward-settings-table .row-number {
