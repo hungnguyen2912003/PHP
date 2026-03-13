@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Resources\Api\ContestResource;
+use App\Http\Resources\Api\RankingResource;
 use App\Models\Contest;
 use App\Models\UserContest;
 use Illuminate\Http\Request;
@@ -225,39 +226,57 @@ class ContestController extends BaseApiController
     /**
      * Get ranking list for a contest.
      */
-    public function ranking(Contest $contest)
+    public function ranking(Request $request, Contest $contest)
     {
         $user = auth()->user();
+        $perPage = (int) $request->query('limit', 10);
 
-        $participants = UserContest::with('user')
-            ->where('contest_id', $contest->id)
-            ->where('total_steps', '>=', $this->target)
-            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, COALESCE(end_time, NOW())) ASC')
-            ->orderBy('start_time', 'asc')
-            ->get();
+        // Build ranked query: order by steps desc, then duration asc
+        $query = UserContest::where('contest_id', $contest->id)
+            ->with('user')
+            ->orderByDesc('total_steps')
+            ->orderBy('duration', 'asc')
+            ->orderBy('start_time', 'asc');
 
-        // Build ranking list
-        $rankings = $participants->values()->map(function ($userContest, $index) {
-            $rank = $index + 1;
+        $paginator = $query->paginate($perPage)->withQueryString();
 
-            return [
-                'rank' => $rank,
-                'user_id' => $userContest->user_id,
-                'fullname' => $userContest->user->fullname ?? $userContest->user->username ?? 'User',
-                'avatar_url' => $userContest->user->avatar_url,
-                'duration' => $userContest->end_time && $userContest->start_time 
-                    ? $userContest->end_time->getTimestamp() - $userContest->start_time->getTimestamp() 
-                    : ($userContest->start_time ? now()->getTimestamp() - $userContest->start_time->getTimestamp() : 0),
-                'total_steps' => $userContest->total_steps ?? 0
-            ];
+        // Calculate rank offset based on current page
+        $rankOffset = ($paginator->currentPage() - 1) * $paginator->perPage();
+        $paginator->getCollection()->transform(function ($item, $index) use ($rankOffset) {
+            $item->rank = $rankOffset + $index + 1;
+            return $item;
         });
 
-        // Find current user's rank
-        $myRank = $rankings->firstWhere('user_id', $user->id);
+        // Get current user's ranking
+        $currentUserRanking = null;
+        $userContest = UserContest::where('contest_id', $contest->id)
+            ->where('user_id', $user->id)
+            ->with('user')
+            ->first();
 
-        return $this->success(200, [
-            'my_rank' => $myRank,
-            'rankings' => $rankings,
-        ]);
+        if ($userContest) {
+            // Count users ranked above the current user
+            $rankAbove = UserContest::where('contest_id', $contest->id)
+                ->where(function ($q) use ($userContest) {
+                    $q->where('total_steps', '>', $userContest->total_steps)
+                      ->orWhere(function ($q2) use ($userContest) {
+                          $q2->where('total_steps', $userContest->total_steps)
+                             ->where('duration', '<', $userContest->duration);
+                      })
+                      ->orWhere(function ($q2) use ($userContest) {
+                          $q2->where('total_steps', $userContest->total_steps)
+                             ->where('duration', $userContest->duration)
+                             ->where('start_time', '<', $userContest->start_time);
+                      });
+                })
+                ->count();
+
+            $userContest->rank = $rankAbove + 1;
+            $currentUserRanking = new RankingResource($userContest);
+        }
+
+        return RankingResource::collection($paginator)
+            ->additional(['current_user_ranking' => $currentUserRanking]);
     }
 }
+
