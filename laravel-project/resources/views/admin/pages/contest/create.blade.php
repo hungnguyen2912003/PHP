@@ -497,6 +497,114 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Reward Settings --}}
+                            <hr class="my-4" />
+                            <h4 class="fw-semibold fs-18 mb-20">
+                                {{ __('label.reward_settings') }}
+                            </h4>
+                            <small class="text-muted d-block mb-3">
+                                {{ __('label.reward_settings_hint') }}
+                            </small>
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-bordered align-middle"
+                                    id="reward-settings-table"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px" class="text-center">#</th>
+                                            <th style="width: 100px">{{ __('label.rank') }}</th>
+                                            <th>{{ __('label.reward_percent') }}</th>
+                                            <th style="width: 60px" class="text-center">
+                                                {{ __('label.action') }}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reward-rows">
+                                        @php
+                                            $defaultRewards = [
+                                                ['rank' => 1, 'reward_percent' => 100],
+                                                ['rank' => 2, 'reward_percent' => 80],
+                                                ['rank' => 3, 'reward_percent' => 60],
+                                            ];
+                                            $rewards = old('rewards', $defaultRewards);
+                                        @endphp
+
+                                        @forelse ($rewards as $index => $reward)
+                                            <tr>
+                                                <td class="text-center row-number">
+                                                    {{ $index + 1 }}
+                                                </td>
+                                                <td>
+                                                    <span class="rank-display fw-semibold">
+                                                        {{ $index + 1 }}
+                                                    </span>
+                                                    <input
+                                                        type="hidden"
+                                                        class="rank-input"
+                                                        name="rewards[{{ $index }}][rank]"
+                                                        value="{{ $index + 1 }}"
+                                                    />
+                                                    @error("rewards.{$index}.rank")
+                                                        <div class="text-danger mt-1">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input
+                                                            class="form-control"
+                                                            type="number"
+                                                            name="rewards[{{ $index }}][reward_percent]"
+                                                            placeholder="{{ __('placeholder.reward_percent') }}"
+                                                            value="{{ $reward['reward_percent'] ?? '' }}"
+                                                            min="0"
+                                                            max="100"
+                                                        />
+                                                        <span class="input-group-text">%</span>
+                                                    </div>
+                                                    @error("rewards.{$index}.reward_percent")
+                                                        <div class="text-danger mt-1">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </td>
+                                                <td class="text-center">
+                                                    <button
+                                                        type="button"
+                                                        class="btn-remove-reward remove-reward-row"
+                                                        title="{{ __('label.delete') }}"
+                                                    >
+                                                        <i class="ri-close-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr id="empty-reward-row">
+                                                <td colspan="4" class="text-center text-muted py-3">
+                                                    {{ __('label.no_reward_data') }}
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                            @error('rewards')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+
+                            <div class="mt-2">
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    id="add-reward-row"
+                                >
+                                    <i class="ri-add-line me-1"></i>
+                                    {{ __('button.add_reward_tier') }}
+                                </button>
+                            </div>
                         </div>
 
                         {{-- Tab: English --}}
@@ -972,7 +1080,7 @@
                 let errorTab = null;
 
                 // Priority 1: Check general fields first
-                const generalFields = ['type', 'target', 'reward_points', 'start_date', 'end_date', 'calculate_at', 'image'];
+                const generalFields = ['type', 'target', 'reward_points', 'start_date', 'end_date', 'calculate_at', 'image', 'rewards'];
                 for (const key of errorKeys) {
                     if (generalFields.includes(key)) {
                         errorTab = 'general';
@@ -998,6 +1106,89 @@
                     if (targetBtn) targetBtn.click();
                 }
             @endif
+
+            // Reward settings: add row
+            let rewardRowIndex = document.querySelectorAll('#reward-rows tr:not(#empty-reward-row)').length;
+
+            document.getElementById('add-reward-row').addEventListener('click', function () {
+                const tbody = document.getElementById('reward-rows');
+                // Remove empty state row if exists
+                const emptyRow = document.getElementById('empty-reward-row');
+                if (emptyRow) emptyRow.remove();
+
+                const nextRank = document.querySelectorAll('#reward-rows tr').length + 1;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center row-number">${nextRank}</td>
+                    <td>
+                        <span class="rank-display fw-semibold">${nextRank}</span>
+                        <input type="hidden" class="rank-input" name="rewards[${rewardRowIndex}][rank]" value="${nextRank}" />
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                type="number"
+                                name="rewards[${rewardRowIndex}][reward_percent]"
+                                placeholder="{{ __('placeholder.reward_percent') }}"
+                                min="0"
+                                max="100"
+                            />
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn-remove-reward remove-reward-row" title="{{ __('label.delete') }}">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                rewardRowIndex++;
+            });
+
+            // Reward settings: remove row (delegated)
+            document.getElementById('reward-rows').addEventListener('click', function (e) {
+                const btn = e.target.closest('.remove-reward-row');
+                if (btn) {
+                    btn.closest('tr').remove();
+                    resequenceRewardRows();
+                    // Show empty state if no rows left
+                    if (document.querySelectorAll('#reward-rows tr').length === 0) {
+                        const emptyTr = document.createElement('tr');
+                        emptyTr.id = 'empty-reward-row';
+                        emptyTr.innerHTML = `<td colspan="4" class="text-center text-muted py-3">{{ __('label.no_reward_data') }}</td>`;
+                        document.getElementById('reward-rows').appendChild(emptyTr);
+                    }
+                }
+            });
+
+            // Re-sequence all row numbers, rank values, and input names after add/delete
+            function resequenceRewardRows() {
+                const rows = document.querySelectorAll('#reward-rows tr:not(#empty-reward-row)');
+                rows.forEach(function (row, index) {
+                    const rank = index + 1;
+                    // Update row number
+                    const rowNum = row.querySelector('.row-number');
+                    if (rowNum) rowNum.textContent = rank;
+                    // Update rank display text
+                    const rankDisplay = row.querySelector('.rank-display');
+                    if (rankDisplay) rankDisplay.textContent = rank;
+                    // Update rank hidden input value
+                    const rankInput = row.querySelector('.rank-input');
+                    if (rankInput) {
+                        rankInput.value = rank;
+                        rankInput.name = `rewards[${index}][rank]`;
+                    }
+                    // Update reward_percent input name
+                    const percentInput = row.querySelector('input[name*="reward_percent"]');
+                    if (percentInput) {
+                        percentInput.name = `rewards[${index}][reward_percent]`;
+                    }
+                });
+                rewardRowIndex = rows.length;
+            }
         });
     </script>
 @endpush

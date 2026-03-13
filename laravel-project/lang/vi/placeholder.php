@@ -28,4 +28,6 @@ return [
     'target' => 'Nhập mục tiêu',
     'reward_points' => 'Nhập số điểm thưởng',
     'win_limit' => 'Nhập giới hạn người thắng',
+    'rank' => 'Nhập thứ hạng',
+    'reward_percent' => 'Nhập phần trăm thưởng',
 ];

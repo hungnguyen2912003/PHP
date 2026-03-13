@@ -167,4 +167,10 @@ return [
         'date' => 'Calculate at must be a valid date.',
         'after' => 'Calculate at must be a date after the end date.',
     ],
+    'rewards_duplicate_rank' => 'Rank values must be unique. Duplicate ranks are not allowed.',
+    'rewards_percent_order' => 'Top :rank1 must have a reward percent greater than or equal to Top :rank2.',
+    'rewards' => [
+        'required' => 'Please add at least one reward tier. Every contest must have reward settings.',
+        'min' => 'Please add at least one reward tier. Every contest must have reward settings.',
+    ],
 ];

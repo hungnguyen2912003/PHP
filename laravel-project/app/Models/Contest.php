@@ -80,6 +80,11 @@ class Contest extends Model
         return $this->hasMany(UserContest::class);
     }
 
+    public function contestRewards()
+    {
+        return $this->hasMany(ContestReward::class);
+    }
+
     /**
      * Get the ranked winners query (all participants, sorted by ranking rules).
      */

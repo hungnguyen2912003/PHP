@@ -30,4 +30,6 @@ return [
     'ranking' => 'Ranking',
     'finalize_ranking' => 'Finalize Ranking',
     'export' => 'Export',
+    'add_row' => 'Add Row',
+    'add_reward_tier' => 'Add Reward Tier',
 ];

@@ -30,4 +30,6 @@ return [
     'ranking' => 'Bảng xếp hạng',
     'finalize_ranking' => 'Chốt xếp hạng',
     'export' => 'Xuất',
+    'add_row' => 'Thêm dòng',
+    'add_reward_tier' => 'Thêm mức thưởng',
 ];

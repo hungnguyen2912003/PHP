@@ -391,3 +391,131 @@ body[data-theme='dark'] .chart-filter-item.active {
     white-space: nowrap;
     max-width: calc(100% - 24px);
 }
+
+/* ===== Reward Settings Table ===== */
+#reward-settings-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 0;
+}
+
+#reward-settings-table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 10px 14px;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+#reward-settings-table tbody td {
+    padding: 8px 14px;
+    vertical-align: middle;
+    border-color: #f1f5f9;
+}
+
+#reward-settings-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#reward-settings-table .row-number {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#reward-settings-table .rank-display {
+    color: #1e293b;
+    font-size: 14px;
+}
+
+#reward-settings-table .btn-remove-reward {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#reward-settings-table .btn-remove-reward:hover {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+#reward-settings-table .input-group .form-control {
+    border-right: 0;
+}
+
+#reward-settings-table .input-group .input-group-text {
+    background: #f8fafc;
+    border-color: #dee2e6;
+    color: #64748b;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Dark Mode */
+body[data-theme='dark'] #reward-settings-table {
+    border-color: #1e293b;
+    background-color: transparent !important;
+}
+
+body[data-theme='dark'] #reward-settings-table thead {
+    background-color: transparent !important;
+}
+
+body[data-theme='dark'] #reward-settings-table thead th {
+    background-color: #0f172a !important;
+    color: #94a3b8;
+    border-bottom-color: #1e293b;
+}
+
+body[data-theme='dark'] #reward-settings-table tbody {
+    background-color: transparent !important;
+}
+
+body[data-theme='dark'] #reward-settings-table tbody tr {
+    background-color: transparent !important;
+}
+
+body[data-theme='dark'] #reward-settings-table tbody td {
+    background-color: transparent !important;
+    border-color: #1e293b;
+}
+
+body[data-theme='dark'] #reward-settings-table .row-number {
+    color: #64748b;
+}
+
+body[data-theme='dark'] #reward-settings-table .rank-display {
+    color: #e2e8f0;
+}
+
+body[data-theme='dark'] #reward-settings-table .btn-remove-reward {
+    color: #64748b;
+}
+
+body[data-theme='dark'] #reward-settings-table .btn-remove-reward:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+body[data-theme='dark'] #reward-settings-table .input-group .input-group-text {
+    background-color: #1e293b !important;
+    border-color: #334155;
+    color: #94a3b8;
+}

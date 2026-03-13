@@ -28,4 +28,6 @@ return [
     'target' => 'Enter target',
     'reward_points' => 'Enter reward points',
     'win_limit' => 'Enter win limit (max winners)',
+    'rank' => 'Enter rank',
+    'reward_percent' => 'Enter reward percent',
 ];

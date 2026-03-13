@@ -35,7 +35,44 @@ class StoreRequest extends FormRequest
             'target' => 'required|integer|min:1',
             'reward_points' => 'required|integer|min:1',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'rewards' => 'required|array|min:1',
+            'rewards.*.rank' => 'required|integer|min:1',
+            'rewards.*.reward_percent' => 'required|numeric|min:0|max:100',
         ];
+    }
+
+    /**
+     * Custom validation: reward percentages must be in descending order.
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $rewards = $this->input('rewards');
+            if (empty($rewards) || count($rewards) < 2) {
+                return;
+            }
+
+            // Check that higher rank (lower number) has higher or equal percentage
+            $sorted = collect($rewards)
+                ->filter(fn($r) => !empty($r['rank']) && isset($r['reward_percent']))
+                ->sortBy('rank')
+                ->values();
+
+            for ($i = 0; $i < $sorted->count() - 1; $i++) {
+                $current = $sorted[$i];
+                $next = $sorted[$i + 1];
+                if ($current['reward_percent'] < $next['reward_percent']) {
+                    $validator->errors()->add(
+                        'rewards',
+                        __('validation.rewards_percent_order', [
+                            'rank1' => $current['rank'],
+                            'rank2' => $next['rank'],
+                        ])
+                    );
+                    break;
+                }
+            }
+        });
     }
 
     public function attributes(): array
@@ -56,6 +93,8 @@ class StoreRequest extends FormRequest
             'description.zh' => __('label.description') . ' (' . __('label.lang_zh') . ')',
             'description.vi' => __('label.description') . ' (' . __('label.lang_vi') . ')',
             'image' => __('label.image'),
+            'rewards.*.rank' => __('label.rank'),
+            'rewards.*.reward_percent' => __('label.reward_percent'),
         ];
     }
 }

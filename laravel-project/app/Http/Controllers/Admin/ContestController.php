@@ -62,6 +62,17 @@ class ContestController extends Controller
             $contest->update(['image_url' => '/storage/' . $path]);
         }
 
+        // Save reward settings
+        if (!empty($data['rewards'])) {
+            $rewards = collect($data['rewards'])->map(function ($reward) {
+                return [
+                    'rank' => $reward['rank'],
+                    'reward_percent' => $reward['reward_percent'],
+                ];
+            })->toArray();
+            $contest->contestRewards()->createMany($rewards);
+        }
+
         return redirect()->route('admin.contests.index')->with('success', __('message.contest_created_successfully'));
     }
 

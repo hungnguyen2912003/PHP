@@ -165,4 +165,10 @@ return [
         'date' => 'Thời gian tính thưởng không hợp lệ.',
         'after' => 'Thời gian tính thưởng phải sau ngày kết thúc.',
     ],
+    'rewards_duplicate_rank' => 'Thứ hạng không được trùng nhau.',
+    'rewards_percent_order' => 'Top :rank1 phải có phần trăm thưởng lớn hơn hoặc bằng Top :rank2.',
+    'rewards' => [
+        'required' => 'Vui lòng thêm ít nhất một mức thưởng. Mỗi cuộc thi bắt buộc phải có cài đặt trả thưởng.',
+        'min' => 'Vui lòng thêm ít nhất một mức thưởng. Mỗi cuộc thi bắt buộc phải có cài đặt trả thưởng.',
+    ],
 ];
