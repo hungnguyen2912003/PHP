@@ -81,40 +81,15 @@ class Contest extends Model
     }
 
     /**
-     * Get the temporarity ranked winners query (all participants, sorted by ranking rules).
+     * Get the ranked winners query (all participants, sorted by ranking rules).
      */
-    public function getTemporarityRankedWinners()
+    public function getRankedWinners()
     {
         return $this->participants()
             ->with('user')
-            ->select('user_contests.*')
-            ->selectRaw('TIMESTAMPDIFF(SECOND, start_time, end_time) as duration_seconds')
             ->where('total_steps', '>=', $this->target)
             ->where('status', UserContest::STATUS_COMPLETED)
-
-            ->orderByRaw('CASE 
-                WHEN end_time IS NOT NULL THEN 0
-                ELSE 1
-            END ASC')
-
-            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, end_time) ASC')
-            ->orderBy('start_time', 'asc')
-
-            ->getQuery();
-    }
-
-    /**
-     * Get the final ranked winners query (only participants who completed the target).
-     */
-    public function getFinalRankedWinners()
-    {
-        return $this->participants()
-            ->with('user')
-            ->select('user_contests.*')
-            ->selectRaw('TIMESTAMPDIFF(SECOND, start_time, end_time) as duration_seconds')
-            ->where('total_steps', '>=', $this->target)
-            ->orderBy('end_time', 'asc')
-            ->orderByRaw('TIMESTAMPDIFF(SECOND, start_time, end_time) ASC')
+            ->orderBy('duration', 'asc')
             ->orderBy('start_time', 'asc')
             ->getQuery();
     }

@@ -22,11 +22,13 @@ class FinalRankingDataTable extends DataTable
 
     public function query(UserContest $model): QueryBuilder
     {
-        return $this->contest->getFinalRankedWinners();
+        return $this->contest->getRankedWinners();
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $this->rankCounter = (int) request()->input('start', 0);
+
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('user_info', function ($row) {
@@ -63,9 +65,9 @@ class FinalRankingDataTable extends DataTable
             ->minifiedAjax()
             ->orderBy([])
             ->parameters([
-                'dom' => 'Brt',
-                'paging' => false,
-                'info' => false,
+                'dom' => 'Brtip',
+                'paging' => true,
+                'info' => true,
                 'buttons' => [],
                 'language' => [
                     'url' => asset('lang/' . app()->getLocale() . '/datatable.json')

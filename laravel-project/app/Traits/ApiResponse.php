@@ -13,7 +13,7 @@ trait ApiResponse
      * @param mixed $data
      * @return JsonResponse
      */
-    protected function success(int $status = 200, mixed $data = null): JsonResponse
+    protected function success(int $status = 200, mixed $data = null, mixed $meta = null): JsonResponse
     {
         $response = [
             'status' => $status,
@@ -22,6 +22,10 @@ trait ApiResponse
 
         if ($data !== null) {
             $response['data'] = $data;
+        }
+
+        if ($meta !== null) {
+            $response['meta'] = $meta;
         }
 
         return response()->json($response, $status);

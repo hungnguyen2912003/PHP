@@ -18,6 +18,7 @@ class UserContest extends Model
         'contest_id',
         'start_time',
         'end_time',
+        'duration',
         'total_steps',
         'rank',
         'score',
@@ -28,6 +29,7 @@ class UserContest extends Model
     protected $casts = [
         'start_time'    => 'datetime',
         'end_time'      => 'datetime',
+        'duration'      => 'integer',
         'total_steps'   => 'integer',
         'rank'          => 'integer',
         'score'         => 'integer',

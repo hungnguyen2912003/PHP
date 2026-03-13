@@ -18,7 +18,7 @@ class ContestController extends BaseApiController
     public function index(Request $request)
     {
         $user = auth()->user();
-        $tab = $request->query('tab', 'current');
+        $tab = $request->query('tab', '1');
 
         $query = Contest::withCount(['participants as total_participants']);
 
@@ -52,9 +52,10 @@ class ContestController extends BaseApiController
                 break;
         }
 
-        $contests = $query->orderByDesc('created_at')->get();
+        $perPage = (int) $request->query('limit', 10);
+        $paginator = $query->latest()->paginate($perPage)->withQueryString();
 
-        return $this->success(200, ContestResource::collection($contests));
+        return ContestResource::collection($paginator);
     }
 
     /**
@@ -113,6 +114,8 @@ class ContestController extends BaseApiController
                 // Already stopped → allow to start again, update start_time
                 $userContest->update([
                     'start_time' => $now,
+                    'end_time' => null,
+                    'duration' => 0,
                 ]);
             } else {
                 // Not joined yet → create new
@@ -120,6 +123,8 @@ class ContestController extends BaseApiController
                     'user_id' => $user->id,
                     'contest_id' => $contest->id,
                     'start_time' => $now,
+                    'end_time' => null,
+                    'duration' => 0,
                 ]);
             }
 

@@ -21,7 +21,7 @@ class TemporaryRankingDataTable extends DataTable
 
     public function query(UserContest $model): QueryBuilder
     {
-        return $this->contest->getTemporarityRankedWinners();
+        return $this->contest->getRankedWinners();
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -59,9 +59,9 @@ class TemporaryRankingDataTable extends DataTable
             ->minifiedAjax()
             ->orderBy([])
             ->parameters([
-                'dom' => 'Brt',
-                'paging' => false,
-                'info' => false,
+                'dom' => 'Brtip',
+                'paging' => true,
+                'info' => true,
                 'buttons' => [],
                 'language' => [
                     'url' => asset('lang/' . app()->getLocale() . '/datatable.json')
