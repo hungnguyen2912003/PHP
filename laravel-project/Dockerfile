@@ -40,7 +40,9 @@ RUN npm install
 COPY . .
 
 # Generate autoload files and run scripts
-RUN composer dump-autoload --optimize && php artisan package:discover
+RUN composer dump-autoload --optimize && \
+    php artisan package:discover && \
+    php artisan storage:link
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www
