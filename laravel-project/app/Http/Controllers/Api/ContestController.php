@@ -27,18 +27,21 @@ class ContestController extends BaseApiController
         $joined = UserContest::where('user_id', $user->id)->select('contest_id');
 
         switch ($tab) {
+            // Tab 1: Current contests (contests that the user has joined and are still in progress)
             case '1':
                 $query->whereIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
+            // Tab 2: Recommend contests (contests that the user has not joined and are still in progress)
             case '2':
                 $query->whereNotIn('id', $joined)
                     ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
 
+            // Tab 3: History contests (contests that the user has joined and are completed or ended)
             case '3':
                 $query->whereIn('id', $joined)
                     ->where(function ($q) {
@@ -47,16 +50,40 @@ class ContestController extends BaseApiController
                     });
                 break;
 
+            // Default: Tab 1 (current contests)
             default:
-                $query->where('status', Contest::STATUS_INPROGRESS)
+                $query->whereIn('id', $joined)
+                    ->where('status', Contest::STATUS_INPROGRESS)
                     ->where('end_date', '>=', now());
                 break;
         }
 
-        $perPage = (int) $request->query('limit', 10);
-        $paginator = $query->latest()->paginate($perPage)->withQueryString();
+        // Paginate with offset + limit
+        // Default offset = 0, limit = 10
+        $offset = (int) $request->query('offset', 0);
+        $limit = (int) $request->query('limit', 10);
 
-        return ContestResource::collection($paginator);
+        // Validate offset and limit - If offset < 0 or limit <= 0, set default values
+        if ($offset < 0 || $limit <= 0) {
+            $offset = 0;
+            $limit = 10;
+        }
+
+        // Get total count
+        $total = $query->count();
+
+        // Get contests with pagination
+        $contests = $query->offset($offset)->limit($limit)->get();
+
+        return $this->success(200, ContestResource::collection($contests), [
+            'pagination' => [
+                'total'    => $total,
+                'offset'   => $offset,
+                'limit'    => $limit,
+                'has_next' => ($offset + $limit) < $total,
+                'has_prev' => $offset > 0,
+            ]
+        ]);
     }
 
     /**
