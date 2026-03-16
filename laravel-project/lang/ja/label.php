@@ -108,4 +108,6 @@ return [
     'joined_at' => '参加日時',
     'rank' => '順位',
     'user_name' => 'ユーザー名',
+    'ranking_finalized' => 'ランキング確定済み',
+    'calculating_ranking' => '計算中...',
 ];

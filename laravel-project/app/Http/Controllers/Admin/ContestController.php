@@ -110,6 +110,10 @@ class ContestController extends Controller
         $type = $request->query('type');
 
         if ($type === 'final') {
+            if ($contest->status !== Contest::STATUS_FINALIZED) {
+                return datatables()->of(collect())->make(true);
+            }
+
             return (new FinalRankingDataTable($contest))->ajax();
         }
 

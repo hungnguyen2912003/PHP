@@ -60,20 +60,14 @@ class ContestController extends BaseApiController
 
         // Paginate with offset + limit
         // Default offset = 0, limit = 10
-        $offset = (int) $request->query('offset', 0);
-        $limit = (int) $request->query('limit', 10);
-
-        // Validate offset and limit - If offset < 0 or limit <= 0, set default values
-        if ($offset < 0 || $limit <= 0) {
-            $offset = 0;
-            $limit = 10;
-        }
+        $offset = max((int)$request->query('offset', 0), 0);
+        $limit  = max((int)$request->query('limit', 10), 1);
 
         // Get total count
         $total = $query->count();
 
         // Get contests with pagination
-        $contests = $query->offset($offset)->limit($limit)->get();
+        $contests = $query->skip($offset)->take($limit)->get();
 
         return $this->success(200, ContestResource::collection($contests), [
             'total'    => $total,
@@ -253,29 +247,80 @@ class ContestController extends BaseApiController
     {
         $user = auth()->user();
 
+        $offset = max((int)$request->query('offset', 0), 0);
+        $limit  = max((int)$request->query('limit', 10), 1);
+
+        $isFinal = $contest->status == 3;
+
+        if ($isFinal) {
+            return $this->finalRanking($contest, $user, $offset, $limit);
+        }
+
+        return $this->temporaryRanking($contest, $user, $offset, $limit);
+    }
+
+    /**
+     * Temporary ranking (before finalize)
+     */
+    private function temporaryRanking(Contest $contest, $user, $offset, $limit)
+    {
         // Get current user ranking
         $userRanking = UserContest::where('contest_id', $contest->id)
             ->where('user_id', $user->id)
             ->first();
 
         // Get ranking list with offset + limit
-        $offset = (int) $request->query('offset', 0);
-        $limit = (int) $request->query('limit', 10);
+        $query = UserContest::where('contest_id', $contest->id)
+            ->where('total_steps', '>', $contest->target);
 
-        // Validate offset and limit - If offset < 0 or limit <= 0, set default values
-        if ($offset < 0 || $limit <= 0) {
-            $offset = 0;
-            $limit = 10;
-        }
-
-        // Create base query for ranking
-        $query = UserContest::where('contest_id', $contest->id);
-
-        // Get total count before applying offset/limit
         $total = $query->count();
 
-        // Get ranking list with offset + limit
         $ranking = $query->orderBy('total_steps', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+
+        // Calculate rank for current user if it's null
+        if ($userRanking && is_null($userRanking->rank)) {
+            $userRanking->rank = UserContest::where('contest_id', $contest->id)
+                ->where('total_steps', '>', $userRanking->total_steps)
+                ->count() + 1;
+        }
+
+        // Calculate ranks for the ranking list if null
+        $ranking->each(function ($item, $key) use ($offset) {
+            if (is_null($item->rank)) {
+                $item->rank = $offset + $key + 1;
+            }
+        });
+
+        return $this->success(200, [
+            'user_ranking' => RankingResource::make($userRanking),
+            'ranking_list' => RankingResource::collection($ranking),
+        ], [
+            'total'    => $total,
+            'offset'   => $offset,
+            'limit'    => $limit,
+        ]);
+    }
+
+    /**
+     * Final ranking (after finalize)
+     */
+    private function finalRanking(Contest $contest, $user, $offset, $limit)
+    {
+        // Get current user ranking
+        $userRanking = UserContest::where('contest_id', $contest->id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        // Get ranking list with offset + limit
+        $query = UserContest::where('contest_id', $contest->id)
+            ->where('status', UserContest::STATUS_COMPLETED);
+
+        $total = $query->count();
+
+        $ranking = $query->orderBy('rank', 'asc')
             ->offset($offset)
             ->limit($limit)
             ->get();

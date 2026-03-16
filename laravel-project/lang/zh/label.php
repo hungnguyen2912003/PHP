@@ -114,4 +114,6 @@ return [
     'joined_at' => '加入时间',
     'rank' => '排名',
     'user_name' => '用户名',
+    'ranking_finalized' => '排名已确定',
+    'calculating_ranking' => '计算中...',
 ];

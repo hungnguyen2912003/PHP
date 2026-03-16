@@ -88,6 +88,17 @@
                                 {{ __('label.final_rank_desc') }}
                             </p>
                         </div>
+                        @if ($contest->calculate_at)
+                            <div id="countdown-container">
+                                <span
+                                    id="countdown-badge"
+                                    class="badge rounded-pill px-3 py-2 fs-13"
+                                >
+                                    <i class="ri-time-line me-1"></i>
+                                    <span id="countdown-text">--:--:--</span>
+                                </span>
+                            </div>
+                        @endif
                     </div>
                     <div class="default-table-area mx-minus-1 style-two table-list">
                         <div class="table-responsive">
@@ -256,6 +267,57 @@
                 dom: 'Brt',
                 order: [[]],
             });
+
+            // Real-time Countdown Timer for calculate_at
+            @if($contest->calculate_at)
+            (function () {
+                const calculateAt = new Date('{{ $contest->calculate_at->toIso8601String() }}').getTime();
+                const badge = document.getElementById('countdown-badge');
+                const text = document.getElementById('countdown-text');
+                const isFinalized = {{ $contest->status === \App\Models\Contest::STATUS_FINALIZED ? 'true' : 'false' }};
+
+                function updateCountdown() {
+                    const now = Date.now();
+                    const diff = calculateAt - now;
+
+                    if (isFinalized) {
+                        badge.className = 'badge rounded-pill px-3 py-2 fs-13 bg-success';
+                        text.textContent = '{{ __("label.ranking_finalized") }}';
+                        return;
+                    }
+
+                    if (diff <= 0) {
+                        badge.className = 'badge rounded-pill px-3 py-2 fs-13 bg-info text-white';
+                        text.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status"></span>{{ __("label.calculating_ranking") }}';
+                        return;
+                    }
+
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-13 bg-warning text-dark';
+
+                    let timeStr = '';
+                    if (days > 0) {
+                        timeStr = days + 'd ' +
+                            String(hours).padStart(2, '0') + ':' +
+                            String(minutes).padStart(2, '0') + ':' +
+                            String(seconds).padStart(2, '0');
+                    } else {
+                        timeStr = String(hours).padStart(2, '0') + ':' +
+                            String(minutes).padStart(2, '0') + ':' +
+                            String(seconds).padStart(2, '0');
+                    }
+
+                    text.textContent = timeStr;
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            })();
+            @endif
         });
     </script>
 @endpush
