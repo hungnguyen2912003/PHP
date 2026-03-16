@@ -76,13 +76,9 @@ class ContestController extends BaseApiController
         $contests = $query->offset($offset)->limit($limit)->get();
 
         return $this->success(200, ContestResource::collection($contests), [
-            'pagination' => [
-                'total'    => $total,
-                'offset'   => $offset,
-                'limit'    => $limit,
-                'has_next' => ($offset + $limit) < $total,
-                'has_prev' => $offset > 0,
-            ]
+            'total'    => $total,
+            'offset'   => $offset,
+            'limit'    => $limit,
         ]);
     }
 
@@ -256,7 +252,42 @@ class ContestController extends BaseApiController
     public function ranking(Request $request, Contest $contest)
     {
         $user = auth()->user();
-        $perPage = (int) $request->query('limit', 10);
+
+        // Get current user ranking
+        $userRanking = UserContest::where('contest_id', $contest->id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        // Get ranking list with offset + limit
+        $offset = (int) $request->query('offset', 0);
+        $limit = (int) $request->query('limit', 10);
+
+        // Validate offset and limit - If offset < 0 or limit <= 0, set default values
+        if ($offset < 0 || $limit <= 0) {
+            $offset = 0;
+            $limit = 10;
+        }
+
+        // Create base query for ranking
+        $query = UserContest::where('contest_id', $contest->id);
+
+        // Get total count before applying offset/limit
+        $total = $query->count();
+
+        // Get ranking list with offset + limit
+        $ranking = $query->orderBy('total_steps', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+
+        return $this->success(200, [
+            'user_ranking' => RankingResource::make($userRanking),
+            'ranking_list' => RankingResource::collection($ranking),
+        ], [
+            'total'    => $total,
+            'offset'   => $offset,
+            'limit'    => $limit,
+        ]);
     }
 }
 

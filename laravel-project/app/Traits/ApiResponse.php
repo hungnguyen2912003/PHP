@@ -13,19 +13,19 @@ trait ApiResponse
      * @param mixed $data
      * @return JsonResponse
      */
-    protected function success(int $status = 200, mixed $data = null, mixed $meta = null): JsonResponse
+    protected function success(int $status = 200, mixed $data = null, mixed $pagination = null): JsonResponse
     {
         $response = [
             'status' => $status,
             'success' => true,
         ];
 
-        if ($data !== null) {
-            $response['data'] = $data;
+        if ($pagination !== null && is_array($pagination)) {
+            $response = array_merge($response, $pagination);
         }
 
-        if ($meta !== null) {
-            $response['meta'] = $meta;
+        if ($data !== null) {
+            $response['data'] = $data;
         }
 
         return response()->json($response, $status);

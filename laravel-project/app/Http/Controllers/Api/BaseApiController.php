@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\JsonResponse;
+use App\Traits\ApiResponse;
 
 class BaseApiController extends Controller
 {
-    use AuthorizesRequests, \App\Traits\ApiResponse;
+    use AuthorizesRequests, ApiResponse;
 }
