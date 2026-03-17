@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Builder;
 
 class Contest extends Model
 {
@@ -28,7 +29,6 @@ class Contest extends Model
         'end_date',
         'target',
         'reward_points',
-        'consolation_points',
         'calculate_at',
         'status',
     ];
@@ -40,7 +40,6 @@ class Contest extends Model
         'type'          => 'integer',
         'target'        => 'integer',
         'reward_points' => 'integer',
-        'consolation_points' => 'integer',
         'status'        => 'integer',
     ];
 
@@ -90,10 +89,11 @@ class Contest extends Model
     /**
      * Get the ranked winners query (all participants, sorted by ranking rules).
      */
-    public function getRankedWinners()
+    public function getRankedWinners(): Builder
     {
-        return $this->participants()
+        return UserContest::query()
             ->with('user')
+            ->where('contest_id', $this->id)
             ->where('total_steps', '>=', (int) $this->target)
             ->where('status', UserContest::STATUS_COMPLETED)
             ->orderBy('duration', 'asc')
@@ -114,7 +114,7 @@ class Contest extends Model
             return (int) round($this->reward_points * ($rewardSetting->reward_percent / 100));
         }
 
-        return (int) $this->consolation_points;
+        return 0;
     }
 
     /**

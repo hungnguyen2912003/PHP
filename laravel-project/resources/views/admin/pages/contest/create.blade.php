@@ -505,32 +505,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="mb-20">
-                                        <label class="label fs-16 mb-2">
-                                            {{ __('label.consolation_points') }}
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="form-floating">
-                                            <input
-                                                class="form-control"
-                                                id="consolation_points"
-                                                name="consolation_points"
-                                                type="number"
-                                                placeholder="{{ __('placeholder.consolation_points') }}"
-                                                value="{{ old('consolation_points', 0) }}"
-                                            />
-                                            <label for="consolation_points">
-                                                {{ __('placeholder.consolation_points') }}
-                                            </label>
-                                        </div>
-                                        @error('consolation_points')
-                                            <div class="text-danger mt-1">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
                             <small class="text-muted d-block mb-3">
                                 {{ __('label.reward_settings_hint') }}

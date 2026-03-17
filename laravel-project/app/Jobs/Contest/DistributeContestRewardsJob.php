@@ -48,8 +48,7 @@ class DistributeContestRewardsJob implements ShouldQueue
             if ($rewardPercent !== null) {
                 $score = (int) round($this->contest->reward_points * ($rewardPercent / 100));
             } else {
-                // Consolation prize for those who reached the target but didn't place in top ranks
-                $score = (int) $this->contest->consolation_points;
+                $score = 0;
             }
 
             $participant->update([

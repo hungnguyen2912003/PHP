@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contests', function (Blueprint $table) {
-            $table->integer('consolation_points')->default(0)->after('reward_points');
+            $table->dropColumn('consolation_points');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('contests', function (Blueprint $table) {
-            $table->dropColumn('consolation_points');
+            $table->integer('consolation_points')->default(0);
         });
     }
 };

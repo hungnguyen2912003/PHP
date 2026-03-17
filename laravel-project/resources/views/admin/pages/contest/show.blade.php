@@ -75,10 +75,6 @@
                         {{ $contest->reward_points }} {{ __('label.reward_points') }}
                     </h2>
 
-                    <!-- Consolation Points -->
-                    <h4 class="text-success fw-semibold mb-2">
-                        + {{ $contest->consolation_points }} {{ __('label.consolation_points') }}
-                    </h4>
 
                     <!-- Target -->
                     <h5 class="text-secondary fw-semibold mb-3">
