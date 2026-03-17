@@ -440,21 +440,33 @@ body[data-theme='dark'] .chart-filter-item.active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 0;
-    border: none;
-    background: transparent;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
     color: #94a3b8;
-    border-radius: 6px;
-    transition: all 0.15s ease;
+    border-radius: 50%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 #reward-settings-table .btn-remove-reward:hover {
     background: #fef2f2;
     color: #ef4444;
+    border-color: #fee2e2;
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1), 0 2px 4px -1px rgba(239, 68, 68, 0.06);
+}
+
+#reward-settings-table .btn-remove-reward:hover i {
+    color: #ef4444 !important;
+}
+
+#reward-settings-table .btn-remove-reward:active {
+    transform: scale(0.95);
 }
 
 #reward-settings-table .input-group .form-control {
@@ -508,16 +520,50 @@ body[data-theme='dark'] #reward-settings-table .rank-display {
 }
 
 body[data-theme='dark'] #reward-settings-table .btn-remove-reward {
+    background-color: #1e293b;
+    border-color: #334155;
     color: #64748b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 body[data-theme='dark'] #reward-settings-table .btn-remove-reward:hover {
-    background: rgba(239, 68, 68, 0.15);
+    background: rgba(239, 68, 68, 0.2);
     color: #f87171;
+    border-color: rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 body[data-theme='dark'] #reward-settings-table .input-group .input-group-text {
     background-color: #1e293b !important;
     border-color: #334155;
     color: #94a3b8;
+}
+
+.btn-add-tier {
+    border: 2px dashed #94a3b8;
+    background: #f8fafc;
+    color: #475569;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 12px 24px;
+    border-radius: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    margin-top: 15px;
+}
+.btn-add-tier:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+.btn-add-tier:active {
+    transform: translateY(0);
+}
+.btn-add-tier i {
+    font-size: 20px;
 }

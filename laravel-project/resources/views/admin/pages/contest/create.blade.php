@@ -511,14 +511,12 @@
                                     class="table table-bordered align-middle"
                                     id="reward-settings-table"
                                 >
-                                    <thead>
+                                    <thead class="bg-light">
                                         <tr>
-                                            <th style="width: 50px" class="text-center">#</th>
-                                            <th style="width: 100px">{{ __('label.rank') }}</th>
+                                            <th width="80" class="text-center">#</th>
+                                            <th width="150">{{ __('label.rank') }}</th>
                                             <th>{{ __('label.reward_percent') }}</th>
-                                            <th style="width: 60px" class="text-center">
-                                                {{ __('label.action') }}
-                                            </th>
+                                            <th width="100" class="text-center">{{ __('label.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="reward-rows">
@@ -575,7 +573,7 @@
                                                     <button
                                                         type="button"
                                                         class="btn-remove-reward remove-reward-row"
-                                                        title="{{ __('label.delete') }}"
+                                                        title="{{ __('button.delete') }}"
                                                     >
                                                         <i class="ri-close-line"></i>
                                                     </button>
@@ -594,14 +592,13 @@
                             @error('rewards')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
-
-                            <div class="mt-2">
+                            <div class="mt-2 text-center">
                                 <button
                                     type="button"
-                                    class="btn btn-outline-primary btn-sm"
+                                    class="btn-add-tier"
                                     id="add-reward-row"
                                 >
-                                    <i class="ri-add-line me-1"></i>
+                                    <i class="ri-add-circle-line"></i>
                                     {{ __('button.add_reward_tier') }}
                                 </button>
                             </div>
@@ -1082,7 +1079,7 @@
                 // Priority 1: Check general fields first
                 const generalFields = ['type', 'target', 'reward_points', 'start_date', 'end_date', 'calculate_at', 'image', 'rewards'];
                 for (const key of errorKeys) {
-                    if (generalFields.includes(key)) {
+                    if (generalFields.includes(key) || key.startsWith('rewards.')) {
                         errorTab = 'general';
                         break;
                     }
@@ -1139,7 +1136,7 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-remove-reward remove-reward-row" title="{{ __('label.delete') }}">
+                        <button type="button" class="btn-remove-reward remove-reward-row" title="{{ __('button.delete') }}">
                             <i class="ri-close-line"></i>
                         </button>
                     </td>

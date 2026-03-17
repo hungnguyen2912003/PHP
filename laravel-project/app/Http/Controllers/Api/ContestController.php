@@ -66,7 +66,7 @@ class ContestController extends BaseApiController
         // Get total count
         $total = $query->count();
 
-        // Get contests with pagination
+        // Get contests with paginations
         $contests = $query->skip($offset)->take($limit)->get();
 
         return $this->success(200, ContestResource::collection($contests), [
@@ -264,27 +264,43 @@ class ContestController extends BaseApiController
      */
     private function temporaryRanking(Contest $contest, $user, $offset, $limit)
     {
-        // Get current user ranking
+        // Get current user participation
         $userRanking = UserContest::where('contest_id', $contest->id)
             ->where('user_id', $user->id)
             ->first();
 
-        // Get ranking list with offset + limit
+        // Get ranking list: same criteria as admin (getRankedWinners)
         $query = UserContest::where('contest_id', $contest->id)
-            ->where('total_steps', '>', $contest->target);
+            ->where('total_steps', '>=', $contest->target)
+            ->where('status', UserContest::STATUS_COMPLETED);
 
         $total = $query->count();
 
-        $ranking = $query->orderBy('total_steps', 'desc')
+        $ranking = (clone $query)
+            ->orderBy('duration', 'asc')
+            ->orderBy('start_time', 'asc')
             ->offset($offset)
             ->limit($limit)
             ->get();
 
         // Calculate rank for current user if it's null
         if ($userRanking && is_null($userRanking->rank)) {
-            $userRanking->rank = UserContest::where('contest_id', $contest->id)
-                ->where('total_steps', '>', $userRanking->total_steps)
-                ->count() + 1;
+            $isEligible = $userRanking->total_steps >= $contest->target
+                && $userRanking->status === UserContest::STATUS_COMPLETED;
+
+            if ($isEligible) {
+                $userRanking->rank = UserContest::where('contest_id', $contest->id)
+                    ->where('total_steps', '>=', $contest->target)
+                    ->where('status', UserContest::STATUS_COMPLETED)
+                    ->where(function ($q) use ($userRanking) {
+                        $q->where('duration', '<', $userRanking->duration)
+                          ->orWhere(function ($q2) use ($userRanking) {
+                              $q2->where('duration', '=', $userRanking->duration)
+                                 ->where('start_time', '<', $userRanking->start_time);
+                          });
+                    })
+                    ->count() + 1;
+            }
         }
 
         // Calculate ranks for the ranking list if null

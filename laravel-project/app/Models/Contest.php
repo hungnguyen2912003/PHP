@@ -80,9 +80,9 @@ class Contest extends Model
         return $this->hasMany(UserContest::class);
     }
 
-    public function contestRewards()
+    public function contestRewardSettings()
     {
-        return $this->hasMany(ContestReward::class);
+        return $this->hasMany(ContestRewardSetting::class);
     }
 
     /**
@@ -101,16 +101,19 @@ class Contest extends Model
 
     /**
      * Calculate reward points based on rank position.
-     * Top 1: 100%, Top 2: 80%, Top 3: 70%, Top 4+: 60%
+     * Uses contest_reward_settings table for reward_percent per rank.
      */
     public function calculateReward(int $rank): int
     {
-        return match (true) {
-            $rank === 1 => $this->reward_points,
-            $rank === 2 => (int) round($this->reward_points * 0.8),
-            $rank === 3 => (int) round($this->reward_points * 0.7),
-            default => (int) round($this->reward_points * 0.6),
-        };
+        $rewardSetting = $this->contestRewardSettings()
+            ->where('rank', $rank)
+            ->first();
+
+        if (!$rewardSetting) {
+            return 0;
+        }
+
+        return (int) round($this->reward_points * ($rewardSetting->reward_percent / 100));
     }
 
     /**

@@ -115,7 +115,7 @@ return [
     'rank' => 'Xếp hạng',
     'user_name' => 'Tên người dùng',
     'reward_settings' => 'Cài đặt trả thưởng',
-    'reward_settings_hint' => 'Thiết lập phần trăm thưởng cho từng thứ hạng. Thứ hạng cao hơn phải có phần trăm bằng hoặc lớn hơn. Bạn có thể xóa tất cả dòng để bỏ qua cài đặt trả thưởng.',
+    'reward_settings_hint' => 'Thiết lập phần trăm thưởng cho từng thứ hạng. Thứ hạng cao hơn phải có phần trăm bằng hoặc lớn hơn.',
     'reward_percent' => 'Phần trăm thưởng',
     'no_reward_data' => 'Chưa có dữ liệu. Nhấn "Thêm dòng" để thêm cài đặt trả thưởng.',
     'ranking_finalized' => 'Đã xếp hạng xong',

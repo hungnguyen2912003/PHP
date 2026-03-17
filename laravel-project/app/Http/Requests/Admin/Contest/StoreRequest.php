@@ -59,8 +59,8 @@ class StoreRequest extends FormRequest
                 ->values();
 
             for ($i = 0; $i < $sorted->count() - 1; $i++) {
-                $current = $sorted[$i];
-                $next = $sorted[$i + 1];
+                $current = $sorted->get($i);
+                $next = $sorted->get($i + 1);
                 if ($current['reward_percent'] < $next['reward_percent']) {
                     $validator->errors()->add(
                         'rewards',

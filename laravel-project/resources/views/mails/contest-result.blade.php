@@ -152,7 +152,13 @@
                                                                 color: #ffffff;
                                                             "
                                                         >
-                                                            #{{ $rank }}
+                                                            @if ($rank > 0)
+                                                                #{{ $rank }}
+                                                            @else
+                                                                <span style="font-size: 20px">
+                                                                    -
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                         <div
                                                             style="
@@ -162,7 +168,11 @@
                                                                 color: #d97706;
                                                             "
                                                         >
-                                                            {{ __('mail.contest_result.rank_label', ['rank' => $rank]) }}
+                                                            @if ($rank > 0)
+                                                                {{ __('mail.contest_result.rank_label', ['rank' => $rank]) }}
+                                                            @else
+                                                                {{ __('mail.contest_result.not_ranked') }}
+                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -283,7 +293,11 @@
                                                                         color: #d97706;
                                                                     "
                                                                 >
-                                                                    #{{ $rank }}
+                                                                    @if ($rank > 0)
+                                                                        #{{ $rank }}
+                                                                    @else
+                                                                        {{ __('mail.contest_result.not_ranked') }}
+                                                                    @endif
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -297,20 +311,24 @@
                                                                         color: #059669;
                                                                     "
                                                                 >
-                                                                    {{ number_format($reward) }}
+                                                                    @if ($reward > 0)
+                                                                        {{ number_format($reward) }}
+                                                                    @else
+                                                                        {{ __('mail.contest_result.no_reward') }}
+                                                                    @endif
                                                                 </span>
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.total_steps') }}:
                                                                 </b>
-                                                                {{ number_format($finalSteps) }}
+                                                                {{ number_format($totalSteps) }}
                                                             </div>
                                                             <div>
                                                                 <b>
                                                                     {{ __('mail.contest_result.joined_at') }}:
                                                                 </b>
-                                                                {{ $joinedAt ? $joinedAt->format('Y-m-d H:i:s') : __('value.not_available') }}
+                                                                {{ $startAt ? $startAt->format('Y-m-d H:i:s') : __('value.not_available') }}
                                                             </div>
                                                         </div>
                                                     </td>
@@ -327,7 +345,13 @@
                                                     text-align: center;
                                                 "
                                             >
-                                                {{ __('mail.contest_result.congrats_message') }}
+                                                @if ($rank > 0 && $reward > 0)
+                                                    {{ __('mail.contest_result.congrats_message') }}
+                                                @elseif ($rank > 0)
+                                                    {{ __('mail.contest_result.passed_target_message') }}
+                                                @else
+                                                    {{ __('mail.contest_result.try_again_message') }}
+                                                @endif
                                             </div>
 
                                             <!-- Divider -->

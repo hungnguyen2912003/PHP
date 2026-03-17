@@ -109,5 +109,9 @@ return [
     'rank' => '順位',
     'user_name' => 'ユーザー名',
     'ranking_finalized' => 'ランキング確定済み',
+    'reward_settings' => '報酬設定',
+    'reward_settings_hint' => '各順位の報酬割合を設定します。上位の順位は、同じかそれ以上の割合にする必要があります。',
+    'reward_percent' => '報酬割合',
+    'no_reward_data' => '報酬データがありません。「行を追加」をクリックして設定を追加してください。',
     'calculating_ranking' => '計算中...',
 ];

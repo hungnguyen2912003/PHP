@@ -11,6 +11,7 @@ return [
     'address' => 'Address',
     'username' => 'Username',
     'password' => 'Password',
+
     'pending' => 'Pending',
     'banned' => 'Banned',
     'inprogress' => 'In Progress',
@@ -121,7 +122,7 @@ return [
     'rank' => 'Rank',
     'user_name' => 'User Name',
     'reward_settings' => 'Reward Settings',
-    'reward_settings_hint' => 'Set the reward percentage for each ranking tier. Higher ranks should have equal or higher percentages. You can remove all rows to skip reward settings.',
+    'reward_settings_hint' => 'Set the reward percentage for each ranking tier. Higher ranks should have equal or higher percentages.',
     'reward_percent' => 'Reward Percent',
     'no_reward_data' => 'No reward data. Click "Add Row" to add reward settings.',
     'ranking_finalized' => 'Ranking Finalized',

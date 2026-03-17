@@ -115,5 +115,9 @@ return [
     'rank' => '排名',
     'user_name' => '用户名',
     'ranking_finalized' => '排名已确定',
+    'reward_settings' => '奖励设置',
+    'reward_settings_hint' => '设置每个排名层级的奖励百分比。排名越前，百分比应相等或更高。',
+    'reward_percent' => '奖励百分比',
+    'no_reward_data' => '暂无奖励数据。点击“添加行”添加奖励设置。',
     'calculating_ranking' => '计算中...',
 ];

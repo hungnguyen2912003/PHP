@@ -70,7 +70,7 @@ class ContestController extends Controller
                     'reward_percent' => $reward['reward_percent'],
                 ];
             })->toArray();
-            $contest->contestRewards()->createMany($rewards);
+            $contest->contestRewardSettings()->createMany($rewards);
         }
 
         return redirect()->route('admin.contests.index')->with('success', __('message.contest_created_successfully'));
@@ -178,6 +178,20 @@ class ContestController extends Controller
         }
 
         $contest->update($data);
+        
+        // Sync reward settings
+        if (isset($data['rewards'])) {
+            $contest->contestRewardSettings()->delete();
+            if (!empty($data['rewards'])) {
+                $rewards = collect($data['rewards'])->map(function ($reward) {
+                    return [
+                        'rank' => $reward['rank'],
+                        'reward_percent' => $reward['reward_percent'],
+                    ];
+                })->toArray();
+                $contest->contestRewardSettings()->createMany($rewards);
+            }
+        }
 
         return redirect()->route('admin.contests.index')->with('success', __('message.contest_updated_successfully'));
     }
