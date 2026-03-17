@@ -83,6 +83,7 @@ class ContestController extends Controller
     {
         $contest = Contest::withCount([
             'participants',
+            'contestRewardSettings',
             'participants as completed_participants_count' => function ($query) {
                 $query->where('status', 1);
             }

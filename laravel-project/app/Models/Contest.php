@@ -28,6 +28,7 @@ class Contest extends Model
         'end_date',
         'target',
         'reward_points',
+        'consolation_points',
         'calculate_at',
         'status',
     ];
@@ -39,6 +40,7 @@ class Contest extends Model
         'type'          => 'integer',
         'target'        => 'integer',
         'reward_points' => 'integer',
+        'consolation_points' => 'integer',
         'status'        => 'integer',
     ];
 
@@ -92,11 +94,10 @@ class Contest extends Model
     {
         return $this->participants()
             ->with('user')
-            ->where('total_steps', '>=', $this->target)
+            ->where('total_steps', '>=', (int) $this->target)
             ->where('status', UserContest::STATUS_COMPLETED)
             ->orderBy('duration', 'asc')
-            ->orderBy('start_time', 'asc')
-            ->getQuery();
+            ->orderBy('start_time', 'asc');
     }
 
     /**
@@ -109,11 +110,11 @@ class Contest extends Model
             ->where('rank', $rank)
             ->first();
 
-        if (!$rewardSetting) {
-            return 0;
+        if ($rewardSetting) {
+            return (int) round($this->reward_points * ($rewardSetting->reward_percent / 100));
         }
 
-        return (int) round($this->reward_points * ($rewardSetting->reward_percent / 100));
+        return (int) $this->consolation_points;
     }
 
     /**

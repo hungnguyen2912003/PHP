@@ -109,6 +109,7 @@ return [
     'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu.',
     'duration' => 'Thời lượng',
     'reward' => 'Thưởng',
+    'rewards' => 'giải thưởng',
     'calculate_at' => 'Thời gian tính thưởng',
     'calculate_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
     'joined_at' => 'Tham gia lúc',
@@ -120,4 +121,5 @@ return [
     'no_reward_data' => 'Chưa có dữ liệu. Nhấn "Thêm dòng" để thêm cài đặt trả thưởng.',
     'ranking_finalized' => 'Đã xếp hạng xong',
     'calculating_ranking' => 'Đang tính toán...',
+    'consolation_points' => 'Điểm khuyến khích',
 ];

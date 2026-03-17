@@ -43,8 +43,14 @@ class DistributeContestRewardsJob implements ShouldQueue
             ->get();
 
         foreach ($rankedParticipants as $participant) {
-            $rewardPercent = $rewardSettings[$participant->rank] ?? 0;
-            $score = (int) round($this->contest->reward_points * ($rewardPercent / 100));
+            $rewardPercent = $rewardSettings[$participant->rank] ?? null;
+            
+            if ($rewardPercent !== null) {
+                $score = (int) round($this->contest->reward_points * ($rewardPercent / 100));
+            } else {
+                // Consolation prize for those who reached the target but didn't place in top ranks
+                $score = (int) $this->contest->consolation_points;
+            }
 
             $participant->update([
                 'score'         => $score,

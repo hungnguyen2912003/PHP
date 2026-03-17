@@ -26,4 +26,5 @@ return [
     'contest_name' => 'コンテスト名を入力',
     'description' => '説明を入力してください',
     'target' => '目標を入力してください',
+    'consolation_points' => '参加賞ポイントを入力してください',
 ];

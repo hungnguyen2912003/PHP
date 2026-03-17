@@ -298,8 +298,8 @@
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="row">
-                                        {{-- Row 1: Type, Reward Points, Target --}}
-                                        <div class="col-sm-4">
+                                        {{-- Row 1: Type, Target --}}
+                                        <div class="col-sm-6">
                                             <div class="mb-20">
                                                 <label class="label fs-16 mb-2">
                                                     {{ __('label.type') }}
@@ -341,7 +341,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="mb-20">
                                                 <label class="label fs-16 mb-2">
                                                     {{ __('label.target') }}
@@ -367,32 +367,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="mb-20">
-                                                <label class="label fs-16 mb-2">
-                                                    {{ __('label.reward_points') }}
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="form-floating">
-                                                    <input
-                                                        class="form-control"
-                                                        id="reward_points"
-                                                        name="reward_points"
-                                                        type="number"
-                                                        placeholder="{{ __('placeholder.reward_points') }}"
-                                                        value="{{ old('reward_points', $contest->reward_points) }}"
-                                                    />
-                                                    <label for="reward_points">
-                                                        {{ __('placeholder.reward_points') }}
-                                                    </label>
-                                                </div>
-                                                @error('reward_points')
-                                                    <div class="text-danger mt-1">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
+
                                         {{-- Row 2: Start Date, End Date, Calculate At --}}
                                         <div class="col-sm-4">
                                             <div class="mb-20">
@@ -507,7 +482,60 @@
 
                             <hr class="my-4">
                             
-                            <h4 class="fw-semibold fs-18 mb-20">{{ __('label.reward_settings') }}</h4>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">
+                                            {{ __('label.reward_points') }}
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="form-floating">
+                                            <input
+                                                class="form-control"
+                                                id="reward_points"
+                                                name="reward_points"
+                                                type="number"
+                                                placeholder="{{ __('placeholder.reward_points') }}"
+                                                value="{{ old('reward_points', $contest->reward_points) }}"
+                                            />
+                                            <label for="reward_points">
+                                                {{ __('placeholder.reward_points') }}
+                                            </label>
+                                        </div>
+                                        @error('reward_points')
+                                            <div class="text-danger mt-1">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-20">
+                                        <label class="label fs-16 mb-2">
+                                            {{ __('label.consolation_points') }}
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="form-floating">
+                                            <input
+                                                class="form-control"
+                                                id="consolation_points"
+                                                name="consolation_points"
+                                                type="number"
+                                                placeholder="{{ __('placeholder.consolation_points') }}"
+                                                value="{{ old('consolation_points', $contest->consolation_points) }}"
+                                            />
+                                            <label for="consolation_points">
+                                                {{ __('placeholder.consolation_points') }}
+                                            </label>
+                                        </div>
+                                        @error('consolation_points')
+                                            <div class="text-danger mt-1">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <p class="text-muted mb-4">{{ __('label.reward_settings_hint') }}</p>
 
                             <div class="table-responsive">

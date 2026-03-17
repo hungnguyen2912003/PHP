@@ -30,4 +30,5 @@ return [
     'win_limit' => 'Nhập giới hạn người thắng',
     'rank' => 'Nhập thứ hạng',
     'reward_percent' => 'Nhập phần trăm thưởng',
+    'consolation_points' => 'Nhập số điểm khuyến khích',
 ];

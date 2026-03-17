@@ -75,6 +75,11 @@
                         {{ $contest->reward_points }} {{ __('label.reward_points') }}
                     </h2>
 
+                    <!-- Consolation Points -->
+                    <h4 class="text-success fw-semibold mb-2">
+                        + {{ $contest->consolation_points }} {{ __('label.consolation_points') }}
+                    </h4>
+
                     <!-- Target -->
                     <h5 class="text-secondary fw-semibold mb-3">
                         {{ __('label.target') }}: {{ number_format($contest->target) }}
@@ -87,6 +92,12 @@
                                 {{ $contest->participants_count }}
                             </span>
                             <span class="ms-1">{{ strtolower(__('label.joined')) }}</span>
+                        </div>
+                        <div class="text-secondary fs-18 border-start ps-4">
+                            <span class="text-body fw-bold fs-22">
+                                {{ $contest->contest_reward_settings_count }}
+                            </span>
+                            <span class="ms-1 text-lowercase">{{ __('label.rewards') }}</span>
                         </div>
                     </div>
 

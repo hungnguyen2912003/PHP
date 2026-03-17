@@ -59,22 +59,20 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
 
         return UserContest::with('user')
             ->where('contest_id', $contest->id)
+            ->orderByRaw('`rank` IS NULL, `rank` ASC')
             ->orderByDesc('total_steps')
             ->get()
-            ->map(function ($userContest, $index) use ($contest) {
-                $rank = $index + 1;
-                $eligible = $userContest->total_steps >= $contest->target;
-
+            ->map(function ($userContest, $index) {
                 return [
-                    $rank,
+                    $index + 1, // No.
                     $userContest->user?->fullname ?? __('value.not_available'),
                     $userContest->user?->email ?? __('value.not_available'),
                     $userContest->start_time?->format('Y-m-d H:i:s') ?? __('value.not_available'),
                     $userContest->end_time?->format('Y-m-d H:i:s') ?? __('value.not_available'),
                     Contest::formatDuration($userContest->start_time, $userContest->end_time),
                     $userContest->total_steps ?? 0,
-                    $rank,
-                    $eligible ? $contest->calculateReward($rank) : 0,
+                    $userContest->rank ?? __('value.not_available'),    
+                    ($userContest->score > 0) ? number_format($userContest->score) : __('value.not_available'),
                 ];
             });
     }

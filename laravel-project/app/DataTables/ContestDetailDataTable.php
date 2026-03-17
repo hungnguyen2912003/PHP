@@ -23,7 +23,9 @@ class ContestDetailDataTable extends DataTable
     {
         return $model->newQuery()
             ->with('user')
-            ->where('contest_id', $this->contestId);
+            ->where('contest_id', $this->contestId)
+            ->orderByRaw('`rank` IS NULL, `rank` ASC')
+            ->orderByDesc('total_steps');
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable

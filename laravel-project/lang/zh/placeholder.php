@@ -28,4 +28,5 @@ return [
     'target' => '输入目标',
     'reward_points' => '输入奖励积分',
     'win_limit' => '输入获胜限制 (最大获胜人数)',
+    'consolation_points' => '输入安慰奖积分',
 ];

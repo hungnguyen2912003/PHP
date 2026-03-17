@@ -109,6 +109,7 @@ return [
     'final_rank_desc' => '已完成目标的参与者。',
     'duration' => '时长',
     'reward' => '奖励',
+    'rewards' => '奖项',
     'calculate_at' => '结算时间',
     'calculate_at_hint' => '设置自动结算排名并发送结果邮件的时间。',
     'joined_at' => '加入时间',
@@ -120,4 +121,5 @@ return [
     'reward_percent' => '奖励百分比',
     'no_reward_data' => '暂无奖励数据。点击“添加行”添加奖励设置。',
     'calculating_ranking' => '计算中...',
+    'consolation_points' => '安慰奖积分',
 ];

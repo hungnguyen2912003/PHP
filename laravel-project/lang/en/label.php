@@ -116,6 +116,7 @@ return [
     'final_rank_desc' => 'Participants who have completed the target.',
     'duration' => 'Duration',
     'reward' => 'Reward',
+    'rewards' => 'rewards',
     'calculate_at' => 'Calculate At',
     'calculate_at_hint' => 'Set a date/time to automatically calculate ranking and send result emails.',
     'joined_at' => 'Joined At',
@@ -127,4 +128,5 @@ return [
     'no_reward_data' => 'No reward data. Click "Add Row" to add reward settings.',
     'ranking_finalized' => 'Ranking Finalized',
     'calculating_ranking' => 'Calculating...',
+    'consolation_points' => 'Consolation Points',
 ];
