@@ -126,13 +126,23 @@
         </div>
         <!-- Action Buttons -->
         <div class="d-flex gap-3 justify-content-center mb-4">
-            <a
-                href="{{ route('admin.contests.export-ranking', $contest->id) }}"
-                class="btn btn-primary px-4 py-3 rounded-pill shadow-sm text-white"
-            >
-                <i class="ri-download-line me-1"></i>
-                {{ __('button.export') }}
-            </a>
+            @if ($contest->status === \App\Models\Contest::STATUS_FINALIZED)
+                <a
+                    href="{{ route('admin.contests.export-ranking', $contest->id) }}"
+                    class="btn btn-primary px-4 py-3 rounded-pill shadow-sm text-white"
+                >
+                    <i class="ri-download-line me-1"></i>
+                    {{ __('button.export') }}
+                </a>
+            @else
+                <button
+                    class="btn btn-primary px-4 py-3 rounded-pill shadow-sm text-white"
+                    disabled
+                >
+                    <i class="ri-download-line me-1"></i>
+                    {{ __('button.export') }}
+                </button>
+            @endif
             <a
                 href="{{ route('admin.contests.index') }}"
                 class="btn btn-secondary px-4 py-3 rounded-pill shadow-sm"

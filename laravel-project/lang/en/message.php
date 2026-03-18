@@ -135,6 +135,7 @@ return [
     'confirm_finalize_ranking' => 'Are you sure you want to finalize the ranking? This action cannot be undone.',
     'confirm_finalize_title' => 'Finalize Ranking',
     'contest_already_started' => 'You have already started this contest.',
+    'contest_type_conflict' => 'You are already participating in another contest of the same type.',
     'contest_not_joined' => 'You have not joined this contest.',
     'contest_not_started' => 'You have not started this contest yet.',
     'another_contest_is_active' => 'Another contest is already active.',

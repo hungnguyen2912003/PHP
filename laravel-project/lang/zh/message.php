@@ -96,6 +96,7 @@ return [
     'confirm_finalize_ranking' => '确定要确认排名吗？此操作无法撤销。',
     'confirm_finalize_title' => '确认排名',
     'contest_already_started' => '您已经开始了此比赛。',
+    'contest_type_conflict' => '您已经参加了相同类型的另一场比赛。',
     'contest_not_joined' => '您尚未参加此比赛。',
     'contest_not_started' => '您尚未开始此比赛。',
     'another_contest_is_active' => '另一个比赛已经开始。',

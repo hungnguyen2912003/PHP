@@ -130,6 +130,7 @@ return [
     'confirm_finalize_ranking' => 'Bạn có chắc chắn muốn chốt xếp hạng? Hành động này không thể hoàn tác.',
     'confirm_finalize_title' => 'Chốt xếp hạng',
     'contest_already_started' => 'Bạn đã bắt đầu cuộc thi này rồi.',
+    'contest_type_conflict' => 'Bạn đang tham gia một cuộc thi khác cùng loại.',
     'contest_not_joined' => 'Bạn chưa tham gia cuộc thi này.',
     'contest_not_started' => 'Bạn chưa bắt đầu cuộc thi này.',
     'another_contest_is_active' => 'Một cuộc thi khác hiện đang hoạt động.',

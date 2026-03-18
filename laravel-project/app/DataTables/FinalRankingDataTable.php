@@ -22,7 +22,9 @@ class FinalRankingDataTable extends DataTable
 
     public function query(UserContest $model): QueryBuilder
     {
-        return $this->contest->getRankedWinners();
+        $rewardCount = $this->contest->contestRewardSettings()->count();
+
+        return $this->contest->getRankedWinners()->limit($rewardCount);
     }
 
     public function dataTable(QueryBuilder $query): EloquentDataTable

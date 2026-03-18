@@ -113,7 +113,20 @@ class ContestController extends BaseApiController
         if ($contest->status !== Contest::STATUS_INPROGRESS || $now < $contest->start_date || $now > $contest->end_date) {
             return $this->error(400, __('message.contest_not_active'));
         }
-        
+
+        // Check if user is already participating in another contest with the same type
+        $hasConflict = UserContest::where('user_id', $user->id)
+            ->where('contest_id', '!=', $contest->id)
+            ->whereHas('contest', function ($q) use ($contest) {
+                $q->where('type', $contest->type)
+                  ->where('end_date', '>=', now());
+            })
+            ->exists();
+
+        if ($hasConflict) {
+            return $this->error(400, __('message.contest_type_conflict'));
+        }
+
         DB::beginTransaction();
         try {
             $userContest = UserContest::where('user_id', $user->id)
@@ -269,14 +282,16 @@ class ContestController extends BaseApiController
             ->where('user_id', $user->id)
             ->first();
 
-        // Get ranking list
-        $query = UserContest::where('contest_id', $contest->id)
-            ->where('total_steps', '>=', $contest->target)
-            ->where('status', UserContest::STATUS_COMPLETED);
+        // Get ranking list - completed users first, then non-completed
+        $query = UserContest::where('contest_id', $contest->id);
 
         $total = $query->count();
 
         $ranking = (clone $query)
+            ->orderByRaw('CASE WHEN total_steps >= ? AND status = ? THEN 0 ELSE 1 END ASC', [
+                $contest->target,
+                UserContest::STATUS_COMPLETED,
+            ])
             ->orderBy('duration', 'asc')
             ->orderBy('start_time', 'asc')
             ->offset($offset)
@@ -285,22 +300,47 @@ class ContestController extends BaseApiController
 
         // Calculate rank for current user if it's null
         if ($userRanking && is_null($userRanking->rank)) {
-            $isEligible = $userRanking->total_steps >= $contest->target
-                && $userRanking->status === UserContest::STATUS_COMPLETED;
+            $userRanking->rank = UserContest::where('contest_id', $contest->id)
+                ->where(function ($q) use ($contest, $userRanking) {
+                    // Users who completed AND are ahead in ranking
+                    $isCompleted = $userRanking->total_steps >= $contest->target
+                        && $userRanking->status === UserContest::STATUS_COMPLETED;
 
-            if ($isEligible) {
-                $userRanking->rank = UserContest::where('contest_id', $contest->id)
-                    ->where('total_steps', '>=', $contest->target)
-                    ->where('status', UserContest::STATUS_COMPLETED)
-                    ->where(function ($q) use ($userRanking) {
-                        $q->where('duration', '<', $userRanking->duration)
-                          ->orWhere(function ($q2) use ($userRanking) {
-                              $q2->where('duration', '=', $userRanking->duration)
-                                 ->where('start_time', '<', $userRanking->start_time);
-                          });
-                    })
-                    ->count() + 1;
-            }
+                    if ($isCompleted) {
+                        // Count completed users with better duration/start_time
+                        $q->where(function ($q1) use ($contest, $userRanking) {
+                            $q1->where('total_steps', '>=', $contest->target)
+                               ->where('status', UserContest::STATUS_COMPLETED)
+                               ->where(function ($q2) use ($userRanking) {
+                                   $q2->where('duration', '<', $userRanking->duration)
+                                      ->orWhere(function ($q3) use ($userRanking) {
+                                          $q3->where('duration', '=', $userRanking->duration)
+                                             ->where('start_time', '<', $userRanking->start_time);
+                                      });
+                               });
+                        });
+                    } else {
+                        // All completed users are ahead + non-completed users with better duration/start_time
+                        $q->where(function ($q1) use ($contest, $userRanking) {
+                            $q1->where(function ($q2) use ($contest) {
+                                $q2->where('total_steps', '>=', $contest->target)
+                                   ->where('status', UserContest::STATUS_COMPLETED);
+                            })->orWhere(function ($q2) use ($contest, $userRanking) {
+                                $q2->where(function ($q3) use ($contest) {
+                                    $q3->where('total_steps', '<', $contest->target)
+                                       ->orWhere('status', '!=', UserContest::STATUS_COMPLETED);
+                                })->where(function ($q3) use ($userRanking) {
+                                    $q3->where('duration', '<', $userRanking->duration)
+                                       ->orWhere(function ($q4) use ($userRanking) {
+                                           $q4->where('duration', '=', $userRanking->duration)
+                                              ->where('start_time', '<', $userRanking->start_time);
+                                       });
+                                });
+                            });
+                        });
+                    }
+                })
+                ->count() + 1;
         }
 
         // Calculate ranks for the ranking list if null
@@ -311,7 +351,7 @@ class ContestController extends BaseApiController
         });
 
         return $this->success(200, [
-            'user_ranking' => RankingResource::make($userRanking),
+            'user_ranking' => $userRanking ? RankingResource::make($userRanking) : null,
             'ranking_list' => RankingResource::collection($ranking),
         ], [
             'total'    => $total,
@@ -330,19 +370,22 @@ class ContestController extends BaseApiController
             ->where('user_id', $user->id)
             ->first();
 
-        // Get ranking list with offset + limit
+        // Get ranking list - only prize winners
+        $rewardCount = $contest->contestRewardSettings()->count();
+
         $query = UserContest::where('contest_id', $contest->id)
-            ->where('status', UserContest::STATUS_COMPLETED);
+            ->whereNotNull('rank')
+            ->where('rank', '<=', $rewardCount);
 
         $total = $query->count();
 
-        $ranking = $query->orderBy('rank', 'asc')
+        $ranking = (clone $query)->orderBy('rank', 'asc')
             ->offset($offset)
             ->limit($limit)
             ->get();
 
         return $this->success(200, [
-            'user_ranking' => RankingResource::make($userRanking),
+            'user_ranking' => $userRanking ? RankingResource::make($userRanking) : null,
             'ranking_list' => RankingResource::collection($ranking),
         ], [
             'total'    => $total,
