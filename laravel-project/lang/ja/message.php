@@ -126,4 +126,5 @@ return [
     'contest_already_started' => 'すでにこのコンテストを開始しています。',
     'contest_not_joined' => 'このコンテストに参加していません。',
     'contest_not_started' => 'まだこのコンテストを開始していません。',
+    'another_contest_is_active' => '別のコンテストが既に有効です。',
 ];

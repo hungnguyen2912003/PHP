@@ -6,11 +6,9 @@ use App\Models\Contest;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+
 
 class ContestDataTable extends DataTable
 {
@@ -28,19 +26,35 @@ class ContestDataTable extends DataTable
             ->editColumn('status', function ($row) {
                 // Return a badge based on status
                 $badges = [
-                    \App\Models\Contest::STATUS_INPROGRESS => 'bg-warning',
-                    \App\Models\Contest::STATUS_COMPLETED => 'bg-success',
-                    \App\Models\Contest::STATUS_FINALIZED => 'bg-info',
+                    Contest::STATUS_INPROGRESS => 'bg-warning',
+                    Contest::STATUS_COMPLETED => 'bg-success',
+                    Contest::STATUS_FINALIZED => 'bg-info',
                 ];
                 $class = $badges[$row->status] ?? 'bg-secondary';
                 $statusKey = match($row->status) {
-                    \App\Models\Contest::STATUS_INPROGRESS => 'inprogress',
-                    \App\Models\Contest::STATUS_COMPLETED => 'completed',
-                    \App\Models\Contest::STATUS_FINALIZED => 'finalized',
+                    Contest::STATUS_INPROGRESS => 'inprogress',
+                    Contest::STATUS_COMPLETED => 'completed',
+                    Contest::STATUS_FINALIZED => 'finalized',
                     default => 'unknown',
                 };
                 $translatedStatus = __('value.status.' . $statusKey);
                 return '<span class="badge ' . $class . '">' . $translatedStatus . '</span>';
+            })
+            ->editColumn('type', function ($row) {
+                $badges = [
+                    Contest::TYPE_WALK => 'bg-primary-subtle text-primary',
+                    Contest::TYPE_RUN => 'bg-success-subtle text-success',
+                    Contest::TYPE_SPRINT => 'bg-danger-subtle text-danger',
+                ];
+                $class = $badges[$row->type] ?? 'bg-secondary-subtle text-secondary';
+                $typeKey = match($row->type) {
+                    Contest::TYPE_WALK => 'walk',
+                    Contest::TYPE_RUN => 'run',
+                    Contest::TYPE_SPRINT => 'sprint',
+                    default => 'unknown',
+                };
+                $translatedType = __('value.contest_type.' . $typeKey);
+                return '<span class="badge ' . $class . '">' . $translatedType . '</span>';
             })
             ->editColumn('start_date', function ($row) {
                 return $row->start_date ? $row->start_date->format('Y-m-d') : __('value.not_available');
@@ -50,17 +64,17 @@ class ContestDataTable extends DataTable
             })
             ->addColumn('image', function ($row) {
                 if ($row->image_url) {
-                    return '<img src="' . asset($row->image_url) . '" alt="Image" style="width: 100px;">';
+                    return '<div style="width: 120px !important; margin: 0 auto;"><img src="' . asset($row->image_url) . '" alt="Image" style="width: 100% !important; max-width: none !important; height: auto !important;"></div>';
                 }
                 return '<span class="text-warning">' . __('value.not_available') . '</span>';
             })
             ->addColumn('completed_count', function ($row) {
-                return $row->completed_participants_count;
+                return $row->contest_reward_settings_count;
             })
             ->addColumn('action', function ($row) {
                 return view('admin.pages.contest.columns.action', compact('row'))->render();
             })
-            ->rawColumns(['status', 'image', 'action', 'completed_count'])
+            ->rawColumns(['status', 'type', 'image', 'action', 'completed_count'])
             ->setRowId('id');
     }
 
@@ -73,9 +87,7 @@ class ContestDataTable extends DataTable
     {
         return $model->newQuery()
             ->withCount('participants')
-            ->withCount(['participants as completed_participants_count' => function ($query) {
-                $query->where('status', 1);
-            }])
+            ->withCount('contestRewardSettings')
             ->when($this->request->get('from_date'), function ($query, $fromDate) {
                 return $query->whereDate('start_date', '>=', $fromDate);
             })
@@ -118,10 +130,11 @@ class ContestDataTable extends DataTable
     {
         return [
             Column::make('name')->name('name_en')->title(__('label.contest_name'))->addClass('text-nowrap'),
+            Column::make('type')->title(__('label.type'))->addClass('text-nowrap'),
             Column::computed('image')->title(__('label.image'))->searchable(false)->orderable(false)->addClass('text-center align-middle text-nowrap'),
             Column::make('target')->title(__('label.target'))->type('string')->addClass('text-nowrap'),
-            Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-nowrap'),
-            Column::computed('completed_count')->title(__('label.completed_count'))->searchable(false)->orderable(false)->addClass('text-center text-nowrap'),
+            Column::make('reward_points')->title(__('label.reward_points'))->type('string')->addClass('text-center text-nowrap'),
+            Column::computed('completed_count')->title(__('label.rewards'))->searchable(false)->orderable(false)->addClass('text-center text-nowrap'),
             Column::make('participants_count')->title(__('label.participants'))->searchable(false)->addClass('text-center text-nowrap')->type('number'),
             Column::make('start_date')->title(__('label.start_date'))->type('string')->addClass('text-nowrap'),
             Column::make('end_date')->title(__('label.end_date'))->type('string')->addClass('text-nowrap'),

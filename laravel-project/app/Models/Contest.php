@@ -14,6 +14,10 @@ class Contest extends Model
     public const STATUS_COMPLETED = 2;
     public const STATUS_FINALIZED = 3;
 
+    public const TYPE_WALK = 1;
+    public const TYPE_RUN = 2;
+    public const TYPE_SPRINT = 3;
+
     protected $fillable = [
         'name_ja',
         'name_en',

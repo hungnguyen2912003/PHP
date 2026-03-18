@@ -18,7 +18,7 @@ class RankingResource extends JsonResource
             'name'               => $this->user?->fullname ?? $this->user?->username,
             'avatar_url'         => $this->user?->avatar_url,
             'steps'              => $this->total_steps ?? 0,
-            'device_source'      => $this->device_source ?? 0,
+            'device_source'      => $this->device_source,
             'duration'           => $this->duration ?? 0,
         ];
     }

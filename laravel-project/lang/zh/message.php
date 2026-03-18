@@ -98,4 +98,5 @@ return [
     'contest_already_started' => '您已经开始了此比赛。',
     'contest_not_joined' => '您尚未参加此比赛。',
     'contest_not_started' => '您尚未开始此比赛。',
+    'another_contest_is_active' => '另一个比赛已经开始。',
 ];

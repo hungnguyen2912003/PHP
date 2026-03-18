@@ -24,6 +24,7 @@ class UserContest extends Model
         'score',
         'is_calculated',
         'status',
+        'device_source',
     ];
 
     protected $casts = [

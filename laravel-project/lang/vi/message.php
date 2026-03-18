@@ -132,4 +132,5 @@ return [
     'contest_already_started' => 'Bạn đã bắt đầu cuộc thi này rồi.',
     'contest_not_joined' => 'Bạn chưa tham gia cuộc thi này.',
     'contest_not_started' => 'Bạn chưa bắt đầu cuộc thi này.',
+    'another_contest_is_active' => 'Một cuộc thi khác hiện đang hoạt động.',
 ];

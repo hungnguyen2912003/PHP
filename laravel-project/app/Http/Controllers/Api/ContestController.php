@@ -269,7 +269,7 @@ class ContestController extends BaseApiController
             ->where('user_id', $user->id)
             ->first();
 
-        // Get ranking list: same criteria as admin (getRankedWinners)
+        // Get ranking list
         $query = UserContest::where('contest_id', $contest->id)
             ->where('total_steps', '>=', $contest->target)
             ->where('status', UserContest::STATUS_COMPLETED);

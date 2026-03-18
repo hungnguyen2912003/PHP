@@ -46,7 +46,8 @@ class UserStepController extends BaseApiController
                     ->sum('steps');
 
                 $contest->update([
-                    'total_steps' => $totalSteps,
+                    'total_steps'   => $totalSteps,
+                    'device_source' => $request->device_source,
                 ]);
 
                 // Cache total_steps
