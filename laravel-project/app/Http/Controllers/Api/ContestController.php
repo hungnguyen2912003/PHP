@@ -372,8 +372,7 @@ class ContestController extends BaseApiController
         $rewardCount = $contest->contestRewardSettings()->count();
 
         $query = UserContest::where('contest_id', $contest->id)
-            ->whereNotNull('rank')
-            ->where('rank', '<=', $rewardCount);
+            ->whereNotNull('rank');
 
         $total = $query->count();
 
