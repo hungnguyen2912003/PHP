@@ -7,6 +7,7 @@ use App\Http\Requests\Api\UserStep\ImportDataRequest;
 use App\Models\UserStep;
 use Illuminate\Support\Facades\Cache;
 use App\Models\UserContest;
+use App\Services\TimestampService;
 
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,7 @@ class UserStepController extends BaseApiController
                 $data[] = [
                     'user_id' => $user->id,
                     'device_source' => $request->device_source,
-                    'recorded_at' => $log['recorded_at'],
+                    'recorded_at' => TimestampService::toDatetime($log['recorded_at']),
                     'steps' => $log['steps'],
                 ];
             }
