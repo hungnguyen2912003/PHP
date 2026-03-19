@@ -21,9 +21,9 @@ class ContestController extends BaseApiController
         $user = auth()->user();
         $tab = $request->query('tab', '1');
 
-        $query = Contest::withCount(['participants as total_participants']);
+        $query = Contest::query();
 
-        // Return collection of contest IDs the user has joined
+        // Get contest that user has joined
         $joined = UserContest::where('user_id', $user->id)->select('contest_id');
 
         switch ($tab) {
@@ -41,13 +41,10 @@ class ContestController extends BaseApiController
                     ->where('end_date', '>=', now());
                 break;
 
-            // Tab 3: History contests (contests that the user has joined and are completed or ended)
+            // Tab 3: History contests (contests that the user has joined and are finalized)
             case '3':
                 $query->whereIn('id', $joined)
-                    ->where(function ($q) {
-                        $q->where('status', Contest::STATUS_COMPLETED)
-                          ->orWhere('end_date', '<', now());
-                    });
+                    ->where('status', Contest::STATUS_FINALIZED);
                 break;
 
             // Default: Tab 1 (current contests)
@@ -69,6 +66,11 @@ class ContestController extends BaseApiController
         // Get contests with paginations
         $contests = $query->skip($offset)->take($limit)->get();
 
+        // Get total participants count
+        foreach ($contests as $contest) {
+            $contest->total_participants = UserContest::where('contest_id', $contest->id)->count();
+        }
+
         return $this->success(200, ContestResource::collection($contests), [
             'total'    => $total,
             'offset'   => $offset,
@@ -83,20 +85,18 @@ class ContestController extends BaseApiController
     {
         $user = auth()->user();
 
-        $contest->loadCount([
-            'participants as total_participants',
-            'participants as total_completed' => function ($query) {
-                $query->where('status', 1);
-            }
-        ]);
-        
+        // 1. Count total participants
+        $contest->total_participants = UserContest::where('contest_id', $contest->id)->count();
 
-        // Load user's participation detail
-        $contest->setRelation('user_contest',
-            UserContest::where('contest_id', $contest->id)
-                ->where('user_id', $user->id)
-                ->first()
-        );
+        // 2. Count completed participants
+        $contest->total_completed_participants = UserContest::where('contest_id', $contest->id)
+            ->where('status', UserContest::STATUS_COMPLETED)
+            ->count();
+
+        // 3. Get user's participation detail
+        $contest->user_progress = UserContest::where('contest_id', $contest->id)
+            ->where('user_id', $user->id)
+            ->first();
 
         return $this->success(200, new ContestResource($contest));
     }
@@ -131,7 +131,6 @@ class ContestController extends BaseApiController
         try {
             $userContest = UserContest::where('user_id', $user->id)
                 ->where('contest_id', $contest->id)
-                ->lockForUpdate()
                 ->first();
 
             if ($userContest) {
@@ -218,7 +217,6 @@ class ContestController extends BaseApiController
         try {
             $userContest = UserContest::where('user_id', $user->id)
                 ->where('contest_id', $contest->id)
-                ->lockForUpdate()
                 ->first();
             
             // Not joined contest
@@ -263,7 +261,7 @@ class ContestController extends BaseApiController
         $offset = max((int)$request->query('offset', 0), 0);
         $limit  = max((int)$request->query('limit', 10), 1);
 
-        $isFinal = $contest->status == 3;
+        $isFinal = $contest->status == Contest::STATUS_FINALIZED;
 
         if ($isFinal) {
             return $this->finalRanking($contest, $user, $offset, $limit);

@@ -26,16 +26,16 @@ class ContestResource extends JsonResource
             'start_date' => $this->start_date?->timestamp,
             'end_date' => $this->end_date?->timestamp,
             'total_participants' => $this->total_participants ?? 0,
-            'total_completed' => $this->total_completed ?? 0,
+            'total_completed' => $this->total_completed_participants ?? 0,
             'status' => $this->status,
-            'user_contest' => $this->whenLoaded('user_contest', function () {
+            'progress' => $this->when($this->user_progress, function () {
                 return [
-                    'id' => $this->user_contest->id,
-                    'start_time' => $this->user_contest->start_time?->timestamp,
-                    'end_time' => $this->user_contest->end_time?->timestamp,
-                    'total_steps' => $this->user_contest->total_steps,
-                    'is_calculated' => $this->user_contest->is_calculated,
-                    'status' => $this->user_contest->status
+                    'id' => $this->user_progress->id,
+                    'start_time' => $this->user_progress->start_time?->timestamp,
+                    'end_time' => $this->user_progress->end_time?->timestamp,
+                    'total_steps' => $this->user_progress->total_steps,
+                    'is_calculated' => $this->user_progress->is_calculated,
+                    'status' => $this->user_progress->status
                 ];
             }),
         ];
