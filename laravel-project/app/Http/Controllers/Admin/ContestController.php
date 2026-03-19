@@ -41,7 +41,6 @@ class ContestController extends Controller
         $data = $request->validated();
         $data['status'] = Contest::STATUS_INPROGRESS;
 
-        // Flatten localized fields: name.en => name_en, description.en => desc_en
         foreach (['name' => 'name', 'description' => 'desc'] as $field => $prefix) {
             if (isset($data[$field]) && is_array($data[$field])) {
                 foreach ($data[$field] as $locale => $value) {
@@ -62,7 +61,6 @@ class ContestController extends Controller
             $contest->update(['image_url' => '/storage/' . $path]);
         }
 
-        // Save reward settings
         if (!empty($data['rewards'])) {
             $rewards = collect($data['rewards'])->map(function ($reward) {
                 return [

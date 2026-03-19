@@ -80,8 +80,8 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
     public function columnWidths(): array
     {
         return [
-            'A' => 8,  'B' => 25, 'C' => 30, 'D' => 22,
-            'E' => 22, 'F' => 15, 'G' => 15, 'H' => 10, 'I' => 18,
+            'A' => 15,  'B' => 30, 'C' => 30, 'D' => 22,
+            'E' => 22, 'F' => 15, 'G' => 15, 'H' => 15, 'I' => 18,
         ];
     }
 

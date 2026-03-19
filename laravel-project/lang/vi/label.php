@@ -109,7 +109,7 @@ return [
     'final_rank_desc' => 'Người tham gia đã hoàn thành mục tiêu.',
     'duration' => 'Thời lượng',
     'reward' => 'Thưởng',
-    'rewards' => 'giải thưởng',
+    'rewards' => 'Thưởng',
     'calculate_at' => 'Thời gian tính thưởng',
     'calculate_at_hint' => 'Thiết lập thời gian tự động tính toán xếp hạng và gửi email kết quả.',
     'joined_at' => 'Tham gia lúc',

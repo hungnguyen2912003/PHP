@@ -103,7 +103,7 @@ return [
     'final_rank_desc' => '目標を達成した参加者。',
     'duration' => '所要時間',
     'reward' => '報酬',
-    'rewards' => '賞',
+    'rewards' => '報酬',
     'calculate_at' => '計算日時',
     'calculate_at_hint' => 'ランキングを自動的に計算し、結果メールを送信する日時を設定します。',
     'joined_at' => '参加日時',

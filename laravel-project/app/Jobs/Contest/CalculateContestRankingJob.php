@@ -33,14 +33,26 @@ class CalculateContestRankingJob implements ShouldQueue
     {
         Log::info("[Contest Ranking] Starting ranking calculation for contest: {$this->contest->id}");
 
+        // Get the number of prize tiers from contest_reward_settings
+        $maxPrizeRank = $this->contest->contestRewardSettings()->count();
+
         // Get all eligible participants (completed & met target), ordered by ranking rules
         $rankedWinners = $this->contest->getRankedWinners()->get();
 
         $rank = 1;
         foreach ($rankedWinners as $participant) {
-            $participant->update([
-                'rank' => $rank,
-            ]);
+            if ($rank <= $maxPrizeRank) {
+                // Only assign rank to users within prize tiers
+                $participant->update([
+                    'rank' => $rank,
+                ]);
+            } else {
+                // Users who met target but didn't win a prize
+                $participant->update([
+                    'rank'  => null,
+                    'score' => 0,
+                ]);
+            }
             $rank++;
         }
 
