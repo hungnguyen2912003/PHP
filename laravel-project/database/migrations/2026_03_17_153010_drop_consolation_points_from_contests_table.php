@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contests', function (Blueprint $table) {
-            $table->dropColumn('consolation_points');
-        });
+        if (Schema::hasColumn('contests', 'consolation_points')) {
+            Schema::table('contests', function (Blueprint $table) {
+                $table->dropColumn('consolation_points');
+            });
+        }
     }
 
     /**

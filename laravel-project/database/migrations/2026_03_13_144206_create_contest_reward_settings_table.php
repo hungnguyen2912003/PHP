@@ -27,6 +27,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contest_rewards');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('contest_reward_settings');
+        Schema::enableForeignKeyConstraints();
     }
 };
