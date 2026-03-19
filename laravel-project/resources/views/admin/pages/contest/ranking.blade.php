@@ -160,12 +160,16 @@
             const d_locale = '{{ app()->getLocale() }}';
             const d_url = '{{ asset('lang') }}/' + d_locale + '/datatable.json';
 
+            $.extend(true, $.fn.dataTable.defaults, {
+                dom: '<"table-responsive"t><"d-flex justify-content-between align-items-center flex-wrap px-4 py-3 border-top"<"text-muted small"i><"mb-0"p>>',
+            });
+
             // Temporary Ranking Table
             $('#temporary-ranking-table').DataTable({
                 processing: true,
                 serverSide: true,
-                paging: false,
-                info: false,
+                paging: true,
+                info: true,
                 ajax: '{!! route('admin.contests.ranking-data', ['id' => $contest->id, 'type' => 'temporary']) !!}',
                 columns: [
                     {
@@ -211,7 +215,8 @@
                     },
                 ],
                 language: { url: d_url },
-                dom: 'Brt',
+                dom: '<"table-responsive"t><"d-flex justify-content-between align-items-center flex-wrap px-4 py-3 border-top"<"text-muted small"i><"mb-0"p>>',
+                pageLength: 10,
                 order: [[]],
             });
 
@@ -219,8 +224,8 @@
             const finalTable = $('#final-ranking-table').DataTable({
                 processing: true,
                 serverSide: true,
-                paging: false,
-                info: false,
+                paging: true,
+                info: true,
                 ajax: '{!! route('admin.contests.ranking-data', ['id' => $contest->id, 'type' => 'final']) !!}',
                 columns: [
                     {
@@ -274,7 +279,8 @@
                     },
                 ],
                 language: { url: d_url },
-                dom: 'Brt',
+                dom: '<"table-responsive"t><"d-flex justify-content-between align-items-center flex-wrap px-4 py-3 border-top"<"text-muted small"i><"mb-0"p>>',
+                pageLength: 10,
                 order: [[]],
             });
 
