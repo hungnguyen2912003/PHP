@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\ContestController as AdminContestController;
-use App\Http\Controllers\Admin\ContestDetailController as AdminContestDetailController;
 use App\Http\Controllers\Admin\MeasurementController as AdminMeasurementController;
 
 use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
@@ -183,16 +182,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('/edit/{id}', [AdminContestController::class, 'edit'])->name('edit');
                 Route::put('/edit/{id}', [AdminContestController::class, 'update'])->name('update');
                 Route::delete('/destroy/{id}', [AdminContestController::class, 'destroy'])->name('destroy');
-            });
-
-            Route::prefix('contest-details')->name('contest-details.')->group(function () {
-                Route::get('/', [AdminContestDetailController::class, 'index'])->name('index');
-                Route::get('/show/{id}', [AdminContestDetailController::class, 'show'])->name('show');
-                Route::get('/create', [AdminContestDetailController::class, 'create'])->name('create');
-                Route::post('/store', [AdminContestDetailController::class, 'store'])->name('store');
-                Route::get('/edit/{id}', [AdminContestDetailController::class, 'edit'])->name('edit');
-                Route::put('/edit/{id}', [AdminContestDetailController::class, 'update'])->name('update');
-                Route::delete('/destroy/{id}', [AdminContestDetailController::class, 'destroy'])->name('destroy');
             });
         });
     });

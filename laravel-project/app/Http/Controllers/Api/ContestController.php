@@ -197,7 +197,7 @@ class ContestController extends BaseApiController
 
         return $this->success(200, [
             'total_steps'    => $totalSteps,
-            'remaining_time' => max(0, $contest->end_date->getTimestamp() - now()->getTimestamp()),
+            'remaining_time' => $userContest->end_date->getTimestamp(),
         ]);
     }
 

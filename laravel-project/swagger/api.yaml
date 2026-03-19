@@ -1,0 +1,1167 @@
+openapi: 3.1.0
+info:
+    title: Healthify API
+    description: API documentation for the Healthify project
+    version: 1.0.0
+
+servers:
+    - url: http://localhost:8080
+      description: Local Server
+
+tags:
+    - name: Auth
+      description: User authentication
+
+    - name: Measurements
+      description: Body measurement metrics
+
+    - name: Contests
+      description: Manage fitness contests, participation, tracking, and rankings
+
+    - name: Steps
+      description: Manage user step data and import activity from devices
+
+paths:
+    /api/auth/register:
+        post:
+            tags: [Auth]
+            summary: Register account
+            description: Register a new user account.
+            operationId: registerUser
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RegisterRequest'
+            responses:
+                '201':
+                    description: User registered successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 201
+                                body:
+                                    data:
+                                        id: '019c4042-12c0-7014-8b0b-33e181251437'
+                                        fullname: 'John Doe'
+                                        username: 'test1'
+                                        email: 'test@example.com'
+                                        role: 'user'
+                                        status: 'active'
+                                        avatar_url: null
+                                        date_of_birth: '1991-02-01'
+                                        gender: 'male'
+                                        phone: null
+                                        bio: null
+                                        email_verified_at: null
+                                        last_login_at: null
+                                        created_at: '2026-02-09 09:36:37'
+                                        updated_at: '2026-02-09 09:36:37'
+                '422':
+                    description: Validate exception
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 422
+                                body:
+                                    errors:
+                                        fullname:
+                                            - 'The fullname field is required.'
+                                        email:
+                                            - 'The email field is required'
+                                        username:
+                                            - 'The username has already been taken.'
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+    /api/auth/login:
+        post:
+            tags: [Auth]
+            summary: Login
+            description: Login user account.
+            operationId: loginUser
+
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+                        example:
+                            username: 'test1'
+                            password: '12345678'
+
+            responses:
+                '200':
+                    description: Login successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 200
+                                body:
+                                    data:
+                                        access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
+                                        token_type: 'bearer'
+                                        expires_in: 3600
+
+                '422':
+                    description: Validation Error (missing or invalid fields)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 422
+                                body:
+                                    errors:
+                                        username:
+                                            - 'The username field is required.'
+                                        password:
+                                            - 'The password field is required.'
+
+                '401':
+                    description: Invalid credentials (wrong username or password)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 401
+                                body:
+                                    errors: {}
+
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+    /api/auth/me:
+        get:
+            tags: [Auth]
+            summary: Get current user profile
+            description: Get profile information of the authenticated user.
+            operationId: profileUser
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Fetch successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 200
+                                body:
+                                    data:
+                                        id: '019c4042-12c0-7014-8b0b-33e181251437'
+                                        fullname: 'John Doe'
+                                        username: 'test1'
+                                        email: 'test@example.com'
+                                        role: 'user'
+                                        status: 'active'
+                                        avatar_url: null
+                                        date_of_birth: '1991-02-01'
+                                        gender: 'male'
+                                        phone: null
+                                        bio: null
+                                        email_verified_at: null
+                                        last_login_at: null
+                                        created_at: '2026-02-09 09:36:37'
+                                        updated_at: '2026-02-09 09:36:37'
+                '401':
+                    description: Unauthorized (missing/invalid/expired token)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 401
+                                body:
+                                    errors: {}
+
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+
+    /api/auth/refresh:
+        post:
+            tags: [Auth]
+            summary: Refresh user session token
+            description: Generate a new access token from the current token.
+            operationId: refreshToken
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Refresh token successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 200
+                                body:
+                                    data:
+                                        access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
+                                        token_type: 'bearer'
+                                        expires_in: 3600
+
+                '401':
+                    description: Unauthorized (missing/invalid/expired token)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 401
+                                body:
+                                    errors: {}
+
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+    /api/auth/logout:
+        post:
+            tags: [Auth]
+            summary: Logout
+            description: Logout user account
+            operationId: logoutUser
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Logout successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 200
+                                body:
+                                    data: null
+
+                '401':
+                    description: Unauthorized (missing/invalid/expired token)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 401
+                                body:
+                                    errors: {}
+
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+    /api/measurements/weights/chart/{range}:
+        get:
+            tags: [Measurements]
+            summary: Get weight chart data
+            description: Retrieve weight statistics chart data for the authenticated user.
+            operationId: weightChart
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: range
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      enum: [days, weeks, months]
+                  example: days
+
+                - name: offset
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 0
+                  example: 1
+
+                - name: from
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      format: date
+                  example: '2026-02-02'
+
+                - name: to
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      format: date
+                  example: '2026-02-10'
+            responses:
+                '200':
+                    description: Fetch successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 200
+                                body:
+                                    data:
+                                        - label: '06 Feb'
+                                          value: 63.2
+                                        - label: '07 Feb'
+                                          value: 63.0
+                                        - label: '08 Feb'
+                                          value: 62.8
+
+                '401':
+                    description: Unauthorized (missing/invalid/expired token)
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 401
+                                body:
+                                    errors: {}
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                            example:
+                                status: 500
+                                body:
+                                    errors: {}
+    /api/measurements/weights:
+        post:
+            tags: [Measurements]
+            summary: Create weight record at current time
+            description: Create a new weight measurement record at the current time.
+            operationId: createWeightRecord
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            required: [weight, time]
+                            properties:
+                                weight:
+                                    type: number
+                                    format: float
+                                    [example]: 62
+                                time:
+                                    type: string
+                                    format: time
+                                    [example]: '21:00'
+                                attachment:
+                                    type: string
+                                    format: binary
+            responses:
+                '201':
+                    description: Weight record created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                            example:
+                                status: 201
+                                body:
+                                    data:
+                                        id: '019c4691-74c8-71a3-b53a-7ff52b50b504'
+                                        user_id: '019c464e-7d88-7284-8478-2e02f4df69a8'
+                                        recorded_at: '2026-02-10 21:00:00'
+                                        weight: '62.00'
+                                        height: null
+                                        bmi: null
+                                        body_fat: null
+                                        fat_free_body_weight: null
+                                        attachment_url: '/storage/019c464e-7d88-7284-8478-2e02f4df69a8/measurements/01bYRPH6o3rJNs1GoRkcGbQIFJHtEFAazhfkAD4i.jpg'
+                                        created_at: '2026-02-10 08:01:03'
+                                        updated_at: '2026-02-10 08:01:03'
+                '422':
+                    description: Validation error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+    /api/measurements/weights/{id}:
+        get:
+            tags: [Measurements]
+            summary: Get weight record details
+            description: Return all measurement metrics of a specific record by ID.
+            operationId: measurementDetail
+            security:
+                - bearerAuth: []
+
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Measurement ID
+                  schema:
+                      type: string
+                      format: uuid
+
+            responses:
+                '200':
+                    description: Show detail record successfully
+                    content:
+                        application/json:
+                            example:
+                                status: 200
+                                body:
+                                    data:
+                                        id: '019c4d1d-1bb8-71df-bb74-941e06635bbe'
+                                        recorded_at: 1770265500
+                                        metrics:
+                                            weight:
+                                                value: 58
+                                                status: 2
+                                            height:
+                                                value: 171.3
+                                                status: 2
+                                            bmi:
+                                                value: 19.8
+                                                status: 2
+                                            body_fat:
+                                                value: 14.7
+                                                status: 2
+                                            fat_free_body_weight:
+                                                value: 49.5
+                                                status: null
+                                            muscle_mass:
+                                                value: 34.7
+                                                status: 3
+                                            skeletal_muscle_mass:
+                                                value: 19.4
+                                                status: 1
+                                            subcutaneous_fat:
+                                                value: 9.9
+                                                status: 2
+                                            visceral_fat:
+                                                value: 5.4
+                                                status: 2
+                                            body_water:
+                                                value: 55.2
+                                                status: 2
+                                            protein:
+                                                value: 18.7
+                                                status: 2
+                                            bone_mass:
+                                                value: 3.2
+                                                status: 2
+                                            bmr:
+                                                value: 1439
+                                                status: 1
+                                            whr:
+                                                value: 0.93
+                                                status: 3
+
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                [example]:
+                                    status: 401
+                                    body:
+                                        errors: {}
+                '404':
+                    description: Measurement not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                [example]:
+                                    status: 404
+                                    body:
+                                        errors: {}
+                default:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                [example]:
+                                    status: 500
+                                    body:
+                                        errors: {}
+
+    /api/contests:
+        get:
+            tags: [Contests]
+            summary: Get list of contests
+            description: Get a list of contests filtered by tab (current, recommend, history).
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: tab
+                  in: query
+                  schema:
+                      type: string
+                      enum: ['1', '2', '3']
+                      default: '1'
+                  description: '1: Current, 2: Recommend, 3: History'
+                - name: offset
+                  in: query
+                  schema:
+                      type: integer
+                      default: 0
+                - name: limit
+                  in: query
+                  schema:
+                      type: integer
+                      default: 10
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/SuccessResponse'
+                                    - type: object
+                                      properties:
+                                          total:
+                                              type: integer
+                                          offset:
+                                              type: integer
+                                          limit:
+                                              type: integer
+                                          body:
+                                              type: object
+                                              properties:
+                                                  data:
+                                                      type: array
+                                                      items:
+                                                          $ref: '#/components/schemas/Contest'
+
+    /api/contests/{contest}:
+        get:
+            tags: [Contests]
+            summary: Get contest details
+            description: Get contest detail with user's participation data.
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: contest
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/SuccessResponse'
+                                    - type: object
+                                      properties:
+                                          body:
+                                              type: object
+                                              properties:
+                                                  data:
+                                                      $ref: '#/components/schemas/Contest'
+    /api/contests/{contest}/start:
+        post:
+            tags: [Contests]
+            summary: Start a contest
+            description: User action start contest
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: contest
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Started successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+    /api/contests/{contest}/tracking:
+        get:
+            tags: [Contests]
+            summary: Tracking contest
+            description: Show steps in time
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: contest
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Tracking data
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/SuccessResponse'
+                                    - type: object
+                                      properties:
+                                          body:
+                                              type: object
+                                              properties:
+                                                  data:
+                                                      type: object
+                                                      properties:
+                                                          total_steps:
+                                                              type: integer
+                                                          remaining_time:
+                                                              type: integer
+    /api/contests/{contest}/stop:
+        post:
+            tags: [Contests]
+            summary: Stop a contest
+            description: User action stop contest
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: contest
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Stopped successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+    /api/contests/{contest}/ranking:
+        get:
+            tags: [Contests]
+            summary: Get contest ranking
+            description: Get ranking list for a contest.
+            security:
+                - bearerAuth: []
+
+            parameters:
+                - name: contest
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+
+                - name: offset
+                  in: query
+                  schema:
+                      type: integer
+                      default: 0
+
+                - name: limit
+                  in: query
+                  schema:
+                      type: integer
+                      default: 10
+
+            responses:
+                '200':
+                    description: Ranking list
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: integer
+                                        example: 200
+                                    success:
+                                        type: boolean
+                                        example: true
+                                    total:
+                                        type: integer
+                                    offset:
+                                        type: integer
+                                    limit:
+                                        type: integer
+                                    data:
+                                        $ref: '#/components/schemas/RankingData'
+    /api/steps/import:
+        post:
+            tags: [Steps]
+            summary: Import user steps
+            description: Import step data from device.
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ImportStepRequest'
+            responses:
+                '201':
+                    description: Imported successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        # ===== Requests =====
+        RegisterRequest:
+            type: object
+            required: [fullname, username, email, password, gender, date_of_birth, role]
+            properties:
+                fullname:
+                    type: string
+                    [example]: 'John Doe'
+                username:
+                    type: string
+                    [example]: 'test1'
+                email:
+                    type: string
+                    format: email
+                    [example]: 'test@example.com'
+                password:
+                    type: string
+                    format: password
+                    [example]: '12345678'
+                gender:
+                    type: string
+                    format: enum[male, female]
+                date_of_birth:
+                    type: string
+                    format: date
+                    [example]: '1990-01-01'
+                role:
+                    type: string
+                    [example]: 'user'
+        LoginRequest:
+            type: object
+            required: [username, password]
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+                    format: password
+
+        StoreWeightRequest:
+            type: object
+            required: [weight, time]
+            properties:
+                weight:
+                    type: number
+                    format: float
+                time:
+                    type: string
+                    format: time
+                attachment:
+                    type: string
+                    format: binary
+        ImportStepRequest:
+            type: object
+            required: [device_source, logs]
+            properties:
+                device_source:
+                    type: integer
+                    enum: [1, 2, 3]
+                    [example]: 1
+                logs:
+                    type: array
+                    minItems: 1
+                    items:
+                        type: object
+                        required: [steps, recorded_at]
+                        properties:
+                            steps:
+                                type: integer
+                                [example]: 500
+                                minimum: 0
+                            recorded_at:
+                                type: string
+                                format: date-time
+                                [example]: '1773895005'
+        # ===== Models =====
+        User:
+            type: object
+            properties:
+                id: { type: string, format: uuid }
+                role:
+                    type: string
+                    enum: [admin, staff, user]
+                fullname: { type: string }
+
+                date_of_birth:
+                    type: [string, 'null']
+                    format: date
+
+                gender:
+                    type: [string, 'null']
+                    enum: [male, female]
+
+                email: { type: string, format: email }
+
+                phone:
+                    type: [string, 'null']
+
+                avatar_url:
+                    type: [string, 'null']
+                    format: uri
+
+                address:
+                    type: [string, 'null']
+
+                bio:
+                    type: [string, 'null']
+
+                username: { type: string }
+
+                google_id:
+                    type: [string, 'null']
+
+                status:
+                    type: string
+                    enum: [pending, active, banned]
+
+                activation_token:
+                    type: [string, 'null']
+
+                activation_token_sent_at:
+                    type: [string, 'null']
+                    format: date-time
+
+                email_verified_at:
+                    type: [string, 'null']
+                    format: date-time
+
+                last_login_at:
+                    type: [string, 'null']
+                    format: date-time
+
+                created_at: { type: string, format: date-time }
+                updated_at: { type: string, format: date-time }
+
+            required: [id, role, fullname, email, username, status, created_at, updated_at]
+
+        Measurement:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+
+                user_id:
+                    type: string
+                    format: uuid
+
+                recorded_at:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp (seconds)
+
+                weight:
+                    type: [number, 'null']
+                    format: float
+
+                height:
+                    type: [number, 'null']
+                    format: float
+
+                bmi:
+                    type: [number, 'null']
+                    format: float
+
+                body_fat:
+                    type: [number, 'null']
+                    format: float
+
+                fat_free_body_weight:
+                    type: [number, 'null']
+                    format: float
+
+                muscle_mass:
+                    type: [number, 'null']
+                    format: float
+
+                skeletal_muscle_mass:
+                    type: [number, 'null']
+                    format: float
+
+                subcutaneous_fat:
+                    type: [number, 'null']
+                    format: float
+
+                visceral_fat:
+                    type: [number, 'null']
+                    format: float
+
+                body_water:
+                    type: [number, 'null']
+                    format: float
+
+                protein:
+                    type: [number, 'null']
+                    format: float
+
+                bone_mass:
+                    type: [number, 'null']
+                    format: float
+
+                bmr:
+                    type: [number, 'null']
+                    format: float
+
+                waist:
+                    type: [number, 'null']
+                    format: float
+
+                hip:
+                    type: [number, 'null']
+                    format: float
+
+                whr:
+                    type: [number, 'null']
+                    format: float
+
+                attachment_url:
+                    type: [string, 'null']
+                    format: uri
+
+                created_at:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp (seconds)
+
+                updated_at:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp (seconds)
+
+            required: [id, user_id, recorded_at]
+        Contest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    type: integer
+                image_url:
+                    type: [string, 'null']
+                target:
+                    type: integer
+                reward_points:
+                    type: integer
+                start_date:
+                    type: integer
+                    description: Unix timestamp
+                end_date:
+                    type: integer
+                    description: Unix timestamp
+                total_participants:
+                    type: integer
+                total_completed:
+                    type: integer
+                status:
+                    type: integer
+                user_contest:
+                    type: [object, 'null']
+                    properties:
+                        id:
+                            type: integer
+                        start_time:
+                            type: [integer, 'null']
+                        end_time:
+                            type: [integer, 'null']
+                        total_steps:
+                            type: integer
+                        is_calculated:
+                            type: integer
+                        status:
+                            type: integer
+        UserContest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                user_id:
+                    type: integer
+                contest_id:
+                    type: integer
+                start_time:
+                    type: [string, 'null']
+                end_time:
+                    type: [string, 'null']
+                duration:
+                    type: integer
+                    default: 0
+                total_steps:
+                    type: integer
+                    default: 0
+                rank:
+                    type: [integer, 'null']
+                score:
+                    type: [integer, 'null']
+                is_calculated:
+                    type: boolean
+                    default: false
+                status:
+                    type: integer
+                    description: '0: In Progress, 1: Completed'
+                device_source:
+                    type: [integer, 'null']
+                    [example]: 1
+        ContestRewardSetting:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                contest_id:
+                    type: integer
+                rank:
+                    type: integer
+                    [example]: 1
+                reward_percent:
+                    type: number
+                    format: float
+                    [example]: 50.0
+        UserStep:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                user_id:
+                    type: integer
+                device_source:
+                    type: integer
+                    [example]: 1
+                steps:
+                    type: integer
+                    [example]: 500
+                recorded_at:
+                    type: string
+                    format: date-time
+                    [example]: '2023-11-20T10:00:00Z'
+        RankingItem:
+            type: object
+            properties:
+                rank:
+                    type: integer
+                user_id:
+                    type: string
+                    format: uuid
+                name:
+                    type: string
+                avatar_url:
+                    type: [string, 'null']
+                steps:
+                    type: integer
+                device_source:
+                    type: integer
+                duration:
+                    type: integer
+        RankingData:
+            type: object
+            properties:
+                user_ranking:
+                    type: [object, 'null']
+                    allOf:
+                        - $ref: '#/components/schemas/RankingItem'
+                ranking_list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RankingItem'
+        # ===== API Response =====
+        SuccessResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    [example]: 200
+                success:
+                    type: boolean
+                    [example]: true
+                body:
+                    type: object
+                    properties:
+                        data:
+                            type: ['object', 'null']
+                    required: [data]
+            required: [status, body]
+        ErrorResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                success:
+                    type: boolean
+                    [example]: false
+                body:
+                    type: object
+                    properties:
+                        errors:
+                            type: object
+                            additionalProperties:
+                                type: array
+                                items:
+                                    type: string
+                    required: [errors]
+            required: [status, body]

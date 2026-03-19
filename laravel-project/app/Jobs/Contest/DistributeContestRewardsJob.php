@@ -67,12 +67,13 @@ class DistributeContestRewardsJob implements ShouldQueue
 
         Log::info("[Contest Rewards] Distributed rewards to {$rankedParticipants->count()} participants for contest: {$this->contest->id}");
 
-        // Chain: dispatch email notification for each participant
-        $allParticipants = $this->contest->participants()
+        // Chain: dispatch email notification ONLY for ranked participants (winners)
+        $rankedParticipantsWithUser = $this->contest->participants()
+            ->whereNotNull('rank')
             ->with('user')
             ->get();
 
-        foreach ($allParticipants as $participant) {
+        foreach ($rankedParticipantsWithUser as $participant) {
             SendContestResultMailJob::dispatch($participant);
         }
     }
