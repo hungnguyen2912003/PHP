@@ -24,6 +24,8 @@ class TemporaryRankingDataTable extends DataTable
         return UserContest::query()
             ->with('user')
             ->where('contest_id', $this->contest->id)
+            ->whereNotNull('start_time')
+            ->whereNotNull('end_time')
             ->orderByRaw('CASE WHEN total_steps >= ? AND status = ? THEN 0 ELSE 1 END ASC', [
                 $this->contest->target,
                 UserContest::STATUS_COMPLETED,

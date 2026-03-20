@@ -7,12 +7,13 @@
         data-bs-placement="top" data-bs-title="{{ __('button.view') }}" data-bs-toggle="tooltip">
         <i class="material-symbols-outlined fs-16 fw-normal text-body">visibility</i>
     </a>
-    @if(!in_array($row->status, [\App\Models\Contest::STATUS_COMPLETED, \App\Models\Contest::STATUS_FINALIZED]))
-        <a href="{{ route('admin.contests.edit', $row->id) }}" class="bg-transparent p-0 border-0 hover-text-success"
-            data-bs-placement="top" data-bs-title="{{ __('button.edit') }}" data-bs-toggle="tooltip">
-            <i class="material-symbols-outlined fs-16 fw-normal text-body">drive_file_rename_outline</i>
-        </a>
-    @endif
+    <!-- @if(!in_array($row->status, [\App\Models\Contest::STATUS_COMPLETED, \App\Models\Contest::STATUS_FINALIZED]))
+
+    @endif -->
+    <a href="{{ route('admin.contests.edit', $row->id) }}" class="bg-transparent p-0 border-0 hover-text-success"
+        data-bs-placement="top" data-bs-title="{{ __('button.edit') }}" data-bs-toggle="tooltip">
+        <i class="material-symbols-outlined fs-16 fw-normal text-body">drive_file_rename_outline</i>
+    </a>
     <form action="{{ route('admin.contests.destroy', $row->id) }}" method="POST" class="d-inline delete-form">
         @csrf
         @method('DELETE')

@@ -178,14 +178,9 @@ class ContestController extends BaseApiController
             ->where('contest_id', $contest->id)
             ->first();
 
-        // Not joined contest
-        if (!$userContest) {
-            return $this->error(400, __('message.contest_not_joined'));
-        }
 
         // Not started or already stopped
-        if (!$userContest->start_time || 
-            ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
+        if (!$userContest || !$userContest->start_time || ($userContest->end_time && $userContest->end_time >= $userContest->start_time)) {
             return $this->error(400, __('message.contest_not_started'));
         }
 
@@ -279,9 +274,11 @@ class ContestController extends BaseApiController
         $userRanking = UserContest::where('contest_id', $contest->id)
             ->where('user_id', $user->id)
             ->first();
-
+        
         // completed users first, then by duration, start_time
         $ranking = UserContest::where('contest_id', $contest->id)
+            ->whereNotNull('start_time')
+            ->whereNotNull('end_time')
             ->orderByRaw('CASE WHEN total_steps >= ? AND status = ? THEN 0 ELSE 1 END ASC', [
                 $contest->target,
                 UserContest::STATUS_COMPLETED,
@@ -305,7 +302,10 @@ class ContestController extends BaseApiController
             }
         });
 
-        $total = UserContest::where('contest_id', $contest->id)->count();
+        $total = UserContest::where('contest_id', $contest->id)
+            ->whereNotNull('start_time')
+            ->whereNotNull('end_time')
+            ->count();
 
         return $this->success(200, [
             'user_ranking' => $userRanking ? RankingResource::make($userRanking) : null,
@@ -362,10 +362,16 @@ class ContestController extends BaseApiController
             return $userRanking->rank;
         }
 
+        if (is_null($userRanking->start_time) || is_null($userRanking->end_time)) {
+            return null;
+        }
+
         $isCompleted = $userRanking->total_steps >= $contest->target
             && $userRanking->status === UserContest::STATUS_COMPLETED;
 
         return UserContest::where('contest_id', $contest->id)
+            ->whereNotNull('start_time')
+            ->whereNotNull('end_time')
             ->where(function ($q) use ($contest, $userRanking, $isCompleted) {
                 if ($isCompleted) {
                     // Only count completed users

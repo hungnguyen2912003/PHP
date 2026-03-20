@@ -59,6 +59,8 @@ class ContestRankingExport implements FromCollection, WithHeadings, WithTitle, W
 
         return UserContest::with('user')
             ->where('contest_id', $contest->id)
+            ->whereNotNull('start_time')
+            ->whereNotNull('end_time')
             ->orderByRaw('`rank` IS NULL, `rank` ASC')
             ->orderByDesc('total_steps')
             ->get()
