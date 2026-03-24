@@ -30,6 +30,8 @@
         </div>
 
         <div class="row">
+            <!-- If contest status is not finalized, show temporary rank column -->
+            @if ($contest->status != \App\Models\Contest::STATUS_FINALIZED)
             <!-- Temporary Rank Column -->
             <div class="col-lg-6 mb-4">
                 <div class="card bg-white rounded-10 border border-white h-100 mb-4">
@@ -70,9 +72,14 @@
                     </div>
                 </div>
             </div>
+            @endif
 
-            <!-- Final Rank Column -->
+            <!-- If contest status is finalized, show final rank with full width -->
+            @if ($contest->status == \App\Models\Contest::STATUS_FINALIZED)
+            <div class="col-lg-12 mb-4">
+            @else
             <div class="col-lg-6 mb-4">
+            @endif
                 <div class="card bg-white rounded-10 border border-white h-100 mb-4">
                     <div
                         class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20"
